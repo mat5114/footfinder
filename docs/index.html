@@ -67,7 +67,7 @@ button{font:inherit;color:inherit}
 .store.live{color:var(--ink);background:var(--card);text-decoration:none;font-weight:600;box-shadow:inset 0 0 0 1px var(--line);transition-property:background-color,scale;transition-duration:.15s}
 .store.live:hover{background:var(--tile-hover)}
 .store.live:active{scale:.96}
-.sinfo{position:absolute;left:0;right:0;bottom:4px;display:flex;align-items:center;justify-content:center;gap:14px;pointer-events:none}
+.sinfo{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:14px;pointer-events:none}
 .sinfo .txt{text-align:center;min-width:0;max-width:60%}
 .sinfo b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sinfo span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -602,7 +602,10 @@ function sGeom(){
 }
 function sLayout(){
   const {W,H,sw,gap,cap}=sGeom();
-  cloud.style.setProperty("--sw",sw+"px");cloud.style.setProperty("--cy",cap?`calc(50% - 26px)`:"50%");
+  // centre the shoe and its caption together as one group
+  const sh=sw*.56,grp=sh+(cap?62:0),top0=Math.max(0,(H-grp)/2);
+  cloud.style.setProperty("--sw",sw+"px");cloud.style.setProperty("--cy",(top0+sh/2)+"px");
+  sinfo.style.top=(top0+sh+10)+"px";
   sOrder.forEach((i,k)=>{const el=els.get(i);if(!el)return;
     const d=k-sC+sDrag/gap,ad=Math.abs(d);
     el.style.left=(W/2+d*gap)+"px";
