@@ -67,8 +67,12 @@ button{font:inherit;color:inherit}
 .shoe.gone{opacity:0}
 .shoe .cap{font-size:11.5px;line-height:1.3;margin-top:2px;opacity:0;transition:opacity .3s var(--ease)}
 .shoe.feat .cap{opacity:1}
-.cap b{display:block;font-weight:600;font-size:12px;white-space:nowrap}
+.shoe .cap{width:100%;white-space:nowrap}
+.cap b,.cap span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cap b{font-weight:600;font-size:12px}
 .cap span{color:var(--muted);font-variant-numeric:tabular-nums}
+@media (max-width:520px){.cap b{font-size:11px}.cap span{font-size:10.5px}}
+.go{white-space:nowrap}
 
 /* card */
 .card{position:relative;z-index:2;flex:none;width:100%;max-width:560px;margin:6px auto 0;background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:12px;transition:max-width .4s var(--ease)}
