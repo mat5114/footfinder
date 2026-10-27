@@ -25,6 +25,8 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(ROOT, "docs", "img")
 CACHE = os.path.join(DATA, "photo_cache.json")
+# Photos a person looked at and rejected: {"shoe-id": ["image url", ...]}
+REJECT = os.path.join(DATA, "photo_reject.json")
 MAX_W = 640
 VERSION = 2  # bump to redo every cut-out when the selection rules change
 
@@ -125,11 +127,12 @@ def main():
 
     ali = json.load(open(os.path.join(DATA, "aliexpress.json"), encoding="utf-8"))
     cache = json.load(open(CACHE, encoding="utf-8")) if os.path.exists(CACHE) else {}
+    reject = json.load(open(REJECT, encoding="utf-8")) if os.path.exists(REJECT) else {}
     os.makedirs(OUT, exist_ok=True)
     done = kept = failed = 0
 
     for sid, hit in ali.items():
-        sources = [u for u in [hit.get("image"), *(hit.get("gallery") or [])] if u]
+        sources = [u for u in [hit.get("image"), *(hit.get("gallery") or [])] if u and u not in reject.get(sid, [])]
         if not sources:
             continue
         path = os.path.join(OUT, f"{sid}.webp")
