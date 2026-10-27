@@ -51,7 +51,6 @@ MODEL_ALIASES = {
     "jueying": ["jueying", "jue ying", "essential"],
     "yueying": ["yueying", "yue ying", "shadow"],
     "super light": ["super light", "superlight", "chaoqing"],
-    "furious future": ["furious future", "furious"],
     "feiying": ["feiying", "fei ying", "flying shadow"],
 }
 
@@ -133,6 +132,11 @@ def norm(text):
 VARIANTS = {"pro", "ultra", "elite", "challenger", "max", "plus", "gt", "se", "lite", "air", "gtx"}
 
 
+SHOE_WORDS = {"shoe", "shoes", "sneaker", "sneakers", "trainer", "trainers", "runner", "runners"}
+NOT_SHOES = {"slipper", "slippers", "slide", "slides", "sandal", "sandals", "sock", "socks", "insole", "insoles",
+             "necklace", "keychain", "charm", "laces", "shoelaces", "lace", "bag", "cap", "hat", "shirt", "shorts", "kids", "children"}
+
+
 def tok_pattern(tok):
     if re.fullmatch(r"\d+", tok):  # "5" also matches "5.0"
         return rf"{tok}(?:\.0)?"
@@ -158,6 +162,9 @@ def model_patterns(model):
 def score(product, shoe):
     title = norm(product.get("product_title", ""))
     padded = f" {title} "
+    words = set(title.split())
+    if not words & SHOE_WORDS or words & NOT_SHOES:
+        return None  # only real shoes: no slippers, socks, insoles or jewellery
     if not any(f" {b} " in padded or b in title for b in BRAND_TERMS[shoe["brand"]]):
         return None
     for pat, toks in model_patterns(shoe["model"]):
