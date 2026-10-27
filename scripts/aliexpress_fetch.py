@@ -207,25 +207,56 @@ def queries(shoe):
     return list(dict.fromkeys(qs))
 
 
-def search_url(shoe):
-    words = f'{BRAND_TERMS.get(shoe["brand"], [shoe["brand"]])[0]} {shoe["model"]} running shoes'
-    return "https://www.aliexpress.com/wholesale?" + urllib.parse.urlencode({"SearchText": words.replace("%", "")})
+def search_words(shoe):
+    return f'{BRAND_TERMS.get(shoe["brand"], [shoe["brand"]])[0]} {shoe["model"]} running shoes'.replace("%", "")
 
 
-def affiliate_links(urls, common, key, secret):
-    """Turn plain AliExpress URLs into affiliate links, 20 at a time."""
-    out = {}
+# Ways to write an AliExpress search page; the API accepts some and not others,
+# so the first one it converts is used for every shoe.
+SEARCH_FORMATS = [
+    lambda w: "https://www.aliexpress.com/w/wholesale-" + re.sub(r"[^a-z0-9]+", "-", w.lower()).strip("-") + ".html",
+    lambda w: "https://www.aliexpress.com/wholesale?" + urllib.parse.urlencode({"SearchText": w}),
+    lambda w: "https://www.aliexpress.com/w/wholesale-" + urllib.parse.quote(w.replace(" ", "-")) + ".html?SearchText=" + urllib.parse.quote(w),
+]
+
+
+def generate(urls, tracking, key, secret, link_type):
+    res = call("aliexpress.affiliate.link.generate",
+               {"source_values": ",".join(urls), "promotion_link_type": link_type, "tracking_id": tracking}, key, secret)
+    links = (res.get("promotion_links") or {}).get("promotion_link") or []
+    return {i.get("source_value"): i["promotion_link"] for i in (links if isinstance(links, list) else [links]) if i.get("promotion_link")}
+
+
+def affiliate_search_links(shoes_by_id, common, key, secret):
+    """Affiliate links to AliExpress search pages, keyed by shoe id."""
+    words = {sid: search_words(sh) for sid, sh in shoes_by_id.items()}
+    sample = next(iter(words.values()), None)
+    if not sample:
+        return {}
+    chosen, tried = None, []
+    for fi, fmt in enumerate(SEARCH_FORMATS):
+        for link_type in (0, 2):
+            try:
+                if generate([fmt(sample)], common["tracking_id"], key, secret, link_type):
+                    chosen = (fmt, link_type)
+                    break
+                tried.append(f"format {fi + 1}/type {link_type}: no link")
+            except RuntimeError as e:
+                tried.append(f"format {fi + 1}/type {link_type}: {e}")
+            time.sleep(0.4)
+        if chosen:
+            break
+    if not chosen:
+        note("warning", "AliExpress did not convert search pages into affiliate links (" + "; ".join(tried)[:400] + "). Using the matched listing links instead.")
+        return {}
+    fmt, link_type = chosen
+    url_of = {sid: fmt(w) for sid, w in words.items()}
+    urls = list(dict.fromkeys(url_of.values()))
+    got = {}
     for i in range(0, len(urls), 20):
-        chunk = urls[i:i + 20]
-        res = call("aliexpress.affiliate.link.generate",
-                   {"source_values": ",".join(chunk), "promotion_link_type": 0, "tracking_id": common["tracking_id"]},
-                   key, secret)
-        links = (res.get("promotion_links") or {}).get("promotion_link") or []
-        for item in links if isinstance(links, list) else [links]:
-            if item.get("promotion_link"):
-                out[item.get("source_value")] = item["promotion_link"]
+        got.update(generate(urls[i:i + 20], common["tracking_id"], key, secret, link_type))
         time.sleep(0.4)
-    return out
+    return {sid: got[u] for sid, u in url_of.items() if u in got}
 
 
 def is_empty(error):
@@ -313,15 +344,14 @@ def main():
         time.sleep(0.4)
 
     # Search-page links for every shoe in scope (skip shoes overridden to null)
-    wanted = {sh["id"]: search_url(sh) for sh in in_scope if not (sh["id"] in overrides and overrides[sh["id"]] is None)}
+    wanted = {sh["id"]: sh for sh in in_scope if not (sh["id"] in overrides and overrides[sh["id"]] is None)}
     try:
-        aff = affiliate_links(list(dict.fromkeys(wanted.values())), common, key, secret)
+        aff = affiliate_search_links(wanted, common, key, secret)
     except Exception as error:
-        failures += 1
         aff = {}
-        note("error", f"link.generate: {error}")
-    for sid, url in wanted.items():
-        link = aff.get(url) or (previous.get(sid) or {}).get("search_link")
+        note("warning", f"link.generate: {error}")
+    for sid in wanted:
+        link = aff.get(sid) or (previous.get(sid) or {}).get("search_link")
         if link:
             found.setdefault(sid, {"fetched": now})["search_link"] = link
     print(f"Search links: {sum(1 for v in found.values() if v.get('search_link'))} of {len(wanted)}")
