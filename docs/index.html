@@ -54,7 +54,7 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
 /* cloud */
-.cloud{position:relative;max-width:1200px;margin:-6px auto 0;height:clamp(330px,56vh,540px)}
+.cloud{position:relative;max-width:1200px;margin:18px auto 0;height:clamp(330px,56vh,540px)}
 .shoe{position:absolute;left:50%;top:50%;width:var(--w);translate:-50% -50%;
   transition-property:left,top,width,opacity,filter;transition-duration:.7s;transition-timing-function:var(--ease);
   filter:grayscale(1) contrast(.9);opacity:.5;text-align:center;pointer-events:none}
@@ -482,12 +482,12 @@ const cloud=document.getElementById("cloud"),els=new Map();
 function slots(){
   const W=cloud.clientWidth,mob=W<640,out=[];
   const fw=mob?118:180,iw=mob?62:96,ow=mob?46:72;
-  out.push([.5,.2,fw],[mob?.24:.33,.52,fw],[mob?.76:.67,.52,fw]);
-  const inner=mob?[[.5,.48]]:[[.5,.5],[.17,.3],[.83,.3],[.2,.74],[.8,.74],[.36,.08],[.64,.08]];
+  out.push([.5,mob?.3:.28,fw],[mob?.24:.33,.56,fw],[mob?.76:.67,.56,fw]);
+  const inner=mob?[[.5,.48]]:[[.5,.5],[.17,.3],[.83,.3],[.2,.74],[.8,.74],[.36,.12],[.64,.12]];
   inner.forEach(p=>out.push([p[0],p[1],iw]));
   const n=mob?10:18;
   for(let j=0;j<n;j++){const a=Math.PI*(1.06+.88*j/(n-1));const rx=mob?.47:.46,ry=.46;
-    const x=.5+rx*Math.cos(a)*(mob?1:1),y=.5+ry*Math.sin(a)*1.05+(j%2?.04:-.02);out.push([x,Math.max(.04,y),ow])}
+    const x=.5+rx*Math.cos(a)*(mob?1:1),y=.5+ry*Math.sin(a)*1.05+(j%2?.04:-.02);out.push([x,Math.max(.1,y),ow])}
   const side=mob?[[.06,.88],[.94,.88]]:[[.04,.6],[.96,.6],[.1,.92],[.9,.92],[.03,.32],[.97,.32]];
   side.forEach(p=>out.push([p[0],p[1],ow]));
   return out;
