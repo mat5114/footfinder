@@ -2,8 +2,9 @@
 
 For every shoe in data/aliexpress.json that has photos, this script:
   1. downloads the main image and the gallery images,
-  2. picks the cleanest one: plain, light background and little text or clutter,
-  3. removes the background (rembg), trims to the shoe and saves a transparent
+  2. removes the background (rembg) from each and keeps only photos that show a
+     single shoe from the side (not the outsole, the back, a pair or a collage),
+  3. takes the cleanest of those, trims it to the shoe and saves a transparent
      WebP to docs/img/<shoe id>.webp, which the site uses instead of the original.
 
 It skips shoes whose chosen source photo has not changed since the last run
@@ -16,6 +17,7 @@ import json
 import os
 import sys
 import urllib.request
+from collections import deque
 
 from PIL import Image, ImageFilter, ImageStat
 
@@ -24,6 +26,7 @@ DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(ROOT, "docs", "img")
 CACHE = os.path.join(DATA, "photo_cache.json")
 MAX_W = 640
+VERSION = 2  # bump to redo every cut-out when the selection rules change
 
 
 def fetch(url):
@@ -59,8 +62,57 @@ def cutout(im, remove):
     canvas.paste(out, (pad, pad))
     if canvas.width > MAX_W:
         canvas = canvas.resize((MAX_W, round(canvas.height * MAX_W / canvas.width)), Image.LANCZOS)
-    # A shoe is wider than tall; a near-square cut-out usually means a collage or a box shot
-    return canvas if canvas.width >= canvas.height * 1.15 else None
+    return canvas
+
+
+def shape_report(rgba):
+    """Is this cut-out a single shoe seen from the side?"""
+    a = rgba.getchannel("A")
+    w0, h0 = a.size
+    W = 120
+    H = max(1, round(h0 * W / w0))
+    m = a.resize((W, H)).point(lambda v: 1 if v > 128 else 0)
+    if m.getbbox():
+        m = m.crop(m.getbbox())
+        W, H = m.size
+    px = m.load()
+    grid = [[px[x, y] for x in range(W)] for y in range(H)]
+    filled = sum(map(sum, grid))
+    if not filled:
+        return {"ok": False, "why": "empty"}
+    aspect = w0 / h0
+    # top-bottom mirror overlap: an outsole seen from below is nearly symmetric, a side view is not
+    inter = sum(grid[y][x] and grid[H - 1 - y][x] for y in range(H) for x in range(W))
+    sym = inter / filled
+    # separate blobs (pairs of shoes, extra items)
+    seen = [[0] * W for _ in range(H)]
+    sizes = []
+    for y in range(H):
+        for x in range(W):
+            if grid[y][x] and not seen[y][x]:
+                q, n = deque([(y, x)]), 0
+                seen[y][x] = 1
+                while q:
+                    cy, cx = q.popleft(); n += 1
+                    for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                        ny, nx = cy + dy, cx + dx
+                        if 0 <= ny < H and 0 <= nx < W and grid[ny][nx] and not seen[ny][nx]:
+                            seen[ny][nx] = 1; q.append((ny, nx))
+                sizes.append(n)
+    big = [s for s in sizes if s > filled * 0.12]
+    # leftover background stuck in the corners
+    cw, ch = max(1, W // 10), max(1, H // 6)
+    corners = [sum(grid[y][x] for y in ys for x in xs) / (len(ys) * len(xs))
+               for ys in (range(0, ch), range(H - ch, H)) for xs in (range(0, cw), range(W - cw, W))]
+    top_corner_fill = max(corners[0], corners[1])
+    # a clean cut-out touches its left/right edge only at the toe and heel tips
+    side_touch = max(sum(grid[y][x] for y in range(H) for x in xs) / (H * len(xs)) for xs in (range(0, 2), range(W - 2, W)))
+    why = []
+    if not 1.7 <= aspect <= 3.8: why.append(f"aspect {aspect:.2f}")
+    if sym > 0.8: why.append(f"symmetric {sym:.2f} (sole view)")
+    if len(big) > 1: why.append(f"{len(big)} objects")
+    if side_touch > 0.28: why.append(f"background left at the edges ({side_touch:.2f})")
+    return {"ok": not why, "why": ", ".join(why), "aspect": round(aspect, 2), "sym": round(sym, 2), "edge": round(side_touch, 2)}
 
 
 def main():
@@ -81,7 +133,7 @@ def main():
         if not sources:
             continue
         path = os.path.join(OUT, f"{sid}.webp")
-        if cache.get(sid, {}).get("sources") == sources and os.path.exists(path):
+        if cache.get(sid, {}).get("sources") == sources and cache[sid].get("v") == VERSION and os.path.exists(path):
             kept += 1
             continue
         scored = []
@@ -91,21 +143,25 @@ def main():
                 scored.append((cleanliness(im), url, im))
             except Exception as e:
                 print(f"! {sid}: could not load {url}: {e}", file=sys.stderr)
-        result = None
-        for score, url, im in sorted(scored, key=lambda x: -x[0])[:3]:  # cleanest first
-            result = cutout(im, remove)
-            if result:
+        # Cut out every photo, keep only single shoes seen from the side, then take the cleanest
+        result, reasons = None, []
+        for score, url, im in sorted(scored, key=lambda x: -x[0]):
+            cut = cutout(im, remove)
+            report = shape_report(cut) if cut else {"ok": False, "why": "nothing left after removing the background"}
+            if report["ok"]:
+                result = cut
                 break
+            reasons.append(report["why"])
         if result:
             result.save(path, "WEBP", quality=88, method=6)
-            cache[sid] = {"sources": sources, "chosen": url}
+            cache[sid] = {"sources": sources, "chosen": url, "v": VERSION}
             done += 1
         else:
             failed += 1
             if os.path.exists(path):
                 os.remove(path)
             cache.pop(sid, None)
-            print(f"! {sid}: no clean cut-out", file=sys.stderr)
+            print(f"! {sid}: no side-view photo ({'; '.join(reasons)[:200]})", file=sys.stderr)
 
     for name in os.listdir(OUT):  # drop cut-outs for shoes that lost their photo
         if name.endswith(".webp") and name[:-5] not in ali:
