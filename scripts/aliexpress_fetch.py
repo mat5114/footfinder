@@ -19,11 +19,13 @@ at risk.
 """
 import csv
 import hashlib
+import hmac
 import json
 import os
 import re
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -54,30 +56,61 @@ MODEL_ALIASES = {
 }
 
 
-def sign(secret, params):
-    base = secret + "".join(f"{k}{params[k]}" for k in sorted(params)) + secret
-    return hashlib.md5(base.encode("utf-8")).hexdigest().upper()
+def sign(secret, params, method="md5"):
+    joined = "".join(f"{k}{params[k]}" for k in sorted(params))
+    if method == "sha256":  # newer apps on the AliExpress Open Platform sign with HMAC-SHA256
+        return hmac.new(secret.encode("utf-8"), joined.encode("utf-8"), hashlib.sha256).hexdigest().upper()
+    return hashlib.md5((secret + joined + secret).encode("utf-8")).hexdigest().upper()
 
 
-def call(method, app_params, key, secret):
+SIGN_METHODS = ["sha256", "md5"]  # the one that works is moved to the front
+
+
+def note(level, message):
+    """Print a GitHub Actions annotation so the reason shows on the run page."""
+    print(f"::{level} title=AliExpress API::{message}", flush=True)
+
+
+def raw_call(method, app_params, key, secret, sign_method):
     sys_params = {
         "format": "json",
         "app_key": key,
-        "sign_method": "md5",
+        "sign_method": sign_method,
         "v": "2.0",
         "timestamp": str(int(time.time() * 1000)),
         "method": method,
     }
-    app_params = {k: v for k, v in app_params.items() if v is not None}
-    sys_params["sign"] = sign(secret, {**sys_params, **app_params})
+    app_params = {k: str(v) for k, v in app_params.items() if v is not None}
+    sys_params["sign"] = sign(secret, {**sys_params, **app_params}, sign_method)
     url = ENDPOINT + "?" + urllib.parse.urlencode(sys_params)
     body = urllib.parse.urlencode(app_params).encode("utf-8")
     req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        payload = json.loads(resp.read())
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            payload = json.loads(resp.read())
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"HTTP {e.code}: {e.read()[:300].decode('utf-8', 'replace')}")
     if "error_response" in payload:
         err = payload["error_response"]
         raise RuntimeError(f"{err.get('code')} {err.get('msg')} {err.get('sub_msg', '')}".strip())
+    return payload
+
+
+def call(method, app_params, key, secret):
+    last = None
+    for sm in list(SIGN_METHODS):
+        try:
+            payload = raw_call(method, app_params, key, secret, sm)
+            if SIGN_METHODS[0] != sm:
+                SIGN_METHODS.remove(sm)
+                SIGN_METHODS.insert(0, sm)
+            break
+        except RuntimeError as e:
+            last = e
+            if "sign" not in str(e).lower():
+                raise
+    else:
+        raise last
     name = method.replace(".", "_") + "_response"
     result = payload[name]["resp_result"]
     if result.get("resp_code") != 200:
@@ -146,7 +179,9 @@ def main():
     secret = os.environ.get("ALIEXPRESS_APP_SECRET")
     tracking = os.environ.get("ALIEXPRESS_TRACKING_ID")
     if not (key and secret and tracking):
-        sys.exit("Set ALIEXPRESS_APP_KEY, ALIEXPRESS_APP_SECRET and ALIEXPRESS_TRACKING_ID first.")
+        missing = [n for n, v in (("ALIEXPRESS_APP_KEY", key), ("ALIEXPRESS_APP_SECRET", secret), ("ALIEXPRESS_TRACKING_ID", tracking)) if not v]
+        note("error", "Missing repository secrets: " + ", ".join(missing))
+        sys.exit(1)
 
     shoes = json.load(open(os.path.join(DATA, "running_shoes.json"), encoding="utf-8"))["shoes"]
     overrides_path = os.path.join(DATA, "aliexpress_overrides.json")
@@ -181,6 +216,8 @@ def main():
         except Exception as error:  # keep going; one bad call should not stop the run
             failures += 1
             print(f"! {sid}: {error}", file=sys.stderr)
+            if failures <= 3:
+                note("error", f"{sid}: {error}")
             if sid in previous:
                 found[sid] = previous[sid]
         hit = found.get(sid)
@@ -194,6 +231,10 @@ def main():
         w.writerow(["shoe_id", "brand", "model", "result", "aliexpress_title", "product_id"])
         w.writerows(review)
     print(f"Matched {len(found)} of {len(review)} shoes ({failures} API errors). Review data/aliexpress_review.csv.")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a", encoding="utf-8") as f:
+            f.write(f"### AliExpress\n\nMatched **{len(found)}** of {len(review)} shoes, {failures} API errors.\n")
     if failures and not found:
         sys.exit(1)
 
