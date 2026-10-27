@@ -598,7 +598,7 @@ function sliderPct(){
 function sGeom(){
   const W=cloud.clientWidth,H=cloud.clientHeight,mob=W<620,cap=H>=150;
   const sw=Math.max(80,Math.min(mob?W*.52:W*.3,(H-(cap?64:8))*1.75,320));
-  return{W,H,sw,gap:mob?Math.max(sw*.78,W*.34):sw*1.02,cap};
+  return{W,H,sw,gap:mob?Math.max(sw*.92,W*.44):sw*1.02,cap};
 }
 function sLayout(){
   const {W,H,sw,gap,cap}=sGeom();
