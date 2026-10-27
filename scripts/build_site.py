@@ -1,9 +1,9 @@
 """Build the Footfinder site.
 
 Reads data/running_shoes.json, packs it into the compact array the page uses,
-injects it into src/footfinder.template.html and writes:
-  - dist/index.html      a complete standalone page (deploy this folder)
-  - dist/artifact.html   the same page without the document shell (for Claude artifacts)
+injects it into src/footfinder.template.html and writes (GitHub Pages serves the docs/ folder):
+  - docs/index.html      a complete standalone page (deploy this folder)
+  - docs/artifact.html   the same page without the document shell (for Claude artifacts)
 """
 import json
 import os
@@ -46,11 +46,11 @@ def main():
     shoes = json.load(open(os.path.join(ROOT, "data", "running_shoes.json"), encoding="utf-8"))["shoes"]
     template = open(os.path.join(ROOT, "src", "footfinder.template.html"), encoding="utf-8").read()
     page = template.replace("__DATA__", compact(shoes))
-    dist = os.path.join(ROOT, "dist")
+    dist = os.path.join(ROOT, "docs")
     os.makedirs(dist, exist_ok=True)
     open(os.path.join(dist, "artifact.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(SHELL.replace("{page}", page))
-    print(f"Built dist/ with {len(shoes)} shoes")
+    print(f"Built docs/ with {len(shoes)} shoes")
 
 
 if __name__ == "__main__":
