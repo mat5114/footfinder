@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
 <style>
-/* Layout: one screen, no scrolling. Header, then a cloud of shoe photos that fills whatever height is left (spaced so none overlap), then the quiz card. Results page through instead of scrolling. */
+/* Layout: one screen, no scrolling. Header, then a slider of shoes that fills whatever height is left (the best match in the middle, the rest fading with distance on both sides), then the quiz card. */
 :root{
   --bg:#F5F5F4; --card:#FFFFFF; --tile:#F5F5F4; --tile-hover:#EDEDEB;
   --ink:#292524; --muted:#78716C; --faint:#A8A29E; --line:#E7E5E4; --sel:#292524;
@@ -44,25 +44,28 @@ button{font:inherit;color:inherit}
 .about:hover{text-decoration:underline;text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
-/* cloud */
-.cloud{position:relative;flex:1 1 auto;min-height:0;width:100%;max-width:1200px;margin:6px auto 0}
-.shoe{position:absolute;left:50%;top:50%;width:var(--w);translate:-50% -50%;
-  transition-property:left,top,width,opacity,filter;transition-duration:.7s;transition-timing-function:var(--ease);
-  filter:grayscale(1) contrast(.9);opacity:.5;text-align:center;pointer-events:none}
-.shoe svg,.shoe .photo{width:100%;height:auto;display:block}
+/* slider: the shoe in the middle is large and solid; the further a shoe is from the middle, the smaller and fainter it gets */
+.cloud{position:relative;flex:1 1 auto;min-height:0;width:100%;max-width:1200px;margin:6px auto 0;overflow:hidden;touch-action:pan-y;user-select:none;cursor:grab;outline-offset:-2px}
+.cloud.dragging{cursor:grabbing}
+.cloud[hidden]{display:none}
+.shoe{position:absolute;top:var(--cy,45%);left:50%;width:var(--sw,240px);translate:-50% -50%;
+  transition:left .5s var(--ease),opacity .5s var(--ease),scale .5s var(--ease),filter .5s var(--ease)}
+.cloud.dragging .shoe{transition:none}
+.shoe svg,.shoe .photo{width:100%;height:auto;display:block;pointer-events:none}
+.shoe .photo{filter:drop-shadow(0 14px 14px rgb(0 0 0 / .12))}
+.shoe.gone{opacity:0!important;scale:.6!important}
 .photo{object-fit:contain;background:transparent;filter:drop-shadow(0 6px 8px rgb(0 0 0 / .08))}
 .store.live{color:var(--ink);background:var(--card);text-decoration:none;font-weight:600;box-shadow:inset 0 0 0 1px var(--line);transition-property:background-color,scale;transition-duration:.15s}
 .store.live:hover{background:var(--tile-hover)}
 .store.live:active{scale:.96}
-.shoe.feat{filter:none;opacity:1}
-.shoe.gone{opacity:0}
-.shoe .cap{font-size:11.5px;line-height:1.3;margin-top:2px;opacity:0;transition:opacity .3s var(--ease)}
-.shoe.feat .cap{opacity:1}
-.shoe .cap{width:100%;white-space:nowrap}
-.cap b,.cap span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cap b{font-weight:600;font-size:12px}
-.cap span{color:var(--muted);font-variant-numeric:tabular-nums}
-@media (max-width:520px){.cap b{font-size:11px}.cap span{font-size:10.5px}}
+.sinfo{position:absolute;left:0;right:0;bottom:4px;display:flex;align-items:center;justify-content:center;gap:14px;pointer-events:none}
+.sinfo .txt{text-align:center;min-width:0;max-width:60%}
+.sinfo b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sinfo span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sarrow{all:unset;pointer-events:auto;cursor:pointer;width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--card);box-shadow:var(--shadow);transition-property:scale,opacity;transition-duration:.15s}
+.sarrow:active{scale:.96}
+.sarrow[disabled]{opacity:.3;pointer-events:none}
+@media (max-width:520px){.sinfo b{font-size:13.5px}.sinfo span{font-size:11px}.sarrow{width:30px;height:30px}}
 .go{white-space:nowrap}
 
 /* card */
@@ -214,7 +217,7 @@ h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.02
   <div class="lang"><button class="lbtn" id="langBtn" aria-haspopup="listbox" aria-expanded="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M1.75 8h12.5M8 1.75c1.8 1.9 2.6 4 2.6 6.25S9.8 12.35 8 14.25C6.2 12.35 5.4 10.25 5.4 8S6.2 3.65 8 1.75z"/></svg><span id="langCur"></span><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m2.5 4 2.5 2.5L7.5 4"/></svg></button><ul class="lmenu" id="langMenu" role="listbox" hidden></ul></div>
   <button class="about" id="aboutBtn"></button>
 </div>
-<div class="cloud" id="cloud" aria-hidden="true"></div>
+<div class="cloud" id="cloud" tabindex="0" role="region" aria-roledescription="carousel"><div class="sinfo" id="sinfo"></div></div>
 <section class="card" id="card" aria-live="polite"></section>
 <p class="note" id="note" hidden></p>
 
@@ -572,52 +575,67 @@ function recompute(){
 }
 const answered=()=>Object.keys(A).filter(k=>k!=="loved"||A.loved.like!=null).length;
 
-/* ---------- cloud ---------- */
-const cloud=document.getElementById("cloud"),els=new Map();
-/* Slots for the cloud, sized to the space left above the card. Featured shoes sit in a row in
-   the middle; smaller ones go on a jittered grid around them, with a gap so nothing overlaps.
-   Slots closest to the middle come first, so better matches sit nearer the featured row. */
-let slotCache=null;
-function slots(){
-  const W=cloud.clientWidth,H=cloud.clientHeight,key=W+"x"+H;
-  if(slotCache&&slotCache.key===key)return slotCache.out;
-  const out=[],gap=W<640?14:22,boxes=[];
-  if(H<70||W<200){slotCache={key,out};return out}
-  let fw=Math.min(200,W*0.27,(H*0.62-30)/0.55);
-  const nf=fw>=86?3:0;
-  if(nf){
-    const fh=fw*0.55+30,cy=H*0.5;
-    [0,-1,1].forEach(d=>{const cx=W/2+d*(fw+gap*1.6);out.push([cx/W,cy/H,fw]);boxes.push([cx-fw/2-gap,cy-fh/2-gap,cx+fw/2+gap,cy+fh/2+gap])});
-  }
-  const sw=Math.max(40,Math.min(86,(nf?fw*0.44:Math.min(W,H*1.8)*0.16))),sh=sw*0.6;
-  let seed=W*7+H*13;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
-  const cw=sw+gap,ch=sh+gap,cols=Math.floor(W/cw),rows=Math.floor(H/ch),cand=[];
-  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
-    const x=(c+.5)*(W/cols)+(rnd()-.5)*gap*.8,y=(r+.5)*(H/rows)+(rnd()-.5)*gap*.6;
-    const bx=[x-sw/2,y-sh/2,x+sw/2,y+sh/2];
-    if(boxes.some(o=>bx[0]<o[2]&&bx[2]>o[0]&&bx[1]<o[3]&&bx[3]>o[1]))continue;
-    cand.push([x,y]);
-  }
-  cand.sort((p,q)=>Math.hypot(p[0]-W/2,(p[1]-H/2)*1.6)-Math.hypot(q[0]-W/2,(q[1]-H/2)*1.6));
-  cand.slice(0,30).forEach(([x,y])=>out.push([x/W,y/H,sw]));
-  slotCache={key,out,nf};return out;
+/* ---------- slider ---------- */
+/* The best match sits in the middle and the next ones alternate right and left of it,
+   so the slider always opens with shoes on both sides. */
+const cloud=document.getElementById("cloud"),sinfo=document.getElementById("sinfo"),els=new Map();
+let sOrder=[],sC=0,sDrag=0,sX0=null;
+const svgL=`<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg>`;
+const svgR=`<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>`;
+function sliderPct(){
+  const top=ranked.length?scores[ranked[0].i].sc:0;
+  return s=>Math.max(55,Math.min(98,Math.round(98-(top-scores[s.i].sc)*0.9)));
+}
+function sGeom(){
+  const W=cloud.clientWidth,H=cloud.clientHeight,mob=W<620,cap=H>=150;
+  const sw=Math.max(80,Math.min(mob?W*.52:W*.3,(H-(cap?64:8))*1.75,320));
+  return{W,H,sw,gap:mob?Math.max(sw*.78,W*.34):sw*1.02,cap};
+}
+function sLayout(){
+  const {W,H,sw,gap,cap}=sGeom();
+  cloud.style.setProperty("--sw",sw+"px");cloud.style.setProperty("--cy",cap?`calc(50% - 26px)`:"50%");
+  sOrder.forEach((i,k)=>{const el=els.get(i);if(!el)return;
+    const d=k-sC+sDrag/gap,ad=Math.abs(d);
+    el.style.left=(W/2+d*gap)+"px";
+    el.style.opacity=String(Math.max(0,1-ad*.3));
+    el.style.scale=String(Math.max(.45,1-ad*.17));
+    el.style.filter=ad<.5?"none":`grayscale(${Math.min(1,ad*.55).toFixed(2)})`;
+    el.style.zIndex=String(100-Math.round(ad*10));
+  });
+  const s=S[sOrder[sC]],on=answered()>0,pct=sliderPct(),rank=s?ranked.indexOf(s)+1:0;
+  sinfo.hidden=!cap||!s;
+  if(s)sinfo.innerHTML=`<button class="sarrow" id="sPrev" aria-label="${t("back")}" ${sC>0?"":"disabled"}>${svgL}</button>
+    <div class="txt"><b>${esc(s.brand+" "+s.model)}</b><span>${on?`#${rank} · ${pct(s)}% · `:""}${s.g} g · drop ${s.drop} mm</span></div>
+    <button class="sarrow" id="sNext" aria-label="${t("next")}" ${sC<sOrder.length-1?"":"disabled"}>${svgR}</button>`;
+  const p=document.getElementById("sPrev"),n=document.getElementById("sNext");
+  if(p)p.onclick=()=>{if(sC>0){sC--;sLayout()}};
+  if(n)n.onclick=()=>{if(sC<sOrder.length-1){sC++;sLayout()}};
+  if(s)cloud.setAttribute("aria-label",s.brand+" "+s.model);
 }
 function drawCloud(){
   cloud.hidden=view==="results";if(view==="results")return;
-  const sl=slots(),nf=(slotCache&&slotCache.nf)||0;const list=(view==="results"&&filt!=="all"?filtered():ranked).slice(0,sl.length);
-  const keep=new Set();
-  list.forEach((s,k)=>{keep.add(s.i);let el=els.get(s.i);const [x,y,w]=sl[k];
-    if(!el){el=document.createElement("div");el.className="shoe gone";el.innerHTML=shoeArt(s)+`<div class="cap"><b></b><span></span></div>`;
-      el.style.left=x*100+"%";el.style.top=(y*100+4)+"%";el.style.setProperty("--w",w+"px");cloud.appendChild(el);els.set(s.i,el);el.getBoundingClientRect()}
-    el.classList.remove("gone");el.classList.toggle("feat",k<nf);
-    el.style.left=x*100+"%";el.style.top=y*100+"%";el.style.setProperty("--w",w+"px");
-    el.querySelector(".cap b").textContent=s.brand+" "+s.model;
-    el.querySelector(".cap span").textContent=s.g+" g · drop "+s.drop+" mm";
+  const list=ranked.slice(0,innerWidth<620?9:13);
+  // centre-out: best in the middle, then right, left, right, left...
+  const order=[];list.forEach((s,k)=>{if(k%2)order.push(s.i);else order.unshift(s.i)});
+  const keep=new Set(order);
+  els.forEach((el,i)=>{if(!keep.has(i)){el.classList.add("gone");els.delete(i);setTimeout(()=>el.remove(),500)}});
+  const {W}=sGeom();
+  order.forEach((i,k)=>{if(els.has(i))return;
+    const el=document.createElement("div");el.className="shoe gone";el.innerHTML=shoeArt(S[i]);
+    el.style.left=(W/2+(k-order.indexOf(list[0]?list[0].i:i))*sGeom().gap)+"px";
+    el.onclick=()=>{if(Math.abs(sDrag)<4){sC=sOrder.indexOf(i);sLayout()}};
+    cloud.insertBefore(el,sinfo);els.set(i,el);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("gone")));
   });
-  els.forEach((el,i)=>{if(!keep.has(i)&&!el.classList.contains("gone")){el.classList.add("gone");el.classList.remove("feat");
-    setTimeout(()=>{if(el.classList.contains("gone")){el.remove();els.delete(i)}},750)}});
+  sOrder=order;sC=list.length?order.indexOf(list[0].i):0;
+  sLayout();
 }
-let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(view==="results")renderResults();drawCloud()},120)});
+cloud.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"&&sC>0){sC--;sLayout();e.preventDefault()}if(e.key==="ArrowRight"&&sC<sOrder.length-1){sC++;sLayout();e.preventDefault()}});
+cloud.addEventListener("pointerdown",e=>{if(e.target.closest(".sarrow"))return;sX0=e.clientX;sDrag=0;cloud.setPointerCapture(e.pointerId)});
+cloud.addEventListener("pointermove",e=>{if(sX0==null)return;sDrag=e.clientX-sX0;if(Math.abs(sDrag)>4)cloud.classList.add("dragging");sLayout()});
+const sEnd=()=>{if(sX0==null)return;const {gap}=sGeom();sC=Math.max(0,Math.min(sOrder.length-1,sC-Math.round(sDrag/gap)));sX0=null;cloud.classList.remove("dragging");setTimeout(()=>{sDrag=0;sLayout()},0)};
+cloud.addEventListener("pointerup",sEnd);cloud.addEventListener("pointercancel",sEnd);
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(view==="results")renderResults();else sLayout()},120)});
 
 /* ---------- card ---------- */
 const card=document.getElementById("card");
