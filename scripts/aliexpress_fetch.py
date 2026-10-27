@@ -1,9 +1,12 @@
 """Fetch real product photos and affiliate links from the AliExpress Affiliate API.
 
-For each shoe from a Chinese brand in data/running_shoes.json, this script
-searches the AliExpress Affiliate API, picks the listing that best matches the
-brand and model, and saves its main image, affiliate (promotion) link and price
-to data/aliexpress.json. scripts/build_site.py then shows the photo and link.
+For each shoe in scope, this script does two things:
+  1. Builds an AliExpress search page link for "<brand> <model>" (the visitor
+     lands on a list of listings, as if they had typed the name) and turns it
+     into an affiliate link with aliexpress.affiliate.link.generate.
+  2. Looks for the listing that exactly matches the model and keeps its photo,
+     so the site can show a real picture of that shoe.
+Results go to data/aliexpress.json; scripts/build_site.py shows them.
 
 Credentials come from environment variables, never from files in the repo:
   ALIEXPRESS_APP_KEY, ALIEXPRESS_APP_SECRET, ALIEXPRESS_TRACKING_ID
@@ -13,9 +16,9 @@ product id or product URL (to force the right listing), or to null (to never
 link that shoe). data/aliexpress_review.csv lists what was matched so a person
 can check it.
 
-Western brands are skipped on purpose: big-brand shoes on AliExpress are often
-not genuine, and linking to them would put the site and the affiliate account
-at risk.
+By default only Chinese brands are linked: search results for big Western
+brands on AliExpress are mostly not genuine, and AliExpress's affiliate terms
+forbid promoting counterfeits. Set INCLUDE_WESTERN_BRANDS = True to change that.
 """
 import csv
 import hashlib
@@ -44,6 +47,9 @@ BRAND_TERMS = {
     "Qiaodan": ["qiaodan", "qiao dan"],
     "Kailas": ["kailas"],
 }
+# Search links for Nike, ASICS, HOKA and other non-Chinese brands (see the note above)
+INCLUDE_WESTERN_BRANDS = False
+
 # Alternative names some models go by in listings (English and pinyin)
 MODEL_ALIASES = {
     "red hare": ["red hare", "chitu", "chi tu", "redhare"],
@@ -201,6 +207,27 @@ def queries(shoe):
     return list(dict.fromkeys(qs))
 
 
+def search_url(shoe):
+    words = f'{BRAND_TERMS.get(shoe["brand"], [shoe["brand"]])[0]} {shoe["model"]} running shoes'
+    return "https://www.aliexpress.com/wholesale?" + urllib.parse.urlencode({"SearchText": words.replace("%", "")})
+
+
+def affiliate_links(urls, common, key, secret):
+    """Turn plain AliExpress URLs into affiliate links, 20 at a time."""
+    out = {}
+    for i in range(0, len(urls), 20):
+        chunk = urls[i:i + 20]
+        res = call("aliexpress.affiliate.link.generate",
+                   {"source_values": ",".join(chunk), "promotion_link_type": 0, "tracking_id": common["tracking_id"]},
+                   key, secret)
+        links = (res.get("promotion_links") or {}).get("promotion_link") or []
+        for item in links if isinstance(links, list) else [links]:
+            if item.get("promotion_link"):
+                out[item.get("source_value")] = item["promotion_link"]
+        time.sleep(0.4)
+    return out
+
+
 def is_empty(error):
     return "result is empty" in str(error).lower() or str(error).startswith("405")
 
@@ -240,9 +267,10 @@ def main():
     found, review, failures = {}, [], 0
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
+    in_scope = [sh for sh in shoes if sh["brand"] in BRAND_TERMS or INCLUDE_WESTERN_BRANDS]
     for shoe in shoes:
         if shoe["brand"] not in BRAND_TERMS:
-            continue
+            continue  # exact-listing photos only for brands with official stores on AliExpress
         sid = shoe["id"]
         try:
             if sid in overrides:
@@ -284,16 +312,30 @@ def main():
                        hit["title"] if hit else "", hit["product_id"] if hit else ""])
         time.sleep(0.4)
 
+    # Search-page links for every shoe in scope (skip shoes overridden to null)
+    wanted = {sh["id"]: search_url(sh) for sh in in_scope if not (sh["id"] in overrides and overrides[sh["id"]] is None)}
+    try:
+        aff = affiliate_links(list(dict.fromkeys(wanted.values())), common, key, secret)
+    except Exception as error:
+        failures += 1
+        aff = {}
+        note("error", f"link.generate: {error}")
+    for sid, url in wanted.items():
+        link = aff.get(url) or (previous.get(sid) or {}).get("search_link")
+        if link:
+            found.setdefault(sid, {"fetched": now})["search_link"] = link
+    print(f"Search links: {sum(1 for v in found.values() if v.get('search_link'))} of {len(wanted)}")
+
     json.dump(found, open(out_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     with open(os.path.join(DATA, "aliexpress_review.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["shoe_id", "brand", "model", "result", "aliexpress_title", "product_id"])
         w.writerows(review)
-    print(f"Matched {len(found)} of {len(review)} shoes ({failures} API errors). Review data/aliexpress_review.csv.")
+    print(f"Photos: {sum(1 for v in found.values() if v.get('image'))} of {len(review)} shoes ({failures} API errors). Review data/aliexpress_review.csv.")
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as f:
-            f.write(f"### AliExpress\n\nMatched **{len(found)}** of {len(review)} shoes, {failures} API errors.\n")
+            f.write(f"### AliExpress\n\nPhotos: **{sum(1 for v in found.values() if v.get('image'))}**, search links: **{sum(1 for v in found.values() if v.get('search_link'))}**, {failures} API errors.\n")
     if failures and not found:
         sys.exit(1)
 

@@ -12,10 +12,17 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 
 def photo_fields(hit):
-    """[image, affiliate link, price] from data/aliexpress.json, or nothing."""
-    if not hit or not hit.get("image") or not hit.get("link"):
+    """[photo or null, AliExpress affiliate link] from data/aliexpress.json, or nothing.
+
+    The link goes to the AliExpress search results for the shoe (a list of
+    listings); the photo is the exact listing's picture when one was matched.
+    """
+    if not hit:
         return []
-    return [hit["image"], hit["link"], hit.get("price")]
+    link = hit.get("search_link") or hit.get("link")
+    if not link:
+        return []
+    return [hit.get("image"), link]
 
 
 def compact(shoes, ali):
@@ -60,7 +67,7 @@ def main():
     os.makedirs(dist, exist_ok=True)
     open(os.path.join(dist, "artifact.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(SHELL.replace("{page}", page))
-    print(f"Built docs/ with {len(shoes)} shoes, {sum(1 for v in ali.values() if v.get('image'))} with AliExpress photos")
+    print(f"Built docs/ with {len(shoes)} shoes, {sum(1 for v in ali.values() if v.get('image'))} with AliExpress photos, {sum(1 for v in ali.values() if v.get('search_link'))} with search links")
 
 
 if __name__ == "__main__":
