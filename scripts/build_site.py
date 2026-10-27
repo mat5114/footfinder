@@ -11,18 +11,20 @@ import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 
-def photo_fields(hit):
-    """[photo or null, AliExpress affiliate link] from data/aliexpress.json, or nothing.
+def photo_fields(sid, hit):
+    """[photo or null, AliExpress affiliate link] for one shoe, or nothing.
 
     The link goes to the AliExpress search results for the shoe (a list of
-    listings); the photo is the exact listing's picture when one was matched.
+    listings). The photo is the background-free cut-out made by
+    scripts/clean_photos.py; without one, the site keeps the drawing.
     """
     if not hit:
         return []
     link = hit.get("search_link") or hit.get("link")
     if not link:
         return []
-    return [hit.get("image"), link]
+    cut = os.path.join(ROOT, "docs", "img", f"{sid}.webp")
+    return [f"img/{sid}.webp" if os.path.exists(cut) else None, link]
 
 
 def compact(shoes, ali):
@@ -37,7 +39,7 @@ def compact(shoes, ali):
             s["distances"], 1 if s["suits_heavier_runners"] else 0, 1 if s["popular_pick"] else 0,
             [idx[x] for x in s["similar"]], 1 if s["is_chinese_brand"] else 0,
             s["data_quality"]["spec_confidence"][0],
-            *photo_fields(ali.get(s["id"])),
+            *photo_fields(s["id"], ali.get(s["id"])),
         ])
     return json.dumps(out, ensure_ascii=False, separators=(",", ":"))
 
@@ -67,7 +69,7 @@ def main():
     os.makedirs(dist, exist_ok=True)
     open(os.path.join(dist, "artifact.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(SHELL.replace("{page}", page))
-    print(f"Built docs/ with {len(shoes)} shoes, {sum(1 for v in ali.values() if v.get('image'))} with AliExpress photos, {sum(1 for v in ali.values() if v.get('search_link'))} with search links")
+    print(f"Built docs/ with {len(shoes)} shoes, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for v in ali.values() if v.get('search_link'))} with search links")
 
 
 if __name__ == "__main__":

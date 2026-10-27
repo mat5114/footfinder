@@ -31,6 +31,17 @@ jobs:
           ALIEXPRESS_TRACKING_ID: ${{ secrets.ALIEXPRESS_TRACKING_ID }}
         run: python scripts/aliexpress_fetch.py
 
+      - name: Cache the background-removal model
+        uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: rembg-isnet-general-use
+
+      - name: Make clean product cut-outs
+        run: |
+          pip install --quiet "rembg[cpu]" pillow
+          python scripts/clean_photos.py
+
       - name: Rebuild the site
         run: python scripts/build_site.py
 
@@ -38,7 +49,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/aliexpress.json data/aliexpress_review.csv docs/
+          git add data/aliexpress.json data/aliexpress_review.csv data/photo_cache.json docs/
           if git diff --cached --quiet; then
             echo "Nothing changed."
           else

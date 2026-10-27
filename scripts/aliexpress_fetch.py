@@ -263,11 +263,20 @@ def is_empty(error):
     return "result is empty" in str(error).lower() or str(error).startswith("405")
 
 
+def gallery_of(product):
+    small = product.get("product_small_image_urls") or {}
+    urls = small.get("string") if isinstance(small, dict) else small
+    if isinstance(urls, str):
+        urls = [urls]
+    return [u for u in (urls or []) if isinstance(u, str)][:8]
+
+
 def pick(product):
     return {
         "product_id": str(product.get("product_id")),
         "title": product.get("product_title"),
         "image": product.get("product_main_image_url"),
+        "gallery": gallery_of(product),
         "link": product.get("promotion_link"),
         "price": product.get("target_sale_price") or product.get("sale_price"),
         "currency": product.get("target_sale_price_currency") or "USD",
