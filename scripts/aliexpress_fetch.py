@@ -124,38 +124,78 @@ def products_of(result):
 
 
 def norm(text):
-    return re.sub(r"[^a-z0-9°%.]+", " ", text.lower()).strip()
+    text = text.lower()
+    text = re.sub(r"(?<=[a-z0-9])-(?=[a-z0-9])", "", text)  # keep product codes like ARHW033-4 in one piece
+    return re.sub(r"[^a-z0-9°%.]+", " ", text).strip()
 
 
-def model_terms(model):
-    """Groups of acceptable spellings; every group must appear in the title."""
+# Words that mark a different version of a model (a "Red Hare 9 Pro" is not a "Red Hare 9")
+VARIANTS = {"pro", "ultra", "elite", "challenger", "max", "plus", "gt", "se", "lite", "air", "gtx"}
+
+
+def tok_pattern(tok):
+    if re.fullmatch(r"\d+", tok):  # "5" also matches "5.0"
+        return rf"{tok}(?:\.0)?"
+    return re.escape(tok)
+
+
+def model_patterns(model):
+    """Regexes for the full model name: tokens in order, at most one extra word between them."""
     m = norm(model)
-    groups = []
+    names = [m]
     for key, aliases in MODEL_ALIASES.items():
         if key in m:
-            groups.append(aliases)
-            m = m.replace(key, " ")
-    for tok in m.split():
-        groups.append([tok])
-    return groups
+            names = [m.replace(key, a) for a in aliases]
+            break
+    pats = []
+    for name in names:
+        toks = name.split()
+        body = r"(?:\s+\S+)?\s+".join(tok_pattern(t) for t in toks)
+        pats.append((re.compile(rf"(?<!\S){body}(?!\S)"), set(toks)))
+    return pats
 
 
 def score(product, shoe):
-    title = " " + norm(product.get("product_title", "")) + " "
-    if not any(b in title for b in BRAND_TERMS[shoe["brand"]]):
+    title = norm(product.get("product_title", ""))
+    padded = f" {title} "
+    if not any(f" {b} " in padded or b in title for b in BRAND_TERMS[shoe["brand"]]):
         return None
-    total = 0
-    for group in model_terms(shoe["model"]):
-        if not any(f" {a} " in title or (len(a) > 3 and a in title) for a in group):
-            return None
-        total += 10
-    if "run" in title:
-        total += 5
-    if "official" in title or "store" in norm(product.get("shop_url", "")):
-        total += 3
-    volume = int(product.get("lastest_volume") or 0)
-    total += min(volume, 1000) / 200
-    return total
+    for pat, toks in model_patterns(shoe["model"]):
+        m = pat.search(title)
+        if not m:
+            continue
+        if len(toks) == 1:  # one-word names like "Wave" must sit right after the brand
+            before = title[:m.start()].split()[-2:]
+            if not any(b in " ".join(before) for b in BRAND_TERMS[shoe["brand"]]):
+                continue
+        nxt = title[m.end():].split()[:1]
+        if nxt and nxt[0] in VARIANTS and nxt[0] not in toks:
+            return None  # e.g. looking for "Red Hare 8", found "Red Hare 8 Pro"
+        total = 20
+        if m.group(0).count(" ") == len(toks) - 1:
+            total += 5  # exact phrase, no extra words in between
+        if "run" in title:
+            total += 5
+        total += min(int(product.get("lastest_volume") or 0), 1000) / 200
+        return total
+    return None
+
+
+def queries(shoe):
+    brand = BRAND_TERMS[shoe["brand"]][0]
+    model = shoe["model"].replace("%", "").strip()
+    qs = [f"{brand} {model} running shoes", f"{brand} {model}"]
+    low = norm(model)
+    for key, aliases in MODEL_ALIASES.items():
+        if key in low:
+            qs += [f"{brand} {low.replace(key, a)}" for a in aliases[1:3]]
+    if shoe["brand"] == "361°":
+        qs.append(f"361 degrees {model}")
+    return list(dict.fromkeys(qs))
+
+
+def is_empty(error):
+    return "result is empty" in str(error).lower() or str(error).startswith("405")
 
 
 def pick(product):
@@ -208,11 +248,23 @@ def main():
                 if prods:
                     found[sid] = {**pick(prods[0]), "matched_by": "override", "fetched": now}
             else:
-                query = f'{BRAND_TERMS[shoe["brand"]][0]} {shoe["model"]} running shoes'
-                res = call("aliexpress.affiliate.product.query", {**common, "keywords": query, "page_size": 20, "sort": "LAST_VOLUME_DESC"}, key, secret)
-                ranked = sorted(((score(p, shoe), p) for p in products_of(res)), key=lambda x: -(x[0] or -1))
-                if ranked and ranked[0][0] is not None:
-                    found[sid] = {**pick(ranked[0][1]), "matched_by": "search", "fetched": now}
+                best = None
+                for query in queries(shoe):  # try the most specific search first, then broader ones
+                    try:
+                        res = call("aliexpress.affiliate.product.query", {**common, "keywords": query, "page_size": 40, "sort": "LAST_VOLUME_DESC"}, key, secret)
+                    except RuntimeError as e:
+                        if is_empty(e):
+                            continue
+                        raise
+                    for p in products_of(res):
+                        sc = score(p, shoe)
+                        if sc is not None and (best is None or sc > best[0]):
+                            best = (sc, p)
+                    if best:
+                        break
+                    time.sleep(0.3)
+                if best:
+                    found[sid] = {**pick(best[1]), "matched_by": "search", "fetched": now}
         except Exception as error:  # keep going; one bad call should not stop the run
             failures += 1
             print(f"! {sid}: {error}", file=sys.stderr)
