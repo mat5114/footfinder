@@ -40,6 +40,19 @@ Em um ou dois minutos o site fica em `https://mat5114.github.io/footfinder/`.
 
 A pasta `docs/` também funciona em Netlify, Vercel ou Cloudflare Pages sem configuração extra.
 
+## Fotos e links do AliExpress
+
+O script `scripts/aliexpress_fetch.py` busca cada tênis de marca chinesa na API de afiliados do AliExpress e salva a foto, o seu link de afiliado e o preço em `data/aliexpress.json`. O site mostra a foto real no lugar da ilustração e o botão do AliExpress vira link. Marcas ocidentais ficam de fora de propósito: no AliExpress elas costumam ser falsificadas.
+
+As chaves nunca ficam no código. Elas são guardadas como segredos do repositório:
+
+1. Em **Settings → Secrets and variables → Actions**, clique em **New repository secret** e crie três segredos: `ALIEXPRESS_APP_KEY`, `ALIEXPRESS_APP_SECRET` e `ALIEXPRESS_TRACKING_ID`.
+2. Em **Actions**, abra **Update AliExpress photos and links** e clique em **Run workflow**.
+
+O processo roda de novo toda segunda-feira para atualizar fotos, links e preços.
+
+Depois de cada execução, confira `data/aliexpress_review.csv`. Se um tênis foi ligado ao anúncio errado, coloque o link ou o ID do anúncio certo em `data/aliexpress_overrides.json`, por exemplo `{"li-ning-red-hare-9-ultra": "https://www.aliexpress.com/item/1005001234567890.html"}`. Para nunca linkar um tênis, use `null`.
+
 ## Qualidade dos dados
 
 Cada tênis tem um campo `data_quality` com o nível de confiança das especificações (`checked`, `high`, `medium` ou `low`) e a fonte. Os de confiança média e baixa são estimativas e precisam ser conferidos na ficha do fabricante antes do lançamento.
