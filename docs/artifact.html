@@ -570,10 +570,9 @@ function renderResults(){
       <div class="pic">${shoeArt(s)}</div>
       <div class="rbody">
         <div class="rname"><b>${esc(s.model)}</b><span class="br">${esc(s.brand)}</span>${!s.cur?`<span class="tag">${t("prev")}</span>`:""}${s.conf==="l"?`<span class="tag">${t("est")}</span>`:""}</div>
-        <div class="specs"><span><em>${s.g}</em> g</span><span><em>${s.h}/${s.f}</em> mm</span><span>drop <em>${s.drop}</em> mm</span><span>${esc(s.foam)}</span>${pl?`<span>${pl}</span>`:""}</div>
+        <div class="specs"><span><em>${s.g}</em> g</span><span><em>${s.h}/${s.f}</em> mm</span><span>drop <em>${s.drop}</em> mm</span>${pl?`<span>${pl}</span>`:""}</div>
         ${r.w.length?`<ul class="why">${r.w.map(k=>`<li>${esc(T[L].w[k])}</li>`).join("")}</ul>`:""}
         <div class="buy"><span class="price">$${s.usd}</span><span class="store">Amazon · ${t("soon")}</span>${s.ali?`<a class="store live" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">AliExpress${s.aliPrice?` · $${esc(s.aliPrice)}`:""} ↗</a>`:s.cn?`<span class="store">AliExpress · ${t("soon")}</span>`:""}</div>
-        <div class="sim">${t("similar")} ${s.sim.slice(0,3).map(i=>`<button data-jump="${i}">${esc(S[i].brand+" "+S[i].model)}</button>`).join(", ")}</div>
       </div>
       <div class="pct"><strong>${pct(s)}%</strong><span>${t("matchLbl")}</span></div></article>`});
   h+=`</div>`+foot2(`<button class="go" id="editAns">${t("edit")}</button>`);
