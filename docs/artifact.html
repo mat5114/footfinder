@@ -135,6 +135,67 @@ h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.02
 }
 @media (max-height:640px){.opt .art{display:none}.opt span{display:none}}
 
+/* results: a product page for the selected shoe, with the shortlist beside it (one screen, no scrolling) */
+.card.res{flex:1 1 auto;min-height:0;max-width:1240px;background:transparent;box-shadow:none;padding:0;margin-top:10px}
+.rwrap{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px}
+.rmain{min-height:0;background:var(--card);border-radius:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden}
+.rphoto{position:relative;background:var(--tile);display:grid;place-items:center;padding:28px;min-height:0}
+.rphoto svg,.rphoto .photo{width:min(100%,460px);height:auto;max-height:100%;display:block}
+.rphoto .photo{filter:drop-shadow(0 22px 22px rgb(0 0 0 / .16))}
+.rbadge{position:absolute;top:18px;left:18px;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--card);font-variant-numeric:tabular-nums;box-shadow:0 1px 2px rgb(0 0 0 / .06)}
+.rdet{min-height:0;display:flex;flex-direction:column;gap:14px;padding:30px 34px}
+.rdet .rb{font-size:13px;color:var(--muted);font-weight:500}
+.rdet h2{margin:0;font-size:28px;font-weight:700;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+.rprice{font-size:24px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:8px}
+.rprice small{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{background:var(--tile);border-radius:12px;padding:10px 14px}
+.tile span{display:block;font-size:12px;color:var(--muted)}
+.tile b{font-size:18px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.spec{margin:0;display:grid;grid-template-columns:auto 1fr;font-size:13.5px}
+.spec dt,.spec dd{margin:0;padding:6px 0;border-top:1px solid var(--line)}
+.spec dt{color:var(--muted);padding-right:16px}
+.spec dd{text-align:right;font-variant-numeric:tabular-nums}
+.spec dt:first-of-type,.spec dd:first-of-type{border-top:0}
+.rwhy{display:flex;flex-wrap:wrap;gap:4px}
+.rwhy span{font-size:12px;background:var(--tile);border-radius:6px;padding:2px 8px}
+.rbtns{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.rbtn{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border-radius:12px;font-weight:600;font-size:14.5px;text-decoration:none;cursor:pointer;transition-property:scale,opacity,background-color;transition-duration:.15s}
+.rbtn:active{scale:.96}
+.rbtn.light{background:var(--tile);color:var(--ink)}
+.rbtn.dark{background:var(--ink);color:var(--bg)}
+.rbtn.off{opacity:.45;cursor:default;pointer-events:none}
+.rlist{min-height:0;background:var(--card);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.rlhead{display:flex;align-items:center;gap:6px;padding:12px 12px 8px}
+.rlhead b{flex:1;font-size:14px;font-weight:600;letter-spacing:-.01em;text-align:right;padding-right:6px}
+.ritem{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 14px;height:64px;transition:background-color .15s}
+.ritem:hover{background:var(--tile)}
+.ritem[aria-current="true"]{background:var(--tile)}
+.ritem .th{height:44px;display:grid;place-items:center}
+.ritem .th svg,.ritem .th .photo{max-height:44px;width:auto;max-width:58px}
+.ritem .tx{min-width:0}
+.ritem .tx b{display:block;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ritem .tx span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rtag{font-size:11.5px;font-weight:500;padding:3px 8px;border-radius:7px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap}
+.rpager{display:none}
+@media (max-height:820px){.rdet{padding:22px 26px;gap:10px}.rdet h2{font-size:24px}.rprice{font-size:20px}.tile b{font-size:16px}.spec dt,.spec dd{padding:4px 0}.rbtn{height:42px}}
+@media (max-height:700px){.spec .x{display:none}.rwhy{display:none}}
+@media (max-width:900px){
+  .rwrap{grid-template-columns:minmax(0,1fr)}
+  .rlist{display:none}
+  .rmain{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .rphoto{padding:12px 16px;height:clamp(110px,22vh,190px)}
+  .rphoto svg,.rphoto .photo{width:auto;max-width:78%;max-height:100%}
+  .rdet{padding:14px 18px 14px;gap:8px}
+  .rdet h2{font-size:21px}.rprice{font-size:18px}
+  .tile{padding:8px 12px}.tile b{font-size:15px}
+  .spec{font-size:13px}.spec dt,.spec dd{padding:3px 0}.spec .x{display:none}
+  .rwhy{display:none}
+  .rbtn{height:42px}
+  .rpager{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:4px}
+  .rpager span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+}
+@media (max-width:900px) and (max-height:700px){.spec .y{display:none}.rphoto{height:96px}}
 /* results: a page of cards at a time instead of a long list */
 .rgrid{display:grid;grid-template-columns:repeat(var(--per,3),minmax(0,1fr));gap:8px}
 .rcard{position:relative;background:var(--tile);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
@@ -347,6 +408,28 @@ it:{goal:"Per cosa le userai?",volume:"Quanto corri a settimana?",volume_start:"
   "budget.b1":"Base","budget.b2":"Fascia media","budget.b3":"Premium","budget.b4":"Senza limiti|Con piastra in carbonio","budget.b4x":"Senza limiti|Le più comode",
   "cn.yes":"Sì, fammele vedere","cn.no":"Solo marchi noti"}}
 };
+/* results copy */
+const RT={
+en:{weight:"Weight",drop:"Drop",stack:"Stack height",cushion:"Cushioning",feel:"Ride",plate:"Plate",stab:"Support",surf:"Surface",dist:"Best for",wide:"Wide version",year:"Released",price:"list price",match:"match",ali:"See on AliExpress",amz:"Amazon · soon",prev:"Previous version",
+ tags:{best:"Best match",light:"Lightest",cheap:"Cheapest",soft:"Most cushioned"},cush:{low:"Low",medium:"Medium",high:"High",max:"Maximum"},feelV:{soft:"Soft",balanced:"Balanced",firm:"Firm",bouncy:"Bouncy"},none:"None",
+ stabV:{neutral:"Neutral",mild:"Light support",stable:"Stability"},surfV:{road:"Road",trail:"Trail",mixed:"Road and trail"},yes:"Yes",no:"No"},
+pt:{weight:"Peso",drop:"Drop",stack:"Altura do solado",cushion:"Amortecimento",feel:"Pisada",plate:"Placa",stab:"Suporte",surf:"Superfície",dist:"Ideal para",wide:"Versão larga",year:"Lançamento",price:"preço de tabela",match:"combina",ali:"Ver no AliExpress",amz:"Amazon · em breve",prev:"Versão anterior",
+ tags:{best:"Melhor combinação",light:"Mais leve",cheap:"Mais barato",soft:"Mais amortecido"},cush:{low:"Baixo",medium:"Médio",high:"Alto",max:"Máximo"},feelV:{soft:"Macia",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Nenhuma",
+ stabV:{neutral:"Neutro",mild:"Suporte leve",stable:"Estabilidade"},surfV:{road:"Asfalto",trail:"Trilha",mixed:"Asfalto e trilha"},yes:"Sim",no:"Não"},
+es:{weight:"Peso",drop:"Drop",stack:"Altura de suela",cushion:"Amortiguación",feel:"Pisada",plate:"Placa",stab:"Soporte",surf:"Superficie",dist:"Ideal para",wide:"Versión ancha",year:"Lanzamiento",price:"precio de lista",match:"coincide",ali:"Ver en AliExpress",amz:"Amazon · pronto",prev:"Versión anterior",
+ tags:{best:"Mejor opción",light:"Más ligera",cheap:"Más barata",soft:"Más amortiguada"},cush:{low:"Baja",medium:"Media",high:"Alta",max:"Máxima"},feelV:{soft:"Suave",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Ninguna",
+ stabV:{neutral:"Neutra",mild:"Soporte leve",stable:"Estabilidad"},surfV:{road:"Asfalto",trail:"Montaña",mixed:"Asfalto y montaña"},yes:"Sí",no:"No"},
+fr:{weight:"Poids",drop:"Drop",stack:"Hauteur de semelle",cushion:"Amorti",feel:"Foulée",plate:"Plaque",stab:"Maintien",surf:"Surface",dist:"Idéale pour",wide:"Version large",year:"Sortie",price:"prix catalogue",match:"correspondance",ali:"Voir sur AliExpress",amz:"Amazon · bientôt",prev:"Version précédente",
+ tags:{best:"Meilleur choix",light:"La plus légère",cheap:"La moins chère",soft:"La plus amortie"},cush:{low:"Faible",medium:"Moyen",high:"Élevé",max:"Maximal"},feelV:{soft:"Moelleuse",balanced:"Équilibrée",firm:"Ferme",bouncy:"Dynamique"},none:"Aucune",
+ stabV:{neutral:"Neutre",mild:"Léger maintien",stable:"Stabilité"},surfV:{road:"Route",trail:"Trail",mixed:"Route et trail"},yes:"Oui",no:"Non"},
+de:{weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Übereinstimmung",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
+ tags:{best:"Beste Wahl",light:"Leichtester",cheap:"Günstigster",soft:"Meiste Dämpfung"},cush:{low:"Gering",medium:"Mittel",high:"Hoch",max:"Maximal"},feelV:{soft:"Weich",balanced:"Ausgewogen",firm:"Fest",bouncy:"Federnd"},none:"Keine",
+ stabV:{neutral:"Neutral",mild:"Leichte Stütze",stable:"Stabilität"},surfV:{road:"Straße",trail:"Trail",mixed:"Straße und Trail"},yes:"Ja",no:"Nein"},
+it:{weight:"Peso",drop:"Drop",stack:"Altezza suola",cushion:"Ammortizzazione",feel:"Appoggio",plate:"Piastra",stab:"Supporto",surf:"Superficie",dist:"Ideale per",wide:"Versione larga",year:"Uscita",price:"prezzo di listino",match:"compatibilità",ali:"Vedi su AliExpress",amz:"Amazon · presto",prev:"Versione precedente",
+ tags:{best:"Migliore scelta",light:"La più leggera",cheap:"La più economica",soft:"La più ammortizzata"},cush:{low:"Bassa",medium:"Media",high:"Alta",max:"Massima"},feelV:{soft:"Morbida",balanced:"Bilanciata",firm:"Rigida",bouncy:"Reattiva"},none:"Nessuna",
+ stabV:{neutral:"Neutra",mild:"Supporto leggero",stable:"Stabilità"},surfV:{road:"Asfalto",trail:"Trail",mixed:"Asfalto e trail"},yes:"Sì",no:"No"}
+};
+const rt=()=>RT[L]||RT.en;
 const qs=k=>(QT[L]&&QT[L][k])||QT.en[k]||"";
 const qo=k=>((QT[L]&&QT[L].o[k])||QT.en.o[k]||"").split("|");
 
@@ -519,6 +602,7 @@ function slots(){
   slotCache={key,out,nf};return out;
 }
 function drawCloud(){
+  cloud.hidden=view==="results";if(view==="results")return;
   const sl=slots(),nf=(slotCache&&slotCache.nf)||0;const list=(view==="results"&&filt!=="all"?filtered():ranked).slice(0,sl.length);
   const keep=new Set();
   list.forEach((s,k)=>{keep.add(s.i);let el=els.get(s.i);const [x,y,w]=sl[k];
@@ -543,7 +627,7 @@ function head(title,backOk){return `<div class="chead"><div class="icons"><butto
 function foot2(extra){
   return `<div class="cfoot"><span class="sp"></span><div class="dots">${Q.map((q,i)=>active(i)?`<i class="${i<=step||view==="results"?"on":""}"></i>`:"").join("")}</div>${extra||"<span></span>"}</div>`}
 function renderQuiz(){
-  card.classList.remove("wide");
+  card.classList.remove("wide","res");
   const q=Q[step];let h="";
   if(q.special){h=head(qTitle(q),true)+renderLoved()+foot2(`<button class="go" id="finish">${t("next")}</button>`)}
   else{
@@ -573,7 +657,7 @@ function wire(q){
   const fw=document.getElementById("fwd");if(fw)fw.onclick=()=>{const nx=nextIdx(step);if(nx<0){finish();return}step=nx;renderQuiz()};
   const fn=document.getElementById("finish");if(fn)fn.onclick=()=>{if(A.loved&&A.loved.like==null)delete A.loved;finish()};
 }
-function finish(){view="results";recompute();filt="all";rpage=0;renderResults();drawCloud()}
+function finish(){view="results";recompute();filt="all";rsel=0;renderResults();drawCloud()}
 function renderLoved(){
   if(lovedStage===0){
     const brands=[...new Set(S.filter(s=>s.pop).map(s=>s.brand))];
@@ -593,37 +677,63 @@ function filtered(){
   if(filt==="all")return ranked;
   if(filt==="budget")return finalize(pool,false,30).sort((a,b)=>a.usd-b.usd).slice(0,12);
   return finalize(pool.filter(s=>filt==="cn"?s.cn:(s.cur&&s.yr>=2026)),false,12)}
-let rpage=0;
+let rpage=0,rsel=0;
+const cushOf=h=>h<30?"low":h<36?"medium":h<42?"high":"max";
+const distTxt=d=>{const m={"5k":"5","10k":"10","21k":"21","42k":"42","ultra":"Ultra"};const a=m[d[0]],b=m[d[d.length-1]];return a===b?a+(a==="Ultra"?"":" km"):`${a}–${b}${b==="Ultra"?"":" km"}`};
 function renderResults(){
-  card.classList.add("wide");
-  const list=filtered().slice(0,12);
+  card.classList.remove("wide");card.classList.add("res");
+  const list=ranked.slice(0,12),R=rt();
   const top=pool.length?scores[pool[0].i].sc:1,lo=pool.length?scores[pool[Math.min(pool.length-1,40)].i].sc:0;
   const pct=s=>Math.max(40,Math.min(99,Math.round(62+37*(scores[s.i].sc-lo)/Math.max(1,top-lo))));
-  const per=innerWidth>=860?3:innerWidth>=560?2:1,pages=Math.max(1,Math.ceil(list.length/per));
-  rpage=Math.min(rpage,pages-1);
-  const pageList=list.slice(rpage*per,rpage*per+per);
-  let h=head(t("resTitle"),true)+`
-  <div class="filters" role="group">${[["all","fAll"],["budget","fBudget"],["cn","fCn"],["cur","fCur"]].filter(f=>!(f[0]==="cn"&&A.cn==="no")).map(f=>`<button class="chip" data-f="${f[0]}" aria-pressed="${filt===f[0]}">${t(f[1])}</button>`).join("")}</div>`;
-  if(!list.length)h+=`<p class="empty">${t("none")}</p>`;
-  h+=`<div class="rgrid" style="--per:${per}">`;
-  pageList.forEach(s=>{const r=scores[s.i];
-    h+=`<article class="rcard">
-      <span class="badge">${pct(s)}%</span>
-      <div class="pic">${shoeArt(s)}</div>
-      <div class="rname"><b>${esc(s.model)}</b><span class="br">${esc(s.brand)}</span></div>
-      <div class="specs"><span><em>${s.g}</em> g</span><span>drop <em>${s.drop}</em> mm</span>${!s.cur?`<span class="tag">${t("prev")}</span>`:""}</div>
-      ${r.w.length?`<ul class="why">${r.w.slice(0,2).map(k=>`<li>${esc(T[L].w[k])}</li>`).join("")}</ul>`:""}
-      <div class="buy"><span class="price">$${s.usd}</span><span class="store">Amazon · ${t("soon")}</span>${s.ali?`<a class="store live" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">AliExpress ↗</a>`:s.cn?`<span class="store">AliExpress · ${t("soon")}</span>`:""}</div>
-    </article>`});
-  h+=`</div>`;
-  const pager=`<div class="pager"><button class="ibtn" id="pgPrev" aria-label="${t("back")}" ${rpage?"":"disabled"}>‹</button><span>${list.length?`${rpage*per+1}–${Math.min(list.length,rpage*per+per)} / ${list.length}`:""}</span><button class="ibtn" id="pgNext" aria-label="${t("next")}" ${rpage<pages-1?"":"disabled"}>›</button></div>`;
-  h+=`<div class="cfoot"><button class="go" id="editAns" style="justify-self:start">${t("edit")}</button>${pager}<span></span></div>`;
-  card.innerHTML=h;wire(null);
-  card.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filt=b.dataset.f;rpage=0;renderResults();drawCloud()});
-  document.getElementById("pgPrev").onclick=()=>{rpage--;renderResults()};
-  document.getElementById("pgNext").onclick=()=>{rpage++;renderResults()};
-  document.getElementById("editAns").onclick=()=>{view="quiz";step=0;recompute();lovedStage=0;renderQuiz();drawCloud()};
-  requestAnimationFrame(drawCloud);
+  if(!list.length){card.innerHTML=`<div class="rmain" style="display:block;padding:24px">${head(t("resTitle"),true)}<p class="empty">${t("none")}</p></div>`;wire(null);return}
+  rsel=Math.min(rsel,list.length-1);
+  // one tag per shoe: best match, lightest, cheapest, most cushioned
+  const tags={};const tagOnce=(k,i)=>{if(i!=null&&!(i in tags))tags[i]=R.tags[k]};
+  tagOnce("best",list[0].i);
+  tagOnce("light",[...list].sort((a,b)=>a.g-b.g)[0].i);
+  tagOnce("cheap",[...list].sort((a,b)=>a.usd-b.usd)[0].i);
+  tagOnce("soft",[...list].sort((a,b)=>b.h-a.h)[0].i);
+  const s=list[rsel],why=scores[s.i].w;
+  const plate=s.plate==="none"?R.none:(T[L].plate[s.plate]||s.plate);
+  const icons=`<button class="ibtn" data-act="back" aria-label="${t("back")}">${svgBack}</button><button class="ibtn" data-act="reset" aria-label="${t("reset")}">${svgReset}</button>`;
+  card.innerHTML=`<div class="rwrap">
+    <section class="rmain" aria-live="polite">
+      <div class="rphoto"><span class="rbadge">${pct(s)}% ${esc(R.match)}</span>${shoeArt(s)}</div>
+      <div class="rdet">
+        <div><div class="rb">${esc(s.brand)}${!s.cur?` · ${esc(R.prev)}`:""}</div><h2>${esc(s.model)}</h2></div>
+        <div class="rprice">$${s.usd}<small>${esc(R.price)}</small></div>
+        <div class="tiles"><div class="tile"><span>${R.weight}</span><b>${s.g} g</b></div><div class="tile"><span>${R.drop}</span><b>${s.drop} mm</b></div></div>
+        <dl class="spec">
+          <dt>${R.stack}</dt><dd>${s.h} / ${s.f} mm</dd>
+          <dt>${R.cushion}</dt><dd>${R.cush[cushOf(s.h)]}</dd>
+          <dt>${R.feel}</dt><dd>${R.feelV[s.feel]}</dd>
+          <dt>${R.stab}</dt><dd>${R.stabV[s.stab]}</dd>
+          <dt class="y">${R.plate}</dt><dd class="y">${esc(plate)}</dd>
+          <dt class="y">${R.surf}</dt><dd class="y">${R.surfV[s.surf]}</dd>
+          <dt class="x">${R.dist}</dt><dd class="x">${distTxt(s.dist)}</dd>
+          <dt class="x">${R.wide}</dt><dd class="x">${s.wide||s.brand==="Altra"||s.brand==="Topo Athletic"?R.yes:R.no}</dd>
+          <dt class="x">${R.year}</dt><dd class="x">${s.yr}</dd>
+        </dl>
+        ${why.length?`<div class="rwhy">${why.map(k=>`<span>${esc(T[L].w[k])}</span>`).join("")}</div>`:""}
+        <div class="rbtns">
+          ${s.ali?`<a class="rbtn light" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${esc(R.ali)} ↗</a>`:""}
+          <span class="rbtn dark off">${esc(R.amz)}</span>
+        </div>
+        <div class="rpager">${icons}<span>${rsel+1} / ${list.length}${tags[s.i]?" · "+esc(tags[s.i]):""}</span><span style="display:flex;gap:2px"><button class="ibtn" id="pgPrev" aria-label="‹" ${rsel?"":"disabled"}>‹</button><button class="ibtn" id="pgNext" aria-label="›" ${rsel<list.length-1?"":"disabled"}>›</button></span></div>
+      </div>
+    </section>
+    <aside class="rlist"><div class="rlhead">${icons}<b>${t("resTitle")}</b></div><div class="ritems"></div></aside>
+  </div>`;
+  // fill the shortlist with as many shoes as fit, no scrolling
+  const box=card.querySelector(".ritems"),aside=card.querySelector(".rlist");
+  const fit=aside.offsetParent?Math.max(3,Math.floor((aside.clientHeight-card.querySelector(".rlhead").offsetHeight-8)/64)):list.length;
+  const shown=list.slice(0,fit);if(rsel>=shown.length&&aside.offsetParent)rsel=0;
+  box.innerHTML=shown.map((x,k)=>`<button class="ritem" data-k="${k}" aria-current="${k===rsel}"><div class="th">${shoeArt(x)}</div><div class="tx"><b>${esc(x.brand+" "+x.model)}</b><span>$${x.usd} · ${pct(x)}%</span></div>${tags[x.i]?`<span class="rtag">${esc(tags[x.i])}</span>`:""}</button>`).join("");
+  card.querySelectorAll(".ritem").forEach(b=>b.onclick=()=>{rsel=+b.dataset.k;renderResults()});
+  const pp=document.getElementById("pgPrev"),pn=document.getElementById("pgNext");
+  if(pp)pp.onclick=()=>{rsel--;renderResults()};if(pn)pn.onclick=()=>{rsel++;renderResults()};
+  card.querySelectorAll('[data-act="back"]').forEach(b=>b.onclick=()=>{view="quiz";step=active(Q.length-1)?Q.length-1:prevIdx(Q.length-1);lovedStage=0;recompute();renderQuiz();drawCloud()});
+  card.querySelectorAll('[data-act="reset"]').forEach(b=>b.onclick=()=>{for(const k in A)delete A[k];autoSurf=false;view="quiz";step=0;lovedStage=0;filt="all";rsel=0;recompute();drawCloud();renderQuiz()});
 }
 
 /* ---------- language & boot ---------- */
