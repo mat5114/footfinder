@@ -175,9 +175,9 @@ def product_id_from(value):
 
 
 def main():
-    key = os.environ.get("ALIEXPRESS_APP_KEY")
-    secret = os.environ.get("ALIEXPRESS_APP_SECRET")
-    tracking = os.environ.get("ALIEXPRESS_TRACKING_ID")
+    key = (os.environ.get("ALIEXPRESS_APP_KEY") or "").strip()
+    secret = (os.environ.get("ALIEXPRESS_APP_SECRET") or "").strip()
+    tracking = (os.environ.get("ALIEXPRESS_TRACKING_ID") or "").strip()
     if not (key and secret and tracking):
         missing = [n for n, v in (("ALIEXPRESS_APP_KEY", key), ("ALIEXPRESS_APP_SECRET", secret), ("ALIEXPRESS_TRACKING_ID", tracking)) if not v]
         note("error", "Missing repository secrets: " + ", ".join(missing))
