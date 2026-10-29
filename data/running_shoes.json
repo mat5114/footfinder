@@ -3,8 +3,8 @@
     "name": "Running shoe catalog",
     "version": "0.1.0",
     "generated": "2026-10-27",
-    "count": 593,
-    "brands": 34,
+    "count": 594,
+    "brands": 35,
     "units": {
       "weight": "grams, men's US 9 (approx.)",
       "stack": "mm",
@@ -38979,6 +38979,74 @@
         "saucony-endorphin-speed-5",
         "li-ning-red-hare-9-pro",
         "li-ning-feidian-6-ultra"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "chunta-carbon",
+      "brand": "Chunta",
+      "model": "Carbon",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2026,
+      "categories": [
+        "race",
+        "tempo",
+        "budget"
+      ],
+      "surface": "road",
+      "msrp_usd": 31,
+      "price_tier": "budget",
+      "weight_g_mens_us9": 240,
+      "weight_class": "medium",
+      "stack_heel_mm": 38.0,
+      "stack_forefoot_mm": 30.0,
+      "drop_mm": 8.0,
+      "cushion_level": "high",
+      "foam_name": "EVA",
+      "foam_type": "EVA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "onemix-tupo",
+        "onemix-pace-beam",
+        "anta-c10-pro",
+        "nike-zoom-fly-6",
+        "asics-magic-speed-5"
       ],
       "image": null,
       "affiliate_links": {

@@ -143,3 +143,8 @@ ONEMIX|Pace Beam|c|2026|race,tempo|road|84|220|37|30|Supercritical foam|sEVA|nyl
 ONEMIX|O-Resilio|c|2025|daily|road|75|260|36|28|EVA|EVA|none|soft|neutral|n|l
 BMAI|21km|c|2025|tempo,long|road|83|240|38|30|PEBA|PEBA|carbon|bouncy|neutral|n|l
 """
+
+# Chunta: AliExpress listings carry no model names, all sell the same carbon-plate racer (~USD 31)
+ROWS += """
+Chunta|Carbon|c|2026|race,tempo,budget|road|31|240|38|30|EVA|EVA|carbon|bouncy|neutral|n|l
+"""

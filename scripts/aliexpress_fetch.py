@@ -50,6 +50,7 @@ BRAND_TERMS = {
     "Do-Win": ["do-win", "dowin", "do win"],
     "Dynafish": ["dynafish"],
     "ONEMIX": ["onemix"],
+    "Chunta": ["chunta"],
 }
 # Search links for Nike, ASICS, HOKA and other non-Chinese brands (see the note above)
 INCLUDE_WESTERN_BRANDS = False
@@ -179,6 +180,10 @@ def model_patterns(model):
     return pats
 
 
+# Brands whose listings have no model names: the catalog "model" is just a word the listings share
+UNNAMED_MODELS = {("Chunta", "Carbon")}
+
+
 def score(product, shoe):
     title = norm(product.get("product_title", ""))
     padded = f" {title} "
@@ -191,7 +196,7 @@ def score(product, shoe):
         m = pat.search(title)
         if not m:
             continue
-        if len(toks) == 1:  # one-word names like "Wave" must sit right after the brand
+        if len(toks) == 1 and (shoe["brand"], shoe["model"]) not in UNNAMED_MODELS:  # one-word names like "Wave" must sit right after the brand
             before = title[:m.start()].split()[-2:]
             if not any(b in " ".join(before) for b in BRAND_TERMS[shoe["brand"]]):
                 continue
