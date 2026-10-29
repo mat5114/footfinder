@@ -375,8 +375,9 @@ def main():
             if sid in previous:
                 found[sid] = previous[sid]
         hit = found.get(sid)
-        review.append([sid, shoe["brand"], shoe["model"], hit["matched_by"] if hit else "not found",
-                       hit["title"] if hit else "", hit["product_id"] if hit else ""])
+        hit = hit if hit and hit.get("product_id") else None  # entries with only a search link count as not found
+        review.append([sid, shoe["brand"], shoe["model"], hit.get("matched_by", "previous run") if hit else "not found",
+                       hit.get("title", "") if hit else "", hit["product_id"] if hit else ""])
         time.sleep(0.4)
 
     # Search-page links for every shoe in scope (skip shoes overridden to null)
