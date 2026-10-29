@@ -54,3 +54,30 @@ Qiaodan|Feiying PB 3.0|p|2024|race|road|150|190|39|33|PEBA|PEBA|carbon|bouncy|ne
 Kailas|Fuga EX 3|c|2024|trail,race|trail|200|260|34|28|PEBA|PEBA|carbon|bouncy|neutral|n|l
 Kailas|Fuga DU 2|c|2024|trail,long|trail|170|290|36|30|EVA|EVA|none|soft|neutral|n|l
 """
+
+# Added 2026-10-29: more Chinese models found in reviews and on AliExpress
+ROWS += """
+Li-Ning|Feidian 6 Elite|c|2026|race|road|230|205|40|34|Super BOOM|PEBA|carbon|bouncy|neutral|n|m
+Li-Ning|Feidian 6 Challenger|c|2025|race,tempo|road|115|200|38|31|BOOM|PEBA|carbon|bouncy|neutral|n|m
+Li-Ning|Feidian 6 Ultra|c|2026|tempo,long|road|170|240|42|36|Super BOOM|PEBA|carbon|bouncy|neutral|n|l
+Li-Ning|Red Hare 9|c|2026|daily,tempo,budget|road|70|235|35|27|Light Foam Plus|sEVA|none|balanced|neutral|n|l
+Li-Ning|Yueying 5 Pro|c|2025|daily,long|road|95|270|40|32|Super BOOM|PEBA|none|soft|neutral|y|l
+ANTA|C202 7|c|2025|race,tempo|road|180|204|40|34|Nitro Edge Pro|blend|carbon|bouncy|neutral|n|m
+ANTA|C202 G9 2|c|2026|race|road|190|184|40|34|Nitroedge 90|PEBA|carbon|bouncy|neutral|n|m
+ANTA|Mach 5 SE|c|2025|daily,budget|road|55|240|33|25|Nitrogen Foam|sEVA|none|balanced|neutral|n|l
+ANTA|Bellero 3|c|2025|daily,long|road|90|265|38|30|Nitro Edge|sEVA|none|soft|neutral|n|l
+361°|Feisu 4|c|2025|race|road|100|185|35|29|QU!KFLAME|PEBA|carbon|bouncy|neutral|n|m
+361°|Eleos 2|c|2025|long,recovery|road|130|300|42|34|QU!KFOAM|EVA|none|soft|neutral|n|l
+361°|Miro Nude ST|c|2025|tempo,daily|road|110|230|35|28|TPEE|TPEE|nylon|bouncy|neutral|n|l
+Xtep|Qingyun 2.0|c|2025|long,recovery|road|110|312|44|36|Dynamic Foam|sEVA|none|soft|mild|n|m
+Xtep|260X 3.0|c|2025|tempo|road|110|225|38|31|XTEP ACE|PEBA|glassfiber|bouncy|neutral|n|l
+Xtep|360X 2.0|p|2024|tempo,long|road|120|235|40|33|XTEP ACE|PEBA|glassfiber|bouncy|neutral|n|l
+Qiaodan|Feiying Plaid 3.0|c|2026|race|road|270|195|40|34|Q-Kungfu Pro-HP|PEBA|carbon|bouncy|neutral|n|l
+Qiaodan|Feiying Plaid 2.0|c|2025|race|road|269|206|40|34|Q-Kungfu Pro-HP|PEBA|carbon|bouncy|neutral|n|m
+Qiaodan|Feiying PB 6.0|c|2026|race|road|160|181|38|32|Super Q-Kungfu|TPEE|carbon|bouncy|neutral|n|m
+Qiaodan|Plaid 1.5|p|2024|race|road|100|195|38|31|Q-Kungfu Pro-HP|TPEE|carbon|bouncy|neutral|n|m
+Qiaodan|Wind 4.0|c|2025|daily,long|road|110|238|37|29|PEBA|PEBA|nylon|bouncy|neutral|n|m
+BMAI|Jingtan 3.0 Turbo|c|2025|race,tempo|road|150|200|39|32|PEBA|PEBA|carbon|bouncy|neutral|n|l
+Do-Win|Speedster 3.0|c|2025|race|road|130|200|38|31|PEBA|PEBA|carbon|firm|neutral|n|l
+Dynafish|Xiaonian|c|2025|daily,tempo|road|110|204|41|34|TPEE|TPEE|none|bouncy|neutral|n|m
+"""

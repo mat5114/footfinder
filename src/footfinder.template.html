@@ -450,6 +450,9 @@ const ico={
 const foot=(w)=>{const sw={tight:12,some:15,no:18}[w];return `<svg width="64" height="58" viewBox="0 0 64 58" fill="none" stroke-width="1.5"><path d="M32 4c${sw} 0 ${sw} 14 ${sw-2} 26s-2 24-${sw-2} 24-${sw-2}-12-${sw-2}-24S${32-sw} 4 32 4z" stroke="currentColor" opacity=".35"/><path d="M32 7c8 0 11 6 11 16s-3 12-3 18-3 11-8 11-8-5-8-11-3-8-3-18S24 7 32 7z" fill="currentColor" opacity=".18" stroke="currentColor"/></svg>`};
 const sole=(z)=>`<svg width="34" height="56" viewBox="0 0 34 58" aria-hidden="true"><path d="M17 2c9 0 13 7 13 16 0 7-3 11-3 18 0 10-3 20-10 20S7 46 7 36c0-7-3-11-3-18C4 9 8 2 17 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>${z==="in"?'<path d="M17 4c-6 1-9 7-9 14 0 7 3 11 3 18s2 16 6 18z" fill="currentColor" opacity=".4"/>':z==="out"?'<path d="M17 4c6 1 9 7 9 14 0 7-3 11-3 18s-2 16-6 18z" fill="currentColor" opacity=".4"/>':z==="even"?'<path d="M17 4c8 0 11 7 11 14 0 7-3 11-3 18 0 9-3 18-8 18s-8-9-8-18c0-7-3-11-3-18C6 11 9 4 17 4z" fill="currentColor" opacity=".22"/>':'<text x="17" y="35" text-anchor="middle" font-size="15" fill="currentColor" font-family="Inter,sans-serif">?</text>'}</svg>`;
 const rep=n=>{const s=byName(n);return s?shoeArt(s):""};
+/* picture for an answer: the first shoe in the catalog that fits it, preferring ones with a real photo */
+const repBy=pred=>{const s=S.find(x=>x.img&&pred(x))||S.find(pred);return s?shoeArt(s):""};
+const hasC=(s,c)=>s.cats.includes(c);
 
 /* option: [value, pt, ptSub, en, enSub, art] */
 /* adaptive quiz: each question can be skipped, retitled or trimmed based on earlier answers */
@@ -457,7 +460,7 @@ const beginner=()=>A.goal==="start"||A.volume==="v0";
 const carbonOk=()=>!(A.goal==="start"||A.volume==="v0"||A.volume==="v1");
 const traily=()=>A.goal==="trail"||A.surface==="trail";
 const Q=[
- {id:"goal",o:[["start",()=>rep("ASICS Gel-Contend 10")],["daily",()=>rep("Nike Pegasus 42")],["fast",()=>rep("Nike Vaporfly 4")],["trail",()=>rep("HOKA Speedgoat 7")]]},
+ {id:"goal",o:[["start",()=>repBy(s=>s.surf==="road"&&s.plate==="none"&&(hasC(s,"budget")||hasC(s,"daily"))&&!hasC(s,"race"))],["daily",()=>repBy(s=>s.surf==="road"&&hasC(s,"daily")&&s.feel!=="firm"&&s.h>=36)],["fast",()=>repBy(s=>hasC(s,"race")&&s.plate!=="none")],["trail",()=>repBy(s=>s.surf==="trail")]]},
  {id:"volume",tk:()=>A.goal==="start"?"volume_start":"volume",
   show:v=>A.goal==="start"?(v==="v0"||v==="v1"):A.goal==="fast"?v!=="v0":true,
   o:[["v0",null,"0"],["v1",null,"<15"],["v2",null,"15–40"],["v3",null,"40+"]]},
@@ -468,14 +471,14 @@ const Q=[
     if(v==="ultra")return traily()&&(A.volume==="v2"||A.volume==="v3");if(v==="42k")return A.volume!=="v1";return true},
   o:[["none",null,"—"],["5k",null,"5"],["10k",null,"10"],["21k",null,"21"],["42k",null,"42"],["ultra",null,"50+"]]},
  {id:"weight",hk:()=>"weight_h",o:[["w1",null,"<60"],["w2",null,"60–80"],["w3",null,"80–95"],["w4",null,"95+"]]},
- {id:"feel",o:[["soft",()=>rep("HOKA Bondi 9")],["bouncy",()=>rep("ASICS Superblast 2")],["firm",()=>rep("Saucony Kinvara 15")],["any",()=>ico.any]]},
+ {id:"feel",o:[["soft",()=>repBy(s=>s.feel==="soft")],["bouncy",()=>repBy(s=>s.feel==="bouncy"&&!hasC(s,"race"))],["firm",()=>repBy(s=>s.feel==="firm"||s.feel==="balanced")],["any",()=>ico.any]]},
  {id:"width",o:[["tight",()=>foot("tight")],["some",()=>foot("some")],["no",()=>foot("no")]]},
  {id:"wear",tk:()=>A.volume==="v0"?"wear_v0":"wear",hk:()=>A.volume==="v0"?"wear_h_v0":"wear_h",
   o:[["in",()=>sole("in")],["out",()=>sole("out")],["even",()=>sole("even")],["unk",()=>sole("unk")]]},
  {id:"budget",hk:()=>"budget_h",
   show:v=>v==="b4"?carbonOk()&&(A.goal==="fast"||A.goal==="trail"):v==="b4x"?!(carbonOk()&&(A.goal==="fast"||A.goal==="trail")):true,
   o:[["b1",null,"$100"],["b2",null,"$160"],["b3",null,"$220"],["b4",null,"$∞"],["b4x",null,"$∞"]]},
- {id:"cn",hk:()=>"cn_h",o:[["yes",()=>rep("Li-Ning Red Hare 9 Ultra")],["no",()=>rep("Brooks Ghost 17")]]},
+ {id:"cn",hk:()=>"cn_h",skip:()=>S.every(s=>s.cn),o:[["yes",()=>repBy(s=>s.cn)],["no",()=>repBy(s=>!s.cn)]]},
  {id:"loved",special:1,skip:()=>A.volume==="v0"}
 ];
 const vis=q=>q.o.filter(o=>!q.show||q.show(o[0]));
@@ -574,6 +577,8 @@ function recompute(){
   const run=strict=>{scores=S.map(s=>scoreShoe(s,strict));pool=S.filter(s=>scores[s.i]).sort((a,b)=>scores[b.i].sc-scores[a.i].sc||b.cur-a.cur||b.pop-a.pop||b.yr-a.yr)};
   run(true);ranked=finalize(pool);
   if(answered()>=3&&ranked.length<4){run(false);ranked=finalize(pool)}
+  // small catalog: never end empty-handed; as a last resort ignore the budget
+  if(answered()>=3&&!ranked.length&&A.budget){const b=A.budget;delete A.budget;run(false);ranked=finalize(pool);A.budget=b}
 }
 const answered=()=>Object.keys(A).filter(k=>k!=="loved"||A.loved.like!=null).length;
 
@@ -684,8 +689,8 @@ function wire(q){
 function finish(){view="results";recompute();filt="all";rsel=0;renderResults();drawCloud()}
 function renderLoved(){
   if(lovedStage===0){
-    const brands=[...new Set(S.filter(s=>s.pop).map(s=>s.brand))];
-    ["Mizuno","PUMA","On","Altra","Li-Ning","Xtep"].forEach(b=>{if(!brands.includes(b))brands.push(b)});
+    const cnt={};S.forEach(s=>cnt[s.brand]=(cnt[s.brand]||0)+1);
+    const brands=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).slice(0,9);
     return `<div class="opts compact" style="--cols:5">${brands.map(b=>`<button class="opt" data-brand="${esc(b)}"><b>${esc(b)}</b></button>`).join("")}<button class="opt" data-none="1"><b>${t("neverHad")}</b></button></div>`;
   }
   if(lovedStage===1){
@@ -748,8 +753,8 @@ function renderResults(){
         ${why.length?`<div class="rwhy">${why.map(k=>`<span>${esc(T[L].w[k])}</span>`).join("")}</div>`:""}
         <div class="rbtns">
           ${storeOffers(s).map(o=>`<a class="rbtn light" href="${esc(o[2])}" target="_blank" rel="sponsored noopener">${esc(R.at)} ${esc(o[0])}${o[3]?` · ${esc(money(o[3],o[4]))}`:""} ↗</a>`).join("")}
-          ${s.ali?`<a class="rbtn light" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${esc(R.ali)} ↗</a>`:""}
-          ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)} ↗</a>`:`<span class="rbtn dark off">${esc(R.amz)}</span>`}
+          ${s.ali?`<a class="rbtn dark" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${esc(R.ali)} ↗</a>`:""}
+          ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)} ↗</a>`:""}
           ${amzLink(s)?`<p class="rnote">${esc(R.amzNote)}</p>`:""}
         </div>
         <div class="rpager">${icons}<span>${rsel+1} / ${list.length}${tags[s.i]?" · "+esc(tags[s.i]):""}</span><span style="display:flex;gap:2px"><button class="ibtn" id="pgPrev" aria-label="‹" ${rsel?"":"disabled"}>‹</button><button class="ibtn" id="pgNext" aria-label="›" ${rsel<list.length-1?"":"disabled"}>›</button></span></div>

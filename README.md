@@ -1,5 +1,7 @@
 # Footfinder
 
+> **Foco atual:** o site mostra só tênis de marcas chinesas encontrados no AliExpress e com foto real (configurado em `data/site.json`). O catálogo completo, com as marcas ocidentais, continua em `data/running_shoes.json`.
+
 Quiz que recomenda tênis de corrida. A pessoa responde só com toques (objetivo, volume, distância, peso, pisada, largura do pé, orçamento) e recebe até 12 tênis, no máximo 2 por marca, com links de afiliado.
 
 - Catálogo com 513 tênis de 30 marcas, incluindo marcas chinesas (Li-Ning, Anta, Xtep, 361° e outras)

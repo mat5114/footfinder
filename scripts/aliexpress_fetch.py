@@ -46,6 +46,9 @@ BRAND_TERMS = {
     "PEAK": ["peak"],
     "Qiaodan": ["qiaodan", "qiao dan"],
     "Kailas": ["kailas"],
+    "BMAI": ["bmai"],
+    "Do-Win": ["do-win", "dowin", "do win"],
+    "Dynafish": ["dynafish"],
 }
 # Search links for Nike, ASICS, HOKA and other non-Chinese brands (see the note above)
 INCLUDE_WESTERN_BRANDS = False
@@ -58,6 +61,10 @@ MODEL_ALIASES = {
     "yueying": ["yueying", "yue ying", "shadow"],
     "super light": ["super light", "superlight", "chaoqing"],
     "feiying": ["feiying", "fei ying", "flying shadow"],
+    "jingtan": ["jingtan", "jing tan"],
+    "qingyun": ["qingyun", "qing yun"],
+    "feisu": ["feisu", "fei su"],
+    "xiaonian": ["xiaonian", "xiao nian"],
 }
 
 

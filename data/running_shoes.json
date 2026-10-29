@@ -3,8 +3,8 @@
     "name": "Running shoe catalog",
     "version": "0.1.0",
     "generated": "2026-10-27",
-    "count": 513,
-    "brands": 30,
+    "count": 536,
+    "brands": 33,
     "units": {
       "weight": "grams, men's US 9 (approx.)",
       "stack": "mm",
@@ -511,7 +511,7 @@
         "saucony-triumph-24",
         "nike-invincible-3",
         "nike-vomero-premium",
-        "saucony-triumph-23"
+        "li-ning-yueying-5-pro"
       ],
       "image": null,
       "affiliate_links": {
@@ -778,8 +778,8 @@
         "nike-pegasus-premium",
         "saucony-triumph-24",
         "nike-invincible-3",
-        "saucony-paramount-max",
-        "saucony-triumph-23"
+        "li-ning-yueying-5-pro",
+        "saucony-paramount-max"
       ],
       "image": null,
       "affiliate_links": {
@@ -846,7 +846,7 @@
         "saucony-paramount-max",
         "nike-invincible-3",
         "saucony-triumph-24",
-        "nike-invincible-2"
+        "li-ning-yueying-5-pro"
       ],
       "image": null,
       "affiliate_links": {
@@ -910,10 +910,10 @@
       ],
       "similar": [
         "saucony-triumph-24",
+        "li-ning-yueying-5-pro",
         "saucony-paramount-max",
         "nike-pegasus-premium",
-        "saucony-triumph-23",
-        "nike-vomero-plus"
+        "saucony-triumph-23"
       ],
       "image": null,
       "affiliate_links": {
@@ -977,10 +977,10 @@
       ],
       "similar": [
         "saucony-triumph-24",
+        "li-ning-yueying-5-pro",
         "saucony-paramount-max",
         "nike-pegasus-premium",
-        "saucony-triumph-23",
-        "nike-vomero-plus"
+        "saucony-triumph-23"
       ],
       "image": null,
       "affiliate_links": {
@@ -1821,10 +1821,10 @@
       ],
       "similar": [
         "asics-magic-speed-5",
+        "anta-c202-7",
         "asics-magic-speed-4",
         "anta-c10-pro",
-        "xtep-160x-6-0",
-        "puma-fast-fwd-nitro-elite-2"
+        "xtep-160x-6-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -1953,9 +1953,9 @@
       "similar": [
         "361-furious-future-3",
         "li-ning-feidian-5-elite",
+        "qiaodan-feiying-plaid-3-0",
         "qiaodan-feiying-pb-4-0",
-        "anta-c202-g9",
-        "hoka-rocket-x-3"
+        "anta-c202-g9-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -2998,11 +2998,11 @@
         "women"
       ],
       "similar": [
-        "on-cloudboom-echo-4",
-        "on-cloudboom-volt",
-        "361-furious-future-3",
-        "olympikus-corre-supra-2",
-        "anta-c202-g9"
+        "qiaodan-feiying-pb-6-0",
+        "qiaodan-feiying-plaid-2-0",
+        "li-ning-feidian-6-elite",
+        "qiaodan-feiying-plaid-3-0",
+        "on-cloudboom-echo-4"
       ],
       "image": null,
       "affiliate_links": {
@@ -3062,11 +3062,11 @@
         "women"
       ],
       "similar": [
+        "qiaodan-feiying-pb-6-0",
+        "qiaodan-feiying-plaid-2-0",
+        "li-ning-feidian-6-elite",
         "on-cloudboom-echo-4",
-        "on-cloudboom-volt",
-        "olympikus-corre-supra-2",
-        "361-furious-future-3",
-        "hoka-rocket-x-3"
+        "on-cloudboom-volt"
       ],
       "image": null,
       "affiliate_links": {
@@ -3130,7 +3130,7 @@
         "saucony-endorphin-pro-5",
         "under-armour-velociti-elite-3",
         "nike-alphafly-3",
-        "brooks-hyperion-elite-6"
+        "qiaodan-feiying-pb-6-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -3190,11 +3190,11 @@
         "women"
       ],
       "similar": [
+        "qiaodan-feiying-pb-6-0",
         "asics-metaspeed-ray",
         "asics-metaspeed-sky-tokyo",
         "nike-vaporfly-4",
-        "li-ning-feidian-5-elite",
-        "hoka-rocket-x-3"
+        "li-ning-feidian-5-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -3254,11 +3254,11 @@
         "women"
       ],
       "similar": [
+        "qiaodan-feiying-pb-6-0",
         "asics-metaspeed-ray",
         "asics-metaspeed-sky-tokyo",
         "nike-vaporfly-4",
-        "li-ning-feidian-5-elite",
-        "hoka-rocket-x-3"
+        "li-ning-feidian-5-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -3322,10 +3322,10 @@
       ],
       "similar": [
         "hoka-mach-x-3",
+        "li-ning-feidian-6-ultra",
         "on-cloudboom-max",
         "new-balance-fuelcell-supercomp-trainer-v3",
-        "hoka-mach-x-2",
-        "xtep-360x-3-0"
+        "hoka-mach-x-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -3390,9 +3390,9 @@
       "similar": [
         "hoka-mach-x-3",
         "new-balance-fuelcell-supercomp-trainer-v3",
+        "li-ning-feidian-6-ultra",
         "hoka-mach-x-2",
-        "on-cloudboom-max",
-        "xtep-360x-3-0"
+        "on-cloudboom-max"
       ],
       "image": null,
       "affiliate_links": {
@@ -3787,11 +3787,11 @@
         "women"
       ],
       "similar": [
+        "li-ning-red-hare-9",
         "diadora-mythos-blushield-vigore-v",
         "li-ning-red-hare-8",
         "li-ning-red-hare-7",
-        "brooks-launch-12",
-        "brooks-launch-11"
+        "brooks-launch-12"
       ],
       "image": null,
       "affiliate_links": {
@@ -3855,9 +3855,9 @@
       "similar": [
         "brooks-launch-12",
         "diadora-mythos-blushield-vigore-v",
+        "li-ning-red-hare-9",
         "brooks-launch-11",
-        "li-ning-red-hare-8",
-        "li-ning-red-hare-7"
+        "li-ning-red-hare-8"
       ],
       "image": null,
       "affiliate_links": {
@@ -3920,11 +3920,11 @@
         "women"
       ],
       "similar": [
+        "dynafish-xiaonian",
         "mizuno-neo-zen-2",
         "new-balance-fuelcell-rebel-v5",
         "new-balance-fuelcell-rebel-trail",
-        "on-cloudmonster-hyper-3-lightspray",
-        "mizuno-neo-vista-3"
+        "on-cloudmonster-hyper-3-lightspray"
       ],
       "image": null,
       "affiliate_links": {
@@ -3990,10 +3990,10 @@
       ],
       "similar": [
         "mizuno-neo-zen-2",
+        "dynafish-xiaonian",
         "new-balance-fuelcell-rebel-trail",
         "on-cloudmonster-hyper-3-lightspray",
-        "mizuno-neo-vista-3",
-        "new-balance-fuelcell-rebel-v5"
+        "mizuno-neo-vista-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -4053,11 +4053,11 @@
         "women"
       ],
       "similar": [
+        "do-win-speedster-3-0",
+        "qiaodan-feiying-pb-6-0",
         "nike-vaporfly-4",
-        "361-furious-future-3",
-        "qiaodan-feiying-pb-4-0",
-        "li-ning-feidian-5-elite",
-        "anta-c202-g9"
+        "361-feisu-4",
+        "361-furious-future-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -6357,11 +6357,11 @@
         "women"
       ],
       "similar": [
+        "361-eleos-2",
         "new-balance-ellipse",
         "saucony-procyon-max",
         "361-kairos-2",
-        "hoka-clifton-11",
-        "salomon-aero-glide-4-grvl"
+        "hoka-clifton-11"
       ],
       "image": null,
       "affiliate_links": {
@@ -6425,11 +6425,11 @@
         "women"
       ],
       "similar": [
+        "361-eleos-2",
         "new-balance-ellipse",
         "saucony-procyon-max",
         "361-kairos-2",
-        "hoka-clifton-11",
-        "salomon-aero-glide-4-grvl"
+        "hoka-clifton-11"
       ],
       "image": null,
       "affiliate_links": {
@@ -6493,11 +6493,11 @@
         "women"
       ],
       "similar": [
+        "361-eleos-2",
         "new-balance-ellipse",
         "saucony-procyon-max",
         "361-kairos-2",
-        "hoka-clifton-11",
-        "new-balance-fresh-foam-x-1080v15"
+        "hoka-clifton-11"
       ],
       "image": null,
       "affiliate_links": {
@@ -6562,10 +6562,10 @@
       ],
       "similar": [
         "new-balance-ellipse",
+        "361-eleos-2",
         "saucony-procyon-max",
         "361-kairos-2",
-        "hoka-clifton-11",
-        "new-balance-fresh-foam-x-1080v15"
+        "hoka-clifton-11"
       ],
       "image": null,
       "affiliate_links": {
@@ -8271,10 +8271,10 @@
       ],
       "similar": [
         "li-ning-feidian-5-elite",
+        "anta-c202-g9-2",
         "anta-c202-g9",
         "361-furious-future-3",
-        "qiaodan-feiying-pb-4-0",
-        "nike-vaporfly-4"
+        "qiaodan-feiying-plaid-3-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -8398,11 +8398,11 @@
         "women"
       ],
       "similar": [
+        "qiaodan-feiying-plaid-3-0",
         "361-furious-future-3",
+        "anta-c202-g9-2",
         "anta-c202-g9",
-        "li-ning-feidian-5-elite",
-        "qiaodan-feiying-pb-4-0",
-        "nike-vaporfly-4"
+        "li-ning-feidian-5-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -8528,9 +8528,9 @@
       "similar": [
         "li-ning-feidian-5-elite",
         "nike-vaporfly-4",
+        "anta-c202-g9-2",
         "anta-c202-g9",
-        "qiaodan-feiying-pb-4-0",
-        "361-furious-future-3"
+        "qiaodan-feiying-pb-4-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -8592,10 +8592,10 @@
       ],
       "similar": [
         "nike-zoom-fly-6",
+        "anta-c202-7",
         "anta-c10-pro",
         "puma-fast-fwd-nitro-elite-2",
-        "xtep-160x-6-0",
-        "mizuno-hyperwarp-pro"
+        "xtep-160x-6-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -8657,10 +8657,10 @@
       ],
       "similar": [
         "nike-zoom-fly-6",
+        "anta-c202-7",
         "anta-c10-pro",
         "xtep-160x-6-0",
-        "puma-fast-fwd-nitro-elite-2",
-        "mizuno-hyperwarp-pro"
+        "puma-fast-fwd-nitro-elite-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -8722,10 +8722,10 @@
       ],
       "similar": [
         "nike-zoom-fly-6",
+        "anta-c202-7",
         "anta-c10-pro",
         "xtep-160x-6-0",
-        "puma-fast-fwd-nitro-elite-2",
-        "mizuno-hyperwarp-pro"
+        "puma-fast-fwd-nitro-elite-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -10242,7 +10242,7 @@
         "mizuno-wave-skyrise-5",
         "brooks-ghost-18",
         "nike-vomero-18",
-        "kiprun-ks900-light-2"
+        "anta-bellero-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -10310,7 +10310,7 @@
         "mizuno-wave-skyrise-5",
         "brooks-ghost-18",
         "nike-vomero-18",
-        "kiprun-ks900-light-2"
+        "anta-bellero-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -10378,7 +10378,7 @@
         "brooks-ghost-18",
         "mizuno-wave-skyrise-5",
         "kiprun-ks900-light-2",
-        "li-ning-yueying-5"
+        "anta-bellero-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -10446,7 +10446,7 @@
         "brooks-ghost-18",
         "mizuno-wave-skyrise-5",
         "kiprun-ks900-light-2",
-        "li-ning-yueying-5"
+        "anta-bellero-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -10711,9 +10711,9 @@
       "similar": [
         "mizuno-wave-skyrise-5",
         "kiprun-ks900-light-2",
+        "anta-bellero-3",
         "li-ning-yueying-5",
-        "on-cloudsurfer-2",
-        "peak-wave"
+        "on-cloudsurfer-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -10971,11 +10971,11 @@
         "women"
       ],
       "similar": [
+        "li-ning-red-hare-9",
         "diadora-mythos-blushield-vigore-v",
         "adidas-adizero-sl",
         "li-ning-red-hare-8",
-        "li-ning-red-hare-7",
-        "adidas-adizero-sl2"
+        "li-ning-red-hare-7"
       ],
       "image": null,
       "affiliate_links": {
@@ -11037,11 +11037,11 @@
         "women"
       ],
       "similar": [
+        "li-ning-red-hare-9",
         "diadora-mythos-blushield-vigore-v",
         "adidas-adizero-sl",
         "li-ning-red-hare-8",
-        "li-ning-red-hare-7",
-        "adidas-adizero-sl2"
+        "li-ning-red-hare-7"
       ],
       "image": null,
       "affiliate_links": {
@@ -11563,9 +11563,9 @@
       "similar": [
         "saucony-tempus-2",
         "diadora-mythos-blushield-vigore-v",
+        "li-ning-red-hare-9",
         "brooks-launch-12",
-        "puma-foreverrun-nitro-3",
-        "adidas-adizero-sl2"
+        "puma-foreverrun-nitro-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -12349,8 +12349,8 @@
         "new-balance-ellipse",
         "saucony-procyon-max",
         "asics-gel-nimbus-28",
-        "361-kairos-2",
-        "new-balance-fresh-foam-x-1080v15"
+        "361-eleos-2",
+        "361-kairos-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -12416,9 +12416,9 @@
       "similar": [
         "new-balance-ellipse",
         "saucony-procyon-max",
+        "361-eleos-2",
         "asics-gel-nimbus-28",
-        "361-kairos-2",
-        "salomon-aero-glide-4-grvl"
+        "361-kairos-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -13078,7 +13078,7 @@
         "brooks-hyperion-max-4",
         "skechers-aero-spark",
         "adidas-adizero-prime-x-2-strung",
-        "puma-deviate-nitro-4"
+        "361-miro-nude-st"
       ],
       "image": null,
       "affiliate_links": {
@@ -13145,7 +13145,7 @@
         "brooks-hyperion-max-4",
         "skechers-aero-spark",
         "adidas-adizero-prime-x-2-strung",
-        "puma-deviate-nitro-4"
+        "361-miro-nude-st"
       ],
       "image": null,
       "affiliate_links": {
@@ -13741,10 +13741,10 @@
       ],
       "similar": [
         "mizuno-wave-sky-9",
+        "qiaodan-wind-4-0",
         "on-cloudstratus-3",
         "on-cloudvista-2",
-        "mizuno-wave-rider-30",
-        "mizuno-wave-rider-29"
+        "mizuno-wave-rider-30"
       ],
       "image": null,
       "affiliate_links": {
@@ -13808,10 +13808,10 @@
       ],
       "similar": [
         "mizuno-wave-sky-9",
+        "qiaodan-wind-4-0",
         "on-cloudstratus-3",
         "on-cloudvista-2",
-        "mizuno-wave-rider-30",
-        "mizuno-wave-rider-29"
+        "mizuno-wave-rider-30"
       ],
       "image": null,
       "affiliate_links": {
@@ -13875,7 +13875,7 @@
         "hoka-rocket-x-3",
         "brooks-hyperion-elite-6",
         "on-cloudboom-strike",
-        "saucony-endorphin-elite-3"
+        "qiaodan-feiying-plaid-3-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -14063,11 +14063,11 @@
         "women"
       ],
       "similar": [
+        "qiaodan-feiying-plaid-2-0",
+        "li-ning-feidian-6-elite",
         "nike-vaporfly-4",
-        "361-furious-future-3",
-        "qiaodan-feiying-pb-4-0",
-        "anta-c202-g9",
-        "asics-metaspeed-sky-tokyo"
+        "qiaodan-feiying-plaid-3-0",
+        "361-furious-future-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -15913,10 +15913,10 @@
       ],
       "similar": [
         "asics-metaspeed-sky-tokyo",
-        "361-furious-future-3",
-        "anta-c202-g9",
-        "qiaodan-feiying-pb-4-0",
-        "li-ning-feidian-5-elite"
+        "qiaodan-feiying-plaid-2-0",
+        "li-ning-feidian-6-elite",
+        "qiaodan-feiying-plaid-3-0",
+        "361-furious-future-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -15976,11 +15976,11 @@
         "women"
       ],
       "similar": [
+        "qiaodan-feiying-plaid-2-0",
+        "li-ning-feidian-6-elite",
         "asics-metaspeed-sky-tokyo",
-        "361-furious-future-3",
-        "anta-c202-g9",
-        "qiaodan-feiying-pb-4-0",
-        "nike-vaporfly-4"
+        "qiaodan-feiying-plaid-3-0",
+        "361-furious-future-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -16043,11 +16043,11 @@
         "women"
       ],
       "similar": [
+        "li-ning-feidian-6-ultra",
         "on-cloudboom-max",
         "xtep-360x-3-0",
-        "li-ning-red-hare-9-pro",
-        "saucony-endorphin-speed-5",
-        "saucony-endorphin-speed-4"
+        "xtep-260x-3-0",
+        "li-ning-red-hare-9-pro"
       ],
       "image": null,
       "affiliate_links": {
@@ -16109,9 +16109,9 @@
       "similar": [
         "nike-vaporfly-4",
         "asics-metaspeed-sky-tokyo",
+        "361-feisu-4",
         "asics-metaspeed-ray",
-        "li-ning-feidian-5-elite",
-        "361-furious-future-3"
+        "li-ning-feidian-5-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -16763,9 +16763,9 @@
       "similar": [
         "saucony-procyon-max",
         "361-kairos-2",
+        "361-eleos-2",
         "asics-gel-nimbus-28",
-        "hoka-clifton-11",
-        "new-balance-fresh-foam-x-1080v15"
+        "hoka-clifton-11"
       ],
       "image": null,
       "affiliate_links": {
@@ -17871,10 +17871,10 @@
       ],
       "similar": [
         "nike-invincible-3",
+        "li-ning-yueying-5-pro",
         "nike-pegasus-premium",
         "nike-invincible-2",
-        "nike-vomero-plus",
-        "saucony-paramount-max"
+        "nike-vomero-plus"
       ],
       "image": null,
       "affiliate_links": {
@@ -17938,10 +17938,10 @@
       ],
       "similar": [
         "nike-invincible-3",
+        "li-ning-yueying-5-pro",
         "nike-pegasus-premium",
         "nike-invincible-2",
-        "nike-vomero-plus",
-        "saucony-paramount-max"
+        "nike-vomero-plus"
       ],
       "image": null,
       "affiliate_links": {
@@ -18273,11 +18273,11 @@
         "women"
       ],
       "similar": [
+        "xtep-260x-3-0",
         "xtep-360x-3-0",
         "li-ning-red-hare-9-pro",
-        "new-balance-fuelcell-supercomp-trainer-v3",
-        "on-cloudboom-max",
-        "li-ning-red-hare-8-pro"
+        "li-ning-feidian-6-ultra",
+        "361-miro-nude-st"
       ],
       "image": null,
       "affiliate_links": {
@@ -18340,11 +18340,11 @@
         "women"
       ],
       "similar": [
+        "xtep-260x-3-0",
         "xtep-360x-3-0",
         "li-ning-red-hare-9-pro",
-        "new-balance-fuelcell-supercomp-trainer-v3",
-        "on-cloudboom-max",
-        "li-ning-red-hare-8-pro"
+        "li-ning-feidian-6-ultra",
+        "361-miro-nude-st"
       ],
       "image": null,
       "affiliate_links": {
@@ -18407,11 +18407,11 @@
         "women"
       ],
       "similar": [
+        "xtep-260x-3-0",
         "xtep-360x-3-0",
         "li-ning-red-hare-9-pro",
-        "new-balance-fuelcell-supercomp-trainer-v3",
-        "on-cloudboom-max",
-        "li-ning-red-hare-8-pro"
+        "li-ning-feidian-6-ultra",
+        "361-miro-nude-st"
       ],
       "image": null,
       "affiliate_links": {
@@ -19386,11 +19386,11 @@
         "women"
       ],
       "similar": [
+        "li-ning-yueying-5-pro",
         "nike-invincible-3",
         "saucony-triumph-24",
         "nike-invincible-2",
-        "li-ning-red-hare-9-ultra",
-        "nike-pegasus-premium"
+        "li-ning-red-hare-9-ultra"
       ],
       "image": null,
       "affiliate_links": {
@@ -19455,10 +19455,10 @@
       ],
       "similar": [
         "new-balance-ellipse",
+        "361-eleos-2",
         "361-kairos-2",
         "asics-gel-nimbus-28",
-        "hoka-clifton-11",
-        "anta-pg7-2"
+        "hoka-clifton-11"
       ],
       "image": null,
       "affiliate_links": {
@@ -19985,7 +19985,7 @@
         "on-cloudstratus-3",
         "hoka-skyward-x-2",
         "hoka-skyward-x",
-        "puma-velocity-nitro-5"
+        "qiaodan-wind-4-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -20049,8 +20049,8 @@
         "on-cloudvista-2",
         "on-cloudstratus-3",
         "hoka-skyward-x-2",
-        "hoka-skyward-x",
-        "puma-velocity-nitro-5"
+        "qiaodan-wind-4-0",
+        "hoka-skyward-x"
       ],
       "image": null,
       "affiliate_links": {
@@ -20113,8 +20113,8 @@
         "on-cloudvista-2",
         "on-cloudstratus-3",
         "hoka-skyward-x-2",
-        "hoka-skyward-x",
-        "puma-velocity-nitro-5"
+        "qiaodan-wind-4-0",
+        "hoka-skyward-x"
       ],
       "image": null,
       "affiliate_links": {
@@ -20442,7 +20442,7 @@
         "on-cloudvista-2",
         "on-cloudstratus-3",
         "hoka-skyward-x",
-        "brooks-glycerin-flex"
+        "qiaodan-wind-4-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -20572,11 +20572,11 @@
         "women"
       ],
       "similar": [
+        "dynafish-xiaonian",
         "adidas-adizero-evo-sl-atr",
         "adidas-adizero-evo-sl",
         "saucony-endorphin-azura",
-        "asics-superblast-3",
-        "asics-sonicblast-2"
+        "asics-superblast-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -20639,11 +20639,11 @@
         "women"
       ],
       "similar": [
+        "dynafish-xiaonian",
         "adidas-adizero-evo-sl-atr",
         "adidas-adizero-evo-sl",
         "saucony-endorphin-azura",
-        "asics-superblast-3",
-        "asics-sonicblast-2"
+        "asics-superblast-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -20710,7 +20710,7 @@
         "asics-superblast-3",
         "asics-megablast",
         "adidas-adizero-evo-sl-atr",
-        "adidas-adizero-evo-sl"
+        "dynafish-xiaonian"
       ],
       "image": null,
       "affiliate_links": {
@@ -20777,7 +20777,7 @@
         "asics-superblast-3",
         "asics-megablast",
         "adidas-adizero-evo-sl-atr",
-        "adidas-adizero-evo-sl"
+        "dynafish-xiaonian"
       ],
       "image": null,
       "affiliate_links": {
@@ -20904,9 +20904,9 @@
       "similar": [
         "puma-fast-fwd-nitro-elite-2",
         "xtep-160x-6-0",
-        "361-flame-5",
-        "li-ning-feidian-4-challenger",
-        "361-flame-4"
+        "bmai-jingtan-3-0-turbo",
+        "li-ning-feidian-6-challenger",
+        "361-flame-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -20967,10 +20967,10 @@
       ],
       "similar": [
         "adidas-adizero-adios-pro-4",
+        "qiaodan-feiying-pb-6-0",
         "adidas-adizero-adios-pro-2",
         "adidas-adizero-adios-pro-3",
-        "adidas-adizero-adios-pro-evo-3",
-        "adidas-adizero-adios-pro-evo-2"
+        "adidas-adizero-adios-pro-evo-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -21162,9 +21162,9 @@
       "similar": [
         "kiprun-ks900-light-2",
         "brooks-glycerin-flex",
+        "anta-bellero-3",
         "li-ning-yueying-5",
-        "on-cloudsurfer-2",
-        "peak-wave"
+        "on-cloudsurfer-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -21685,7 +21685,7 @@
         "xtep-2000km-5-pro",
         "on-cloudsurfer-next",
         "adidas-supernova-prima-2",
-        "saucony-ride-19"
+        "anta-mach-5-se"
       ],
       "image": null,
       "affiliate_links": {
@@ -21748,8 +21748,8 @@
         "puma-electrify-nitro-4",
         "on-cloudsurfer-next",
         "xtep-2000km-5-pro",
-        "adidas-supernova-prima-2",
-        "saucony-ride-19"
+        "anta-mach-5-se",
+        "adidas-supernova-prima-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -21812,8 +21812,8 @@
         "puma-electrify-nitro-4",
         "on-cloudsurfer-next",
         "xtep-2000km-5-pro",
-        "adidas-supernova-prima-2",
-        "xtep-ultra-fast-5"
+        "anta-mach-5-se",
+        "adidas-supernova-prima-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -21875,9 +21875,9 @@
       "similar": [
         "puma-electrify-nitro-4",
         "on-cloudsurfer-next",
+        "anta-mach-5-se",
         "xtep-2000km-5-pro",
-        "xtep-ultra-fast-5",
-        "saucony-ride-19"
+        "xtep-ultra-fast-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -21943,8 +21943,8 @@
         "brooks-hyperion-max-4",
         "skechers-aero-spark",
         "brooks-hyperion-max-3",
-        "hoka-mach-x-3",
-        "hoka-mach-x-2"
+        "361-miro-nude-st",
+        "hoka-mach-x-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -22010,8 +22010,8 @@
         "brooks-hyperion-max-4",
         "skechers-aero-spark",
         "brooks-hyperion-max-3",
-        "hoka-mach-x-3",
-        "hoka-mach-x-2"
+        "361-miro-nude-st",
+        "hoka-mach-x-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -22463,9 +22463,9 @@
       "similar": [
         "mizuno-hyperwarp-pro",
         "xtep-160x-6-0",
-        "361-flame-5",
-        "li-ning-feidian-4-challenger",
-        "361-flame-4"
+        "bmai-jingtan-3-0-turbo",
+        "li-ning-feidian-6-challenger",
+        "361-flame-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -22726,10 +22726,10 @@
       ],
       "similar": [
         "on-cloudsurfer-next",
+        "anta-mach-5-se",
         "xtep-2000km-5-pro",
         "xtep-ultra-fast-5",
-        "puma-velocity-nitro-trail",
-        "puma-velocity-nitro-5"
+        "puma-velocity-nitro-trail"
       ],
       "image": null,
       "affiliate_links": {
@@ -22790,10 +22790,10 @@
       ],
       "similar": [
         "on-cloudsurfer-next",
+        "anta-mach-5-se",
         "xtep-ultra-fast-5",
         "xtep-2000km-5-pro",
-        "puma-velocity-nitro-trail",
-        "puma-velocity-nitro-5"
+        "puma-velocity-nitro-trail"
       ],
       "image": null,
       "affiliate_links": {
@@ -23578,8 +23578,8 @@
         "kiprun-ks900-light-2",
         "mizuno-wave-skyrise-5",
         "brooks-glycerin-flex",
-        "li-ning-yueying-5",
-        "peak-wave"
+        "anta-bellero-3",
+        "li-ning-yueying-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -23641,8 +23641,8 @@
         "kiprun-ks900-light-2",
         "mizuno-wave-skyrise-5",
         "brooks-glycerin-flex",
-        "li-ning-yueying-5",
-        "peak-wave"
+        "anta-bellero-3",
+        "li-ning-yueying-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -23770,10 +23770,10 @@
       ],
       "similar": [
         "puma-electrify-nitro-4",
+        "anta-mach-5-se",
         "xtep-ultra-fast-5",
         "xtep-2000km-5-pro",
-        "puma-velocity-nitro-trail",
-        "puma-velocity-nitro-5"
+        "puma-velocity-nitro-trail"
       ],
       "image": null,
       "affiliate_links": {
@@ -24230,9 +24230,9 @@
       "similar": [
         "hoka-rocket-x-3",
         "olympikus-corre-supra-2",
+        "qiaodan-feiying-plaid-2-0",
         "nike-alphafly-3",
-        "under-armour-velociti-elite-3",
-        "brooks-hyperion-elite-6"
+        "under-armour-velociti-elite-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -24422,9 +24422,9 @@
       "similar": [
         "olympikus-corre-supra-2",
         "hoka-rocket-x-3",
+        "li-ning-feidian-6-elite",
         "kiprun-kd900x-ld-2",
-        "saucony-endorphin-pro-5",
-        "under-armour-velociti-elite-3"
+        "saucony-endorphin-pro-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -24487,11 +24487,11 @@
         "women"
       ],
       "similar": [
+        "li-ning-feidian-6-ultra",
         "new-balance-fuelcell-supercomp-trainer-v3",
         "li-ning-red-hare-9-pro",
         "xtep-360x-3-0",
-        "saucony-endorphin-speed-5",
-        "li-ning-red-hare-8-pro"
+        "xtep-260x-3-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -26409,7 +26409,7 @@
         "new-balance-ellipse",
         "361-kairos-2",
         "saucony-procyon-max",
-        "asics-gel-nimbus-28"
+        "361-eleos-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -26545,7 +26545,7 @@
         "new-balance-ellipse",
         "361-kairos-2",
         "saucony-procyon-max",
-        "asics-gel-nimbus-28"
+        "361-eleos-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -27397,7 +27397,7 @@
         "saucony-endorphin-trainer",
         "brooks-glycerin-flex",
         "mizuno-wave-skyrise-5",
-        "kiprun-ks900-light-2"
+        "anta-bellero-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -28169,11 +28169,11 @@
         "women"
       ],
       "similar": [
+        "li-ning-red-hare-9",
         "brooks-launch-12",
         "adidas-adizero-sl2",
         "brooks-launch-11",
-        "adidas-adizero-sl",
-        "li-ning-red-hare-8"
+        "adidas-adizero-sl"
       ],
       "image": null,
       "affiliate_links": {
@@ -29751,9 +29751,9 @@
       "similar": [
         "mizuno-wave-skyrise-5",
         "brooks-glycerin-flex",
+        "anta-bellero-3",
         "on-cloudsurfer-2",
-        "li-ning-yueying-5",
-        "peak-wave"
+        "li-ning-yueying-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -30339,9 +30339,9 @@
       "similar": [
         "anta-zone2-90",
         "saucony-paramount-max",
+        "li-ning-yueying-5-pro",
         "nike-vomero-plus",
-        "topo-athletic-specter-3",
-        "peak-taichi-3-0"
+        "topo-athletic-specter-3"
       ],
       "image": null,
       "affiliate_links": {
@@ -30402,11 +30402,11 @@
         "women"
       ],
       "similar": [
+        "xtep-260x-3-0",
         "xtep-360x-3-0",
+        "li-ning-feidian-6-ultra",
         "on-cloudboom-max",
-        "saucony-endorphin-speed-5",
-        "new-balance-fuelcell-supercomp-trainer-v3",
-        "saucony-endorphin-speed-4"
+        "saucony-endorphin-speed-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -30466,11 +30466,11 @@
         "women"
       ],
       "similar": [
+        "xtep-260x-3-0",
         "xtep-360x-3-0",
+        "li-ning-feidian-6-ultra",
         "saucony-endorphin-speed-5",
-        "on-cloudboom-max",
-        "new-balance-fuelcell-supercomp-trainer-v3",
-        "saucony-endorphin-speed-4"
+        "on-cloudboom-max"
       ],
       "image": null,
       "affiliate_links": {
@@ -30597,11 +30597,11 @@
         "women"
       ],
       "similar": [
+        "xtep-260x-3-0",
         "xtep-360x-3-0",
+        "li-ning-feidian-6-ultra",
         "saucony-endorphin-speed-5",
-        "on-cloudboom-max",
-        "new-balance-fuelcell-supercomp-trainer-v3",
-        "saucony-endorphin-speed-4"
+        "361-miro-nude-st"
       ],
       "image": null,
       "affiliate_links": {
@@ -30728,11 +30728,11 @@
         "women"
       ],
       "similar": [
+        "anta-c202-g9-2",
         "qiaodan-feiying-pb-4-0",
         "anta-c202-g9",
         "361-furious-future-3",
-        "asics-metaspeed-sky-tokyo",
-        "nike-vaporfly-4"
+        "qiaodan-feiying-plaid-3-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -30794,9 +30794,9 @@
       "similar": [
         "qiaodan-feiying-pb-4-0",
         "anta-c202-g9",
+        "anta-c202-g9-2",
         "361-furious-future-3",
-        "nike-vaporfly-4",
-        "olympikus-corre-supra-2"
+        "qiaodan-feiying-plaid-3-0"
       ],
       "image": null,
       "affiliate_links": {
@@ -30922,10 +30922,10 @@
       ],
       "similar": [
         "361-flame-5",
+        "bmai-jingtan-3-0-turbo",
         "xtep-160x-6-0",
         "puma-fast-fwd-nitro-elite-2",
-        "mizuno-hyperwarp-pro",
-        "361-flame-4"
+        "mizuno-hyperwarp-pro"
       ],
       "image": null,
       "affiliate_links": {
@@ -30989,10 +30989,10 @@
       ],
       "similar": [
         "under-armour-infinite-elite-2",
+        "anta-bellero-3",
         "mizuno-wave-skyrise-5",
         "li-ning-yueying-5",
-        "saucony-endorphin-trainer",
-        "brooks-glycerin-flex"
+        "saucony-endorphin-trainer"
       ],
       "image": null,
       "affiliate_links": {
@@ -31056,10 +31056,10 @@
       ],
       "similar": [
         "under-armour-infinite-elite-2",
+        "anta-bellero-3",
         "li-ning-yueying-5",
         "mizuno-wave-skyrise-5",
-        "kiprun-ks900-light-2",
-        "peak-wave"
+        "kiprun-ks900-light-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -31120,11 +31120,11 @@
         "women"
       ],
       "similar": [
+        "anta-bellero-3",
         "peak-wave",
         "mizuno-wave-skyrise-5",
         "kiprun-ks900-light-2",
-        "brooks-glycerin-flex",
-        "on-cloudsurfer-2"
+        "brooks-glycerin-flex"
       ],
       "image": null,
       "affiliate_links": {
@@ -31185,10 +31185,10 @@
       ],
       "similar": [
         "peak-wave",
+        "anta-bellero-3",
         "kiprun-ks900-light-2",
         "mizuno-wave-skyrise-5",
-        "on-cloudsurfer-2",
-        "brooks-glycerin-flex"
+        "on-cloudsurfer-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -31252,9 +31252,9 @@
       "similar": [
         "saucony-endorphin-azura",
         "nike-pegasus-turbo-next-nature",
+        "dynafish-xiaonian",
         "topo-athletic-cyclone-3",
-        "nike-pegasus-plus-2",
-        "mizuno-neo-zen-2"
+        "nike-pegasus-plus-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -31319,8 +31319,8 @@
         "saucony-endorphin-azura",
         "nike-pegasus-turbo-next-nature",
         "topo-athletic-cyclone-3",
-        "nike-pegasus-plus-2",
-        "mizuno-neo-zen-2"
+        "dynafish-xiaonian",
+        "nike-pegasus-plus-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -31384,10 +31384,10 @@
       ],
       "similar": [
         "li-ning-red-hare-9-ultra",
+        "li-ning-yueying-5-pro",
         "peak-taichi-3-0",
         "saucony-paramount-max",
-        "nike-vomero-plus",
-        "topo-athletic-specter-3"
+        "nike-vomero-plus"
       ],
       "image": null,
       "affiliate_links": {
@@ -31450,8 +31450,8 @@
         "361-furious-future-3",
         "qiaodan-feiying-pb-4-0",
         "li-ning-feidian-5-elite",
-        "olympikus-corre-supra-2",
-        "hoka-rocket-x-3"
+        "qiaodan-feiying-plaid-3-0",
+        "li-ning-feidian-6-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -31576,11 +31576,11 @@
         "women"
       ],
       "similar": [
+        "anta-c202-7",
         "asics-magic-speed-5",
         "nike-zoom-fly-6",
         "asics-magic-speed-4",
-        "li-ning-feidian-4-challenger",
-        "361-flame-5"
+        "li-ning-feidian-6-challenger"
       ],
       "image": null,
       "affiliate_links": {
@@ -31782,7 +31782,7 @@
         "361-kairos-2",
         "new-balance-ellipse",
         "skechers-gorun-consistent-2",
-        "hoka-clifton-11"
+        "361-eleos-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -31850,7 +31850,7 @@
         "361-kairos-2",
         "skechers-gorun-consistent-2",
         "new-balance-ellipse",
-        "hoka-clifton-11"
+        "361-eleos-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -31914,11 +31914,11 @@
         "women"
       ],
       "similar": [
+        "anta-mach-5-se",
         "puma-electrify-nitro-4",
         "xtep-ultra-fast-5",
         "puma-velocity-nitro-trail",
-        "on-cloudsurfer-next",
-        "puma-velocity-nitro-5"
+        "on-cloudsurfer-next"
       ],
       "image": null,
       "affiliate_links": {
@@ -31979,11 +31979,11 @@
         "women"
       ],
       "similar": [
+        "anta-mach-5-se",
         "puma-electrify-nitro-4",
         "xtep-ultra-fast-5",
         "on-cloudsurfer-next",
-        "puma-velocity-nitro-trail",
-        "puma-velocity-nitro-5"
+        "puma-velocity-nitro-trail"
       ],
       "image": null,
       "affiliate_links": {
@@ -32173,10 +32173,10 @@
       ],
       "similar": [
         "puma-fast-fwd-nitro-elite-2",
+        "bmai-jingtan-3-0-turbo",
+        "li-ning-feidian-6-challenger",
         "mizuno-hyperwarp-pro",
-        "361-flame-5",
-        "li-ning-feidian-4-challenger",
-        "361-flame-4"
+        "361-flame-5"
       ],
       "image": null,
       "affiliate_links": {
@@ -32367,11 +32367,11 @@
         "women"
       ],
       "similar": [
+        "xtep-260x-3-0",
         "li-ning-red-hare-9-pro",
+        "li-ning-feidian-6-ultra",
         "saucony-endorphin-speed-5",
-        "new-balance-fuelcell-supercomp-trainer-v3",
-        "on-cloudboom-max",
-        "saucony-endorphin-speed-4"
+        "new-balance-fuelcell-supercomp-trainer-v3"
       ],
       "image": null,
       "affiliate_links": {
@@ -32495,11 +32495,11 @@
         "women"
       ],
       "similar": [
+        "anta-mach-5-se",
         "puma-electrify-nitro-4",
         "xtep-2000km-5-pro",
         "on-cloudsurfer-next",
-        "xtep-2000km-4",
-        "puma-electrify-nitro-3"
+        "xtep-2000km-4"
       ],
       "image": null,
       "affiliate_links": {
@@ -32560,10 +32560,10 @@
       ],
       "similar": [
         "anta-c202-g9",
+        "anta-c202-g9-2",
         "qiaodan-feiying-pb-4-0",
         "li-ning-feidian-5-elite",
-        "olympikus-corre-supra-2",
-        "nike-vaporfly-4"
+        "li-ning-feidian-6-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -32625,9 +32625,9 @@
       "similar": [
         "qiaodan-feiying-pb-4-0",
         "anta-c202-g9",
-        "li-ning-feidian-5-elite",
-        "olympikus-corre-supra-2",
-        "on-cloudboom-volt"
+        "anta-c202-g9-2",
+        "li-ning-feidian-6-elite",
+        "li-ning-feidian-5-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -32689,10 +32689,10 @@
       ],
       "similar": [
         "li-ning-feidian-4-challenger",
+        "bmai-jingtan-3-0-turbo",
+        "li-ning-feidian-6-challenger",
         "xtep-160x-6-0",
-        "puma-fast-fwd-nitro-elite-2",
-        "mizuno-hyperwarp-pro",
-        "asics-magic-speed-5"
+        "puma-fast-fwd-nitro-elite-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -32754,10 +32754,10 @@
       ],
       "similar": [
         "li-ning-feidian-4-challenger",
+        "bmai-jingtan-3-0-turbo",
+        "li-ning-feidian-6-challenger",
         "xtep-160x-6-0",
-        "puma-fast-fwd-nitro-elite-2",
-        "mizuno-hyperwarp-pro",
-        "asics-magic-speed-5"
+        "puma-fast-fwd-nitro-elite-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -33015,9 +33015,9 @@
       "similar": [
         "new-balance-ellipse",
         "saucony-procyon-max",
+        "361-eleos-2",
         "asics-gel-nimbus-28",
-        "hoka-clifton-11",
-        "new-balance-fresh-foam-x-1080v15"
+        "hoka-clifton-11"
       ],
       "image": null,
       "affiliate_links": {
@@ -33408,10 +33408,10 @@
       ],
       "similar": [
         "li-ning-yueying-5",
+        "anta-bellero-3",
         "mizuno-wave-skyrise-5",
         "kiprun-ks900-light-2",
-        "on-cloudsurfer-2",
-        "brooks-glycerin-flex"
+        "on-cloudsurfer-2"
       ],
       "image": null,
       "affiliate_links": {
@@ -33473,10 +33473,10 @@
       ],
       "similar": [
         "saucony-endorphin-trainer",
+        "li-ning-yueying-5-pro",
         "li-ning-jueying-5",
         "under-armour-infinite-elite-2",
-        "adidas-hyperboost-edge",
-        "anta-zone2-90"
+        "adidas-hyperboost-edge"
       ],
       "image": null,
       "affiliate_links": {
@@ -33538,9 +33538,9 @@
       "similar": [
         "anta-c202-g9",
         "361-furious-future-3",
+        "anta-c202-g9-2",
         "li-ning-feidian-5-elite",
-        "olympikus-corre-supra-2",
-        "nike-vaporfly-4"
+        "li-ning-feidian-6-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -33602,9 +33602,9 @@
       "similar": [
         "361-furious-future-3",
         "anta-c202-g9",
+        "anta-c202-g9-2",
         "li-ning-feidian-5-elite",
-        "olympikus-corre-supra-2",
-        "on-cloudboom-volt"
+        "li-ning-feidian-6-elite"
       ],
       "image": null,
       "affiliate_links": {
@@ -33753,6 +33753,1512 @@
         "spec_confidence": "low",
         "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
         "verified": false
+      }
+    },
+    {
+      "id": "li-ning-feidian-6-elite",
+      "brand": "Li-Ning",
+      "model": "Feidian 6 Elite",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2026,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 230,
+      "price_tier": "elite",
+      "weight_g_mens_us9": 205,
+      "weight_class": "light",
+      "stack_heel_mm": 40.0,
+      "stack_forefoot_mm": 34.0,
+      "drop_mm": 6.0,
+      "cushion_level": "high",
+      "foam_name": "Super BOOM",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "qiaodan-feiying-plaid-2-0",
+        "qiaodan-feiying-plaid-3-0",
+        "361-furious-future-3",
+        "anta-c202-g9-2",
+        "anta-c202-g9"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "GearUpToFit (205 g, 6 mm drop, MSRP USD 230)",
+        "verified": true
+      }
+    },
+    {
+      "id": "li-ning-feidian-6-challenger",
+      "brand": "Li-Ning",
+      "model": "Feidian 6 Challenger",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "race",
+        "tempo"
+      ],
+      "surface": "road",
+      "msrp_usd": 115,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 200,
+      "weight_class": "light",
+      "stack_heel_mm": 38.0,
+      "stack_forefoot_mm": 31.0,
+      "drop_mm": 7.0,
+      "cushion_level": "high",
+      "foam_name": "BOOM",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "bmai-jingtan-3-0-turbo",
+        "361-flame-5",
+        "xtep-160x-6-0",
+        "puma-fast-fwd-nitro-elite-2",
+        "mizuno-hyperwarp-pro"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "Track Spikes (200 g US9, 38 mm stack)",
+        "verified": true
+      }
+    },
+    {
+      "id": "li-ning-feidian-6-ultra",
+      "brand": "Li-Ning",
+      "model": "Feidian 6 Ultra",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2026,
+      "categories": [
+        "tempo",
+        "long"
+      ],
+      "surface": "road",
+      "msrp_usd": 170,
+      "price_tier": "premium",
+      "weight_g_mens_us9": 240,
+      "weight_class": "medium",
+      "stack_heel_mm": 42.0,
+      "stack_forefoot_mm": 36.0,
+      "drop_mm": 6.0,
+      "cushion_level": "max",
+      "foam_name": "Super BOOM",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "xtep-360x-3-0",
+        "on-cloudboom-max",
+        "li-ning-red-hare-9-pro",
+        "new-balance-fuelcell-supercomp-trainer-v3",
+        "xtep-260x-3-0"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "li-ning-red-hare-9",
+      "brand": "Li-Ning",
+      "model": "Red Hare 9",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2026,
+      "categories": [
+        "daily",
+        "tempo",
+        "budget"
+      ],
+      "surface": "road",
+      "msrp_usd": 70,
+      "price_tier": "budget",
+      "weight_g_mens_us9": 235,
+      "weight_class": "medium",
+      "stack_heel_mm": 35.0,
+      "stack_forefoot_mm": 27.0,
+      "drop_mm": 8.0,
+      "cushion_level": "medium",
+      "foam_name": "Light Foam Plus",
+      "foam_type": "sEVA",
+      "plate": "none",
+      "ride_feel": "balanced",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "diadora-mythos-blushield-vigore-v",
+        "brooks-launch-12",
+        "adidas-adizero-sl2",
+        "brooks-launch-11",
+        "adidas-adizero-sl"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "li-ning-yueying-5-pro",
+      "brand": "Li-Ning",
+      "model": "Yueying 5 Pro",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "daily",
+        "long"
+      ],
+      "surface": "road",
+      "msrp_usd": 95,
+      "price_tier": "budget",
+      "weight_g_mens_us9": 270,
+      "weight_class": "medium",
+      "stack_heel_mm": 40.0,
+      "stack_forefoot_mm": 32.0,
+      "drop_mm": 8.0,
+      "cushion_level": "high",
+      "foam_name": "Super BOOM",
+      "foam_type": "PEBA",
+      "plate": "none",
+      "ride_feel": "soft",
+      "stability": "neutral",
+      "wide_available": true,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": true,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "nike-invincible-3",
+        "saucony-paramount-max",
+        "saucony-triumph-24",
+        "nike-invincible-2",
+        "saucony-triumph-23"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "anta-c202-7",
+      "brand": "ANTA",
+      "model": "C202 7",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "race",
+        "tempo"
+      ],
+      "surface": "road",
+      "msrp_usd": 180,
+      "price_tier": "premium",
+      "weight_g_mens_us9": 204,
+      "weight_class": "light",
+      "stack_heel_mm": 40.0,
+      "stack_forefoot_mm": 34.0,
+      "drop_mm": 6.0,
+      "cushion_level": "high",
+      "foam_name": "Nitro Edge Pro",
+      "foam_type": "blend",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "asics-magic-speed-5",
+        "anta-c10-pro",
+        "nike-zoom-fly-6",
+        "asics-magic-speed-4",
+        "361-flame-5"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "Correr una Maratón (204 g US8, 6 mm drop, ~40/34 mm)",
+        "verified": true
+      }
+    },
+    {
+      "id": "anta-c202-g9-2",
+      "brand": "ANTA",
+      "model": "C202 G9 2",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2026,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 190,
+      "price_tier": "premium",
+      "weight_g_mens_us9": 184,
+      "weight_class": "light",
+      "stack_heel_mm": 40.0,
+      "stack_forefoot_mm": 34.0,
+      "drop_mm": 6.0,
+      "cushion_level": "high",
+      "foam_name": "Nitroedge 90",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "361-furious-future-3",
+        "qiaodan-feiying-pb-4-0",
+        "li-ning-feidian-5-elite",
+        "qiaodan-feiying-plaid-3-0",
+        "li-ning-feidian-6-elite"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "Outside / Fishgoo (~184 g, Nitroedge 90, carbon)",
+        "verified": true
+      }
+    },
+    {
+      "id": "anta-mach-5-se",
+      "brand": "ANTA",
+      "model": "Mach 5 SE",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "daily",
+        "budget"
+      ],
+      "surface": "road",
+      "msrp_usd": 55,
+      "price_tier": "budget",
+      "weight_g_mens_us9": 240,
+      "weight_class": "medium",
+      "stack_heel_mm": 33.0,
+      "stack_forefoot_mm": 25.0,
+      "drop_mm": 8.0,
+      "cushion_level": "medium",
+      "foam_name": "Nitrogen Foam",
+      "foam_type": "sEVA",
+      "plate": "none",
+      "ride_feel": "balanced",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "xtep-ultra-fast-5",
+        "puma-electrify-nitro-4",
+        "xtep-2000km-5-pro",
+        "on-cloudsurfer-next",
+        "puma-velocity-nitro-5"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "anta-bellero-3",
+      "brand": "ANTA",
+      "model": "Bellero 3",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "daily",
+        "long"
+      ],
+      "surface": "road",
+      "msrp_usd": 90,
+      "price_tier": "budget",
+      "weight_g_mens_us9": 265,
+      "weight_class": "medium",
+      "stack_heel_mm": 38.0,
+      "stack_forefoot_mm": 30.0,
+      "drop_mm": 8.0,
+      "cushion_level": "high",
+      "foam_name": "Nitro Edge",
+      "foam_type": "sEVA",
+      "plate": "none",
+      "ride_feel": "soft",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": true,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "li-ning-yueying-5",
+        "peak-wave",
+        "mizuno-wave-skyrise-5",
+        "kiprun-ks900-light-2",
+        "brooks-glycerin-flex"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "361-feisu-4",
+      "brand": "361°",
+      "model": "Feisu 4",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 100,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 185,
+      "weight_class": "light",
+      "stack_heel_mm": 35.0,
+      "stack_forefoot_mm": 29.0,
+      "drop_mm": 6.0,
+      "cushion_level": "medium",
+      "foam_name": "QU!KFLAME",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "qiaodan-feiying-pb-4-0",
+        "li-ning-feidian-5-elite",
+        "361-furious-future-3",
+        "anta-c202-g9",
+        "anta-c202-g9-2"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "Track Spikes (185 g US9, 35 mm stack, ~USD 100)",
+        "verified": true
+      }
+    },
+    {
+      "id": "361-eleos-2",
+      "brand": "361°",
+      "model": "Eleos 2",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "long",
+        "recovery"
+      ],
+      "surface": "road",
+      "msrp_usd": 130,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 300,
+      "weight_class": "heavy",
+      "stack_heel_mm": 42.0,
+      "stack_forefoot_mm": 34.0,
+      "drop_mm": 8.0,
+      "cushion_level": "max",
+      "foam_name": "QU!KFOAM",
+      "foam_type": "EVA",
+      "plate": "none",
+      "ride_feel": "soft",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": true,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "asics-gel-nimbus-28",
+        "saucony-procyon-max",
+        "new-balance-ellipse",
+        "361-kairos-2",
+        "hoka-clifton-11"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "361-miro-nude-st",
+      "brand": "361°",
+      "model": "Miro Nude ST",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "tempo",
+        "daily"
+      ],
+      "surface": "road",
+      "msrp_usd": 110,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 230,
+      "weight_class": "medium",
+      "stack_heel_mm": 35.0,
+      "stack_forefoot_mm": 28.0,
+      "drop_mm": 7.0,
+      "cushion_level": "medium",
+      "foam_name": "TPEE",
+      "foam_type": "TPEE",
+      "plate": "nylon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "xtep-260x-3-0",
+        "xtep-360x-3-0",
+        "li-ning-red-hare-9-pro",
+        "saucony-endorphin-speed-5",
+        "li-ning-feidian-6-ultra"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "xtep-qingyun-2-0",
+      "brand": "Xtep",
+      "model": "Qingyun 2.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "long",
+        "recovery"
+      ],
+      "surface": "road",
+      "msrp_usd": 110,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 312,
+      "weight_class": "heavy",
+      "stack_heel_mm": 44.0,
+      "stack_forefoot_mm": 36.0,
+      "drop_mm": 8.0,
+      "cushion_level": "max",
+      "foam_name": "Dynamic Foam",
+      "foam_type": "sEVA",
+      "plate": "none",
+      "ride_feel": "soft",
+      "stability": "mild",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": true,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "brooks-glycerin-flex",
+        "puma-magmax-nitro",
+        "brooks-glycerin-gts-23",
+        "anta-bellero-3",
+        "brooks-glycerin-23"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "Outside / Fishgoo (~312 g recovery shoe)",
+        "verified": true
+      }
+    },
+    {
+      "id": "xtep-260x-3-0",
+      "brand": "Xtep",
+      "model": "260X 3.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "tempo"
+      ],
+      "surface": "road",
+      "msrp_usd": 110,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 225,
+      "weight_class": "light",
+      "stack_heel_mm": 38.0,
+      "stack_forefoot_mm": 31.0,
+      "drop_mm": 7.0,
+      "cushion_level": "high",
+      "foam_name": "XTEP ACE",
+      "foam_type": "PEBA",
+      "plate": "glassfiber",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "xtep-360x-3-0",
+        "li-ning-red-hare-9-pro",
+        "saucony-endorphin-speed-5",
+        "li-ning-feidian-6-ultra",
+        "361-miro-nude-st"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "xtep-360x-2-0",
+      "brand": "Xtep",
+      "model": "360X 2.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "previous_version",
+      "release_year": 2024,
+      "categories": [
+        "tempo",
+        "long"
+      ],
+      "surface": "road",
+      "msrp_usd": 120,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 235,
+      "weight_class": "medium",
+      "stack_heel_mm": 40.0,
+      "stack_forefoot_mm": 33.0,
+      "drop_mm": 7.0,
+      "cushion_level": "high",
+      "foam_name": "XTEP ACE",
+      "foam_type": "PEBA",
+      "plate": "glassfiber",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "xtep-260x-3-0",
+        "li-ning-red-hare-9-pro",
+        "li-ning-feidian-6-ultra",
+        "saucony-endorphin-speed-5",
+        "new-balance-fuelcell-supercomp-trainer-v3"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "qiaodan-feiying-plaid-3-0",
+      "brand": "Qiaodan",
+      "model": "Feiying Plaid 3.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2026,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 270,
+      "price_tier": "elite",
+      "weight_g_mens_us9": 195,
+      "weight_class": "light",
+      "stack_heel_mm": 40.0,
+      "stack_forefoot_mm": 34.0,
+      "drop_mm": 6.0,
+      "cushion_level": "high",
+      "foam_name": "Q-Kungfu Pro-HP",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "li-ning-feidian-6-elite",
+        "361-furious-future-3",
+        "anta-c202-g9-2",
+        "anta-c202-g9",
+        "hoka-rocket-x-3"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "qiaodan-feiying-plaid-2-0",
+      "brand": "Qiaodan",
+      "model": "Feiying Plaid 2.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 269,
+      "price_tier": "elite",
+      "weight_g_mens_us9": 206,
+      "weight_class": "light",
+      "stack_heel_mm": 40.0,
+      "stack_forefoot_mm": 34.0,
+      "drop_mm": 6.0,
+      "cushion_level": "high",
+      "foam_name": "Q-Kungfu Pro-HP",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "li-ning-feidian-6-elite",
+        "361-furious-future-3",
+        "on-cloudboom-echo-4",
+        "anta-c202-g9-2",
+        "anta-c202-g9"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "RunningZap (206 g, 6 mm drop, USD 269, carbon)",
+        "verified": true
+      }
+    },
+    {
+      "id": "qiaodan-feiying-pb-6-0",
+      "brand": "Qiaodan",
+      "model": "Feiying PB 6.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2026,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 160,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 181,
+      "weight_class": "light",
+      "stack_heel_mm": 38.0,
+      "stack_forefoot_mm": 32.0,
+      "drop_mm": 6.0,
+      "cushion_level": "high",
+      "foam_name": "Super Q-Kungfu",
+      "foam_type": "TPEE",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "adidas-adizero-adios-pro-4",
+        "li-ning-feidian-5-elite",
+        "361-furious-future-3",
+        "anta-c202-g9",
+        "anta-c202-g9-2"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "RunningZap (181 g, 6 mm drop, USD 160, carbon)",
+        "verified": true
+      }
+    },
+    {
+      "id": "qiaodan-plaid-1-5",
+      "brand": "Qiaodan",
+      "model": "Plaid 1.5",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "previous_version",
+      "release_year": 2024,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 100,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 195,
+      "weight_class": "light",
+      "stack_heel_mm": 38.0,
+      "stack_forefoot_mm": 31.0,
+      "drop_mm": 7.0,
+      "cushion_level": "high",
+      "foam_name": "Q-Kungfu Pro-HP",
+      "foam_type": "TPEE",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "qiaodan-feiying-pb-6-0",
+        "adidas-adizero-adios-pro-4",
+        "361-feisu-4",
+        "olympikus-corre-supra-2",
+        "qiaodan-feiying-pb-4-0"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "RunningZap (195 g, 7 mm drop, USD 100, carbon)",
+        "verified": true
+      }
+    },
+    {
+      "id": "qiaodan-wind-4-0",
+      "brand": "Qiaodan",
+      "model": "Wind 4.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "daily",
+        "long"
+      ],
+      "surface": "road",
+      "msrp_usd": 110,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 238,
+      "weight_class": "medium",
+      "stack_heel_mm": 37.0,
+      "stack_forefoot_mm": 29.0,
+      "drop_mm": 8.0,
+      "cushion_level": "high",
+      "foam_name": "PEBA",
+      "foam_type": "PEBA",
+      "plate": "nylon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "hoka-skyward-x-2",
+        "hoka-skyward-x",
+        "mizuno-wave-sky-9",
+        "on-cloudvista-2",
+        "on-cloudstratus-3"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "RunningZap (238 g, 8 mm drop, USD 110, nylon plate)",
+        "verified": true
+      }
+    },
+    {
+      "id": "bmai-jingtan-3-0-turbo",
+      "brand": "BMAI",
+      "model": "Jingtan 3.0 Turbo",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "race",
+        "tempo"
+      ],
+      "surface": "road",
+      "msrp_usd": 150,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 200,
+      "weight_class": "light",
+      "stack_heel_mm": 39.0,
+      "stack_forefoot_mm": 32.0,
+      "drop_mm": 7.0,
+      "cushion_level": "high",
+      "foam_name": "PEBA",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "li-ning-feidian-6-challenger",
+        "361-flame-5",
+        "xtep-160x-6-0",
+        "puma-fast-fwd-nitro-elite-2",
+        "li-ning-feidian-4-challenger"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "do-win-speedster-3-0",
+      "brand": "Do-Win",
+      "model": "Speedster 3.0",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "race"
+      ],
+      "surface": "road",
+      "msrp_usd": 130,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 200,
+      "weight_class": "light",
+      "stack_heel_mm": 38.0,
+      "stack_forefoot_mm": 31.0,
+      "drop_mm": 7.0,
+      "cushion_level": "high",
+      "foam_name": "PEBA",
+      "foam_type": "PEBA",
+      "plate": "carbon",
+      "ride_feel": "firm",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "adidas-adizero-takumi-sen-10",
+        "olympikus-corre-supra-2",
+        "on-cloudboom-volt",
+        "qiaodan-feiying-pb-4-0",
+        "361-furious-future-3"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "low",
+        "spec_source": "editorial estimate from model line; verify against manufacturer spec sheet",
+        "verified": false
+      }
+    },
+    {
+      "id": "dynafish-xiaonian",
+      "brand": "Dynafish",
+      "model": "Xiaonian",
+      "brand_origin": "CN",
+      "is_chinese_brand": true,
+      "status": "current",
+      "release_year": 2025,
+      "categories": [
+        "daily",
+        "tempo"
+      ],
+      "surface": "road",
+      "msrp_usd": 110,
+      "price_tier": "mid",
+      "weight_g_mens_us9": 204,
+      "weight_class": "light",
+      "stack_heel_mm": 41.0,
+      "stack_forefoot_mm": 34.0,
+      "drop_mm": 7.0,
+      "cushion_level": "high",
+      "foam_name": "TPEE",
+      "foam_type": "TPEE",
+      "plate": "none",
+      "ride_feel": "bouncy",
+      "stability": "neutral",
+      "wide_available": false,
+      "runner_levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "distances": [
+        "5k",
+        "10k",
+        "21k",
+        "42k"
+      ],
+      "suits_heavier_runners": false,
+      "zero_drop": false,
+      "popular_pick": false,
+      "gender": [
+        "men",
+        "women"
+      ],
+      "similar": [
+        "adidas-adizero-evo-sl",
+        "mizuno-neo-zen-2",
+        "adidas-adizero-evo-sl-atr",
+        "mizuno-neo-vista-3",
+        "new-balance-fuelcell-rebel-v5"
+      ],
+      "image": null,
+      "affiliate_links": {
+        "amazon_us": null,
+        "amazon_uk": null,
+        "amazon_de": null,
+        "amazon_br": null,
+        "aliexpress": null,
+        "brand_store": null
+      },
+      "data_quality": {
+        "spec_confidence": "checked",
+        "spec_source": "Track Spikes (~204 g, 41/34 mm, unplated TPEE)",
+        "verified": true
       }
     }
   ]

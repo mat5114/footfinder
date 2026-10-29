@@ -5,7 +5,7 @@ from data_china import ROWS as C
 ORIGIN = {"Nike":"US","adidas":"DE","ASICS":"JP","Brooks":"US","HOKA":"US","New Balance":"US","Saucony":"US",
  "Mizuno":"JP","PUMA":"DE","On":"CH","Altra":"US","Salomon":"FR","Under Armour":"US","Skechers":"US",
  "Diadora":"IT","Topo Athletic":"US","Merrell":"US","La Sportiva":"IT","inov-8":"GB","Craft":"SE","Karhu":"FI",
- "Kiprun":"FR","Olympikus":"BR","Li-Ning":"CN","ANTA":"CN","Xtep":"CN","361°":"CN","PEAK":"CN","Qiaodan":"CN","Kailas":"CN"}
+ "Kiprun":"FR","Olympikus":"BR","Li-Ning":"CN","ANTA":"CN","Xtep":"CN","361°":"CN","PEAK":"CN","Qiaodan":"CN","Kailas":"CN","BMAI":"CN","Do-Win":"CN","Dynafish":"CN"}
 
 CATS={"daily","tempo","race","long","recovery","stab","trail","budget"}
 SURF={"road","trail","mixed"}; FOAM={"EVA","sEVA","TPU","PEBA","TPEE","blend"}
@@ -29,6 +29,17 @@ CHECKED = {
  "hoka-rocket-x-trail":"Road Trail Run (45/39 mm, ~256 g US8.5)",
  "topo-athletic-specter-3":"Road Trail Run (official stack 39/34 mm)",
  "361-lynx":"RunnersPicks review (USD 150, 6 mm drop)",
+ "li-ning-feidian-6-elite":"GearUpToFit (205 g, 6 mm drop, MSRP USD 230)",
+ "li-ning-feidian-6-challenger":"Track Spikes (200 g US9, 38 mm stack)",
+ "anta-c202-7":"Correr una Maratón (204 g US8, 6 mm drop, ~40/34 mm)",
+ "anta-c202-g9-2":"Outside / Fishgoo (~184 g, Nitroedge 90, carbon)",
+ "361-feisu-4":"Track Spikes (185 g US9, 35 mm stack, ~USD 100)",
+ "xtep-qingyun-2-0":"Outside / Fishgoo (~312 g recovery shoe)",
+ "qiaodan-feiying-plaid-2-0":"RunningZap (206 g, 6 mm drop, USD 269, carbon)",
+ "qiaodan-feiying-pb-6-0":"RunningZap (181 g, 6 mm drop, USD 160, carbon)",
+ "qiaodan-plaid-1-5":"RunningZap (195 g, 7 mm drop, USD 100, carbon)",
+ "qiaodan-wind-4-0":"RunningZap (238 g, 8 mm drop, USD 110, nylon plate)",
+ "dynafish-xiaonian":"Track Spikes (~204 g, 41/34 mm, unplated TPEE)",
 }
 
 POPULAR = {"Pegasus 41","Pegasus 40","Vomero 18","Vaporfly 3","Invincible 3","Structure 25","Zoom Fly 6","Winflo 11",
@@ -47,7 +58,7 @@ def slug(s):
 
 def parse(block, region):
     out=[]
-    for line in block.strip().splitlines():
+    for line in (l for l in block.strip().splitlines() if l.strip()):
         p=[x.strip() for x in line.split("|")]
         assert len(p)==17, line
         b,m,st,yr,cats,surf,usd,g,h,f,fname,ftype,plate,feel,stab,wide,conf=p
