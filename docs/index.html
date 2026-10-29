@@ -781,9 +781,9 @@ function shoeDetail(s,badge,why){
         </dl>
         ${why.length?`<div class="rwhy">${why.map(k=>`<span>${esc(T[L].w[k])}</span>`).join("")}</div>`:""}
         <div class="rbtns">
-          ${storeOffers(s).map(o=>`<a class="rbtn light" href="${esc(o[2])}" target="_blank" rel="sponsored noopener">${esc(R.at)} ${esc(o[0])}${o[3]?` · ${esc(money(o[3],o[4]))}`:""} ↗</a>`).join("")}
+          ${storeOffers(s).map(o=>`<a class="rbtn light" href="${esc(o[2])}" target="_blank" rel="sponsored noopener">${esc(R.at)} ${esc(o[0])}${o[3]?` · ${esc(money(o[3],o[4]))}`:""}</a>`).join("")}
           ${s.ali?`<a class="rbtn dark ali" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${aliLogo}${esc(R.ali)}</a>`:""}
-          ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)} ↗</a>`:""}
+          ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)}</a>`:""}
           ${amzLink(s)?`<p class="rnote">${esc(R.amzNote)}</p>`:""}
         </div>
 `;
