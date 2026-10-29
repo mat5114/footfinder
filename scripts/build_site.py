@@ -64,12 +64,15 @@ def main():
     ali_path = os.path.join(ROOT, "data", "aliexpress.json")
     ali = json.load(open(ali_path, encoding="utf-8")) if os.path.exists(ali_path) else {}
     template = open(os.path.join(ROOT, "src", "footfinder.template.html"), encoding="utf-8").read()
-    page = template.replace("__DATA__", compact(shoes, ali))
+    amz_path = os.path.join(ROOT, "data", "amazon.json")
+    amz = json.load(open(amz_path, encoding="utf-8")) if os.path.exists(amz_path) else {}
+    amz = {"store": amz.get("store") or "amazon.com", "tag": (amz.get("tag") or "").strip()}
+    page = template.replace("__DATA__", compact(shoes, ali)).replace("__AMAZON__", json.dumps(amz))
     dist = os.path.join(ROOT, "docs")
     os.makedirs(dist, exist_ok=True)
     open(os.path.join(dist, "artifact.html"), "w", encoding="utf-8").write(page)
     open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(SHELL.replace("{page}", page))
-    print(f"Built docs/ with {len(shoes)} shoes, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for v in ali.values() if v.get('search_link'))} with search links")
+    print(f"Built docs/ with {len(shoes)} shoes, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for v in ali.values() if v.get('search_link'))} with search links, Amazon tag {'set' if amz['tag'] else 'not set'}")
 
 
 if __name__ == "__main__":

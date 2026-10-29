@@ -223,6 +223,7 @@ h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.02
 
 <script>
 const RAW=__DATA__;
+const AMZ=__AMAZON__; /* {store, tag} from data/amazon.json; the Amazon button links to a search with this tag */
 const S=RAW.map((r,i)=>({i,brand:r[0],model:r[1],cur:!!r[2],yr:r[3],cats:r[4],surf:r[5],usd:r[6],g:r[7],h:r[8],f:r[9],drop:Math.round((r[8]-r[9])*10)/10,foam:r[10],ftype:r[11],plate:r[12],feel:r[13],stab:r[14],wide:!!r[15],dist:r[16],heavy:!!r[17],pop:!!r[18],sim:r[19],cn:!!r[20],conf:r[21],img:r[22]||null,ali:r[23]||null,aliPrice:r[24]||null}));
 const byName=n=>S.find(s=>(s.brand+" "+s.model)===n);
 
@@ -414,22 +415,22 @@ it:{goal:"Per cosa le userai?",volume:"Quanto corri a settimana?",volume_start:"
 };
 /* results copy */
 const RT={
-en:{weight:"Weight",drop:"Drop",stack:"Stack height",cushion:"Cushioning",feel:"Ride",plate:"Plate",stab:"Support",surf:"Surface",dist:"Best for",wide:"Wide version",year:"Released",price:"list price",match:"match",ali:"See on AliExpress",amz:"Amazon · soon",prev:"Previous version",
+en:{amzGo:"Search on Amazon",weight:"Weight",drop:"Drop",stack:"Stack height",cushion:"Cushioning",feel:"Ride",plate:"Plate",stab:"Support",surf:"Surface",dist:"Best for",wide:"Wide version",year:"Released",price:"list price",match:"match",ali:"See on AliExpress",amz:"Amazon · soon",prev:"Previous version",
  tags:{best:"Best match",light:"Lightest",cheap:"Cheapest",soft:"Most cushioned"},cush:{low:"Low",medium:"Medium",high:"High",max:"Maximum"},feelV:{soft:"Soft",balanced:"Balanced",firm:"Firm",bouncy:"Bouncy"},none:"None",
  stabV:{neutral:"Neutral",mild:"Light support",stable:"Stability"},surfV:{road:"Road",trail:"Trail",mixed:"Road and trail"},yes:"Yes",no:"No"},
-pt:{weight:"Peso",drop:"Drop",stack:"Altura do solado",cushion:"Amortecimento",feel:"Pisada",plate:"Placa",stab:"Suporte",surf:"Superfície",dist:"Ideal para",wide:"Versão larga",year:"Lançamento",price:"preço de tabela",match:"combina",ali:"Ver no AliExpress",amz:"Amazon · em breve",prev:"Versão anterior",
+pt:{amzGo:"Buscar na Amazon",weight:"Peso",drop:"Drop",stack:"Altura do solado",cushion:"Amortecimento",feel:"Pisada",plate:"Placa",stab:"Suporte",surf:"Superfície",dist:"Ideal para",wide:"Versão larga",year:"Lançamento",price:"preço de tabela",match:"combina",ali:"Ver no AliExpress",amz:"Amazon · em breve",prev:"Versão anterior",
  tags:{best:"Melhor combinação",light:"Mais leve",cheap:"Mais barato",soft:"Mais amortecido"},cush:{low:"Baixo",medium:"Médio",high:"Alto",max:"Máximo"},feelV:{soft:"Macia",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Nenhuma",
  stabV:{neutral:"Neutro",mild:"Suporte leve",stable:"Estabilidade"},surfV:{road:"Asfalto",trail:"Trilha",mixed:"Asfalto e trilha"},yes:"Sim",no:"Não"},
-es:{weight:"Peso",drop:"Drop",stack:"Altura de suela",cushion:"Amortiguación",feel:"Pisada",plate:"Placa",stab:"Soporte",surf:"Superficie",dist:"Ideal para",wide:"Versión ancha",year:"Lanzamiento",price:"precio de lista",match:"coincide",ali:"Ver en AliExpress",amz:"Amazon · pronto",prev:"Versión anterior",
+es:{amzGo:"Buscar en Amazon",weight:"Peso",drop:"Drop",stack:"Altura de suela",cushion:"Amortiguación",feel:"Pisada",plate:"Placa",stab:"Soporte",surf:"Superficie",dist:"Ideal para",wide:"Versión ancha",year:"Lanzamiento",price:"precio de lista",match:"coincide",ali:"Ver en AliExpress",amz:"Amazon · pronto",prev:"Versión anterior",
  tags:{best:"Mejor opción",light:"Más ligera",cheap:"Más barata",soft:"Más amortiguada"},cush:{low:"Baja",medium:"Media",high:"Alta",max:"Máxima"},feelV:{soft:"Suave",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Ninguna",
  stabV:{neutral:"Neutra",mild:"Soporte leve",stable:"Estabilidad"},surfV:{road:"Asfalto",trail:"Montaña",mixed:"Asfalto y montaña"},yes:"Sí",no:"No"},
-fr:{weight:"Poids",drop:"Drop",stack:"Hauteur de semelle",cushion:"Amorti",feel:"Foulée",plate:"Plaque",stab:"Maintien",surf:"Surface",dist:"Idéale pour",wide:"Version large",year:"Sortie",price:"prix catalogue",match:"correspondance",ali:"Voir sur AliExpress",amz:"Amazon · bientôt",prev:"Version précédente",
+fr:{amzGo:"Chercher sur Amazon",weight:"Poids",drop:"Drop",stack:"Hauteur de semelle",cushion:"Amorti",feel:"Foulée",plate:"Plaque",stab:"Maintien",surf:"Surface",dist:"Idéale pour",wide:"Version large",year:"Sortie",price:"prix catalogue",match:"correspondance",ali:"Voir sur AliExpress",amz:"Amazon · bientôt",prev:"Version précédente",
  tags:{best:"Meilleur choix",light:"La plus légère",cheap:"La moins chère",soft:"La plus amortie"},cush:{low:"Faible",medium:"Moyen",high:"Élevé",max:"Maximal"},feelV:{soft:"Moelleuse",balanced:"Équilibrée",firm:"Ferme",bouncy:"Dynamique"},none:"Aucune",
  stabV:{neutral:"Neutre",mild:"Léger maintien",stable:"Stabilité"},surfV:{road:"Route",trail:"Trail",mixed:"Route et trail"},yes:"Oui",no:"Non"},
-de:{weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Übereinstimmung",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
+de:{amzGo:"Auf Amazon suchen",weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Übereinstimmung",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
  tags:{best:"Beste Wahl",light:"Leichtester",cheap:"Günstigster",soft:"Meiste Dämpfung"},cush:{low:"Gering",medium:"Mittel",high:"Hoch",max:"Maximal"},feelV:{soft:"Weich",balanced:"Ausgewogen",firm:"Fest",bouncy:"Federnd"},none:"Keine",
  stabV:{neutral:"Neutral",mild:"Leichte Stütze",stable:"Stabilität"},surfV:{road:"Straße",trail:"Trail",mixed:"Straße und Trail"},yes:"Ja",no:"Nein"},
-it:{weight:"Peso",drop:"Drop",stack:"Altezza suola",cushion:"Ammortizzazione",feel:"Appoggio",plate:"Piastra",stab:"Supporto",surf:"Superficie",dist:"Ideale per",wide:"Versione larga",year:"Uscita",price:"prezzo di listino",match:"compatibilità",ali:"Vedi su AliExpress",amz:"Amazon · presto",prev:"Versione precedente",
+it:{amzGo:"Cerca su Amazon",weight:"Peso",drop:"Drop",stack:"Altezza suola",cushion:"Ammortizzazione",feel:"Appoggio",plate:"Piastra",stab:"Supporto",surf:"Superficie",dist:"Ideale per",wide:"Versione larga",year:"Uscita",price:"prezzo di listino",match:"compatibilità",ali:"Vedi su AliExpress",amz:"Amazon · presto",prev:"Versione precedente",
  tags:{best:"Migliore scelta",light:"La più leggera",cheap:"La più economica",soft:"La più ammortizzata"},cush:{low:"Bassa",medium:"Media",high:"Alta",max:"Massima"},feelV:{soft:"Morbida",balanced:"Bilanciata",firm:"Rigida",bouncy:"Reattiva"},none:"Nessuna",
  stabV:{neutral:"Neutra",mild:"Supporto leggero",stable:"Stabilità"},surfV:{road:"Asfalto",trail:"Trail",mixed:"Asfalto e trail"},yes:"Sì",no:"No"}
 };
@@ -700,6 +701,8 @@ function filtered(){
   if(filt==="budget")return finalize(pool,false,30).sort((a,b)=>a.usd-b.usd).slice(0,12);
   return finalize(pool.filter(s=>filt==="cn"?s.cn:(s.cur&&s.yr>=2026)),false,12)}
 let rpage=0,rsel=0;
+/* Amazon search link with the affiliate tag: no API needed */
+const amzLink=s=>AMZ&&AMZ.tag?`https://www.${AMZ.store}/s?${new URLSearchParams({k:`${s.brand} ${s.model} running shoes`,tag:AMZ.tag})}`:null;
 const cushOf=h=>h<30?"low":h<36?"medium":h<42?"high":"max";
 const distTxt=d=>{const m={"5k":"5","10k":"10","21k":"21","42k":"42","ultra":"Ultra"};const a=m[d[0]],b=m[d[d.length-1]];return a===b?a+(a==="Ultra"?"":" km"):`${a}–${b}${b==="Ultra"?"":" km"}`};
 function renderResults(){
@@ -740,7 +743,7 @@ function renderResults(){
         ${why.length?`<div class="rwhy">${why.map(k=>`<span>${esc(T[L].w[k])}</span>`).join("")}</div>`:""}
         <div class="rbtns">
           ${s.ali?`<a class="rbtn light" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${esc(R.ali)} ↗</a>`:""}
-          <span class="rbtn dark off">${esc(R.amz)}</span>
+          ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)} ↗</a>`:`<span class="rbtn dark off">${esc(R.amz)}</span>`}
         </div>
         <div class="rpager">${icons}<span>${rsel+1} / ${list.length}${tags[s.i]?" · "+esc(tags[s.i]):""}</span><span style="display:flex;gap:2px"><button class="ibtn" id="pgPrev" aria-label="‹" ${rsel?"":"disabled"}>‹</button><button class="ibtn" id="pgNext" aria-label="›" ${rsel<list.length-1?"":"disabled"}>›</button></span></div>
       </div>

@@ -53,6 +53,14 @@ O processo roda de novo toda segunda-feira para atualizar fotos, links e preços
 
 Depois de cada execução, confira `data/aliexpress_review.csv`. Se um tênis foi ligado ao anúncio errado, coloque o link ou o ID do anúncio certo em `data/aliexpress_overrides.json`, por exemplo `{"li-ning-red-hare-9-ultra": "https://www.aliexpress.com/item/1005001234567890.html"}`. Para nunca linkar um tênis, use `null`.
 
+## Links da Amazon
+
+O botão da Amazon leva para a busca pelo nome do tênis na Amazon, com o seu código de afiliado. Não precisa da API.
+
+Para ligar, coloque o seu Tracking ID em `data/amazon.json` (por exemplo `"tag": "footfinder-20"`) e, se o cadastro não for na amazon.com, troque `"store"` (por exemplo `"amazon.es"`). Depois rode `python3 scripts/build_site.py`.
+
+As fotos da Amazon só podem vir pela API (liberada depois das primeiras vendas). Até lá, os tênis sem foto do AliExpress continuam com o desenho.
+
 ## Qualidade dos dados
 
 Cada tênis tem um campo `data_quality` com o nível de confiança das especificações (`checked`, `high`, `medium` ou `low`) e a fonte. Os de confiança média e baixa são estimativas e precisam ser conferidos na ficha do fabricante antes do lançamento.
