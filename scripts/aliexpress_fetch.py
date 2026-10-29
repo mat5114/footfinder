@@ -191,6 +191,8 @@ def score(product, shoe):
         nxt = title[m.end():].split()[:1]
         if nxt and nxt[0] in VARIANTS and nxt[0] not in toks:
             return None  # e.g. looking for "Red Hare 8", found "Red Hare 8 Pro"
+        if nxt and re.fullmatch(r"v?\d+(\.\d+)?", nxt[0]) and not re.fullmatch(r"\d+", shoe["model"].split()[-1]):
+            return None  # a different version: "C202 G9" is not "C202 G9 2"
         total = 20
         if m.group(0).count(" ") == len(toks) - 1:
             total += 5  # exact phrase, no extra words in between
