@@ -81,3 +81,65 @@ BMAI|Jingtan 3.0 Turbo|c|2025|race,tempo|road|150|200|39|32|PEBA|PEBA|carbon|bou
 Do-Win|Speedster 3.0|c|2025|race|road|130|200|38|31|PEBA|PEBA|carbon|firm|neutral|n|l
 Dynafish|Xiaonian|c|2025|daily,tempo|road|110|204|41|34|TPEE|TPEE|none|bouncy|neutral|n|m
 """
+
+# Added 2026-10-29 from the AliExpress discovery report (models actually for sale there).
+# Specs are estimates from each series and the listing; price is the median AliExpress price in USD.
+ROWS += """
+Xtep|2000km Pro|c|2026|daily,long|road|78|270|38|30|Dynamic Foam|sEVA|none|balanced|mild|n|l
+Xtep|2000km 5.0|c|2025|daily,long|road|76|265|38|30|Dynamic Foam|sEVA|none|balanced|neutral|n|l
+Xtep|2000km 3.0|p|2025|daily,budget|road|52|275|35|27|Dynamic Foam|sEVA|none|balanced|neutral|n|l
+Xtep|2000km Plus|c|2025|daily,budget|road|52|270|35|27|Dynamic Foam|sEVA|none|balanced|neutral|n|l
+Xtep|2000km 2.0|p|2024|daily,budget|road|64|280|34|26|Dynamic Foam|sEVA|none|firm|neutral|n|l
+Xtep|2000km 5.5 Pro|c|2026|daily,tempo|road|79|255|38|30|Dynamic Foam|sEVA|none|bouncy|neutral|n|l
+Xtep|Shyft 1.0|c|2025|tempo|road|70|240|36|28|Dynamic Foam|sEVA|none|bouncy|neutral|n|l
+Xtep|Shyft Pro|c|2025|tempo,long|road|94|250|40|32|XTEP ACE|blend|none|bouncy|neutral|n|l
+Xtep|Qingyun Lite|c|2025|daily|road|57|260|36|28|Dynamic Foam|sEVA|none|soft|neutral|n|l
+Xtep|360X|p|2023|tempo,long|road|87|245|38|31|XTEP ACE|PEBA|carbon|bouncy|neutral|n|l
+Xtep|Chase Mountain 2.0 Pro|c|2025|trail|trail|100|300|34|28|Dynamic Foam|sEVA|none|balanced|neutral|n|l
+Li-Ning|Yueying 6|c|2026|daily,long,budget|road|51|265|38|30|Light Foam Plus|sEVA|none|soft|neutral|y|l
+Li-Ning|Yueying 6 Pro|c|2026|daily,long|road|105|260|40|32|Super BOOM|PEBA|none|soft|neutral|y|l
+Li-Ning|Feidian 5 Challenger|p|2025|race,tempo|road|100|205|38|31|BOOM|PEBA|carbon|bouncy|neutral|n|l
+Li-Ning|Feidian 5 Ultra|p|2025|tempo,long|road|207|240|42|36|Super BOOM|PEBA|carbon|bouncy|neutral|n|l
+Li-Ning|Chaoying|c|2025|daily|road|68|255|36|28|BOOM|PEBA|none|bouncy|neutral|n|l
+Li-Ning|Chaoying Pro|c|2025|daily,tempo|road|113|245|38|30|Super BOOM|PEBA|none|bouncy|neutral|n|l
+Li-Ning|Arc Pro|c|2025|daily|road|89|270|37|29|BOOM|PEBA|none|soft|neutral|n|l
+Li-Ning|Shadow 4 Essential|c|2026|daily,long|road|143|265|40|32|Super BOOM|PEBA|none|bouncy|neutral|n|l
+Li-Ning|Furious Rider 8 Pro|c|2025|daily,tempo|road|128|250|38|30|BOOM|PEBA|none|bouncy|neutral|n|l
+Li-Ning|Ben Xiao|c|2025|trail|trail|90|310|33|27|BOOM|PEBA|none|balanced|neutral|n|l
+Li-Ning|Di Lu 3|c|2026|trail,long|trail|128|295|37|31|XTRM-BOOM|PEBA|none|balanced|neutral|n|l
+Li-Ning|Di Lu 2|p|2025|trail,long|trail|135|300|36|30|XTRM-BOOM|PEBA|none|balanced|neutral|n|l
+Li-Ning|Longju|c|2025|trail|trail|148|330|34|28|BOOM|PEBA|none|balanced|neutral|n|l
+361°|Fengye 5.0|c|2025|daily,budget|road|37|260|32|24|QU!KFOAM|EVA|none|soft|neutral|n|l
+361°|PopBlaze 6|c|2026|daily,long|road|85|270|40|32|QU!KFOAM|EVA|none|soft|neutral|n|l
+361°|PopBlaze 5|p|2025|daily,long|road|82|275|39|31|QU!KFOAM|EVA|none|soft|neutral|n|l
+361°|AirFeather 5.0|c|2025|daily,budget|road|58|240|33|25|QU!KFOAM|EVA|none|balanced|neutral|n|l
+361°|Flame 5 Future|c|2026|race|road|176|190|39|33|QU!K Flame PEBA|PEBA|carbon|bouncy|neutral|n|l
+361°|Flame 4 ET|p|2025|race,tempo|road|114|205|39|33|QU!K Flame|PEBA|carbon|bouncy|neutral|n|l
+361°|Flame 3.0 ET|p|2024|race,tempo|road|88|210|37|30|QU!K Flame|PEBA|carbon|bouncy|neutral|n|l
+361°|Wuxia 2.0|c|2025|daily|road|81|255|36|28|QU!KFOAM|EVA|none|bouncy|neutral|n|l
+361°|Feiyuan 2.0|c|2025|daily,budget|road|56|255|33|25|QU!KFOAM|EVA|none|balanced|neutral|n|l
+361°|N40|c|2025|daily,budget|road|59|260|32|24|QU!KFOAM|EVA|none|balanced|neutral|n|l
+361°|Steed|c|2026|tempo|road|70|235|34|27|QU!KFOAM|EVA|none|firm|neutral|n|l
+361°|Swift Fox 2.0|c|2025|daily,budget|road|39|245|31|23|QU!KFOAM|EVA|none|balanced|neutral|n|l
+361°|Yushan 3.0|c|2026|trail|trail|78|300|32|26|QU!KFOAM|EVA|none|balanced|neutral|n|l
+361°|Yushan SE|c|2025|trail,budget|trail|54|305|31|25|QU!KFOAM|EVA|none|firm|neutral|n|l
+Qiaodan|TG1.0|c|2026|race,tempo|road|75|210|38|31|Q-Kungfu|TPEE|nylon|bouncy|neutral|n|l
+Qiaodan|TG2.0 Leili|c|2026|tempo,long|road|109|240|40|33|Q-Kungfu Pro|blend|none|bouncy|neutral|n|l
+Qiaodan|TG2.0 Leili Max|c|2026|long,recovery|road|138|260|44|36|Q-Kungfu Pro|blend|none|soft|neutral|n|l
+Qiaodan|TG2.0 SE|c|2026|tempo|road|81|235|38|31|Q-Kungfu|TPEE|none|bouncy|neutral|n|l
+Qiaodan|TG Plaid|c|2026|race|road|111|205|39|32|Q-Kungfu Pro-HP|TPEE|carbon|bouncy|neutral|n|l
+Qiaodan|Feiying GT|c|2026|race|road|142|200|39|32|Q-Kungfu Pro-HP|PEBA|carbon|bouncy|neutral|n|l
+Qiaodan|Feiying PB 5.0|p|2025|race|road|157|190|38|32|Super Q-Kungfu|TPEE|carbon|bouncy|neutral|n|l
+Qiaodan|Wind SL|c|2026|daily,tempo|road|94|225|35|28|Q-Kungfu|TPEE|nylon|bouncy|neutral|n|l
+Qiaodan|Wind 3TR|c|2026|daily,long|road|80|260|38|30|Q-Kungfu|TPEE|none|soft|neutral|n|l
+Qiaodan|Mountain God 3.0|c|2026|trail|trail|90|300|33|27|Q-Kungfu|TPEE|none|balanced|neutral|n|l
+ANTA|Zone 2 Heart Rate 85|c|2026|daily,long|road|73|230|38|32|Nitrogen Foam|sEVA|none|bouncy|neutral|n|l
+ANTA|C202 8.0|c|2026|race,tempo|road|85|200|40|34|Nitroedge|PEBA|carbon|bouncy|neutral|n|l
+ANTA|C202 6.0|p|2024|race,tempo|road|86|205|39|33|Nitroedge|blend|carbon|bouncy|neutral|n|l
+ONEMIX|Tupo|c|2026|race,tempo|road|60|220|38|31|Supercritical foam|sEVA|carbon|bouncy|neutral|n|l
+ONEMIX|Bumper Max|c|2025|daily,long|road|71|280|40|32|EVA|EVA|none|soft|neutral|n|l
+ONEMIX|Wind Wings|c|2026|tempo,budget|road|44|230|32|25|EVA|EVA|none|balanced|neutral|n|l
+ONEMIX|Pace Beam|c|2026|race,tempo|road|84|220|37|30|Supercritical foam|sEVA|nylon|bouncy|neutral|n|l
+ONEMIX|O-Resilio|c|2025|daily|road|75|260|36|28|EVA|EVA|none|soft|neutral|n|l
+BMAI|21km|c|2025|tempo,long|road|83|240|38|30|PEBA|PEBA|carbon|bouncy|neutral|n|l
+"""

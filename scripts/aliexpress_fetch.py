@@ -49,6 +49,7 @@ BRAND_TERMS = {
     "BMAI": ["bmai"],
     "Do-Win": ["do-win", "dowin", "do win"],
     "Dynafish": ["dynafish"],
+    "ONEMIX": ["onemix"],
 }
 # Search links for Nike, ASICS, HOKA and other non-Chinese brands (see the note above)
 INCLUDE_WESTERN_BRANDS = False
@@ -142,7 +143,7 @@ def norm(text):
 
 
 # Words that mark a different version of a model (a "Red Hare 9 Pro" is not a "Red Hare 9")
-VARIANTS = {"pro", "ultra", "elite", "challenger", "max", "plus", "gt", "se", "lite", "air", "gtx"}
+VARIANTS = {"pro", "ultra", "elite", "challenger", "max", "plus", "gt", "se", "lite", "air", "gtx", "essential", "et", "mix", "future", "leili", "boa"}
 
 
 SHOE_WORDS = {"shoe", "shoes", "sneaker", "sneakers", "trainer", "trainers", "runner", "runners"}
@@ -153,6 +154,8 @@ NOT_SHOES = {"slipper", "slippers", "slide", "slides", "sandal", "sandals", "soc
 def tok_pattern(tok):
     if re.fullmatch(r"\d+", tok):  # "5" also matches "5.0"
         return rf"{tok}(?:\.0)?"
+    if re.fullmatch(r"\d+\.0", tok):  # "3.0" also matches "3"
+        return rf"{tok[:-2]}(?:\.0)?"
     return re.escape(tok)
 
 
@@ -167,7 +170,11 @@ def model_patterns(model):
     pats = []
     for name in names:
         toks = name.split()
-        body = r"(?:\s+\S+)?\s+".join(tok_pattern(t) for t in toks)
+        body = tok_pattern(toks[0])
+        for prev, t in zip(toks, toks[1:]):
+            # "Fuga EX 3" also matches "FUGA EX3", "PB 6.0" matches "PB6.0"; otherwise one extra word may sit between
+            sep = r"(?:\s*|\s+\S+\s+)" if re.search(r"[a-z]$", prev) and re.match(r"\d", t) else r"(?:\s+\S+)?\s+"
+            body += sep + tok_pattern(t)
         pats.append((re.compile(rf"(?<!\S){body}(?!\S)"), set(toks)))
     return pats
 

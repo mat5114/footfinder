@@ -5,7 +5,7 @@ from data_china import ROWS as C
 ORIGIN = {"Nike":"US","adidas":"DE","ASICS":"JP","Brooks":"US","HOKA":"US","New Balance":"US","Saucony":"US",
  "Mizuno":"JP","PUMA":"DE","On":"CH","Altra":"US","Salomon":"FR","Under Armour":"US","Skechers":"US",
  "Diadora":"IT","Topo Athletic":"US","Merrell":"US","La Sportiva":"IT","inov-8":"GB","Craft":"SE","Karhu":"FI",
- "Kiprun":"FR","Olympikus":"BR","Li-Ning":"CN","ANTA":"CN","Xtep":"CN","361°":"CN","PEAK":"CN","Qiaodan":"CN","Kailas":"CN","BMAI":"CN","Do-Win":"CN","Dynafish":"CN"}
+ "Kiprun":"FR","Olympikus":"BR","Li-Ning":"CN","ANTA":"CN","Xtep":"CN","361°":"CN","PEAK":"CN","Qiaodan":"CN","Kailas":"CN","BMAI":"CN","Do-Win":"CN","Dynafish":"CN","ONEMIX":"CN"}
 
 CATS={"daily","tempo","race","long","recovery","stab","trail","budget"}
 SURF={"road","trail","mixed"}; FOAM={"EVA","sEVA","TPU","PEBA","TPEE","blend"}
