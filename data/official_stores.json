@@ -1,0 +1,994 @@
+{
+  "checked": "2026-10-29",
+  "brands": {
+    "ASICS": {
+      "listings": 98,
+      "shops": [
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 33,
+          "examples": [
+            "ASICS GEL KAYANO 33 Breathable Support Rebound Running Shoes Men's Black 1011C167-001",
+            "ASICS Gel Excite 11 Low top Training Running Shoes Men's Black 1011C080-002",
+            "ASICS Gel-Cumulus 27 Running Shoes Men's Low-top Black 1011B960-003"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 28,
+          "examples": [
+            "ASICS Gel-1090 V1 Running Shoes Unisex Low-top White/Silver 1203A243-100",
+            "ASICS Gel Kahana 8 FL Breathable Low top Casual Trail Running City Commuting Running Shoes",
+            "ASICS Gel 1130 Support Low top Casual City Commuting Running Shoes Unisex White Silver Gre"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105380610",
+          "name": "CORE SPORTS Store",
+          "official": false,
+          "listings": 18,
+          "examples": [
+            "Hot ASICS Gel-Kahana 8, Trendy Versatile, Men's Low-Top Outdoor Running Shoes, Brown And B",
+            "ASICS 2026 Mid Top Running Shoes Lightweight Breathable Shock Absorbing Non Slip Wear Resi",
+            "Asics Men Mid-Top Running Shoes, Lightweight Breathable Shock Absorbing Non-slip Wear Resi"
+          ],
+          "url": "https://www.aliexpress.com/store/1105380610"
+        },
+        {
+          "shop_id": "1104780568",
+          "name": "Champions Sports Store",
+          "official": false,
+          "listings": 11,
+          "examples": [
+            "Asics Men's Shoes Gel-Cumulus 27 Sports Shoes Fitness Training Cushioning Casual Running S",
+            "Asics Men's Sports Shoes Gel-Nimbus 28 Fitness Training Cushioning and Wear-Resistant Runn",
+            "Asics Men's Shoes Gt-1000 14 Gtx Outdoor Sports Shoes Cushioning Breathable Fitness Runnin"
+          ],
+          "url": "https://www.aliexpress.com/store/1104780568"
+        },
+        {
+          "shop_id": "1105630477",
+          "name": "Global Brand Sale Store",
+          "official": false,
+          "listings": 4,
+          "examples": [
+            "Asics Men's Authentic HYPER SPEED 4 Sports Breathable Mesh Leisure Shoes - Racing Running ",
+            "Asics Men's Running Shoes - New Model NOVABLAST 6 Training Shoes - Breathable and Shock Ab",
+            "Asics Running Shoes Men's GEL-NIMBUS 28 Cushioning Sports Shoes Breathable Shoes 1011C127-"
+          ],
+          "url": "https://www.aliexpress.com/store/1105630477"
+        },
+        {
+          "shop_id": "1105075500",
+          "name": "ZenithRun Store",
+          "official": false,
+          "listings": 2,
+          "examples": [
+            "ASICS Gel-Pulse 11 Women's Low-Top Running Shoes – Comfortable, Versatile, Durable & Breat",
+            "ASICS Gel-Pulse 11 Women's Low-Top Running Shoes – Comfortable, Versatile, Durable & Breat"
+          ],
+          "url": "https://www.aliexpress.com/store/1105075500"
+        }
+      ],
+      "official_store": null
+    },
+    "HOKA": {
+      "listings": 100,
+      "shops": [
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 58,
+          "examples": [
+            "HOKA ONE ONE Bondi 9 Low top Long Distance Running Shoes Men's Green 1162011-SSSC",
+            "HOKA ONE ONE Challenger 8 Running Shoes Men's Low-top River Stone Gray/Dark Iron Gray 1168",
+            "HOKA ONE ONE Anacapa 2 Synthetic Leather Breathable Lightweight Low top Trail Running Shoe"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 40,
+          "examples": [
+            "HOKA ONE ONE Speedgoat 5 Running Shoes 1123157-FRYL",
+            "HOKA ONE ONE Mafate X Trail Running Shoes Men's Black 1161990-BCMN",
+            "HOKA ONE ONE Bondi 8 Running Shoes Men's Low-top Black/Gray 1127953-BBLC"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105411894",
+          "name": "POIZON-SPORTS PRO Store",
+          "official": false,
+          "listings": 2,
+          "examples": [
+            "HOKA ONE ONE Bondi 8 Running Shoes Women's Low-top Orange Pink 1127952-ICYC",
+            "HOKA ONE ONE Mach 5 Running Shoes 1136678-WBGL"
+          ],
+          "url": "https://www.aliexpress.com/store/1105411894"
+        }
+      ],
+      "official_store": null
+    },
+    "adidas": {
+      "listings": 100,
+      "shops": [
+        {
+          "shop_id": "1104434306",
+          "name": "Apex Athletic Gear Store",
+          "official": false,
+          "listings": 10,
+          "examples": [
+            "Adidas Official Genuine 2024 New Men's and Women's Sports Wear-resistant Running Shoes JR9",
+            "Adidas Authentic ADIZERO ARUKU Men's Women's Thick Sole Wear-Resistant Running Shoes JS371",
+            "Adidas genuine FUTRO MIXR couple thick sole sports running shoes IG1885"
+          ],
+          "url": "https://www.aliexpress.com/store/1104434306"
+        },
+        {
+          "shop_id": "1104402414",
+          "name": "Peak Performance Gear Store",
+          "official": false,
+          "listings": 9,
+          "examples": [
+            "Adidas Official New Men's and Women's Lightweight Breathable Cushioned Running Shoes GW672",
+            "Adidas Official CITYWOWLK Unisex Retro Fashion Low-Top Running Shoes JR8332",
+            "Adidas Official Genuine PUREBOOST 5 TR Unisex Running Shoes JI1016"
+          ],
+          "url": "https://www.aliexpress.com/store/1104402414"
+        },
+        {
+          "shop_id": "1104929003",
+          "name": "Core Life Gear Store",
+          "official": false,
+          "listings": 8,
+          "examples": [
+            "Adidas genuine RAPIDMOVE Men's Training Cushioned Fashion Running Shoes JR6401",
+            "Adidas Genuine EQ19 RUN Unisex Lace-Up Running Shoes JR0248",
+            "Adidas genuine Supernova Eterno Men's and Women's Cushioned Running Shoes IH0440"
+          ],
+          "url": "https://www.aliexpress.com/store/1104929003"
+        },
+        {
+          "shop_id": "1104934045",
+          "name": "Limitless Motion Gear Store",
+          "official": false,
+          "listings": 8,
+          "examples": [
+            "Adidas genuine new men's and women's retro low cut anti slip running shoes JQ7576",
+            "Adidas Genuine XLG RUNNER DELUXE Unisex Running Shoes IH7799",
+            "adidas Genuine Adizero Aruku Unisex Cushioned Running Shoes JH7772"
+          ],
+          "url": "https://www.aliexpress.com/store/1104934045"
+        },
+        {
+          "shop_id": "1104462124",
+          "name": "Active Motion Hub Store",
+          "official": false,
+          "listings": 7,
+          "examples": [
+            "Adidas official genuine men's and women's simple, wear-resistant, cushioned, breathable an",
+            "Adidas Official Authentic 2024 New Men's and Women's Classic Durable Running Shoes JI2445",
+            "Adidas genuine DURAMO SL men's and women's fashionable sports low top running shoes JQ9716"
+          ],
+          "url": "https://www.aliexpress.com/store/1104462124"
+        },
+        {
+          "shop_id": "1104923162",
+          "name": "Active Drive Sports Store",
+          "official": false,
+          "listings": 6,
+          "examples": [
+            "Adidas Authentic New Unisex Casual Shock-Absorbing Sports Running Shoes JS3021",
+            "Adidas genuine season new men's sports low cut casual running shoes H00511",
+            "Adidas Genuine Strutter Men's Lightweight Running Shoes GX0670"
+          ],
+          "url": "https://www.aliexpress.com/store/1104923162"
+        }
+      ],
+      "official_store": null
+    },
+    "Nike": {
+      "listings": 96,
+      "shops": [
+        {
+          "shop_id": "1104402414",
+          "name": "Peak Performance Gear Store",
+          "official": false,
+          "listings": 10,
+          "examples": [
+            "Nike official genuine new product men's WEARALDAY WNTR sports running shoe CT1729-001",
+            "Nike official authentic Air Max men's cushioned and breathable casual running shoes 511416",
+            "Nike official genuine AIR MAX SOLO men's cushioned sports fitness running shoes DX3666"
+          ],
+          "url": "https://www.aliexpress.com/store/1104402414"
+        },
+        {
+          "shop_id": "1104440316",
+          "name": "Power Stride Sports Store",
+          "official": false,
+          "listings": 8,
+          "examples": [
+            "Nike Official Genuine 2023 New Men's Breathable and Wear-Resistant Low-Cut Running Shoes F",
+            "Nike Air Monarch IV Men's Training Dad Shoes 415445-101",
+            "Nike Official Genuine Air Max Portal Women's Cushioned Running Shoes HF3053-100"
+          ],
+          "url": "https://www.aliexpress.com/store/1104440316"
+        },
+        {
+          "shop_id": "1104933002",
+          "name": "Go-To Athletic Hub Store",
+          "official": false,
+          "listings": 8,
+          "examples": [
+            "Nike Genuine Free Run 5.0 Men's Breathable Running Shoes CZ1884-103",
+            "Nike Authentic Promina Men's Cushioned Thick Sole Walking Breathable Running Shoes FV5285-",
+            "Nike Genuine P-6000 Men's Cushioned Breathable Fashion Running Shoes IH4465-095"
+          ],
+          "url": "https://www.aliexpress.com/store/1104933002"
+        },
+        {
+          "shop_id": "1104462124",
+          "name": "Active Motion Hub Store",
+          "official": false,
+          "listings": 6,
+          "examples": [
+            "Nike Official Genuine UPLIFT SC Men's Lightweight Breathable Durable Running Shoes IB2765-",
+            "Nike Official Genuine AL8 Women's Retro Running Shoes Style Sneakers Dad Shoes FJ3794-600",
+            "Nike Official Genuine Alpha Trainer 5 Men's Cushioned Thick Sole Running Shoes DM0829-003"
+          ],
+          "url": "https://www.aliexpress.com/store/1104462124"
+        },
+        {
+          "shop_id": "1104433311",
+          "name": "Metro Kicks Lab Store",
+          "official": false,
+          "listings": 6,
+          "examples": [
+            "Nike Official V2K Run Men's Retro Durable Breathable Dad Shoes HQ3445-222",
+            "Nike Official AIR MAX TORCH 4 Men's Air Cushion Running Shoes 343846-002",
+            "Nike official genuine ZOOM 2K women's comfortable and wear-resistant training sports shoes"
+          ],
+          "url": "https://www.aliexpress.com/store/1104433311"
+        },
+        {
+          "shop_id": "1104910975",
+          "name": "Chill Athletic Vibes Store",
+          "official": false,
+          "listings": 5,
+          "examples": [
+            "Nike Authentic AIR MAX DN Men's Responsive Running Shoes HV5235-002",
+            "Nike Authentic Shox TL Men's Air Column Cushioned Sports Training Running Shoes IH1338-002",
+            "Nike Genuine Air Monarch IV Men's Comfort Cushioned Sneakers 415445-020"
+          ],
+          "url": "https://www.aliexpress.com/store/1104910975"
+        }
+      ],
+      "official_store": null
+    },
+    "Brooks": {
+      "listings": 100,
+      "shops": [
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 63,
+          "examples": [
+            "Brooks Glycerin 22 Slip Resistant Abrasion Resistant Low top Casual Running Shoes Women's ",
+            "Brooks Slip Resistant Abrasion Resistant Low top Trail Running Shoes Women's Black",
+            "Brooks Hyperion Elite Running Shoes Unisex Low-top Hat With Black/Green Lizard 100049-1D-4"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 37,
+          "examples": [
+            "Brooks Glycerin Max 2 Running Shoes Men's Gray 110479-1D-392",
+            "Brooks Divide Slip Resistant Slip Resistant Low top Running Shoes Men's Black Orange 11040",
+            "Brooks Ghost 17 Soft And Comfortable Breathable Low top Casual Running Shoes Men's Black 1"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        }
+      ],
+      "official_store": null
+    },
+    "Saucony": {
+      "listings": 98,
+      "shops": [
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 46,
+          "examples": [
+            "Saucony Peregrine 13 Running Shoes Women's Low-top Blue Brown S10838-20",
+            "Saucony Shadow 6000 Support Low top Running Shoes Unisex Beige Green S79050-1",
+            "Saucony Endorphin Pro 5 Running Shoes Unisex Low-top Red S101940-1006"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 45,
+          "examples": [
+            "Saucony GUARD 2K Cushioning Abrasion Resistant Low top Casual Running Shoes Unisex White S",
+            "Saucony Ride 18 Low top Casual Running Shoes Unisex Beige S28264-5",
+            "Saucony Kinvara 4 Casual Running Shoes Unisex Gray Silver Blue S79052-9"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105411894",
+          "name": "POIZON-SPORTS PRO Store",
+          "official": false,
+          "listings": 6,
+          "examples": [
+            "Saucony CRADLE MT Low top Running Shoes Unisex Light Khaki S28904-3",
+            "Saucony Endorphin Pro 3 Abrasion Resistant Low top Running Shoes Women's Pink White S10755",
+            "Saucony IDLING Cruise Slip Resistant Abrasion Resistant Low top Running Shoes Unisex Black"
+          ],
+          "url": "https://www.aliexpress.com/store/1105411894"
+        },
+        {
+          "shop_id": "1105554014",
+          "name": "Goodsprings Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "Saucony Womens Guide 7 Running Shoes"
+          ],
+          "url": "https://www.aliexpress.com/store/1105554014"
+        }
+      ],
+      "official_store": null
+    },
+    "New Balance": {
+      "listings": 6,
+      "shops": [
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 4,
+          "examples": [
+            "New Balance NB 530 Mesh, Synthetic Leather Breathable Low top Running Shoes Unisex Silver ",
+            "New Balance NB 237 Vintage Fabric Abrasion Resistant Low top Casual Running Shoes Unisex G",
+            "New Balance NB 565 Comfortable Breathable Low top Casual Running Shoes Unisex Gray Black M"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "New Balance NB 9060 Running Shoes Men's Low-top Light Brown/Gray/White U9060LBD"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105075500",
+          "name": "ZenithRun Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "New Balance 408 Unisex Low-Top Casual Running Shoes – Black, Retro Style, Non-Slip Outsole"
+          ],
+          "url": "https://www.aliexpress.com/store/1105075500"
+        }
+      ],
+      "official_store": null
+    },
+    "Mizuno": {
+      "listings": 100,
+      "shops": [
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 32,
+          "examples": [
+            "Mizuno SPARK CN Abrasion-Resistant Low-top Casual Running Shoes Unisex Gray D1GH242801",
+            "Mizuno FIYI V2 Low top City Commuting Casual Running Shoes Unisex Black D1GH241504",
+            "Mizuno Racer S Low-top Running Shoes Unisex Light Gray Blue D1GH253506"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 30,
+          "examples": [
+            "Mizuno TRAINER 2K Low-top Running Shoes Unisex Silver Gray D1GH250401",
+            "Mizuno Racer ADV Low-top Training Physical Fitness Test & Exam Racing City Commuting Runni",
+            "Mizuno Low top Running Shoes Unisex Sage Gray D1GH252103"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105075500",
+          "name": "ZenithRun Store",
+          "official": false,
+          "listings": 19,
+          "examples": [
+            "Mizuno Racer ADV Unisex Low-Top Outdoor Running Shoes – Thick Sole, Non-Slip, Durable, Bre",
+            "Mizuno Speed 10S Unisex Low-Top Training Running Shoes – Gray-Brown, Retro Style, Durable ",
+            "Mizuno FIYIT LV2 Unisex Low-Top Casual Running Shoes – Tofu White, Durable Build,Non-Slip "
+          ],
+          "url": "https://www.aliexpress.com/store/1105075500"
+        },
+        {
+          "shop_id": "1105072500",
+          "name": "NimbusFit Store",
+          "official": false,
+          "listings": 11,
+          "examples": [
+            "Mizuno Racer: Lightweight, Soft, Snug-Fitting, Durable, and Cushioned Premium Low-Top Runn",
+            "Mizuno NEX Trendy Retro Low-Top Running Shoes with Rebound Cushioning, Midsole, and Durabl",
+            "Mizuno ASTRO PLUS II Lightweight, Flexible, Grippy, and Durable Low-Top Running Shoes for "
+          ],
+          "url": "https://www.aliexpress.com/store/1105072500"
+        },
+        {
+          "shop_id": "1105762299",
+          "name": "COODON SPORTS Store",
+          "official": false,
+          "listings": 5,
+          "examples": [
+            "Mizuno Men's and Women's Shoes Original New Shock-Absorbing Fitness Training Sports Shoes ",
+            "Mizuno Men's and Women's Shoes Original New Cushioning Fitness Training Sneakers Breathabl",
+            "Mizuno Men's and Women's Shoes Original New Cushioning Fitness Training Sneakers Breathabl"
+          ],
+          "url": "https://www.aliexpress.com/store/1105762299"
+        },
+        {
+          "shop_id": "1105075501",
+          "name": "BoundHub Store",
+          "official": false,
+          "listings": 3,
+          "examples": [
+            "Mizuno HaloMix TL Unisex Jade White Low-Top Runners – Fashionable Look, Non-Slip Sole, Bre",
+            "Mizuno Racer ADV Unisex Light Gray Low-Top Runners – Non-Slip Breathable Mesh, Durable Sol",
+            "Mizuno Speed 2K Unisex Black/Silver Low-Top Runners – Breathable Upper, Cushioned Ride & V"
+          ],
+          "url": "https://www.aliexpress.com/store/1105075501"
+        }
+      ],
+      "official_store": null
+    },
+    "On": {
+      "listings": 13,
+      "shops": [
+        {
+          "shop_id": "1103573332",
+          "name": "Stone's Store",
+          "official": false,
+          "listings": 3,
+          "examples": [
+            "Men Shoes Sneakers Breathable Mesh Slip on Running Shoes Outdoor Non-Slip Couple Jogging T",
+            "2/4/6Pcs New Medical Men Women Acupressure on Foot Insoles Sport Shoes Insole for Breathab",
+            "Men's Customizable Sanda Shoes Comfortable Breathable Slip On Sneakers Unisex Sports Fitne"
+          ],
+          "url": "https://www.aliexpress.com/store/1103573332"
+        },
+        {
+          "shop_id": "1103716048",
+          "name": "Shop1103716048 Store",
+          "official": false,
+          "listings": 2,
+          "examples": [
+            "Men Shoes Slip on Fashion Sneakers Male Sport Running Shoes Breathable Gym Training Walkin",
+            "Men Shoes Slip on Fashion Sneakers Male Sport Running Shoes Breathable Gym Training Walkin"
+          ],
+          "url": "https://www.aliexpress.com/store/1103716048"
+        },
+        {
+          "shop_id": "1102628901",
+          "name": "Professional outdoor life Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "Acupressure on Foot Insoles For Shoes Breathable Deodorant Sport Insoles for Medical Man W"
+          ],
+          "url": "https://www.aliexpress.com/store/1102628901"
+        },
+        {
+          "shop_id": "1104055060",
+          "name": "PUAMSS Achievement Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "Men Shoes Sneakers Breathable Mesh Slip on Running Shoes Outdoor Non-Slip Couple Jogging T"
+          ],
+          "url": "https://www.aliexpress.com/store/1104055060"
+        },
+        {
+          "shop_id": "1105184268",
+          "name": "ValueDeal Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "Outdoor Sports LED Safety Light Reflective Magnetic Clip On Strobe Reflector Warning Clip "
+          ],
+          "url": "https://www.aliexpress.com/store/1105184268"
+        },
+        {
+          "shop_id": "1103776091",
+          "name": "SNEAKERS Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "Men Shoes Breathable Men's Sneakers Comfortable Running Shoes Tenis Outdoor Slip On Walkin"
+          ],
+          "url": "https://www.aliexpress.com/store/1103776091"
+        }
+      ],
+      "official_store": null
+    },
+    "PUMA": {
+      "listings": 100,
+      "shops": [
+        {
+          "shop_id": "1105380610",
+          "name": "CORE SPORTS Store",
+          "official": false,
+          "listings": 17,
+          "examples": [
+            "Puma Women's Casual Shoes Comfortable Lightweight Daily Sneakers Stylish Slip-On Walking S",
+            "Puma Summer Running Shoes For Men Women Lightweight Breathable Casual Sneakers Sport Cycli",
+            "Puma Men Mid Top Running Shoes Comfortable Lightweight Breathable Non Slip Sneakers 379601"
+          ],
+          "url": "https://www.aliexpress.com/store/1105380610"
+        },
+        {
+          "shop_id": "1105630477",
+          "name": "Global Brand Sale Store",
+          "official": false,
+          "listings": 15,
+          "examples": [
+            "PUMA  White Black Breathable Mesh Lightweight Retro Non-slip Casual Running Sneakers 39743",
+            "Caven PUMA III Year Of The Horse Limited Edition Unisex 2026 Spring Retro Skate Shoes Casu",
+            "PUMA  White Dark Green Suede Stitching Retro Lightweight Non-slip Casual Sneakers 399250-0"
+          ],
+          "url": "https://www.aliexpress.com/store/1105630477"
+        },
+        {
+          "shop_id": "1105600000",
+          "name": "Prime Sports Flagship Store",
+          "official": false,
+          "listings": 15,
+          "examples": [
+            "Unisex Puma 194459-01 Black White Mesh Running Shoes, Light Cushion Breathable Athletic Sn",
+            "PUMA 373117-02 Unisex Retro Casual Sneakers Summer Low Top Breathable Mesh Sports Shoes Me",
+            "PUMA 371128-02 Men Women Running Sneakers Breathable Mesh Upper EVA Midsole Lightweight Bl"
+          ],
+          "url": "https://www.aliexpress.com/store/1105600000"
+        },
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 12,
+          "examples": [
+            "PUMA Fabric Cushioning Abrasion Resistant Lightweight Low top Running Shoes Unisex Black W",
+            "PUMA Axelion Comfortable Textile Breathable Low top Casual Shoe Men's 193148-01",
+            "PUMA Axelion Running Shoes Men's Low-top White/Red 193148-02"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105393586",
+          "name": "GAGA SPORTS Store",
+          "official": false,
+          "listings": 10,
+          "examples": [
+            "2026 New Puma Summer Running Shoes For Men Women Lightweight Breathable Casual Sneakers 37",
+            "PUMA Men's 2026 Summer Olive Green Voltaic Evo Cushioned Running Shoes 379601-05",
+            "2026 New Puma Men's And Women's Ftr Wave Sports Fitness Training Cushioning Comfortable Br"
+          ],
+          "url": "https://www.aliexpress.com/store/1105393586"
+        },
+        {
+          "shop_id": "1104462124",
+          "name": "Active Motion Hub Store",
+          "official": false,
+          "listings": 7,
+          "examples": [
+            "Puma Genuine Summer New Men's Lightweight Breathable Durable Sport Running Shoes 377671-12",
+            "PUMA Genuine 2025 Summer Unisex Cushioned Platform Durable Running Shoes 310155-04",
+            "Puma Genuine 2024 New Women's Sports Lightweight Durable Running Shoes 376961-15"
+          ],
+          "url": "https://www.aliexpress.com/store/1104462124"
+        }
+      ],
+      "official_store": null
+    },
+    "Altra": {
+      "listings": 15,
+      "shops": [
+        {
+          "shop_id": "1105411894",
+          "name": "POIZON-SPORTS PRO Store",
+          "official": false,
+          "listings": 13,
+          "examples": [
+            "Altra Olympus 275 Mesh, Textile Abrasion Resistant Abrasion Resistant Low top Running Shoe",
+            "Altra Torin 8 Running Shoes Women's Mint Green AL0A85QF-319",
+            "Altra OLYMPUS 6 Low top Running Shoes Men's Green AL0A85NJ330"
+          ],
+          "url": "https://www.aliexpress.com/store/1105411894"
+        },
+        {
+          "shop_id": "1105775348",
+          "name": "Shop1105775348 Store",
+          "official": false,
+          "listings": 2,
+          "examples": [
+            "Vibram Megagrip Altra Lone Peak 9+ Trail Shoes Men Women Zero Drop FootShape Wide Toe Box ",
+            "Vibram Megagrip Altra Lone Peak 9+ Trail Running Shoes Men Women Zero Drop Slip Resistant "
+          ],
+          "url": "https://www.aliexpress.com/store/1105775348"
+        }
+      ],
+      "official_store": null
+    },
+    "Salomon": {
+      "listings": 99,
+      "shops": [
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 43,
+          "examples": [
+            "SALOMON Pulsar Advanced Running Shoes Men's Low Top Multicolor L47132100",
+            "SALOMON ACS Pro Waterproof Low top Casual Running Shoes Unisex Blue White L47866900",
+            "SALOMON XT 6 Fabric Breathable Low top MUD ContaGRIP Running Shoes Unisex Beige Brown L477"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 31,
+          "examples": [
+            "SALOMON XT-WHISPER Fabric Breathable Low-top Trail Running Shoes Unisex Gray Silver L47801",
+            "SALOMON INDEX 03 Casual Running Shoes Unisex White 473772",
+            "SALOMON X ALP Running Shoes Unisex Black L49165500"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105072500",
+          "name": "NimbusFit Store",
+          "official": false,
+          "listings": 4,
+          "examples": [
+            "Salomon ACS Pro: Low-top running shoes with core stability, all-around fit, and supportive",
+            "Salomon X ULTRA 5 GTX Stylish,Minimalist,High-Performance, Durable, Comfortable, and Soft ",
+            "Salomon XT-6 EXPANSE: Low-cut outdoor running shoes with stable support to reduce foot fat"
+          ],
+          "url": "https://www.aliexpress.com/store/1105072500"
+        },
+        {
+          "shop_id": "1105411894",
+          "name": "POIZON-SPORTS PRO Store",
+          "official": false,
+          "listings": 3,
+          "examples": [
+            "SALOMON Drx Bliss Comfortable Slip Resistant Low top Casual Running Shoes Women's Dragon F",
+            "SALOMON Running Shoes Unisex Low-top Beige Green CML_L49261700",
+            "SALOMON XT-6 Running Shoes Unisex Low-top Gray L45471700"
+          ],
+          "url": "https://www.aliexpress.com/store/1105411894"
+        },
+        {
+          "shop_id": "1104404136",
+          "name": "Shop1104404136 Store",
+          "official": false,
+          "listings": 2,
+          "examples": [
+            "Quick Lace Kit No Tie Round Tennis Shoe Laces Without Ties Adult Kids Quality Running Snea",
+            "New No tie Shoe laces Round Tennis Laces Without ties Adult Kids Quality Running Sneakers "
+          ],
+          "url": "https://www.aliexpress.com/store/1104404136"
+        },
+        {
+          "shop_id": "5598100",
+          "name": "TOY WHOSALE Store",
+          "official": false,
+          "listings": 2,
+          "examples": [
+            "No tie Shoe laces Round Tennis Laces Without ties Adult Kids Quality Running Sneakers Shoe",
+            "1Pair Without Ties Quick Lace Kit Round Tennis Creative No Tie Shoelaces Running Sneakers "
+          ],
+          "url": "https://www.aliexpress.com/store/5598100"
+        }
+      ],
+      "official_store": null
+    },
+    "Topo Athletic": {
+      "listings": 0,
+      "shops": [],
+      "official_store": null
+    },
+    "Kiprun": {
+      "listings": 0,
+      "shops": [],
+      "official_store": null
+    },
+    "Under Armour": {
+      "listings": 96,
+      "shops": [
+        {
+          "shop_id": "1105175627",
+          "name": "POIZON-SPORTS FAST Store",
+          "official": false,
+          "listings": 30,
+          "examples": [
+            "Under Armour Charged Verssert 2 Running Shoes Men's Beige 3027178-103",
+            "Under Armour HOVR Phantom 3 Comfortable Fabric Abrasion Resistant Breathable Mid top Runni",
+            "Under Armour Charged Bandit Trail 2 Breathable Low top Running Shoes Men's Black 3024725-0"
+          ],
+          "url": "https://www.aliexpress.com/store/1105175627"
+        },
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 21,
+          "examples": [
+            "Under Armour Charged Pursuit 3 Running Shoes Men's Low-top Blue 3025424-400",
+            "Under Armour HOVR Phantom 3 Fabric Low top Running Shoes Unisex Black 3025522-001",
+            "Under Armour Charged Bandit Trail 2 Breathable Casual Training City Commuting Running Shoe"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        },
+        {
+          "shop_id": "1105380610",
+          "name": "CORE SPORTS Store",
+          "official": false,
+          "listings": 17,
+          "examples": [
+            "Under Armour CURRY 2 LOW FLOTRO Men's Signature Basketball Shoes, TPU Upper Athletic Sneak",
+            "Under Armour UA W HOVR Phantom 3 SE ELVTE 3026648-100 Womens Sport Performance Running Sho",
+            "New Under Armour White Lightweight Running Shoes Breathable Cushioned Training Sneakers No"
+          ],
+          "url": "https://www.aliexpress.com/store/1105380610"
+        },
+        {
+          "shop_id": "1105393586",
+          "name": "GAGA SPORTS Store",
+          "official": false,
+          "listings": 8,
+          "examples": [
+            "Under Armour Running Shoes for Men and Women, New Style in Summer 2026, Thick-Soled Mesh S",
+            "2026 Under Armour 3027180-100 Women Running Shoes Lightweight Durable Breathable Comfortab",
+            "2026 Under Armour 3024870-002 Men Slip On Running Shoes Breathable Cushioned Supportive Sp"
+          ],
+          "url": "https://www.aliexpress.com/store/1105393586"
+        },
+        {
+          "shop_id": "1105668396",
+          "name": "DAILY CASUAL SPORT Store",
+          "official": false,
+          "listings": 5,
+          "examples": [
+            "Under Armour Flow Slip Speed Men's and Women's Cushioned Training Sporty Casual Shoes 3026",
+            "Under Armour  Charged Rogue 5 SE Shock Absorbing Running Shoes - Men's Summer Sports Joggi",
+            "Under Armour Summer Men's Outdoor Running Mesh Cushioned Lightweight Spring/Summer Sport a"
+          ],
+          "url": "https://www.aliexpress.com/store/1105668396"
+        },
+        {
+          "shop_id": "1105411894",
+          "name": "POIZON-SPORTS PRO Store",
+          "official": false,
+          "listings": 4,
+          "examples": [
+            "Under Armour Charged Assert 10 Low top Casual Running Shoes Women's White Pink 3026179-102",
+            "Under Armour Infinite Elite 2 Low top Running Shoes Women's White 3028178-100",
+            "Under Armour Rogue 5 Running Shoes Women's Beige 3028262-110"
+          ],
+          "url": "https://www.aliexpress.com/store/1105411894"
+        }
+      ],
+      "official_store": null
+    },
+    "Skechers": {
+      "listings": 98,
+      "shops": [
+        {
+          "shop_id": "1105627510",
+          "name": "ProSelect Brand Gallery Store",
+          "official": false,
+          "listings": 21,
+          "examples": [
+            "Skechers Women Slip‑Ins Casual Shoes 117500‑MVE Mauve Hands‑Free Lightweight Breathable Wa",
+            "Skechers 12980-BKHP 2026 New Womens Walking Shoes Black Pink Mesh Lightweight Beat Peer Ca",
+            "Skechers Men 220848‑TPBK Taupe Black Running Shoes Breathable Mesh Cushion Sports Sneakers"
+          ],
+          "url": "https://www.aliexpress.com/store/1105627510"
+        },
+        {
+          "shop_id": "1105393586",
+          "name": "GAGA SPORTS Store",
+          "official": false,
+          "listings": 19,
+          "examples": [
+            "Skechers Geno Lace-Up Cushioning Lightweight Men's Shoes Sports Casual Running Shoes",
+            "Skechers Mesh Breathable Running Shoes, Light Elastic Cushioned Wear-resistant Casual Snea",
+            "Skechers Men's Black Warrior Running Shoes, Summer Cushioned Breathable Training Sneakers,"
+          ],
+          "url": "https://www.aliexpress.com/store/1105393586"
+        },
+        {
+          "shop_id": "1105380610",
+          "name": "CORE SPORTS Store",
+          "official": false,
+          "listings": 18,
+          "examples": [
+            "Skechers Men Urban Outdoor Sports Shoes Fashion Low-Top Lightweight Thick Sole Wear Resist",
+            "New Skechers GO WALK JOY 124637-NAT Casual Cushioning And Breathable Women's Shoes, Daily ",
+            "Skechers Men's Shoes New Summer Mesh Breathable Slip-On Casual Shoes Authentic Soft Sole S"
+          ],
+          "url": "https://www.aliexpress.com/store/1105380610"
+        },
+        {
+          "shop_id": "1104780567",
+          "name": "First Sports Store",
+          "official": false,
+          "listings": 14,
+          "examples": [
+            "Skechers Men's Comfortable, Trendy, Fashionable, Casual Walking Shoes, Sports Soft-Soled S",
+            "Skechers Men's Shoes, Sports Shoes, Fashionable, Comfortable, Breathable, Outdoor Travel, ",
+            "Skechers Flection 3.0 Men's Slip-On Casual Sports Shoes, Comfortable and Cushioned for Dai"
+          ],
+          "url": "https://www.aliexpress.com/store/1104780567"
+        },
+        {
+          "shop_id": "1104787539",
+          "name": "Star Sports Store",
+          "official": false,
+          "listings": 10,
+          "examples": [
+            "Skechers Women's Shoes, Mesh Breathable Soft-Soled Sneakers, Slip-On Casual Shoes, Walking",
+            "Skechers Women's Sports Shoes Modern D'Lux Slip-On Mesh Breathable Casual Shoes 159287-Nat",
+            "Skechers Men's Dad Shoes Thick-Soled Classic Panda Shoes Sports Casual Shoes 52675-Bkw"
+          ],
+          "url": "https://www.aliexpress.com/store/1104787539"
+        },
+        {
+          "shop_id": "1105219155",
+          "name": "POIZON-SPORTS Store",
+          "official": false,
+          "listings": 3,
+          "examples": [
+            "Skechers MEN'S GO Breathable Rebound Running Shoes Men's Black 220622-BBK",
+            "Skechers Go Run Running Shoes Men's Black 220613-BBK",
+            "Skechers Max Cushioning Running Shoes Men's Black Gray 54450-BKCC"
+          ],
+          "url": "https://www.aliexpress.com/store/1105219155"
+        }
+      ],
+      "official_store": null
+    },
+    "La Sportiva": {
+      "listings": 0,
+      "shops": [],
+      "official_store": null
+    },
+    "Olympikus": {
+      "listings": 0,
+      "shops": [],
+      "official_store": null
+    },
+    "inov-8": {
+      "listings": 0,
+      "shops": [],
+      "official_store": null
+    },
+    "Merrell": {
+      "listings": 12,
+      "shops": [
+        {
+          "shop_id": "1105411894",
+          "name": "POIZON-SPORTS PRO Store",
+          "official": false,
+          "listings": 12,
+          "examples": [
+            "MERRELL ProMorph Low top Trail Running Shoes Men's White J068573",
+            "MERRELL MOAB 3 Cushioning Slip Resistant Trail Running Hiking Shoes Women's White Black J0",
+            "MERRELL Agility Peak 5 Running Shoes Men's White Black J068049"
+          ],
+          "url": "https://www.aliexpress.com/store/1105411894"
+        }
+      ],
+      "official_store": null
+    },
+    "Craft": {
+      "listings": 5,
+      "shops": [
+        {
+          "shop_id": "1105627510",
+          "name": "ProSelect Brand Gallery Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "Adidas KH6817 Light Grey DREAMSTRIKE Midsole Cold Cement Craft Breathable Fabric Upper Ret"
+          ],
+          "url": "https://www.aliexpress.com/store/1105627510"
+        },
+        {
+          "shop_id": "1105393586",
+          "name": "GAGA SPORTS Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "Adidas Authentic ZYRION BOLD Women Running Shoes KH7964 EVA Midsole COLD.CEMENT Craft Spor"
+          ],
+          "url": "https://www.aliexpress.com/store/1105393586"
+        },
+        {
+          "shop_id": "403980",
+          "name": "Six-Stars Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "100 pcs/lot LED Shoes light Green Blue Red Blingking Flashing lamps Colors Changing Glowin"
+          ],
+          "url": "https://www.aliexpress.com/store/403980"
+        },
+        {
+          "shop_id": "2754001",
+          "name": "Yu'er DIY Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "20pcs Antique Silver Plated Zinc Alloy Running Shoes Charms Pendants for Jewelry Making DI"
+          ],
+          "url": "https://www.aliexpress.com/store/2754001"
+        },
+        {
+          "shop_id": "1103285334",
+          "name": "VORCOOL Sports Activity Store",
+          "official": false,
+          "listings": 1,
+          "examples": [
+            "1.1m Flat Colored Shoelaces Glitter Finish for Sneakers Running Shoes Casual Footwear Bowk"
+          ],
+          "url": "https://www.aliexpress.com/store/1103285334"
+        }
+      ],
+      "official_store": null
+    },
+    "Diadora": {
+      "listings": 0,
+      "shops": [],
+      "official_store": null
+    },
+    "Karhu": {
+      "listings": 0,
+      "shops": [],
+      "official_store": null
+    }
+  }
+}
