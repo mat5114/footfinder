@@ -176,6 +176,12 @@ h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.02
 .rbtn:active{scale:.96}
 .rbtn.light{background:var(--tile);color:var(--ink)}
 .rbtn.dark{background:var(--ink);color:var(--bg)}
+.rbtn.ali{gap:6px}.alilogo{height:17px;width:auto;flex:none;position:relative;top:1px}
+.smodal{position:fixed;inset:0;z-index:10000;background:rgb(0 0 0 / .32);display:grid;place-items:center;padding:16px;animation:fadein .18s}
+.smodal .rmain{position:relative;width:min(920px,100%);height:min(640px,100%)}
+.sclose{position:absolute;top:12px;right:12px;z-index:2;background:var(--tile)}
+@keyframes fadein{from{opacity:0}}
+.shoe{cursor:pointer}
 .rbtn.off{opacity:.45;cursor:default;pointer-events:none}
 .rnote{margin:0;font-size:11px;color:var(--muted);text-align:center;text-wrap:pretty}
 .rlist{min-height:0;background:var(--card);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
@@ -275,7 +281,7 @@ function shoeSVG(s){
 /* ---------- copy ---------- */
 const LANGS=[["en","English","en"],["pt","Português","pt-BR"],["es","Español","es"],["fr","Français","fr"],["de","Deutsch","de"],["it","Italiano","it"]];
 const T={
-en:{lang:"Language",about:"About",back:"Back",reset:"Start over",next:"See results",
+en:{lang:"Language",about:"About",back:"Back",close:"Close",reset:"Start over",next:"See results",
  resTitle:"Your best shoes",resHint:"We picked {n} for you, at most 2 per brand.",
  fAll:"All",fBudget:"Cheapest",fCn:"Chinese brands",fCur:"2026 releases",
  edit:"Change answers",prev:"Previous version · often discounted",est:"estimated specs",soon:"soon",similar:"Similar:",
@@ -284,7 +290,7 @@ en:{lang:"Language",about:"About",back:"Back",reset:"Start over",next:"See resul
  notHere:"Not listed",neverHad:"Never had one / can't remember",loved:"Loved it",hated:"Didn't like it",pickModel:"Tap the model",howWas:"How did it go?",
  w:{stab:"Extra stability",wide:"Wide / roomy fit",soft:"Soft ride",bouncy:"Bouncy foam",firm:"Firm ride",heavy:"Good for heavier runners",start:"Easy for beginners",fast:"Built for pace",daily:"Great daily trainer",dist:"Handles your distance",budget:"Fits your budget",like:"Like the one you loved",trail:"Trail grip",mixed:"Road and dirt",long:"Protective for high mileage"},
  plate:{carbon:"carbon plate",carbon_rods:"carbon rods",glassfiber:"fiberglass",nylon:"nylon plate"}},
-pt:{lang:"Idioma",about:"Sobre",back:"Voltar",reset:"Recomeçar",next:"Ver resultados",
+pt:{lang:"Idioma",about:"Sobre",back:"Voltar",close:"Fechar",reset:"Recomeçar",next:"Ver resultados",
  resTitle:"Seus melhores tênis",resHint:"Selecionamos {n} para você, no máximo 2 por marca.",
  fAll:"Todos",fBudget:"Mais baratos",fCn:"Marcas chinesas",fCur:"Lançamentos 2026",
  edit:"Mudar respostas",prev:"Versão anterior · costuma ter desconto",est:"dados estimados",soon:"em breve",similar:"Parecidos:",
@@ -293,7 +299,7 @@ pt:{lang:"Idioma",about:"Sobre",back:"Voltar",reset:"Recomeçar",next:"Ver resul
  notHere:"Não está aqui",neverHad:"Nunca tive / não lembro",loved:"Amei esse",hated:"Não gostei",pickModel:"Toque no modelo",howWas:"E como foi com ele?",
  w:{stab:"Mais estabilidade",wide:"Versão larga / fôrma espaçosa",soft:"Pisada macia",bouncy:"Espuma com retorno",firm:"Pisada firme",heavy:"Bom para mais peso",start:"Fácil para começar",fast:"Feito para ritmo",daily:"Ótimo no dia a dia",dist:"Aguenta sua distância",budget:"Cabe no orçamento",like:"Parecido com o que você amou",trail:"Tração para trilha",mixed:"Asfalto e terra",long:"Protege em volume alto"},
  plate:{carbon:"placa de carbono",carbon_rods:"hastes de carbono",glassfiber:"fibra de vidro",nylon:"placa de nylon"}},
-es:{lang:"Idioma",about:"Acerca de",back:"Atrás",reset:"Empezar de nuevo",next:"Ver resultados",
+es:{lang:"Idioma",about:"Acerca de",back:"Atrás",close:"Cerrar",reset:"Empezar de nuevo",next:"Ver resultados",
  resTitle:"Tus mejores zapatillas",resHint:"Elegimos {n} para ti, como máximo 2 por marca.",
  fAll:"Todas",fBudget:"Más baratas",fCn:"Marcas chinas",fCur:"Novedades 2026",
  edit:"Cambiar respuestas",prev:"Versión anterior · suele tener descuento",est:"datos estimados",soon:"pronto",similar:"Parecidas:",
@@ -302,7 +308,7 @@ es:{lang:"Idioma",about:"Acerca de",back:"Atrás",reset:"Empezar de nuevo",next:
  notHere:"No está aquí",neverHad:"Nunca tuve / no recuerdo",loved:"Me encantó",hated:"No me gustó",pickModel:"Toca el modelo",howWas:"¿Qué tal te fue?",
  w:{stab:"Más estabilidad",wide:"Versión ancha / horma amplia",soft:"Pisada suave",bouncy:"Espuma con rebote",firm:"Pisada firme",heavy:"Buena para más peso",start:"Fácil para empezar",fast:"Hecha para el ritmo",daily:"Ideal para el día a día",dist:"Aguanta tu distancia",budget:"Entra en tu presupuesto",like:"Parecida a la que te encantó",trail:"Agarre para montaña",mixed:"Asfalto y tierra",long:"Protege en mucho volumen"},
  plate:{carbon:"placa de carbono",carbon_rods:"varillas de carbono",glassfiber:"fibra de vidrio",nylon:"placa de nailon"}},
-fr:{lang:"Langue",about:"À propos",back:"Retour",reset:"Recommencer",next:"Voir les résultats",
+fr:{lang:"Langue",about:"À propos",back:"Retour",close:"Fermer",reset:"Recommencer",next:"Voir les résultats",
  resTitle:"Vos meilleures chaussures",resHint:"Nous en avons choisi {n} pour vous, 2 par marque au maximum.",
  fAll:"Toutes",fBudget:"Les moins chères",fCn:"Marques chinoises",fCur:"Nouveautés 2026",
  edit:"Modifier les réponses",prev:"Version précédente · souvent en promo",est:"données estimées",soon:"bientôt",similar:"Similaires :",
@@ -311,7 +317,7 @@ fr:{lang:"Langue",about:"À propos",back:"Retour",reset:"Recommencer",next:"Voir
  notHere:"Pas dans la liste",neverHad:"Jamais eu / je ne sais plus",loved:"Je l'ai adorée",hated:"Je n'ai pas aimé",pickModel:"Touchez le modèle",howWas:"Et alors, c'était comment ?",
  w:{stab:"Plus de stabilité",wide:"Version large / chaussant ample",soft:"Foulée moelleuse",bouncy:"Mousse dynamique",firm:"Foulée ferme",heavy:"Adaptée aux coureurs plus lourds",start:"Facile pour débuter",fast:"Faite pour la vitesse",daily:"Idéale au quotidien",dist:"Tient votre distance",budget:"Dans votre budget",like:"Proche de celle que vous avez adorée",trail:"Accroche en trail",mixed:"Route et chemins",long:"Protège sur gros volume"},
  plate:{carbon:"plaque carbone",carbon_rods:"tiges carbone",glassfiber:"fibre de verre",nylon:"plaque nylon"}},
-de:{lang:"Sprache",about:"Über",back:"Zurück",reset:"Neu starten",next:"Ergebnisse ansehen",
+de:{lang:"Sprache",about:"Über",back:"Zurück",close:"Schließen",reset:"Neu starten",next:"Ergebnisse ansehen",
  resTitle:"Deine besten Schuhe",resHint:"Wir haben {n} für dich ausgewählt, höchstens 2 pro Marke.",
  fAll:"Alle",fBudget:"Günstigste",fCn:"Chinesische Marken",fCur:"Neu 2026",
  edit:"Antworten ändern",prev:"Vorgängermodell · oft reduziert",est:"geschätzte Daten",soon:"bald",similar:"Ähnlich:",
@@ -320,7 +326,7 @@ de:{lang:"Sprache",about:"Über",back:"Zurück",reset:"Neu starten",next:"Ergebn
  notHere:"Nicht dabei",neverHad:"Noch nie / weiß nicht mehr",loved:"Geliebt",hated:"Nicht gemocht",pickModel:"Tippe auf das Modell",howWas:"Wie war er?",
  w:{stab:"Mehr Stabilität",wide:"Weite Version / großzügige Passform",soft:"Weiches Laufgefühl",bouncy:"Federnder Schaum",firm:"Festes Laufgefühl",heavy:"Gut für schwerere Läufer",start:"Leicht für Einsteiger",fast:"Gebaut fürs Tempo",daily:"Top im Alltag",dist:"Hält deine Distanz",budget:"Passt ins Budget",like:"Ähnlich wie dein Lieblingsschuh",trail:"Grip im Gelände",mixed:"Straße und Waldweg",long:"Schützt bei hohem Umfang"},
  plate:{carbon:"Carbonplatte",carbon_rods:"Carbonstäbe",glassfiber:"Glasfaser",nylon:"Nylonplatte"}},
-it:{lang:"Lingua",about:"Info",back:"Indietro",reset:"Ricomincia",next:"Vedi risultati",
+it:{lang:"Lingua",about:"Info",back:"Indietro",close:"Chiudi",reset:"Ricomincia",next:"Vedi risultati",
  resTitle:"Le tue scarpe migliori",resHint:"Ne abbiamo scelte {n} per te, al massimo 2 per marca.",
  fAll:"Tutte",fBudget:"Più economiche",fCn:"Marchi cinesi",fCur:"Novità 2026",
  edit:"Cambia risposte",prev:"Versione precedente · spesso in sconto",est:"dati stimati",soon:"presto",similar:"Simili:",
@@ -463,8 +469,11 @@ const foot=(w)=>{const sw={tight:12,some:15,no:18}[w];return `<svg width="64" he
 const sole=(z)=>`<svg width="34" height="56" viewBox="0 0 34 58" aria-hidden="true"><path d="M17 2c9 0 13 7 13 16 0 7-3 11-3 18 0 10-3 20-10 20S7 46 7 36c0-7-3-11-3-18C4 9 8 2 17 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>${z==="in"?'<path d="M17 4c-6 1-9 7-9 14 0 7 3 11 3 18s2 16 6 18z" fill="currentColor" opacity=".4"/>':z==="out"?'<path d="M17 4c6 1 9 7 9 14 0 7-3 11-3 18s-2 16-6 18z" fill="currentColor" opacity=".4"/>':z==="even"?'<path d="M17 4c8 0 11 7 11 14 0 7-3 11-3 18 0 9-3 18-8 18s-8-9-8-18c0-7-3-11-3-18C6 11 9 4 17 4z" fill="currentColor" opacity=".22"/>':'<text x="17" y="35" text-anchor="middle" font-size="15" fill="currentColor" font-family="Inter,sans-serif">?</text>'}</svg>`;
 
 const foot1=(x,y,r)=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M0 0c3.8 0 5.4 3.6 5.4 7.8S3.8 15.6 2.6 17.6 0 19.8-1.8 17.6-3.8 11.8-4.4 7.8-3.8 0 0 0z"${G}/><circle cx="-3.8" cy="-4" r="1.3" fill="currentColor"/><circle cx="-.6" cy="-5.2" r="1.3" fill="currentColor"/><circle cx="2.6" cy="-4.2" r="1.3" fill="currentColor"/></g>`;
+/* AliExpress wordmark (simple-icons, CC0), shown in place of the word on the store button */
+const aliLogo=`<svg class="alilogo" viewBox="0 8.9 24 6.7" role="img" aria-label="AliExpress"><path fill="#FF4747" d="M5.166 9.096a.022.022 0 0 0-.022.021c0 .396-.32.717-.713.717a.021.021 0 0 0-.021.022c0 .012.01.021.021.021.394 0 .713.322.713.718 0 .012.01.021.022.021.011 0 .021-.01.021-.021A.717.717 0 0 1 5.9 9.88a.021.021 0 0 0 0-.043.716.716 0 0 1-.713-.718v-.002a.021.021 0 0 0-.006-.015.022.022 0 0 0-.015-.006zm-3.693.526L0 13.462h.48l.355-.922h1.782l.354.922h.481L1.98 9.622zm2.264.002v3.838h.491V9.624zm2.375 0v3.838h2.413v-.502H6.613v-1.19H8.19v-.477H6.613v-1.166h1.773v-.502zm-4.386.592l.698 1.82H1.028zm14.689.402a1.466 1.466 0 0 0-.966.366V10.7h-.491v2.763h.49c.002-.477 0-.955.002-1.433a.969.969 0 0 1 .965-.918zm4.18.007c-.053 0-.105.003-.158.01-.315.031-.606.175-.753.377a.689.689 0 0 0-.14.465c.007.2.066.357.233.496.184.147.42.2.657.259.311.067.426.095.546.186.08.07.133.127.136.27 0 .25-.221.372-.42.41a.89.89 0 0 1-.894-.344l-.371.288c.33.382.777.505 1.09.5.54-.01.891-.217 1.029-.534.066-.153.063-.309.063-.38a.677.677 0 0 0-.267-.545c-.228-.177-.583-.228-.636-.242-.437-.078-.658-.196-.697-.341-.043-.192.102-.35.297-.411a.76.76 0 0 1 .857.277l.367-.247a1.166 1.166 0 0 0-.939-.494zm2.387 0c-.052 0-.105.003-.157.01-.316.031-.607.175-.753.377a.689.689 0 0 0-.14.465c.006.2.065.357.233.496.183.147.42.2.657.259.31.067.426.095.545.186.081.07.134.127.136.27.001.25-.221.372-.42.41a.89.89 0 0 1-.894-.344l-.371.288c.33.382.777.505 1.09.5.541-.01.891-.217 1.03-.534.065-.153.062-.309.062-.38a.677.677 0 0 0-.267-.545c-.227-.177-.583-.228-.636-.242-.437-.078-.658-.196-.696-.341-.043-.192.101-.35.297-.411a.76.76 0 0 1 .857.277l.367-.247a1.167 1.167 0 0 0-.94-.494zm-9.84.002a1.461 1.461 0 0 0-1.42 1.117 1.305 1.305 0 0 0-.041.327v2.833h.491v-1.813c.17.18.487.42.96.454a1.447 1.447 0 0 0 1.208-.627 1.457 1.457 0 0 0-1.199-2.292zm4.804 0a1.448 1.448 0 0 0-1.288 2.08c.255.53.811.87 1.412.833a1.452 1.452 0 0 0 1.012-.51l-.363-.291a.968.968 0 0 1-1.106.273 1.01 1.01 0 0 1-.602-.69h2.239l.002-.427a1.295 1.295 0 0 0-1.306-1.268zm-9.2.08l1.062 1.377-1.062 1.378h.581l.779-1.01.778 1.01h.581l-1.062-1.378 1.062-1.378h-.581l-.778 1.01-.779-1.01zm-3.825.015v2.74h.49v-2.74zm8.233.37a.96.96 0 0 1 .95.993.963.963 0 0 1-.863.998.962.962 0 0 1-1.034-.739c-.074-.382 0-.746.307-1.019a.959.959 0 0 1 .64-.233zm4.79.015a.823.823 0 0 1 .819.755h-1.76a.964.964 0 0 1 .94-.755z"/></svg>`;
+const aliLabel=txt=>{const i=txt.indexOf("AliExpress");return i<0?esc(txt)+aliLogo:esc(txt.slice(0,i))+aliLogo+esc(txt.slice(i+10))};
 const icoGoal={
- start:SV(`${foot1(22,24,-14)}${foot1(42,11,-14)}`),
+ start:SV(`<path d="M32 44V24"/><path d="M32 30c-2-9-9-13-18-12 0 9 7 14 18 12z"${G}/><path d="M32 25c1-8 8-13 17-12 0 9-7 13-17 12z"${G}/><path d="M18 44h28"/>`),
  daily:SV(`<rect x="12" y="9" width="40" height="33" rx="5"${G}/><path d="M12 18h40M22 5v7M42 5v7"/><path d="m19 26 2.5 2.5L26 24M31 26l2.5 2.5L38 24M19 35l2.5 2.5L26 33"/>`),
  fast:SV(`<circle cx="38" cy="27" r="15"${G}/><path d="M38 12V7M34 6h8M38 27l6-6"/><path d="M4 22h10M8 29h8M4 36h12"/>`),
  trail:ico.trail
@@ -665,7 +674,7 @@ function drawCloud(){
   order.forEach((i,k)=>{if(els.has(i))return;
     const el=document.createElement("div");el.className="shoe gone";el.innerHTML=shoeArt(S[i]);
     el.style.left=(W/2+(k-order.indexOf(list[0]?list[0].i:i))*sGeom().gap)+"px";
-    el.onclick=()=>{if(Math.abs(sDrag)<4){sC=sOrder.indexOf(i);sLayout()}};
+    el.dataset.i=i;
     cloud.insertBefore(el,sinfo);els.set(i,el);
     requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("gone")));
   });
@@ -675,7 +684,11 @@ function drawCloud(){
 cloud.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"&&sC>0){sC--;sLayout();e.preventDefault()}if(e.key==="ArrowRight"&&sC<sOrder.length-1){sC++;sLayout();e.preventDefault()}});
 cloud.addEventListener("pointerdown",e=>{if(e.target.closest(".sarrow"))return;sX0=e.clientX;sDrag=0;cloud.setPointerCapture(e.pointerId)});
 cloud.addEventListener("pointermove",e=>{if(sX0==null)return;sDrag=e.clientX-sX0;if(Math.abs(sDrag)>4)cloud.classList.add("dragging");sLayout()});
-const sEnd=()=>{if(sX0==null)return;const {gap}=sGeom();sC=Math.max(0,Math.min(sOrder.length-1,sC-Math.round(sDrag/gap)));sX0=null;cloud.classList.remove("dragging");setTimeout(()=>{sDrag=0;sLayout()},0)};
+/* a tap (no drag) on a shoe: the centred one opens its details, any other one slides to the centre */
+const sTap=e=>{const el=document.elementsFromPoint(e.clientX,e.clientY).map(x=>x.closest&&x.closest(".shoe")).find(Boolean);
+  if(!el||el.classList.contains("gone"))return;const i=+el.dataset.i,k=sOrder.indexOf(i);if(k<0)return;
+  if(k===sC)openShoe(i);else{sC=k;sLayout()}};
+const sEnd=e=>{if(sX0==null)return;if(e&&e.type==="pointerup"&&Math.abs(sDrag)<4)sTap(e);const {gap}=sGeom();sC=Math.max(0,Math.min(sOrder.length-1,sC-Math.round(sDrag/gap)));sX0=null;cloud.classList.remove("dragging");setTimeout(()=>{sDrag=0;sLayout()},0)};
 cloud.addEventListener("pointerup",sEnd);cloud.addEventListener("pointercancel",sEnd);
 let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(view==="results")renderResults();else sLayout()},120)});
 
@@ -747,26 +760,11 @@ const money=(v,c)=>{const n=parseFloat(v);if(!isFinite(n))return "";try{return n
 const amzLink=s=>AMZ&&AMZ.tag?`https://www.${AMZ.store}/s?${new URLSearchParams({k:`${s.brand} ${s.model} running shoes`,tag:AMZ.tag})}`:null;
 const cushOf=h=>h<30?"low":h<36?"medium":h<42?"high":"max";
 const distTxt=d=>{const m={"5k":"5","10k":"10","21k":"21","42k":"42","ultra":"Ultra"};const a=m[d[0]],b=m[d[d.length-1]];return a===b?a+(a==="Ultra"?"":" km"):`${a}–${b}${b==="Ultra"?"":" km"}`};
-function renderResults(){
-  card.classList.remove("wide");card.classList.add("res");
-  const list=ranked.slice(0,12),R=rt();
-  // match %: the best shoe gets 98%, each point of score behind it costs about 1%
-  const top=list.length?scores[list[0].i].sc:0;
-  const pct=s=>Math.max(55,Math.min(98,Math.round(98-(top-scores[s.i].sc)*0.9)));
-  if(!list.length){card.innerHTML=`<div class="rmain" style="display:block;padding:24px">${head(t("resTitle"),true)}<p class="empty">${t("none")}</p></div>`;wire(null);return}
-  rsel=Math.min(rsel,list.length-1);
-  // one tag per shoe: best match, lightest, cheapest, most cushioned
-  const tags={};const tagOnce=(k,i)=>{if(i!=null&&!(i in tags))tags[i]=R.tags[k]};
-  tagOnce("best",list[0].i);
-  tagOnce("light",[...list].sort((a,b)=>a.g-b.g)[0].i);
-  tagOnce("cheap",[...list].sort((a,b)=>a.usd-b.usd)[0].i);
-  tagOnce("soft",[...list].sort((a,b)=>b.h-a.h)[0].i);
-  const s=list[rsel],why=scores[s.i].w;
-  const plate=s.plate==="none"?R.none:(T[L].plate[s.plate]||s.plate);
-  const icons=`<button class="ibtn" data-act="back" aria-label="${t("back")}">${svgBack}</button><button class="ibtn" data-act="reset" aria-label="${t("reset")}">${svgReset}</button>`;
-  card.innerHTML=`<div class="rwrap">
-    <section class="rmain" aria-live="polite">
-      <div class="rphoto"><span class="rbadge">${pct(s)}% ${esc(R.match)}</span>${shoeArt(s)}</div>
+/* product details for one shoe: photo on the left, specs and store buttons on the right.
+   Returns the photo panel and an open .rdet column, so callers can add their own footer before closing it. */
+function shoeDetail(s,badge,why){
+  const R=rt(),plate=s.plate==="none"?R.none:(T[L].plate[s.plate]||s.plate);
+  return `      <div class="rphoto"><span class="rbadge">${esc(badge)}</span>${shoeArt(s)}</div>
       <div class="rdet">
         <div><div class="rb">${esc(s.brand)}${!s.cur?` · ${esc(R.prev)}`:""}</div><h2>${esc(s.model)}</h2></div>
         <div class="rprice">$${s.usd}<small>${esc(R.price)}</small></div>
@@ -785,10 +783,42 @@ function renderResults(){
         ${why.length?`<div class="rwhy">${why.map(k=>`<span>${esc(T[L].w[k])}</span>`).join("")}</div>`:""}
         <div class="rbtns">
           ${storeOffers(s).map(o=>`<a class="rbtn light" href="${esc(o[2])}" target="_blank" rel="sponsored noopener">${esc(R.at)} ${esc(o[0])}${o[3]?` · ${esc(money(o[3],o[4]))}`:""} ↗</a>`).join("")}
-          ${s.ali?`<a class="rbtn dark" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${esc(R.ali)} ↗</a>`:""}
+          ${s.ali?`<a class="rbtn dark ali" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${aliLabel(R.ali)} ↗</a>`:""}
           ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)} ↗</a>`:""}
           ${amzLink(s)?`<p class="rnote">${esc(R.amzNote)}</p>`:""}
         </div>
+`;
+}
+/* tap a shoe in the slider: show its details over the page */
+function openShoe(i){
+  const s=S[i],sc=scores[i],top=ranked.length?scores[ranked[0].i].sc:0;
+  const pc=Math.max(55,Math.min(98,Math.round(98-(top-sc.sc)*0.9)));
+  const m=document.createElement("div");m.className="smodal";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");
+  m.innerHTML=`<section class="rmain">${shoeDetail(s,answered()?`${pc}% ${rt().match}`:s.brand,answered()?sc.w:[])}</div><button class="ibtn sclose" aria-label="${esc(t("close"))}">✕</button></section>`;
+  const close=()=>{m.remove();removeEventListener("keydown",onKey)};
+  const onKey=e=>{if(e.key==="Escape")close()};
+  m.onclick=e=>{if(e.target===m||e.target.closest(".sclose"))close()};
+  addEventListener("keydown",onKey);document.body.appendChild(m);m.querySelector(".sclose").focus();
+}
+function renderResults(){
+  card.classList.remove("wide");card.classList.add("res");
+  const list=ranked.slice(0,12),R=rt();
+  // match %: the best shoe gets 98%, each point of score behind it costs about 1%
+  const top=list.length?scores[list[0].i].sc:0;
+  const pct=s=>Math.max(55,Math.min(98,Math.round(98-(top-scores[s.i].sc)*0.9)));
+  if(!list.length){card.innerHTML=`<div class="rmain" style="display:block;padding:24px">${head(t("resTitle"),true)}<p class="empty">${t("none")}</p></div>`;wire(null);return}
+  rsel=Math.min(rsel,list.length-1);
+  // one tag per shoe: best match, lightest, cheapest, most cushioned
+  const tags={};const tagOnce=(k,i)=>{if(i!=null&&!(i in tags))tags[i]=R.tags[k]};
+  tagOnce("best",list[0].i);
+  tagOnce("light",[...list].sort((a,b)=>a.g-b.g)[0].i);
+  tagOnce("cheap",[...list].sort((a,b)=>a.usd-b.usd)[0].i);
+  tagOnce("soft",[...list].sort((a,b)=>b.h-a.h)[0].i);
+  const s=list[rsel],why=scores[s.i].w;
+  const icons=`<button class="ibtn" data-act="back" aria-label="${t("back")}">${svgBack}</button><button class="ibtn" data-act="reset" aria-label="${t("reset")}">${svgReset}</button>`;
+  card.innerHTML=`<div class="rwrap">
+    <section class="rmain" aria-live="polite">
+${shoeDetail(s,`${pct(s)}% ${R.match}`,why)}
         <div class="rpager">${icons}<span>${rsel+1} / ${list.length}${tags[s.i]?" · "+esc(tags[s.i]):""}</span><span style="display:flex;gap:2px"><button class="ibtn" id="pgPrev" aria-label="‹" ${rsel?"":"disabled"}>‹</button><button class="ibtn" id="pgNext" aria-label="›" ${rsel<list.length-1?"":"disabled"}>›</button></span></div>
       </div>
     </section>
