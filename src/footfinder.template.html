@@ -449,6 +449,28 @@ const ico={
 };
 const foot=(w)=>{const sw={tight:12,some:15,no:18}[w];return `<svg width="64" height="58" viewBox="0 0 64 58" fill="none" stroke-width="1.5"><path d="M32 4c${sw} 0 ${sw} 14 ${sw-2} 26s-2 24-${sw-2} 24-${sw-2}-12-${sw-2}-24S${32-sw} 4 32 4z" stroke="currentColor" opacity=".35"/><path d="M32 7c8 0 11 6 11 16s-3 12-3 18-3 11-8 11-8-5-8-11-3-8-3-18S24 7 32 7z" fill="currentColor" opacity=".18" stroke="currentColor"/></svg>`};
 const sole=(z)=>`<svg width="34" height="56" viewBox="0 0 34 58" aria-hidden="true"><path d="M17 2c9 0 13 7 13 16 0 7-3 11-3 18 0 10-3 20-10 20S7 46 7 36c0-7-3-11-3-18C4 9 8 2 17 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>${z==="in"?'<path d="M17 4c-6 1-9 7-9 14 0 7 3 11 3 18s2 16 6 18z" fill="currentColor" opacity=".4"/>':z==="out"?'<path d="M17 4c6 1 9 7 9 14 0 7-3 11-3 18s-2 16-6 18z" fill="currentColor" opacity=".4"/>':z==="even"?'<path d="M17 4c8 0 11 7 11 14 0 7-3 11-3 18 0 9-3 18-8 18s-8-9-8-18c0-7-3-11-3-18C6 11 9 4 17 4z" fill="currentColor" opacity=".22"/>':'<text x="17" y="35" text-anchor="middle" font-size="15" fill="currentColor" font-family="Inter,sans-serif">?</text>'}</svg>`;
+
+/* line icons for answers, same style as ico: 64x48, 1.5px stroke, currentColor */
+const SV=(b,h=48)=>`<svg width="64" height="${h}" viewBox="0 0 64 ${h}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${b}</svg>`;
+const foot1=(x,y,r)=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M0 0c3.6 0 5 3.4 5 7.4S3.6 15 2.4 17 0 19-1.6 17-3.4 11.4-4 7.4-3.6 0 0 0z"/><circle cx="-3.6" cy="-3.4" r="1.1"/><circle cx="-.6" cy="-4.6" r="1.1"/><circle cx="2.4" cy="-3.8" r="1.1"/></g>`;
+const icoGoal={
+ start:SV(`${foot1(22,24,-14)}${foot1(42,12,-14)}<path d="M8 44h48" stroke-dasharray="2 4"/>`),
+ daily:SV(`<rect x="12" y="8" width="40" height="34" rx="4"/><path d="M12 17h40M22 4v7M42 4v7"/><path d="m18 26 2.5 2.5L25 24M30 26l2.5 2.5L37 24M42 26l2.5 2.5L49 24M18 35l2.5 2.5L25 33"/>`),
+ fast:SV(`<circle cx="38" cy="27" r="15"/><path d="M38 12V7M34 6h8M38 27l6-6M51 13l3-3"/><path d="M4 22h10M8 29h8M4 36h12"/>`),
+ trail:ico.trail
+};
+const icoFeel={
+ soft:SV(`<path d="M18 38h28a9 9 0 0 0 1.4-17.9A12 12 0 0 0 24.4 17 10.5 10.5 0 0 0 18 38z"/>`),
+ bouncy:SV(`<circle cx="46" cy="12" r="6"/><path d="M6 42c4-22 14-22 18 0M24 42c4-16 12-22 16-26" stroke-dasharray="2 3"/><path d="M2 44h60"/>`),
+ firm:SV(`<path d="M10 28h44"/><path d="M14 36l4-8M24 36l4-8M34 36l4-8M44 36l4-8M54 36l2-4"/><path d="M32 6v14M26 15l6 6 6-6"/>`)
+};
+/* bathroom scale, the needle moves right as the range goes up */
+const icoScale=n=>{const a=(-60+n*40)*Math.PI/180,x=(32+12*Math.sin(a)).toFixed(1),y=(26-12*Math.cos(a)).toFixed(1);
+ return SV(`<rect x="12" y="6" width="40" height="38" rx="7"/><path d="M20 26a12 12 0 0 1 24 0"/><path d="M32 26 ${x} ${y}"/><circle cx="32" cy="26" r="1.6" fill="currentColor"/>`)};
+/* weekly volume: bars, one more filled per level */
+const icoBars=n=>SV([0,1,2].map(i=>`<rect x="${14+i*14}" y="${30-i*10}" width="8" height="${12+i*10}" rx="2"${i<n?' fill="currentColor"':''}/>`).join("")+`<path d="M8 44h48"/>`);
+/* distance: a route whose solid part (and flag) gets longer */
+const icoRoute=f=>{const x=8+48*f;return SV(`<path d="M8 38h48" stroke-dasharray="2 4" opacity=".5"/>${f?`<path d="M8 38H${x}"/><path d="M${x} 38V12l10 4-10 4"/>`:'<circle cx="8" cy="38" r="2.5"/>'}`)};
 const rep=n=>{const s=byName(n);return s?shoeArt(s):""};
 /* picture for an answer: the first shoe in the catalog that fits it, preferring ones with a real photo */
 const repBy=pred=>{const s=S.find(pred);return s?shoeSVG(s):""};  // answer options always show the drawing, never a photo
@@ -460,18 +482,18 @@ const beginner=()=>A.goal==="start"||A.volume==="v0";
 const carbonOk=()=>!(A.goal==="start"||A.volume==="v0"||A.volume==="v1");
 const traily=()=>A.goal==="trail"||A.surface==="trail";
 const Q=[
- {id:"goal",o:[["start",()=>repBy(s=>s.surf==="road"&&s.plate==="none"&&(hasC(s,"budget")||hasC(s,"daily"))&&!hasC(s,"race"))],["daily",()=>repBy(s=>s.surf==="road"&&hasC(s,"daily")&&s.feel!=="firm"&&s.h>=36)],["fast",()=>repBy(s=>hasC(s,"race")&&s.plate!=="none")],["trail",()=>repBy(s=>s.surf==="trail")]]},
+ {id:"goal",o:[["start",()=>icoGoal.start],["daily",()=>icoGoal.daily],["fast",()=>icoGoal.fast],["trail",()=>icoGoal.trail]]},
  {id:"volume",tk:()=>A.goal==="start"?"volume_start":"volume",
   show:v=>A.goal==="start"?(v==="v0"||v==="v1"):A.goal==="fast"?v!=="v0":true,
-  o:[["v0",null,"0"],["v1",null,"<15"],["v2",null,"15–40"],["v3",null,"40+"]]},
+  o:[["v0",()=>icoBars(0)],["v1",()=>icoBars(1)],["v2",()=>icoBars(2)],["v3",()=>icoBars(3)]]},
  {id:"surface",skip:()=>A.goal==="trail",tk:()=>A.volume==="v0"?"surface_v0":"surface",
   o:[["road",()=>ico.road],["treadmill",()=>ico.treadmill],["trail",()=>ico.trail],["mixed",()=>ico.mixed]]},
  {id:"distance",tk:()=>beginner()?"distance_beg":A.goal==="fast"?"distance_fast":"distance",
   show:v=>{if(v==="none")return beginner();if(beginner())return v==="5k"||v==="10k";
     if(v==="ultra")return traily()&&(A.volume==="v2"||A.volume==="v3");if(v==="42k")return A.volume!=="v1";return true},
-  o:[["none",null,"—"],["5k",null,"5"],["10k",null,"10"],["21k",null,"21"],["42k",null,"42"],["ultra",null,"50+"]]},
- {id:"weight",hk:()=>"weight_h",o:[["w1",null,"<60"],["w2",null,"60–80"],["w3",null,"80–95"],["w4",null,"95+"]]},
- {id:"feel",o:[["soft",()=>repBy(s=>s.feel==="soft")],["bouncy",()=>repBy(s=>s.feel==="bouncy"&&!hasC(s,"race"))],["firm",()=>repBy(s=>s.feel==="firm"||s.feel==="balanced")],["any",()=>ico.any]]},
+  o:[["none",()=>icoRoute(0)],["5k",()=>icoRoute(.2)],["10k",()=>icoRoute(.35)],["21k",()=>icoRoute(.55)],["42k",()=>icoRoute(.8)],["ultra",()=>icoRoute(1)]]},
+ {id:"weight",hk:()=>"weight_h",o:[["w1",()=>icoScale(0)],["w2",()=>icoScale(1)],["w3",()=>icoScale(2)],["w4",()=>icoScale(3)]]},
+ {id:"feel",o:[["soft",()=>icoFeel.soft],["bouncy",()=>icoFeel.bouncy],["firm",()=>icoFeel.firm],["any",()=>ico.any]]},
  {id:"width",o:[["tight",()=>foot("tight")],["some",()=>foot("some")],["no",()=>foot("no")]]},
  {id:"wear",tk:()=>A.volume==="v0"?"wear_v0":"wear",hk:()=>A.volume==="v0"?"wear_h_v0":"wear_h",
   o:[["in",()=>sole("in")],["out",()=>sole("out")],["even",()=>sole("even")],["unk",()=>sole("unk")]]},
