@@ -4,7 +4,7 @@
 
 Quiz que recomenda tênis de corrida. A pessoa responde só com toques (objetivo, volume, distância, peso, pisada, largura do pé, orçamento) e recebe até 12 tênis, no máximo 2 por marca, com links de afiliado.
 
-- Catálogo com 513 tênis de 30 marcas, incluindo marcas chinesas (Li-Ning, Anta, Xtep, 361° e outras)
+- Catálogo com 593 tênis de 34 marcas, incluindo marcas chinesas (Li-Ning, Anta, Xtep, 361° e outras)
 - Perguntas adaptativas: cada resposta muda o título, as opções e quais perguntas aparecem depois
 - Interface em inglês, português, espanhol, francês, alemão e italiano
 - Ilustração de cada tênis gerada a partir da altura do solado e do drop reais, até as fotos das lojas parceiras estarem disponíveis
