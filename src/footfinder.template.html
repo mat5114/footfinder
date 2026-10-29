@@ -168,6 +168,7 @@ h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.02
 .rbtn.light{background:var(--tile);color:var(--ink)}
 .rbtn.dark{background:var(--ink);color:var(--bg)}
 .rbtn.off{opacity:.45;cursor:default;pointer-events:none}
+.rnote{margin:0;font-size:11px;color:var(--muted);text-align:center;text-wrap:pretty}
 .rlist{min-height:0;background:var(--card);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
 .rlhead{display:flex;align-items:center;gap:6px;padding:12px 12px 8px}
 .rlhead b{flex:1;font-size:14px;font-weight:600;letter-spacing:-.01em;text-align:right;padding-right:6px}
@@ -415,22 +416,22 @@ it:{goal:"Per cosa le userai?",volume:"Quanto corri a settimana?",volume_start:"
 };
 /* results copy */
 const RT={
-en:{amzGo:"Search on Amazon",weight:"Weight",drop:"Drop",stack:"Stack height",cushion:"Cushioning",feel:"Ride",plate:"Plate",stab:"Support",surf:"Surface",dist:"Best for",wide:"Wide version",year:"Released",price:"list price",match:"match",ali:"See on AliExpress",amz:"Amazon · soon",prev:"Previous version",
+en:{amzNote:"As an Amazon Associate, Footfinder earns from qualifying purchases.",amzGo:"Search on Amazon",weight:"Weight",drop:"Drop",stack:"Stack height",cushion:"Cushioning",feel:"Ride",plate:"Plate",stab:"Support",surf:"Surface",dist:"Best for",wide:"Wide version",year:"Released",price:"list price",match:"match",ali:"See on AliExpress",amz:"Amazon · soon",prev:"Previous version",
  tags:{best:"Best match",light:"Lightest",cheap:"Cheapest",soft:"Most cushioned"},cush:{low:"Low",medium:"Medium",high:"High",max:"Maximum"},feelV:{soft:"Soft",balanced:"Balanced",firm:"Firm",bouncy:"Bouncy"},none:"None",
  stabV:{neutral:"Neutral",mild:"Light support",stable:"Stability"},surfV:{road:"Road",trail:"Trail",mixed:"Road and trail"},yes:"Yes",no:"No"},
-pt:{amzGo:"Buscar na Amazon",weight:"Peso",drop:"Drop",stack:"Altura do solado",cushion:"Amortecimento",feel:"Pisada",plate:"Placa",stab:"Suporte",surf:"Superfície",dist:"Ideal para",wide:"Versão larga",year:"Lançamento",price:"preço de tabela",match:"combina",ali:"Ver no AliExpress",amz:"Amazon · em breve",prev:"Versão anterior",
+pt:{amzNote:"Como Associado da Amazon, o Footfinder ganha com compras qualificadas.",amzGo:"Buscar na Amazon",weight:"Peso",drop:"Drop",stack:"Altura do solado",cushion:"Amortecimento",feel:"Pisada",plate:"Placa",stab:"Suporte",surf:"Superfície",dist:"Ideal para",wide:"Versão larga",year:"Lançamento",price:"preço de tabela",match:"combina",ali:"Ver no AliExpress",amz:"Amazon · em breve",prev:"Versão anterior",
  tags:{best:"Melhor combinação",light:"Mais leve",cheap:"Mais barato",soft:"Mais amortecido"},cush:{low:"Baixo",medium:"Médio",high:"Alto",max:"Máximo"},feelV:{soft:"Macia",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Nenhuma",
  stabV:{neutral:"Neutro",mild:"Suporte leve",stable:"Estabilidade"},surfV:{road:"Asfalto",trail:"Trilha",mixed:"Asfalto e trilha"},yes:"Sim",no:"Não"},
-es:{amzGo:"Buscar en Amazon",weight:"Peso",drop:"Drop",stack:"Altura de suela",cushion:"Amortiguación",feel:"Pisada",plate:"Placa",stab:"Soporte",surf:"Superficie",dist:"Ideal para",wide:"Versión ancha",year:"Lanzamiento",price:"precio de lista",match:"coincide",ali:"Ver en AliExpress",amz:"Amazon · pronto",prev:"Versión anterior",
+es:{amzNote:"Como Afiliado de Amazon, Footfinder obtiene ingresos por las compras adscritas que cumplen los requisitos aplicables.",amzGo:"Buscar en Amazon",weight:"Peso",drop:"Drop",stack:"Altura de suela",cushion:"Amortiguación",feel:"Pisada",plate:"Placa",stab:"Soporte",surf:"Superficie",dist:"Ideal para",wide:"Versión ancha",year:"Lanzamiento",price:"precio de lista",match:"coincide",ali:"Ver en AliExpress",amz:"Amazon · pronto",prev:"Versión anterior",
  tags:{best:"Mejor opción",light:"Más ligera",cheap:"Más barata",soft:"Más amortiguada"},cush:{low:"Baja",medium:"Media",high:"Alta",max:"Máxima"},feelV:{soft:"Suave",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Ninguna",
  stabV:{neutral:"Neutra",mild:"Soporte leve",stable:"Estabilidad"},surfV:{road:"Asfalto",trail:"Montaña",mixed:"Asfalto y montaña"},yes:"Sí",no:"No"},
-fr:{amzGo:"Chercher sur Amazon",weight:"Poids",drop:"Drop",stack:"Hauteur de semelle",cushion:"Amorti",feel:"Foulée",plate:"Plaque",stab:"Maintien",surf:"Surface",dist:"Idéale pour",wide:"Version large",year:"Sortie",price:"prix catalogue",match:"correspondance",ali:"Voir sur AliExpress",amz:"Amazon · bientôt",prev:"Version précédente",
+fr:{amzNote:"En tant que Partenaire Amazon, Footfinder réalise un bénéfice sur les achats remplissant les conditions requises.",amzGo:"Chercher sur Amazon",weight:"Poids",drop:"Drop",stack:"Hauteur de semelle",cushion:"Amorti",feel:"Foulée",plate:"Plaque",stab:"Maintien",surf:"Surface",dist:"Idéale pour",wide:"Version large",year:"Sortie",price:"prix catalogue",match:"correspondance",ali:"Voir sur AliExpress",amz:"Amazon · bientôt",prev:"Version précédente",
  tags:{best:"Meilleur choix",light:"La plus légère",cheap:"La moins chère",soft:"La plus amortie"},cush:{low:"Faible",medium:"Moyen",high:"Élevé",max:"Maximal"},feelV:{soft:"Moelleuse",balanced:"Équilibrée",firm:"Ferme",bouncy:"Dynamique"},none:"Aucune",
  stabV:{neutral:"Neutre",mild:"Léger maintien",stable:"Stabilité"},surfV:{road:"Route",trail:"Trail",mixed:"Route et trail"},yes:"Oui",no:"Non"},
-de:{amzGo:"Auf Amazon suchen",weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Übereinstimmung",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
+de:{amzNote:"Als Amazon-Partner verdient Footfinder an qualifizierten Verkäufen.",amzGo:"Auf Amazon suchen",weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Übereinstimmung",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
  tags:{best:"Beste Wahl",light:"Leichtester",cheap:"Günstigster",soft:"Meiste Dämpfung"},cush:{low:"Gering",medium:"Mittel",high:"Hoch",max:"Maximal"},feelV:{soft:"Weich",balanced:"Ausgewogen",firm:"Fest",bouncy:"Federnd"},none:"Keine",
  stabV:{neutral:"Neutral",mild:"Leichte Stütze",stable:"Stabilität"},surfV:{road:"Straße",trail:"Trail",mixed:"Straße und Trail"},yes:"Ja",no:"Nein"},
-it:{amzGo:"Cerca su Amazon",weight:"Peso",drop:"Drop",stack:"Altezza suola",cushion:"Ammortizzazione",feel:"Appoggio",plate:"Piastra",stab:"Supporto",surf:"Superficie",dist:"Ideale per",wide:"Versione larga",year:"Uscita",price:"prezzo di listino",match:"compatibilità",ali:"Vedi su AliExpress",amz:"Amazon · presto",prev:"Versione precedente",
+it:{amzNote:"In qualità di Affiliato Amazon, Footfinder riceve un guadagno dagli acquisti idonei.",amzGo:"Cerca su Amazon",weight:"Peso",drop:"Drop",stack:"Altezza suola",cushion:"Ammortizzazione",feel:"Appoggio",plate:"Piastra",stab:"Supporto",surf:"Superficie",dist:"Ideale per",wide:"Versione larga",year:"Uscita",price:"prezzo di listino",match:"compatibilità",ali:"Vedi su AliExpress",amz:"Amazon · presto",prev:"Versione precedente",
  tags:{best:"Migliore scelta",light:"La più leggera",cheap:"La più economica",soft:"La più ammortizzata"},cush:{low:"Bassa",medium:"Media",high:"Alta",max:"Massima"},feelV:{soft:"Morbida",balanced:"Bilanciata",firm:"Rigida",bouncy:"Reattiva"},none:"Nessuna",
  stabV:{neutral:"Neutra",mild:"Supporto leggero",stable:"Stabilità"},surfV:{road:"Asfalto",trail:"Trail",mixed:"Asfalto e trail"},yes:"Sì",no:"No"}
 };
@@ -744,6 +745,7 @@ function renderResults(){
         <div class="rbtns">
           ${s.ali?`<a class="rbtn light" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${esc(R.ali)} ↗</a>`:""}
           ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)} ↗</a>`:`<span class="rbtn dark off">${esc(R.amz)}</span>`}
+          ${amzLink(s)?`<p class="rnote">${esc(R.amzNote)}</p>`:""}
         </div>
         <div class="rpager">${icons}<span>${rsel+1} / ${list.length}${tags[s.i]?" · "+esc(tags[s.i]):""}</span><span style="display:flex;gap:2px"><button class="ibtn" id="pgPrev" aria-label="‹" ${rsel?"":"disabled"}>‹</button><button class="ibtn" id="pgNext" aria-label="›" ${rsel<list.length-1?"":"disabled"}>›</button></span></div>
       </div>
