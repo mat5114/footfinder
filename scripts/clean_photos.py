@@ -3,7 +3,8 @@
 For every shoe with photos in data/aliexpress.json or data/awin.json, this script:
   1. downloads the main image and the gallery images,
   2. removes the background (rembg) from each and keeps only photos that show a
-     single shoe from the side (not the outsole, the back, a pair or a collage),
+     single shoe from the side (not the outsole, the back, a pair or a collage);
+     when a shoe has no side view, a three-quarter angled photo is used instead,
   3. takes the cleanest of those, trims it to the shoe and saves a transparent
      WebP to docs/img/<shoe id>.webp, which the site uses instead of the original.
 
@@ -67,8 +68,8 @@ def cutout(im, remove):
     return canvas
 
 
-def shape_report(rgba):
-    """Is this cut-out a single shoe seen from the side?"""
+def shape_report(rgba, angled=False):
+    """Is this cut-out a single shoe seen from the side (or, with angled=True, from a three-quarter angle)?"""
     a = rgba.getchannel("A")
     w0, h0 = a.size
     W = 120
@@ -110,7 +111,7 @@ def shape_report(rgba):
     # a clean cut-out touches its left/right edge only at the toe and heel tips
     side_touch = max(sum(grid[y][x] for y in range(H) for x in xs) / (H * len(xs)) for xs in (range(0, 2), range(W - 2, W)))
     why = []
-    if not 1.7 <= aspect <= 3.8: why.append(f"aspect {aspect:.2f}")
+    if not (1.25 if angled else 1.7) <= aspect <= 3.8: why.append(f"aspect {aspect:.2f}")
     if sym > 0.8: why.append(f"symmetric {sym:.2f} (sole view)")
     if len(big) > 1: why.append(f"{len(big)} objects")
     if side_touch > 0.28: why.append(f"background left at the edges ({side_touch:.2f})")
@@ -149,7 +150,7 @@ def main():
             continue
         # Photos of the main listing first, then the other listings, 10 at a time; in each batch
         # cut out the cleanest first and keep the first single shoe seen from the side
-        result, reasons = None, []
+        result, fallback, reasons = None, None, []
         for start in range(0, len(sources), 10):
             scored = []
             for url in sources[start:start + 10]:
@@ -165,11 +166,16 @@ def main():
                     result = cut
                     break
                 reasons.append(report["why"])
+                if fallback is None and cut and shape_report(cut, angled=True)["ok"]:
+                    fallback = (cut, url)  # angled photo, used only if no side view turns up
             if result:
                 break
+        angled = False
+        if not result and fallback:
+            (result, url), angled = fallback, True
         if result:
             result.save(path, "WEBP", quality=88, method=6)
-            cache[sid] = {"sources": sources, "chosen": url, "v": VERSION}
+            cache[sid] = {"sources": sources, "chosen": url, "v": VERSION, "angled": angled}
             done += 1
         else:
             failed += 1
