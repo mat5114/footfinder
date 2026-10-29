@@ -339,7 +339,7 @@ def main():
                 if prods:
                     found[sid] = {**pick(prods[0]), "matched_by": "override", "fetched": now}
             else:
-                best = None
+                best, hits = None, {}
                 for query in queries(shoe):  # try the most specific search first, then broader ones
                     try:
                         res = call("aliexpress.affiliate.product.query", {**common, "keywords": query, "page_size": 40, "sort": "LAST_VOLUME_DESC"}, key, secret)
@@ -349,13 +349,19 @@ def main():
                         raise
                     for p in products_of(res):
                         sc = score(p, shoe)
-                        if sc is not None and (best is None or sc > best[0]):
+                        if sc is None:
+                            continue
+                        hits.setdefault(str(p.get("product_id")), (sc, p))
+                        if best is None or sc > best[0]:
                             best = (sc, p)
                     if best:
                         break
                     time.sleep(0.3)
                 if best:
                     found[sid] = {**pick(best[1]), "matched_by": "search", "fetched": now}
+                    # photos from other listings of the same model, used when the main one has no side view
+                    others = sorted((h for k, h in hits.items() if k != str(best[1].get("product_id"))), key=lambda h: -h[0])[:5]
+                    found[sid]["alt_images"] = list(dict.fromkeys(u for _, o in others for u in [o.get("product_main_image_url"), *gallery_of(o)] if u))[:30]
         except Exception as error:  # keep going; one bad call should not stop the run
             failures += 1
             print(f"! {sid}: {error}", file=sys.stderr)

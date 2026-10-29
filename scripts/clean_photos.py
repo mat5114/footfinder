@@ -133,36 +133,40 @@ def main():
     for sid, hit in load("awin.json").items():
         photos.setdefault(sid, []).extend(hit.get("images") or [])
     for sid, hit in load("aliexpress.json").items():
-        photos.setdefault(sid, []).extend([hit.get("image"), *(hit.get("gallery") or [])])
+        photos.setdefault(sid, []).extend([hit.get("image"), *(hit.get("gallery") or []), *(hit.get("alt_images") or [])])
     cache = json.load(open(CACHE, encoding="utf-8")) if os.path.exists(CACHE) else {}
     reject = json.load(open(REJECT, encoding="utf-8")) if os.path.exists(REJECT) else {}
     os.makedirs(OUT, exist_ok=True)
     done = kept = failed = 0
 
     for sid, urls in photos.items():
-        sources = list(dict.fromkeys(u for u in urls if u and u not in reject.get(sid, [])))[:16]
+        sources = list(dict.fromkeys(u for u in urls if u and u not in reject.get(sid, [])))[:40]
         if not sources:
             continue
         path = os.path.join(OUT, f"{sid}.webp")
         if cache.get(sid, {}).get("sources") == sources and cache[sid].get("v") == VERSION and os.path.exists(path):
             kept += 1
             continue
-        scored = []
-        for url in dict.fromkeys(sources):
-            try:
-                im = fetch(url)
-                scored.append((cleanliness(im), url, im))
-            except Exception as e:
-                print(f"! {sid}: could not load {url}: {e}", file=sys.stderr)
-        # Cut out every photo, keep only single shoes seen from the side, then take the cleanest
+        # Photos of the main listing first, then the other listings, 10 at a time; in each batch
+        # cut out the cleanest first and keep the first single shoe seen from the side
         result, reasons = None, []
-        for score, url, im in sorted(scored, key=lambda x: -x[0]):
-            cut = cutout(im, remove)
-            report = shape_report(cut) if cut else {"ok": False, "why": "nothing left after removing the background"}
-            if report["ok"]:
-                result = cut
+        for start in range(0, len(sources), 10):
+            scored = []
+            for url in sources[start:start + 10]:
+                try:
+                    im = fetch(url)
+                    scored.append((cleanliness(im), url, im))
+                except Exception as e:
+                    print(f"! {sid}: could not load {url}: {e}", file=sys.stderr)
+            for score, url, im in sorted(scored, key=lambda x: -x[0]):
+                cut = cutout(im, remove)
+                report = shape_report(cut) if cut else {"ok": False, "why": "nothing left after removing the background"}
+                if report["ok"]:
+                    result = cut
+                    break
+                reasons.append(report["why"])
+            if result:
                 break
-            reasons.append(report["why"])
         if result:
             result.save(path, "WEBP", quality=88, method=6)
             cache[sid] = {"sources": sources, "chosen": url, "v": VERSION}
