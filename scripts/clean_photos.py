@@ -1,6 +1,6 @@
-"""Turn AliExpress listing photos into clean product cut-outs.
+"""Turn store product photos into clean product cut-outs.
 
-For every shoe in data/aliexpress.json that has photos, this script:
+For every shoe with photos in data/aliexpress.json or data/awin.json, this script:
   1. downloads the main image and the gallery images,
   2. removes the background (rembg) from each and keeps only photos that show a
      single shoe from the side (not the outsole, the back, a pair or a collage),
@@ -125,14 +125,22 @@ def main():
     session = new_session("isnet-general-use")
     remove = lambda im: rembg_remove(im, session=session)
 
-    ali = json.load(open(os.path.join(DATA, "aliexpress.json"), encoding="utf-8"))
+    def load(name):
+        path = os.path.join(DATA, name)
+        return json.load(open(path, encoding="utf-8")) if os.path.exists(path) else {}
+    # photos per shoe from every store: Awin first (official brand photos), then AliExpress
+    photos = {}
+    for sid, hit in load("awin.json").items():
+        photos.setdefault(sid, []).extend(hit.get("images") or [])
+    for sid, hit in load("aliexpress.json").items():
+        photos.setdefault(sid, []).extend([hit.get("image"), *(hit.get("gallery") or [])])
     cache = json.load(open(CACHE, encoding="utf-8")) if os.path.exists(CACHE) else {}
     reject = json.load(open(REJECT, encoding="utf-8")) if os.path.exists(REJECT) else {}
     os.makedirs(OUT, exist_ok=True)
     done = kept = failed = 0
 
-    for sid, hit in ali.items():
-        sources = [u for u in [hit.get("image"), *(hit.get("gallery") or [])] if u and u not in reject.get(sid, [])]
+    for sid, urls in photos.items():
+        sources = list(dict.fromkeys(u for u in urls if u and u not in reject.get(sid, [])))[:16]
         if not sources:
             continue
         path = os.path.join(OUT, f"{sid}.webp")
@@ -167,7 +175,7 @@ def main():
             print(f"! {sid}: no side-view photo ({'; '.join(reasons)[:200]})", file=sys.stderr)
 
     for name in os.listdir(OUT):  # drop cut-outs for shoes that lost their photo
-        if name.endswith(".webp") and name[:-5] not in ali:
+        if name.endswith(".webp") and name[:-5] not in photos:
             os.remove(os.path.join(OUT, name))
             cache.pop(name[:-5], None)
 

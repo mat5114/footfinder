@@ -1,7 +1,8 @@
-name: Update AliExpress photos and links
+name: Update store photos and links
 
 # Runs on demand (Actions tab → "Run workflow") and every Monday.
-# Needs three repository secrets: ALIEXPRESS_APP_KEY, ALIEXPRESS_APP_SECRET, ALIEXPRESS_TRACKING_ID.
+# Needs repository secrets: ALIEXPRESS_APP_KEY, ALIEXPRESS_APP_SECRET, ALIEXPRESS_TRACKING_ID,
+# and for Awin: AWIN_API_TOKEN (plus AWIN_PUBLISHER_ID, optional).
 on:
   workflow_dispatch:
   schedule:
@@ -31,6 +32,12 @@ jobs:
           ALIEXPRESS_TRACKING_ID: ${{ secrets.ALIEXPRESS_TRACKING_ID }}
         run: python scripts/aliexpress_fetch.py
 
+      - name: Fetch Awin store photos and links
+        env:
+          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
+          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
+        run: python scripts/awin_fetch.py
+
       - name: Cache the background-removal model
         uses: actions/cache@v4
         with:
@@ -50,9 +57,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/aliexpress.json data/aliexpress_review.csv data/photo_cache.json docs/
+          git add data/awin.json data/awin_review.csv 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Nothing changed."
           else
-            git commit -m "Update AliExpress photos and links"
+            git commit -m "Update store photos and links"
             git push
           fi

@@ -53,6 +53,16 @@ O processo roda de novo toda segunda-feira para atualizar fotos, links e preços
 
 Depois de cada execução, confira `data/aliexpress_review.csv`. Se um tênis foi ligado ao anúncio errado, coloque o link ou o ID do anúncio certo em `data/aliexpress_overrides.json`, por exemplo `{"li-ning-red-hare-9-ultra": "https://www.aliexpress.com/item/1005001234567890.html"}`. Para nunca linkar um tênis, use `null`.
 
+## Lojas da Awin (Nike BR, Netshoes, SportsShoes...)
+
+O script `scripts/awin_fetch.py` baixa o feed de produtos de cada loja que aprovou você na Awin, encontra os tênis do catálogo e salva, por tênis, o link de afiliado, o preço e as fotos em `data/awin.json`. As fotos viram recortes sem fundo, e o resultado mostra um botão para cada loja, com as do país do visitante primeiro.
+
+Configuração, em **Settings → Secrets and variables → Actions**:
+- `AWIN_API_TOKEN`: o token de ui.awin.com/awin-api.
+- `AWIN_PUBLISHER_ID`: o seu ID de publisher (opcional).
+
+O resumo de cada execução mostra as lojas aprovadas, as que ainda estão em análise e quantos tênis foram encontrados em cada uma. Lojas sem o feed novo da Awin aparecem como "no Enhanced Feed".
+
 ## Links da Amazon
 
 O botão da Amazon leva para a busca pelo nome do tênis na Amazon, com o seu código de afiliado. Não precisa da API.
