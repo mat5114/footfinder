@@ -24,6 +24,11 @@ DATA = os.path.join(ROOT, "data")
 
 BRANDS = dict(BRAND_TERMS)
 BRANDS.update({"ERKE": ["erke", "hongxing erke"], "ONEMIX": ["onemix"]})
+# DISCOVER_BRANDS="Chunta,Other" searches only those brands and writes a separate report
+ONLY = [b.strip() for b in (os.environ.get("DISCOVER_BRANDS") or "").split(",") if b.strip()]
+if ONLY:
+    BRANDS = {b: BRANDS.get(b) or [norm(b)] for b in ONLY}
+OUT_NAME = "aliexpress_discovery.json" if not ONLY else "aliexpress_discovery_" + "_".join(norm(b).replace(" ", "-") for b in ONLY) + ".json"
 KEYWORDS = ["running shoes", "marathon running shoes", "carbon plate running shoes", "trail running shoes",
             "cushioning running shoes", "racing shoes"]
 STOP = set("""running run runner shoes shoe sneakers sneaker trainers trainer men men's mens women women's womens unisex
@@ -94,7 +99,7 @@ def main():
                     e["ids"].add(pid)
                     e["listings"] += 1
                     e["volume"] += int(p.get("lastest_volume") or 0)
-                    if len(e["titles"]) < 3:
+                    if len(e["titles"]) < (10 if ONLY else 3):
                         e["titles"].append(title[:110])
                     pr = p.get("target_sale_price") or p.get("sale_price")
                     if pr:
@@ -110,7 +115,7 @@ def main():
                      "volume": e["volume"], "median_price_usd": pr[len(pr) // 2] if pr else None, "titles": e["titles"]})
     rows.sort(key=lambda r: (-r["volume"], -r["listings"]))
     json.dump({"checked": datetime.now(timezone.utc).strftime("%Y-%m-%d"), "models": rows},
-              open(os.path.join(DATA, "aliexpress_discovery.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+              open(os.path.join(DATA, OUT_NAME), "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     new = [r for r in rows if not r["in_catalog"]]
     note("notice", f"Discovery: {len(rows)} model names, {len(new)} not in the catalog")
 
