@@ -43,7 +43,7 @@ button{font:inherit;color:inherit}
 .lmenu li[aria-selected="true"]::after{content:"✓";font-size:12px}
 .lmenu li small{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
 .cfoot>:last-child{justify-self:end}
-.about{all:unset;cursor:pointer;justify-self:end;font-size:12.5px;color:var(--ink)}
+.about{all:unset;cursor:pointer;text-decoration:none;justify-self:end;font-size:12.5px;color:var(--ink)}
 .about:hover{text-decoration:underline;text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
@@ -225,11 +225,10 @@ h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.02
 <div class="top">
   <div class="logo"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 15.5c3.5 0 4.8-7 9-7 3.6 0 3.8 3 8.5 3v3.3c0 1.3-.8 2.2-2.2 2.2H3.6C2.6 17 2 16.4 2 15.5z" fill="currentColor"/></svg>Footfinder</div>
   <div class="lang"><button class="lbtn" id="langBtn" aria-haspopup="listbox" aria-expanded="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M1.75 8h12.5M8 1.75c1.8 1.9 2.6 4 2.6 6.25S9.8 12.35 8 14.25C6.2 12.35 5.4 10.25 5.4 8S6.2 3.65 8 1.75z"/></svg><span id="langCur"></span><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m2.5 4 2.5 2.5L7.5 4"/></svg></button><ul class="lmenu" id="langMenu" role="listbox" hidden></ul></div>
-  <button class="about" id="aboutBtn"></button>
+  <a class="about" id="aboutBtn" href="about.html"></a>
 </div>
 <div class="cloud" id="cloud" tabindex="0" role="region" aria-roledescription="carousel"><div class="sinfo" id="sinfo"></div></div>
 <section class="card" id="card" aria-live="polite"></section>
-<p class="note" id="note" hidden></p>
 
 <script>
 const RAW=__DATA__;
@@ -835,7 +834,7 @@ function applyLang(){
   document.getElementById("langCur").textContent=cur[1];
   document.getElementById("langBtn").setAttribute("aria-label",t("lang")+": "+cur[1]);
   document.getElementById("langMenu").innerHTML=LANGS.map(x=>`<li role="option" tabindex="0" data-l="${x[0]}" aria-selected="${x[0]===L}" lang="${x[2]}">${x[1]}</li>`).join("");
-  document.getElementById("aboutBtn").textContent=t("about");document.getElementById("note").textContent=t("note");
+  document.getElementById("aboutBtn").textContent=t("about");
   view==="quiz"?renderQuiz():renderResults();
 }
 const lb=document.getElementById("langBtn"),lm=document.getElementById("langMenu");
@@ -849,10 +848,5 @@ lm.onkeydown=e=>{const li=e.target.closest("li");if(!li)return;
   if(e.key==="ArrowUp"){e.preventDefault();(li.previousElementSibling||lm.lastElementChild).focus()}};
 document.addEventListener("click",e=>{if(!lm.hidden&&!e.target.closest(".lang"))closeMenu()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!lm.hidden){closeMenu();lb.focus()}});
-const noteEl=document.getElementById("note"),aboutBtn=document.getElementById("aboutBtn");
-aboutBtn.setAttribute("aria-expanded","false");
-aboutBtn.onclick=e=>{e.stopPropagation();noteEl.hidden=!noteEl.hidden;aboutBtn.setAttribute("aria-expanded",String(!noteEl.hidden))};
-document.addEventListener("click",e=>{if(!noteEl.hidden&&!e.target.closest("#note"))noteEl.hidden=true});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!noteEl.hidden){noteEl.hidden=true;aboutBtn.focus()}});
 recompute();drawCloud();applyLang();
 </script>

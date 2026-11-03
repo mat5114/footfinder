@@ -6,6 +6,7 @@ injects it into src/footfinder.template.html and writes (GitHub Pages serves the
   - docs/artifact.html   the same page without the document shell (for Claude artifacts)
 """
 import json
+import shutil
 import re
 import os
 
@@ -93,6 +94,7 @@ def main():
     site = site.replace(title, "", 1)
     html = SHELL.replace("{page}", site).replace("</head>", title + icons + "</head>", 1)
     open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(html)
+    shutil.copyfile(os.path.join(ROOT, "src", "about.template.html"), os.path.join(dist, "about.html"))
     print(f"Built docs/ with {len(shoes)} shoes on the site, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for v in ali.values() if v.get('search_link'))} with AliExpress links, {len(awin)} with Awin offers, Amazon tag {'set' if amz['tag'] else 'not set'}")
 
 

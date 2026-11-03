@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · Footfinder</title>
+<meta name="description" content="What Footfinder is, where its data comes from, how it makes money and what it does with your data.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<style>
+:root{
+  --bg:#F5F5F4; --card:#FFFFFF; --ink:#292524; --muted:#78716C; --line:#E7E5E4;
+  --shadow:0 1px 2px rgb(28 25 23 / .04),0 4px 12px rgb(28 25 23 / .05),0 16px 40px rgb(28 25 23 / .06);
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1C1917; --card:#292524; --ink:#F5F5F4; --muted:#A8A29E; --line:#3D3936;
+  --shadow:0 1px 2px rgb(0 0 0 / .3),0 16px 40px rgb(0 0 0 / .35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1C1917; --card:#292524; --ink:#F5F5F4; --muted:#A8A29E; --line:#3D3936;
+  --shadow:0 1px 2px rgb(0 0 0 / .3),0 16px 40px rgb(0 0 0 / .35); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 var(--font);font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased;
+  padding:12px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;height:40px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.back{font-size:12.5px;color:var(--ink);text-decoration:none}
+.back:hover{text-decoration:underline;text-underline-offset:3px}
+main{max-width:680px;margin:28px auto 0;background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:clamp(24px,5vw,44px)}
+h1{margin:0 0 14px;font-size:clamp(26px,4vw,32px);font-weight:700;letter-spacing:-.03em;line-height:1.15}
+h2{margin:30px 0 8px;font-size:17px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 12px;text-wrap:pretty}
+.lead{font-size:16px}
+.muted{color:var(--muted)}
+.cta{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;margin-top:26px;border-radius:12px;background:var(--ink);color:var(--bg);font-weight:600;font-size:14.5px;text-decoration:none}
+.cta:active{scale:.96}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="./"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 15.5c3.5 0 4.8-7 9-7 3.6 0 3.8 3 8.5 3v3.3c0 1.3-.8 2.2-2.2 2.2H3.6C2.6 17 2 16.4 2 15.5z" fill="currentColor"/></svg>Footfinder</a>
+  <a class="back" href="./" id="back"></a>
+</header>
+<main id="main"></main>
+<script>
+/* Same language as the quiz: it is saved in this browser when the visitor picks one there */
+const T={
+en:{back:"← Back to the quiz",title:"About Footfinder",cta:"Find my shoe",s:[
+ ["","Footfinder is a free, independent tool that helps you find the right running shoe. You answer a few questions by tapping, and it shows the shoes that best fit how you run.","For now it focuses on Chinese brands such as Li-Ning, Anta, Xtep, 361° and Qiaodan. They offer great value, but their information is scattered and often only in Chinese, so it's hard to compare them in one place."],
+ ["Where the data comes from","Specs such as weight, stack height, drop, foam and plate come from brand spec sheets and published reviews and measurements. For some newer models, specs are estimates based on the rest of the line.","Prices are list prices in US dollars. The store's page always has the final word on price, sizes and stock. Photos come from the stores' listings."],
+ ["Affiliates and disclosure","The \"See on AliExpress\" buttons are affiliate links through the AliExpress affiliate program. If you buy, Footfinder may earn a small commission, at no extra cost to you. This helps keep the site running.","Commissions don't affect which shoes appear or in what order. Results depend only on your answers and the shoe data."],
+ ["Privacy","No sign-up and no cookies of our own. Your answers stay in your browser and aren't sent anywhere. The only thing saved is your language choice, in your browser's storage.","The site is hosted on GitHub Pages and uses Google Fonts. Like any web host, they may log technical data such as your IP address. When you go to AliExpress, its own cookies and privacy policy apply."]]},
+pt:{back:"← Voltar ao quiz",title:"Sobre o Footfinder",cta:"Achar meu tênis",s:[
+ ["","O Footfinder é uma ferramenta gratuita e independente que ajuda você a encontrar o tênis de corrida certo. Você responde algumas perguntas só tocando na tela e ele mostra os tênis que mais combinam com o seu jeito de correr.","Por enquanto, o foco são marcas chinesas como Li-Ning, Anta, Xtep, 361° e Qiaodan. Elas têm ótimo custo-benefício, mas as informações estão espalhadas e muitas vezes só em chinês, então é difícil compará-las num lugar só."],
+ ["De onde vêm os dados","Especificações como peso, altura do solado, drop, espuma e placa vêm das fichas técnicas das marcas e de reviews e medições publicadas. Em alguns modelos mais novos, são estimativas baseadas no resto da linha.","Os preços são de tabela, em dólares americanos. A página da loja tem sempre a palavra final sobre preço, tamanhos e estoque. As fotos vêm dos anúncios das lojas."],
+ ["Afiliados e transparência","Os botões \"Ver no AliExpress\" são links de afiliado do programa de afiliados do AliExpress. Se você comprar, o Footfinder pode ganhar uma pequena comissão, sem custo extra para você. Isso ajuda a manter o site.","As comissões não influenciam quais tênis aparecem nem a ordem deles. Os resultados dependem só das suas respostas e dos dados dos tênis."],
+ ["Privacidade","Não é preciso cadastro e o site não usa cookies próprios. Suas respostas ficam no seu navegador e não são enviadas para lugar nenhum. A única coisa salva é o idioma escolhido, no armazenamento do seu navegador.","O site é hospedado no GitHub Pages e usa o Google Fonts. Como qualquer serviço de hospedagem, eles podem registrar dados técnicos como o seu endereço IP. Ao ir para o AliExpress, valem os cookies e a política de privacidade dele."]]},
+es:{back:"← Volver al quiz",title:"Acerca de Footfinder",cta:"Encontrar mi zapatilla",s:[
+ ["","Footfinder es una herramienta gratuita e independiente que te ayuda a encontrar la zapatilla de running adecuada. Respondes unas preguntas con solo tocar la pantalla y te muestra las zapatillas que mejor encajan con tu forma de correr.","Por ahora se centra en marcas chinas como Li-Ning, Anta, Xtep, 361° y Qiaodan. Tienen una gran relación calidad-precio, pero su información está dispersa y a menudo solo en chino, así que es difícil compararlas en un solo lugar."],
+ ["De dónde vienen los datos","Las especificaciones como peso, altura de la suela, drop, espuma y placa vienen de las fichas de las marcas y de análisis y mediciones publicados. En algunos modelos recientes son estimaciones basadas en el resto de la línea.","Los precios son de catálogo, en dólares estadounidenses. La página de la tienda siempre tiene la última palabra sobre precio, tallas y stock. Las fotos vienen de los anuncios de las tiendas."],
+ ["Afiliados y transparencia","Los botones \"Ver en AliExpress\" son enlaces de afiliado del programa de afiliados de AliExpress. Si compras, Footfinder puede ganar una pequeña comisión, sin coste extra para ti. Esto ayuda a mantener el sitio.","Las comisiones no influyen en qué zapatillas aparecen ni en su orden. Los resultados dependen solo de tus respuestas y de los datos de las zapatillas."],
+ ["Privacidad","No hace falta registrarse y el sitio no usa cookies propias. Tus respuestas se quedan en tu navegador y no se envían a ningún sitio. Lo único que se guarda es el idioma elegido, en el almacenamiento de tu navegador.","El sitio está alojado en GitHub Pages y usa Google Fonts. Como cualquier servicio de alojamiento, pueden registrar datos técnicos como tu dirección IP. Al ir a AliExpress, se aplican sus propias cookies y su política de privacidad."]]},
+fr:{back:"← Retour au quiz",title:"À propos de Footfinder",cta:"Trouver ma chaussure",s:[
+ ["","Footfinder est un outil gratuit et indépendant qui vous aide à trouver la bonne chaussure de running. Vous répondez à quelques questions d'un simple toucher, et il vous montre les chaussures qui correspondent le mieux à votre façon de courir.","Pour l'instant, il se concentre sur les marques chinoises comme Li-Ning, Anta, Xtep, 361° et Qiaodan. Elles offrent un excellent rapport qualité-prix, mais leurs informations sont dispersées et souvent uniquement en chinois, ce qui rend la comparaison difficile."],
+ ["D'où viennent les données","Les caractéristiques comme le poids, la hauteur de semelle, le drop, la mousse et la plaque viennent des fiches des marques et de tests et mesures publiés. Pour certains modèles récents, ce sont des estimations basées sur le reste de la gamme.","Les prix sont des prix catalogue en dollars américains. La page du magasin fait toujours foi pour le prix, les tailles et le stock. Les photos viennent des annonces des magasins."],
+ ["Affiliation et transparence","Les boutons « Voir sur AliExpress » sont des liens d'affiliation du programme d'affiliation d'AliExpress. Si vous achetez, Footfinder peut toucher une petite commission, sans frais supplémentaires pour vous. Cela aide à faire vivre le site.","Les commissions n'influencent ni les chaussures affichées ni leur ordre. Les résultats dépendent uniquement de vos réponses et des données des chaussures."],
+ ["Confidentialité","Aucune inscription et aucun cookie propre au site. Vos réponses restent dans votre navigateur et ne sont envoyées nulle part. Seul votre choix de langue est enregistré, dans le stockage de votre navigateur.","Le site est hébergé sur GitHub Pages et utilise Google Fonts. Comme tout hébergeur, ils peuvent enregistrer des données techniques comme votre adresse IP. Sur AliExpress, ses propres cookies et sa politique de confidentialité s'appliquent."]]},
+de:{back:"← Zurück zum Quiz",title:"Über Footfinder",cta:"Meinen Schuh finden",s:[
+ ["","Footfinder ist ein kostenloses, unabhängiges Tool, das dir hilft, den richtigen Laufschuh zu finden. Du beantwortest ein paar Fragen per Antippen und siehst die Schuhe, die am besten zu deinem Laufstil passen.","Im Moment liegt der Fokus auf chinesischen Marken wie Li-Ning, Anta, Xtep, 361° und Qiaodan. Sie bieten ein sehr gutes Preis-Leistungs-Verhältnis, aber die Informationen sind verstreut und oft nur auf Chinesisch, daher lassen sie sich schwer an einem Ort vergleichen."],
+ ["Woher die Daten kommen","Angaben wie Gewicht, Sohlenhöhe, Sprengung, Schaum und Platte stammen aus den Datenblättern der Marken sowie aus veröffentlichten Tests und Messungen. Bei einigen neueren Modellen sind es Schätzungen auf Basis der übrigen Serie.","Preise sind Listenpreise in US-Dollar. Maßgeblich für Preis, Größen und Verfügbarkeit ist immer die Seite des Shops. Die Fotos stammen aus den Angeboten der Shops."],
+ ["Affiliate-Links und Offenlegung","Die Buttons „Auf AliExpress ansehen“ sind Affiliate-Links über das Partnerprogramm von AliExpress. Wenn du kaufst, kann Footfinder eine kleine Provision erhalten, ohne Mehrkosten für dich. Das hilft, die Seite zu betreiben.","Provisionen beeinflussen weder, welche Schuhe erscheinen, noch ihre Reihenfolge. Die Ergebnisse hängen nur von deinen Antworten und den Schuhdaten ab."],
+ ["Datenschutz","Keine Registrierung und keine eigenen Cookies. Deine Antworten bleiben in deinem Browser und werden nirgendwohin gesendet. Gespeichert wird nur deine Sprachwahl, im Speicher deines Browsers.","Die Seite wird auf GitHub Pages gehostet und nutzt Google Fonts. Wie jeder Hoster können sie technische Daten wie deine IP-Adresse protokollieren. Auf AliExpress gelten dessen eigene Cookies und Datenschutzrichtlinie."]]},
+it:{back:"← Torna al quiz",title:"Informazioni su Footfinder",cta:"Trova la mia scarpa",s:[
+ ["","Footfinder è uno strumento gratuito e indipendente che ti aiuta a trovare la scarpa da running giusta. Rispondi a qualche domanda con un tocco e ti mostra le scarpe più adatte al tuo modo di correre.","Per ora si concentra su marchi cinesi come Li-Ning, Anta, Xtep, 361° e Qiaodan. Hanno un ottimo rapporto qualità-prezzo, ma le informazioni sono sparse e spesso solo in cinese, quindi è difficile confrontarle in un unico posto."],
+ ["Da dove vengono i dati","Le specifiche come peso, altezza della suola, drop, schiuma e piastra vengono dalle schede dei marchi e da recensioni e misurazioni pubblicate. Per alcuni modelli recenti sono stime basate sul resto della linea.","I prezzi sono di listino, in dollari statunitensi. La pagina del negozio ha sempre l'ultima parola su prezzo, taglie e disponibilità. Le foto vengono dagli annunci dei negozi."],
+ ["Affiliazioni e trasparenza","I pulsanti \"Vedi su AliExpress\" sono link di affiliazione del programma di affiliazione di AliExpress. Se acquisti, Footfinder può ricevere una piccola commissione, senza costi aggiuntivi per te. Questo aiuta a mantenere il sito.","Le commissioni non influenzano quali scarpe compaiono né il loro ordine. I risultati dipendono solo dalle tue risposte e dai dati delle scarpe."],
+ ["Privacy","Nessuna registrazione e nessun cookie proprio. Le tue risposte restano nel tuo browser e non vengono inviate da nessuna parte. L'unica cosa salvata è la lingua scelta, nella memoria del tuo browser.","Il sito è ospitato su GitHub Pages e usa Google Fonts. Come qualsiasi hosting, possono registrare dati tecnici come il tuo indirizzo IP. Su AliExpress valgono i suoi cookie e la sua informativa sulla privacy."]]}
+};
+let L="en";try{const sv=localStorage.getItem("fdf-lang");if(T[sv])L=sv}catch(e){}
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const t=T[L];document.documentElement.lang=L;document.title=t.title;
+document.getElementById("back").textContent=t.back;
+document.getElementById("main").innerHTML=`<h1>${esc(t.title)}</h1>`+t.s.map(([h,...ps],k)=>(h?`<h2>${esc(h)}</h2>`:"")+ps.map(p=>`<p class="${k?"":"lead"}">${esc(p)}</p>`).join("")).join("")+`<a class="cta" href="./">${esc(t.cta)}</a>`;
+</script>
+</body>
+</html>
