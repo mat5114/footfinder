@@ -14,6 +14,7 @@ It skips shoes whose chosen source photo has not changed since the last run
 Needs: pip install "rembg[cpu]" pillow
 """
 import io
+import re
 import json
 import os
 import sys
@@ -26,7 +27,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(ROOT, "docs", "img")
 CACHE = os.path.join(DATA, "photo_cache.json")
-# Photos a person looked at and rejected: {"shoe-id": ["image url", ...]}
+# Photos a person looked at and rejected: {"shoe-id": ["image url" or 64-bit look fingerprint, ...]}
 REJECT = os.path.join(DATA, "photo_reject.json")
 MAX_W = 640
 VERSION = 2  # bump to redo every cut-out when the selection rules change
@@ -66,6 +67,17 @@ def cutout(im, remove):
     if canvas.width > MAX_W:
         canvas = canvas.resize((MAX_W, round(canvas.height * MAX_W / canvas.width)), Image.LANCZOS)
     return canvas
+
+
+def look_hash(rgba):
+    """64-bit fingerprint of a cut-out's shape and shading; the same photo gives the same hash whatever its address."""
+    bg = Image.new("RGB", rgba.size, "white"); bg.paste(rgba, mask=rgba.getchannel("A"))
+    g = bg.convert("L").resize((9, 8), Image.LANCZOS); px = list(g.getdata())
+    return "".join("1" if px[r * 9 + c] > px[r * 9 + c + 1] else "0" for r in range(8) for c in range(8))
+
+
+def near(h, hashes, limit=8):
+    return any(sum(a != b for a, b in zip(h, x)) <= limit for x in hashes)
 
 
 def shape_report(rgba, angled=False):
@@ -137,6 +149,8 @@ def main():
         photos.setdefault(sid, []).extend([hit.get("image"), *(hit.get("gallery") or []), *(hit.get("alt_images") or [])])
     cache = json.load(open(CACHE, encoding="utf-8")) if os.path.exists(CACHE) else {}
     reject = json.load(open(REJECT, encoding="utf-8")) if os.path.exists(REJECT) else {}
+    # fingerprints of rejected cut-outs, so the same picture under another address is skipped too
+    bad_looks = {sid: [u for u in urls if re.fullmatch(r"[01]{64}", u)] for sid, urls in reject.items()}
     os.makedirs(OUT, exist_ok=True)
     done = kept = failed = 0
     report = {}  # why each shoe without a cut-out was rejected, photo by photo
@@ -162,6 +176,9 @@ def main():
                     print(f"! {sid}: could not load {url}: {e}", file=sys.stderr)
             for score, url, im in sorted(scored, key=lambda x: -x[0]):
                 cut = cutout(im, remove)
+                if cut and near(look_hash(cut), bad_looks.get(sid, [])):
+                    reasons.append("same picture as a rejected one")
+                    continue
                 report = shape_report(cut) if cut else {"ok": False, "why": "nothing left after removing the background"}
                 if report["ok"]:
                     result = cut
