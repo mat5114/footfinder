@@ -40,6 +40,8 @@ O site fica na pasta `docs/`, que o GitHub Pages publica direto:
 
 Em um ou dois minutos o site fica em `https://mat5114.github.io/footfinder/`.
 
+Domínio próprio: `footfinder.cc` (registado na GoDaddy). O arquivo `docs/CNAME` liga o domínio ao GitHub Pages; o DNS na GoDaddy tem 4 registros A em `@` (185.199.108.153, .109, .110, .111) e um CNAME `www` para `mat5114.github.io`.
+
 A pasta `docs/` também funciona em Netlify, Vercel ou Cloudflare Pages sem configuração extra.
 
 ## Fotos e links do AliExpress
