@@ -38,7 +38,7 @@ body{overflow:hidden;display:flex;flex-direction:column;background:var(--bg);col
   -webkit-font-smoothing:antialiased;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 14px}
 button{font:inherit;color:inherit}
-.top{flex:none;width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;max-width:1200px;margin:0 auto;position:relative;z-index:3}
+.top{flex:none;width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;max-width:1200px;margin:0 auto;position:relative;z-index:200}  /* above the slider shoes (z up to 100) */
 .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:-.01em}
 .logo svg{flex:none}
 .lang{position:relative;justify-self:center}
@@ -51,7 +51,7 @@ button{font:inherit;color:inherit}
 .lmenu li[aria-selected="true"]{font-weight:600}
 .lmenu li[aria-selected="true"]::after{content:"✓";font-size:12px}
 .lmenu li small{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
-.cfoot>:last-child{justify-self:end}
+.cfoot>:first-child{justify-self:start}.cfoot>:last-child{justify-self:end}
 .about{all:unset;cursor:pointer;text-decoration:none;justify-self:end;font-size:12.5px;color:var(--ink)}
 .about:hover{text-decoration:underline;text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
@@ -83,6 +83,12 @@ button{font:inherit;color:inherit}
 /* card */
 .card{position:relative;z-index:2;flex:none;width:100%;max-width:560px;margin:6px auto 0;background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:12px}
 .card.wide{max-width:920px}
+.card:not(.res){display:flex;flex-direction:column}
+.cbody{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+.nav{all:unset;cursor:pointer;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--tile);color:var(--ink);transition-property:scale,opacity,background-color;transition-duration:.15s}
+.nav:hover{background:var(--tile-hover)}
+.nav:active{scale:.96}
+.nav[disabled]{opacity:.3;pointer-events:none}
 .chead{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;padding:6px 4px 12px}
 .icons{display:flex;gap:2px}
 .ibtn{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center;border-radius:8px;color:var(--muted);transition-property:background-color,color,scale;transition-duration:.15s}
@@ -92,7 +98,7 @@ button{font:inherit;color:inherit}
 h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.022em;line-height:1.2;text-wrap:balance}
 .hint{margin:-4px 0 12px;text-align:center;color:var(--muted);font-size:13px;text-wrap:pretty;padding-inline:12px}
 .opts{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:6px}
-@media (max-width:520px){.opts{--cols:2!important}}
+@media (max-width:520px){.opts{--cols:2!important}.opts.many{--cols:3!important}}
 .opt{all:unset;box-sizing:border-box;cursor:pointer;background:var(--tile);border-radius:10px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;min-height:64px;
   transition-property:background-color,box-shadow,scale;transition-duration:.15s}
 .opt:hover{background:var(--tile-hover)}
@@ -283,7 +289,7 @@ function shoeSVG(s){
 /* ---------- copy ---------- */
 const LANGS=[["en","English","en"],["pt","Português","pt-BR"],["es","Español","es"],["fr","Français","fr"],["de","Deutsch","de"],["it","Italiano","it"]];
 const T={
-en:{lang:"Language",about:"About",back:"Back",close:"Close",reset:"Start over",next:"See results",
+en:{lang:"Language",about:"About",back:"Back",fwd:"Next",close:"Close",reset:"Start over",next:"See results",
  resTitle:"Your best shoes",resHint:"We picked {n} for you, at most 2 per brand.",
  fAll:"All",fBudget:"Cheapest",fCn:"Chinese brands",fCur:"2026 releases",
  edit:"Change answers",prev:"Previous version · often discounted",est:"estimated specs",soon:"soon",similar:"Similar:",
@@ -292,7 +298,7 @@ en:{lang:"Language",about:"About",back:"Back",close:"Close",reset:"Start over",n
  notHere:"Not listed",neverHad:"Never had one / can't remember",loved:"Loved it",hated:"Didn't like it",pickModel:"Tap the model",howWas:"How did it go?",
  w:{stab:"Extra stability",wide:"Wide / roomy fit",soft:"Soft ride",bouncy:"Bouncy foam",firm:"Firm ride",heavy:"Good for heavier runners",start:"Easy for beginners",fast:"Built for pace",daily:"Great daily trainer",dist:"Handles your distance",budget:"Fits your budget",like:"Like the one you loved",trail:"Trail grip",mixed:"Road and dirt",long:"Protective for high mileage"},
  plate:{carbon:"carbon plate",carbon_rods:"carbon rods",glassfiber:"fiberglass",nylon:"nylon plate"}},
-pt:{lang:"Idioma",about:"Sobre",back:"Voltar",close:"Fechar",reset:"Recomeçar",next:"Ver resultados",
+pt:{lang:"Idioma",about:"Sobre",back:"Voltar",fwd:"Avançar",close:"Fechar",reset:"Recomeçar",next:"Ver resultados",
  resTitle:"Seus melhores tênis",resHint:"Selecionamos {n} para você, no máximo 2 por marca.",
  fAll:"Todos",fBudget:"Mais baratos",fCn:"Marcas chinesas",fCur:"Lançamentos 2026",
  edit:"Mudar respostas",prev:"Versão anterior · costuma ter desconto",est:"dados estimados",soon:"em breve",similar:"Parecidos:",
@@ -301,7 +307,7 @@ pt:{lang:"Idioma",about:"Sobre",back:"Voltar",close:"Fechar",reset:"Recomeçar",
  notHere:"Não está aqui",neverHad:"Nunca tive / não lembro",loved:"Amei esse",hated:"Não gostei",pickModel:"Toque no modelo",howWas:"E como foi com ele?",
  w:{stab:"Mais estabilidade",wide:"Versão larga / fôrma espaçosa",soft:"Pisada macia",bouncy:"Espuma com retorno",firm:"Pisada firme",heavy:"Bom para mais peso",start:"Fácil para começar",fast:"Feito para ritmo",daily:"Ótimo no dia a dia",dist:"Aguenta sua distância",budget:"Cabe no orçamento",like:"Parecido com o que você amou",trail:"Tração para trilha",mixed:"Asfalto e terra",long:"Protege em volume alto"},
  plate:{carbon:"placa de carbono",carbon_rods:"hastes de carbono",glassfiber:"fibra de vidro",nylon:"placa de nylon"}},
-es:{lang:"Idioma",about:"Acerca de",back:"Atrás",close:"Cerrar",reset:"Empezar de nuevo",next:"Ver resultados",
+es:{lang:"Idioma",about:"Acerca de",back:"Atrás",fwd:"Siguiente",close:"Cerrar",reset:"Empezar de nuevo",next:"Ver resultados",
  resTitle:"Tus mejores zapatillas",resHint:"Elegimos {n} para ti, como máximo 2 por marca.",
  fAll:"Todas",fBudget:"Más baratas",fCn:"Marcas chinas",fCur:"Novedades 2026",
  edit:"Cambiar respuestas",prev:"Versión anterior · suele tener descuento",est:"datos estimados",soon:"pronto",similar:"Parecidas:",
@@ -310,7 +316,7 @@ es:{lang:"Idioma",about:"Acerca de",back:"Atrás",close:"Cerrar",reset:"Empezar 
  notHere:"No está aquí",neverHad:"Nunca tuve / no recuerdo",loved:"Me encantó",hated:"No me gustó",pickModel:"Toca el modelo",howWas:"¿Qué tal te fue?",
  w:{stab:"Más estabilidad",wide:"Versión ancha / horma amplia",soft:"Pisada suave",bouncy:"Espuma con rebote",firm:"Pisada firme",heavy:"Buena para más peso",start:"Fácil para empezar",fast:"Hecha para el ritmo",daily:"Ideal para el día a día",dist:"Aguanta tu distancia",budget:"Entra en tu presupuesto",like:"Parecida a la que te encantó",trail:"Agarre para montaña",mixed:"Asfalto y tierra",long:"Protege en mucho volumen"},
  plate:{carbon:"placa de carbono",carbon_rods:"varillas de carbono",glassfiber:"fibra de vidrio",nylon:"placa de nailon"}},
-fr:{lang:"Langue",about:"À propos",back:"Retour",close:"Fermer",reset:"Recommencer",next:"Voir les résultats",
+fr:{lang:"Langue",about:"À propos",back:"Retour",fwd:"Suivant",close:"Fermer",reset:"Recommencer",next:"Voir les résultats",
  resTitle:"Vos meilleures chaussures",resHint:"Nous en avons choisi {n} pour vous, 2 par marque au maximum.",
  fAll:"Toutes",fBudget:"Les moins chères",fCn:"Marques chinoises",fCur:"Nouveautés 2026",
  edit:"Modifier les réponses",prev:"Version précédente · souvent en promo",est:"données estimées",soon:"bientôt",similar:"Similaires :",
@@ -319,7 +325,7 @@ fr:{lang:"Langue",about:"À propos",back:"Retour",close:"Fermer",reset:"Recommen
  notHere:"Pas dans la liste",neverHad:"Jamais eu / je ne sais plus",loved:"Je l'ai adorée",hated:"Je n'ai pas aimé",pickModel:"Touchez le modèle",howWas:"Et alors, c'était comment ?",
  w:{stab:"Plus de stabilité",wide:"Version large / chaussant ample",soft:"Foulée moelleuse",bouncy:"Mousse dynamique",firm:"Foulée ferme",heavy:"Adaptée aux coureurs plus lourds",start:"Facile pour débuter",fast:"Faite pour la vitesse",daily:"Idéale au quotidien",dist:"Tient votre distance",budget:"Dans votre budget",like:"Proche de celle que vous avez adorée",trail:"Accroche en trail",mixed:"Route et chemins",long:"Protège sur gros volume"},
  plate:{carbon:"plaque carbone",carbon_rods:"tiges carbone",glassfiber:"fibre de verre",nylon:"plaque nylon"}},
-de:{lang:"Sprache",about:"Über",back:"Zurück",close:"Schließen",reset:"Neu starten",next:"Ergebnisse ansehen",
+de:{lang:"Sprache",about:"Über",back:"Zurück",fwd:"Weiter",close:"Schließen",reset:"Neu starten",next:"Ergebnisse ansehen",
  resTitle:"Deine besten Schuhe",resHint:"Wir haben {n} für dich ausgewählt, höchstens 2 pro Marke.",
  fAll:"Alle",fBudget:"Günstigste",fCn:"Chinesische Marken",fCur:"Neu 2026",
  edit:"Antworten ändern",prev:"Vorgängermodell · oft reduziert",est:"geschätzte Daten",soon:"bald",similar:"Ähnlich:",
@@ -328,7 +334,7 @@ de:{lang:"Sprache",about:"Über",back:"Zurück",close:"Schließen",reset:"Neu st
  notHere:"Nicht dabei",neverHad:"Noch nie / weiß nicht mehr",loved:"Geliebt",hated:"Nicht gemocht",pickModel:"Tippe auf das Modell",howWas:"Wie war er?",
  w:{stab:"Mehr Stabilität",wide:"Weite Version / großzügige Passform",soft:"Weiches Laufgefühl",bouncy:"Federnder Schaum",firm:"Festes Laufgefühl",heavy:"Gut für schwerere Läufer",start:"Leicht für Einsteiger",fast:"Gebaut fürs Tempo",daily:"Top im Alltag",dist:"Hält deine Distanz",budget:"Passt ins Budget",like:"Ähnlich wie dein Lieblingsschuh",trail:"Grip im Gelände",mixed:"Straße und Waldweg",long:"Schützt bei hohem Umfang"},
  plate:{carbon:"Carbonplatte",carbon_rods:"Carbonstäbe",glassfiber:"Glasfaser",nylon:"Nylonplatte"}},
-it:{lang:"Lingua",about:"Info",back:"Indietro",close:"Chiudi",reset:"Ricomincia",next:"Vedi risultati",
+it:{lang:"Lingua",about:"Info",back:"Indietro",fwd:"Avanti",close:"Chiudi",reset:"Ricomincia",next:"Vedi risultati",
  resTitle:"Le tue scarpe migliori",resHint:"Ne abbiamo scelte {n} per te, al massimo 2 per marca.",
  fAll:"Tutte",fBudget:"Più economiche",fCn:"Marchi cinesi",fCur:"Novità 2026",
  edit:"Cambia risposte",prev:"Versione precedente · spesso in sconto",est:"dati stimati",soon:"presto",similar:"Simili:",
@@ -698,24 +704,46 @@ const card=document.getElementById("card");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const svgBack=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg>`;
 const svgReset=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8a5.5 5.5 0 1 0 1.6-3.9M2.5 2.5v3h3"/></svg>`;
-function head(title,backOk){return `<div class="chead"><div class="icons"><button class="ibtn" id="back" aria-label="${t("back")}" ${backOk?"":"disabled"}>${svgBack}</button><button class="ibtn" id="reset" aria-label="${t("reset")}" ${answered()?"":"disabled"}>${svgReset}</button></div><h1>${esc(title)}</h1><div></div></div>`}
-function foot2(extra){
-  return `<div class="cfoot"><span class="sp"></span><div class="dots">${Q.map((q,i)=>active(i)?`<i class="${i<=step||view==="results"?"on":""}"></i>`:"").join("")}</div>${extra||"<span></span>"}</div>`}
+function head(title){return `<div class="chead"><div class="icons"><button class="ibtn" id="reset" aria-label="${t("reset")}" title="${t("reset")}" ${answered()?"":"disabled"}>${svgReset}</button></div><h1>${esc(title)}</h1><div></div></div>`}
+/* footer: back on the left, progress dots in the middle, forward on the right, always in the same places */
+function foot2(backOk,fwdOk,fwdId="fwd",fwdLabel=t("fwd")){
+  return `<div class="cfoot"><button class="nav" id="back" aria-label="${t("back")}" ${backOk?"":"disabled"}>${svgL}</button><div class="dots">${Q.map((q,i)=>active(i)?`<i class="${i<=step||view==="results"?"on":""}"></i>`:"").join("")}</div><button class="nav" id="${fwdId}" aria-label="${esc(fwdLabel)}" ${fwdOk?"":"disabled"}>${svgR}</button></div>`}
 function renderQuiz(){
   card.classList.remove("wide","res");
   const q=Q[step];let h="";
-  if(q.special){h=head(qTitle(q),true)+renderLoved()+foot2(`<button class="go" id="finish">${t("next")}</button>`)}
+  if(q.special){h=head(qTitle(q))+`<div class="cbody">${renderLoved()}</div>`+foot2(true,true,"finish",t("next"))}
   else{
     const opts=vis(q);
-    h=head(qTitle(q),prevIdx(step)>=0);
+    h=head(qTitle(q))+`<div class="cbody">`;
     if(qHint(q))h+=`<p class="hint">${esc(qHint(q))}</p>`;
-    h+=`<div class="opts" style="--cols:${Math.min(opts.length,opts.length===6?3:5)}">`+opts.map(o=>{const [lab,sub]=qo(q.id+"."+o[0]);
+    h+=`<div class="opts${opts.length>4?" many":""}" style="--cols:${Math.min(opts.length,opts.length===6?3:5)}">`+opts.map(o=>{const [lab,sub]=qo(q.id+"."+o[0]);
       const art=o[1]?`<div class="art">${o[1]()}</div>`:o[2]?`<div class="num">${esc(o[2])}${/^[\d<]/.test(o[2])&&q.id!=="budget"?`<small>${q.id==="weight"?"kg":"km"}</small>`:""}</div>`:"";
       return `<button class="opt ${A[q.id]===o[0]?"sel":""}" data-v="${o[0]}">${art}<b>${esc(lab)}</b>${sub?`<span>${esc(sub)}</span>`:""}</button>`}).join("")+`</div>`;
-    h+=foot2(A[q.id]?`<button class="go" id="fwd">→</button>`:"<span></span>");
+    h+=`</div>`+foot2(prevIdx(step)>=0,!!A[q.id]);
   }
-  card.innerHTML=h;wire(q);
+  card.innerHTML=h;wire(q);fitCard();
   requestAnimationFrame(drawCloud); // the card height changed, so the space for the cloud did too
+}
+/* the card keeps the height of its tallest question, so nothing below or above it moves between questions */
+let cardH=0,cardHKey="";
+function fitCard(){
+  const key=L+"|"+innerWidth+"x"+innerHeight;
+  if(key!==cardHKey){
+    cardHKey=key;const probe=card.cloneNode(false);probe.removeAttribute("id");
+    probe.style.cssText="position:absolute;visibility:hidden;left:0;top:0;min-height:0;height:auto;width:"+card.getBoundingClientRect().width+"px";
+    document.body.appendChild(probe);let mx=0;
+    const keep={step,lovedStage,lovedBrand};
+    Q.forEach((q,i)=>{
+      if(q.special){const cnt={};S.forEach(s=>cnt[s.brand]=(cnt[s.brand]||0)+1);const top=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];
+        [0,1].forEach(st=>{lovedStage=st;lovedBrand=top;
+        probe.innerHTML=head(qTitle(q))+`<div class="cbody">${renderLoved()}</div>`+foot2(true,true);mx=Math.max(mx,probe.offsetHeight)});return}
+      // only options that can show up together: "no goal yet" never sits next to all the race distances, and the two "no limit" budgets swap
+      step=i;const opts=q.o.filter(o=>!(q.id==="distance"&&o[0]==="none")&&!(q.id==="budget"&&o[0]==="b4x"));
+      probe.innerHTML=head(qTitle(q))+`<div class="cbody">${qHint(q)?`<p class="hint">${esc(qHint(q))}</p>`:""}<div class="opts${opts.length>4?" many":""}" style="--cols:${Math.min(opts.length,opts.length===6?3:5)}">${opts.map(o=>{const [lab,sub]=qo(q.id+"."+o[0]);return `<button class="opt">${o[1]?`<div class="art">${o[1]()}</div>`:""}<b>${esc(lab)}</b>${sub?`<span>${esc(sub)}</span>`:""}</button>`}).join("")}</div></div>`+foot2(true,true);
+      mx=Math.max(mx,probe.offsetHeight)});
+    ({step,lovedStage,lovedBrand}=keep);probe.remove();cardH=mx;
+  }
+  card.style.minHeight=cardH+"px";
 }
 function wire(q){
   card.querySelectorAll(".opt[data-v]").forEach(b=>b.onclick=()=>{A[q.id]=b.dataset.v;
@@ -740,8 +768,8 @@ function renderLoved(){
     return `<div class="opts compact" style="--cols:5">${brands.map(b=>`<button class="opt" data-brand="${esc(b)}"><b>${esc(b)}</b></button>`).join("")}<button class="opt" data-none="1"><b>${t("neverHad")}</b></button></div>`;
   }
   if(lovedStage===1){
-    const list=S.filter(s=>s.brand===lovedBrand).sort((a,b)=>(b.pop-a.pop)||(b.yr-a.yr)).slice(0,innerHeight<760?7:11);
-    return `<p class="hint">${t("pickModel")} · ${esc(lovedBrand)}</p><div class="opts" style="--cols:4">${list.map(s=>`<button class="opt" data-shoe="${s.i}"><div class="art">${shoeArt(s)}</div><b>${esc(s.model)}</b><span>${s.yr}</span></button>`).join("")}<button class="opt" data-none="1"><b>${t("notHere")}</b></button></div>`;
+    const list=S.filter(s=>s.brand===lovedBrand).sort((a,b)=>(b.pop-a.pop)||(b.yr-a.yr)).slice(0,9);
+    return `<p class="hint">${t("pickModel")} · ${esc(lovedBrand)}</p><div class="opts compact" style="--cols:5">${list.map(s=>`<button class="opt" data-shoe="${s.i}"><b>${esc(s.model)}</b></button>`).join("")}<button class="opt" data-none="1"><b>${t("notHere")}</b></button></div>`;
   }
   const s=S[A.loved.i];
   return `<p class="hint">${t("howWas")} · ${esc(s.brand+" "+s.model)}</p><div class="opts" style="--cols:2"><button class="opt" data-like="1"><div class="art">${shoeArt(s)}</div><b>${t("loved")}</b></button><button class="opt" data-like="0"><div class="art" style="filter:grayscale(1);opacity:.6">${shoeArt(s)}</div><b>${t("hated")}</b></button></div>`;
@@ -802,7 +830,7 @@ function openShoe(i){
   addEventListener("keydown",onKey);document.body.appendChild(m);m.querySelector(".sclose").focus();
 }
 function renderResults(){
-  card.classList.remove("wide");card.classList.add("res");
+  card.classList.remove("wide");card.classList.add("res");card.style.minHeight="";
   const list=ranked.slice(0,12),R=rt();
   // match %: the best shoe gets 98%, each point of score behind it costs about 1%
   const top=list.length?scores[list[0].i].sc:0;
