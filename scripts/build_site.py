@@ -6,6 +6,7 @@ injects it into src/footfinder.template.html and writes (GitHub Pages serves the
   - docs/artifact.html   the same page without the document shell (for Claude artifacts)
 """
 import json
+import re
 import os
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -82,7 +83,16 @@ def main():
     dist = os.path.join(ROOT, "docs")
     os.makedirs(dist, exist_ok=True)
     open(os.path.join(dist, "artifact.html"), "w", encoding="utf-8").write(page)
-    open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(SHELL.replace("{page}", page))
+    # the live site links the icon files in docs/ (every browser shows these); the artifact keeps inline icons
+    site = re.sub(r'<link rel="(?:icon|apple-touch-icon)"[^>]*>\n?', "", page)
+    icons = ('<link rel="icon" href="favicon.ico" sizes="any">\n<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">\n'
+             '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n')
+    # the tab title and icons belong in <head>, where browsers look for them
+    m = re.search(r"<title>.*?</title>\n?", site)
+    title = m.group(0) if m else ""
+    site = site.replace(title, "", 1)
+    html = SHELL.replace("{page}", site).replace("</head>", title + icons + "</head>", 1)
+    open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(html)
     print(f"Built docs/ with {len(shoes)} shoes on the site, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for v in ali.values() if v.get('search_link'))} with AliExpress links, {len(awin)} with Awin offers, Amazon tag {'set' if amz['tag'] else 'not set'}")
 
 
