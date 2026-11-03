@@ -139,9 +139,10 @@ def main():
     reject = json.load(open(REJECT, encoding="utf-8")) if os.path.exists(REJECT) else {}
     os.makedirs(OUT, exist_ok=True)
     done = kept = failed = 0
+    report = {}  # why each shoe without a cut-out was rejected, photo by photo
 
     for sid, urls in photos.items():
-        sources = list(dict.fromkeys(u for u in urls if u and u not in reject.get(sid, [])))[:40]
+        sources = list(dict.fromkeys(u for u in urls if u and u not in reject.get(sid, [])))[:70]
         if not sources:
             continue
         path = os.path.join(OUT, f"{sid}.webp")
@@ -183,6 +184,7 @@ def main():
                 os.remove(path)
             cache.pop(sid, None)
             print(f"! {sid}: no side-view photo ({'; '.join(reasons)[:200]})", file=sys.stderr)
+            report[sid] = reasons
 
     for name in os.listdir(OUT):  # drop cut-outs for shoes that lost their photo
         if name.endswith(".webp") and name[:-5] not in photos:
@@ -190,6 +192,7 @@ def main():
             cache.pop(name[:-5], None)
 
     json.dump(cache, open(CACHE, "w", encoding="utf-8"), indent=2)
+    json.dump(report, open(os.path.join(DATA, "photo_report.json"), "w", encoding="utf-8"), indent=2)
     print(f"Cut-outs: {done} new, {kept} unchanged, {failed} without a clean photo")
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:

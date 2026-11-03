@@ -289,7 +289,7 @@ def gallery_of(product):
     urls = small.get("string") if isinstance(small, dict) else small
     if isinstance(urls, str):
         urls = [urls]
-    return [u for u in (urls or []) if isinstance(u, str)][:8]
+    return [u for u in (urls or []) if isinstance(u, str)][:20]
 
 
 def pick(product):
@@ -379,6 +379,44 @@ def main():
         review.append([sid, shoe["brand"], shoe["model"], hit.get("matched_by", "previous run") if hit else "not found",
                        hit.get("title", "") if hit else "", hit["product_id"] if hit else ""])
         time.sleep(0.4)
+
+    # Shoes still without a clean cut-out: search deeper (more result pages, every matching listing)
+    # and pull each listing's full photo gallery, so the photo step has more photos to choose from
+    cache_path = os.path.join(DATA, "photo_cache.json")
+    have_photo = set(json.load(open(cache_path, encoding="utf-8"))) if os.path.exists(cache_path) else set()
+    for shoe in shoes:
+        sid = shoe["id"]
+        if shoe["brand"] not in BRAND_TERMS or sid in have_photo or sid not in found or sid in overrides:
+            continue
+        hits = {}
+        for query in queries(shoe):
+            for page in (1, 2, 3):
+                try:
+                    res = call("aliexpress.affiliate.product.query", {**common, "keywords": query, "page_size": 50, "page_no": page}, key, secret)
+                except Exception:
+                    break
+                prods = products_of(res)
+                for p in prods:
+                    if score(p, shoe) is not None:
+                        hits.setdefault(str(p.get("product_id")), p)
+                if len(prods) < 50:
+                    break
+                time.sleep(0.3)
+        ids = [k for k in hits if k != found[sid].get("product_id")][:10]
+        extra = []
+        for k in [found[sid].get("product_id"), *ids]:
+            if not k:
+                continue
+            try:  # the detail call returns the whole gallery, the search only a few photos
+                det = products_of(call("aliexpress.affiliate.productdetail.get", {**common, "product_ids": k}, key, secret))
+            except Exception:
+                det = []
+            src = det[0] if det else hits.get(k) or {}
+            extra += [src.get("product_main_image_url"), *gallery_of(src)]
+            time.sleep(0.3)
+        old = found[sid].get("alt_images") or []
+        found[sid]["alt_images"] = list(dict.fromkeys(u for u in [*old, *extra] if u))[:60]
+        print(f"deep search {sid}: {len(hits)} listings, {len(found[sid]['alt_images'])} extra photos")
 
     # Search-page links for every shoe in scope (skip shoes overridden to null)
     wanted = {sh["id"]: sh for sh in in_scope if not (sh["id"] in overrides and overrides[sh["id"]] is None)}

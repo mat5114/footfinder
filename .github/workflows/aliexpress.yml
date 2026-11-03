@@ -56,7 +56,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/aliexpress.json data/aliexpress_review.csv data/photo_cache.json docs/
+          git add data/aliexpress.json data/aliexpress_review.csv data/photo_cache.json data/photo_report.json docs/
           git add data/awin.json data/awin_review.csv 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Nothing changed."
