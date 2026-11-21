@@ -3,8 +3,9 @@
 Reads data/running_shoes.json (plus data/aliexpress.json, data/awin.json and data/amazon.json when present), packs it into the compact array the page uses,
 injects it into src/footfinder.template.html and writes (GitHub Pages serves the docs/ folder):
   - docs/index.html      a complete standalone page (deploy this folder)
-  - docs/artifact.html   the same page without the document shell (for Claude artifacts)
+  - build/artifact.html  the same page without the document shell (for Claude artifacts, not published)
 """
+import datetime
 import json
 import shutil
 import re
@@ -52,7 +53,17 @@ SHELL = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Answer a few taps and Footfinder matches you with the running shoes that fit how you run.">
+<meta name="description" content="Free quiz to find Chinese running shoes. Tap a few answers, get up to 12 picks from Li-Ning, Xtep, ANTA and more. Independent, no typing.">
+<link rel="canonical" href="https://footfinder.cc/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Footfinder">
+<meta property="og:url" content="https://footfinder.cc/">
+<meta property="og:title" content="Footfinder · Find your Chinese running shoe">
+<meta property="og:description" content="Free quiz: tap a few answers and get up to 12 Chinese running shoes that fit how you run.">
+<meta property="og:image" content="https://footfinder.cc/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -83,18 +94,32 @@ def main():
     page = template.replace("__DATA__", compact(shoes, ali, awin)).replace("__AMAZON__", json.dumps(amz))
     dist = os.path.join(ROOT, "docs")
     os.makedirs(dist, exist_ok=True)
-    open(os.path.join(dist, "artifact.html"), "w", encoding="utf-8").write(page)
+    # the single-file copy for Claude artifacts stays out of the public site
+    os.makedirs(os.path.join(ROOT, "build"), exist_ok=True)
+    open(os.path.join(ROOT, "build", "artifact.html"), "w", encoding="utf-8").write(page)
     # the live site links the icon files in docs/ (every browser shows these); the artifact keeps inline icons
     site = re.sub(r'<link rel="(?:icon|apple-touch-icon)"[^>]*>\n?', "", page)
     icons = ('<link rel="icon" href="favicon.ico" sizes="any">\n<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">\n'
              '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n')
     # the tab title and icons belong in <head>, where browsers look for them
-    m = re.search(r"<title>.*?</title>\n?", site)
-    title = m.group(0) if m else ""
-    site = site.replace(title, "", 1)
-    html = SHELL.replace("{page}", site).replace("</head>", title + icons + "</head>", 1)
+    # everything before the first page element (title, styles, fonts) belongs in <head>
+    cut = site.index('<div class="top">')
+    head, body = site[:cut], site[cut:]
+    head = re.sub(r"<title>.*?</title>", "<title>Footfinder · Find your Chinese running shoe</title>", head, count=1)
+    html = SHELL.replace("{page}", body).replace("</head>", head + icons + "</head>", 1)
     open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(html)
     shutil.copyfile(os.path.join(ROOT, "src", "about.template.html"), os.path.join(dist, "about.html"))
+    # help search engines find the pages
+    today = datetime.date.today().isoformat()
+    urls = ["https://footfinder.cc/", "https://footfinder.cc/about.html"]
+    open(os.path.join(dist, "sitemap.xml"), "w", encoding="utf-8").write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"  <url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
+    open(os.path.join(dist, "robots.txt"), "w", encoding="utf-8").write(
+        "User-agent: *\nAllow: /\n\nSitemap: https://footfinder.cc/sitemap.xml\n")
+    old = os.path.join(dist, "artifact.html")
+    if os.path.exists(old):
+        os.remove(old)
     print(f"Built docs/ with {len(shoes)} shoes on the site, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for v in ali.values() if v.get('search_link'))} with AliExpress links, {len(awin)} with Awin offers, Amazon tag {'set' if amz['tag'] else 'not set'}")
 
 
