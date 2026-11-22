@@ -3,27 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/">
 <meta name="description" content="Free quiz to find Chinese running shoes. Tap a few answers, get up to 12 picks from Li-Ning, Xtep, ANTA and more. Independent, no typing.">
 <link rel="canonical" href="https://footfinder.cc/">
+<link rel="alternate" hreflang="en" href="https://footfinder.cc/">
+<link rel="alternate" hreflang="pt-BR" href="https://footfinder.cc/pt/">
+<link rel="alternate" hreflang="pt-PT" href="https://footfinder.cc/pt-pt/">
+<link rel="alternate" hreflang="es" href="https://footfinder.cc/es/">
+<link rel="alternate" hreflang="fr" href="https://footfinder.cc/fr/">
+<link rel="alternate" hreflang="de" href="https://footfinder.cc/de/">
+<link rel="alternate" hreflang="it" href="https://footfinder.cc/it/">
+<link rel="alternate" hreflang="x-default" href="https://footfinder.cc/">
+<script>window.PAGE_LANG="en"</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Footfinder">
 <meta property="og:url" content="https://footfinder.cc/">
 <meta property="og:title" content="Footfinder · Find your Chinese running shoe">
-<meta property="og:description" content="Free quiz: tap a few answers and get up to 12 Chinese running shoes that fit how you run.">
+<meta property="og:description" content="Free quiz to find Chinese running shoes. Tap a few answers, get up to 12 picks from Li-Ning, Xtep, ANTA and more. Independent, no typing.">
 <meta property="og:image" content="https://footfinder.cc/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Footfinder · Find your Chinese running shoe</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
 <style>
 /* Layout: one screen, no scrolling. Header, then a slider of shoes that fills whatever height is left (the best match in the middle, the rest fading with distance on both sides), then the quiz card. */
 :root{
   --bg:#F5F5F4; --card:#FFFFFF; --tile:#F5F5F4; --tile-hover:#EDEDEB;
-  --ink:#292524; --muted:#78716C; --faint:#A8A29E; --line:#E7E5E4; --sel:#292524;
+  --ink:#292524; --muted:#6B635D; --faint:#A8A29E; --line:#E7E5E4; --sel:#292524;
   --shadow:0 1px 2px rgb(28 25 23 / .04),0 4px 12px rgb(28 25 23 / .05),0 16px 40px rgb(28 25 23 / .06);
   --font:"Inter","Helvetica Neue",Arial,sans-serif;
   --ease:cubic-bezier(0.2,0,0,1);
@@ -96,6 +105,7 @@ button{font:inherit;color:inherit}
 .nav[disabled]{opacity:.3;pointer-events:none}
 .chead{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;padding:6px 4px 12px}
 .icons{display:flex;gap:2px}
+#pgPrev,#pgNext{width:44px;height:44px;font-size:24px;color:var(--ink)}#pgPrev:disabled,#pgNext:disabled{color:var(--faint);cursor:default}
 .ibtn{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center;border-radius:8px;color:var(--muted);transition-property:background-color,color,scale;transition-duration:.15s}
 .ibtn:hover{background:var(--tile);color:var(--ink)}
 .ibtn:active{scale:.96}
@@ -207,7 +217,7 @@ h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.02
 .ritem .th{height:44px;display:grid;place-items:center}
 .ritem .th svg,.ritem .th .photo{max-height:44px;width:auto;max-width:58px}
 .ritem .tx{min-width:0}
-.ritem .tx b{display:block;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ritem .tx b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;font-size:13.5px;font-weight:600;line-height:1.25;overflow:hidden;overflow-wrap:anywhere}
 .ritem .tx span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
 .rtag{font-size:11.5px;font-weight:500;padding:3px 8px;border-radius:7px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap}
 .rpager{display:none}
@@ -297,14 +307,14 @@ function shoeSVG(s){
 }
 
 /* ---------- copy ---------- */
-const LANGS=[["en","English","en"],["pt","Português","pt-BR"],["es","Español","es"],["fr","Français","fr"],["de","Deutsch","de"],["it","Italiano","it"]];
+const LANGS=[["en","English","en"],["pt","Português (Brasil)","pt-BR"],["pp","Português (Portugal)","pt-PT"],["es","Español","es"],["fr","Français","fr"],["de","Deutsch","de"],["it","Italiano","it"]];
 const T={
 en:{lang:"Language",about:"About",back:"Back",fwd:"Next",close:"Close",reset:"Start over",next:"See results",
  resTitle:"Your best shoes",resHint:"We picked {n} for you, at most 2 per brand.",
  fAll:"All",fBudget:"Cheapest",fCn:"Chinese brands",fCur:"2026 releases",
  edit:"Change answers",prev:"Previous version · often discounted",est:"estimated specs",soon:"soon",similar:"Similar:",
  none:"No shoe passed your filters. Try a bigger budget or allow Chinese brands.",matchLbl:"match",
- note:"Footfinder is a prototype. Illustrations are drawn from each shoe's stack height and drop; real photos will come from partner stores. Some specs are estimated. USD prices are list prices. The site may earn a commission on purchases.",
+ note:"Footfinder is independent. Some specs are estimated. USD prices are list prices; the store has the final word on price. The \"See on AliExpress\" buttons are affiliate links: we may earn a commission, and it never changes the results.",
  notHere:"Not listed",neverHad:"Never had one / can't remember",loved:"Loved it",hated:"Didn't like it",pickModel:"Tap the model",howWas:"How did it go?",
  w:{stab:"Extra stability",wide:"Wide / roomy fit",soft:"Soft ride",bouncy:"Bouncy foam",firm:"Firm ride",heavy:"Good for heavier runners",start:"Easy for beginners",fast:"Built for pace",daily:"Great daily trainer",dist:"Handles your distance",budget:"Fits your budget",like:"Like the one you loved",trail:"Trail grip",mixed:"Road and dirt",long:"Protective for high mileage"},
  plate:{carbon:"carbon plate",carbon_rods:"carbon rods",glassfiber:"fiberglass",nylon:"nylon plate"}},
@@ -313,7 +323,7 @@ pt:{lang:"Idioma",about:"Sobre",back:"Voltar",fwd:"Avançar",close:"Fechar",rese
  fAll:"Todos",fBudget:"Mais baratos",fCn:"Marcas chinesas",fCur:"Lançamentos 2026",
  edit:"Mudar respostas",prev:"Versão anterior · costuma ter desconto",est:"dados estimados",soon:"em breve",similar:"Parecidos:",
  none:"Nenhum tênis passou nos seus filtros. Tente aumentar o orçamento ou aceitar marcas chinesas.",matchLbl:"combinação",
- note:"Footfinder é um protótipo. As ilustrações são geradas a partir da altura do solado e do drop de cada tênis; as fotos reais virão das lojas parceiras. Parte das especificações é estimada. Preços em dólar são de tabela. O site pode ganhar comissão nas compras.",
+ note:"O Footfinder é independente. Parte das especificações é estimada. Preços em dólar são de tabela; a loja tem a palavra final sobre o preço. Os botões \"Ver no AliExpress\" são links de afiliado: podemos ganhar uma comissão, e isso nunca muda os resultados.",
  notHere:"Não está aqui",neverHad:"Nunca tive / não lembro",loved:"Amei esse",hated:"Não gostei",pickModel:"Toque no modelo",howWas:"E como foi com ele?",
  w:{stab:"Mais estabilidade",wide:"Versão larga / fôrma espaçosa",soft:"Pisada macia",bouncy:"Espuma com retorno",firm:"Pisada firme",heavy:"Bom para mais peso",start:"Fácil para começar",fast:"Feito para ritmo",daily:"Ótimo no dia a dia",dist:"Aguenta sua distância",budget:"Cabe no orçamento",like:"Parecido com o que você amou",trail:"Tração para trilha",mixed:"Asfalto e terra",long:"Protege em volume alto"},
  plate:{carbon:"placa de carbono",carbon_rods:"hastes de carbono",glassfiber:"fibra de vidro",nylon:"placa de nylon"}},
@@ -322,7 +332,7 @@ es:{lang:"Idioma",about:"Acerca de",back:"Atrás",fwd:"Siguiente",close:"Cerrar"
  fAll:"Todas",fBudget:"Más baratas",fCn:"Marcas chinas",fCur:"Novedades 2026",
  edit:"Cambiar respuestas",prev:"Versión anterior · suele tener descuento",est:"datos estimados",soon:"pronto",similar:"Parecidas:",
  none:"Ninguna zapatilla pasó tus filtros. Prueba con más presupuesto o acepta marcas chinas.",matchLbl:"coincidencia",
- note:"Footfinder es un prototipo. Las ilustraciones se generan a partir de la altura de la suela y el drop de cada zapatilla; las fotos reales vendrán de las tiendas asociadas. Parte de las especificaciones son estimadas. Los precios en dólares son de lista. El sitio puede ganar una comisión por las compras.",
+ note:"Footfinder es independiente. Parte de las especificaciones son estimadas. Los precios en dólares son de lista; la tienda tiene la última palabra sobre el precio. Los botones \"Ver en AliExpress\" son enlaces de afiliado: podemos ganar una comisión, y nunca cambia los resultados.",
  notHere:"No está aquí",neverHad:"Nunca tuve / no recuerdo",loved:"Me encantó",hated:"No me gustó",pickModel:"Toca el modelo",howWas:"¿Qué tal te fue?",
  w:{stab:"Más estabilidad",wide:"Versión ancha / horma amplia",soft:"Pisada suave",bouncy:"Espuma con rebote",firm:"Pisada firme",heavy:"Buena para más peso",start:"Fácil para empezar",fast:"Hecha para el ritmo",daily:"Ideal para el día a día",dist:"Aguanta tu distancia",budget:"Entra en tu presupuesto",like:"Parecida a la que te encantó",trail:"Agarre para montaña",mixed:"Asfalto y tierra",long:"Protege en mucho volumen"},
  plate:{carbon:"placa de carbono",carbon_rods:"varillas de carbono",glassfiber:"fibra de vidrio",nylon:"placa de nailon"}},
@@ -331,7 +341,7 @@ fr:{lang:"Langue",about:"À propos",back:"Retour",fwd:"Suivant",close:"Fermer",r
  fAll:"Toutes",fBudget:"Les moins chères",fCn:"Marques chinoises",fCur:"Nouveautés 2026",
  edit:"Modifier les réponses",prev:"Version précédente · souvent en promo",est:"données estimées",soon:"bientôt",similar:"Similaires :",
  none:"Aucune chaussure ne passe vos filtres. Augmentez le budget ou acceptez les marques chinoises.",matchLbl:"correspondance",
- note:"Footfinder est un prototype. Les illustrations sont dessinées à partir de la hauteur de semelle et du drop de chaque chaussure ; les vraies photos viendront des boutiques partenaires. Certaines caractéristiques sont estimées. Les prix en dollars sont des prix catalogue. Le site peut toucher une commission sur les achats.",
+ note:"Footfinder est indépendant. Certaines caractéristiques sont estimées. Les prix en dollars sont des prix catalogue ; la boutique a le dernier mot sur le prix. Les boutons « Voir sur AliExpress » sont des liens affiliés : nous pouvons toucher une commission, qui ne change jamais les résultats.",
  notHere:"Pas dans la liste",neverHad:"Jamais eu / je ne sais plus",loved:"Je l'ai adorée",hated:"Je n'ai pas aimé",pickModel:"Touchez le modèle",howWas:"Et alors, c'était comment ?",
  w:{stab:"Plus de stabilité",wide:"Version large / chaussant ample",soft:"Foulée moelleuse",bouncy:"Mousse dynamique",firm:"Foulée ferme",heavy:"Adaptée aux coureurs plus lourds",start:"Facile pour débuter",fast:"Faite pour la vitesse",daily:"Idéale au quotidien",dist:"Tient votre distance",budget:"Dans votre budget",like:"Proche de celle que vous avez adorée",trail:"Accroche en trail",mixed:"Route et chemins",long:"Protège sur gros volume"},
  plate:{carbon:"plaque carbone",carbon_rods:"tiges carbone",glassfiber:"fibre de verre",nylon:"plaque nylon"}},
@@ -340,7 +350,7 @@ de:{lang:"Sprache",about:"Über",back:"Zurück",fwd:"Weiter",close:"Schließen",
  fAll:"Alle",fBudget:"Günstigste",fCn:"Chinesische Marken",fCur:"Neu 2026",
  edit:"Antworten ändern",prev:"Vorgängermodell · oft reduziert",est:"geschätzte Daten",soon:"bald",similar:"Ähnlich:",
  none:"Kein Schuh passt zu deinen Filtern. Erhöhe das Budget oder lass chinesische Marken zu.",matchLbl:"Übereinstimmung",
- note:"Footfinder ist ein Prototyp. Die Illustrationen entstehen aus Sohlenhöhe und Sprengung jedes Schuhs; echte Fotos kommen später von Partnershops. Einige Daten sind geschätzt. Preise in US-Dollar sind Listenpreise. Die Seite kann an Käufen eine Provision verdienen.",
+ note:"Footfinder ist unabhängig. Einige Daten sind geschätzt. Preise in US-Dollar sind Listenpreise; der Shop hat beim Preis das letzte Wort. Die Buttons „Bei AliExpress ansehen“ sind Affiliate-Links: Wir können eine Provision erhalten, die die Ergebnisse nie verändert.",
  notHere:"Nicht dabei",neverHad:"Noch nie / weiß nicht mehr",loved:"Geliebt",hated:"Nicht gemocht",pickModel:"Tippe auf das Modell",howWas:"Wie war er?",
  w:{stab:"Mehr Stabilität",wide:"Weite Version / großzügige Passform",soft:"Weiches Laufgefühl",bouncy:"Federnder Schaum",firm:"Festes Laufgefühl",heavy:"Gut für schwerere Läufer",start:"Leicht für Einsteiger",fast:"Gebaut fürs Tempo",daily:"Top im Alltag",dist:"Hält deine Distanz",budget:"Passt ins Budget",like:"Ähnlich wie dein Lieblingsschuh",trail:"Grip im Gelände",mixed:"Straße und Waldweg",long:"Schützt bei hohem Umfang"},
  plate:{carbon:"Carbonplatte",carbon_rods:"Carbonstäbe",glassfiber:"Glasfaser",nylon:"Nylonplatte"}},
@@ -349,7 +359,7 @@ it:{lang:"Lingua",about:"Info",back:"Indietro",fwd:"Avanti",close:"Chiudi",reset
  fAll:"Tutte",fBudget:"Più economiche",fCn:"Marchi cinesi",fCur:"Novità 2026",
  edit:"Cambia risposte",prev:"Versione precedente · spesso in sconto",est:"dati stimati",soon:"presto",similar:"Simili:",
  none:"Nessuna scarpa supera i tuoi filtri. Prova ad aumentare il budget o ad accettare marchi cinesi.",matchLbl:"compatibilità",
- note:"Footfinder è un prototipo. Le illustrazioni sono disegnate a partire dall'altezza della suola e dal drop di ogni scarpa; le foto reali arriveranno dai negozi partner. Alcune specifiche sono stimate. I prezzi in dollari sono di listino. Il sito può guadagnare una commissione sugli acquisti.",
+ note:"Footfinder è indipendente. Alcune specifiche sono stimate. I prezzi in dollari sono di listino; il negozio ha l'ultima parola sul prezzo. I pulsanti \"Vedi su AliExpress\" sono link di affiliazione: possiamo ricevere una commissione, che non cambia mai i risultati.",
  notHere:"Non c'è",neverHad:"Mai avute / non ricordo",loved:"Mi è piaciuta",hated:"Non mi è piaciuta",pickModel:"Tocca il modello",howWas:"Com'è andata?",
  w:{stab:"Più stabilità",wide:"Versione larga / calzata ampia",soft:"Appoggio morbido",bouncy:"Schiuma reattiva",firm:"Appoggio rigido",heavy:"Adatta a chi pesa di più",start:"Facile per iniziare",fast:"Fatta per il ritmo",daily:"Ottima ogni giorno",dist:"Regge la tua distanza",budget:"Nel tuo budget",like:"Simile a quella che hai amato",trail:"Grip da trail",mixed:"Asfalto e sterrato",long:"Protegge con tanti km"},
  plate:{carbon:"piastra in carbonio",carbon_rods:"aste in carbonio",glassfiber:"fibra di vetro",nylon:"piastra in nylon"}}
@@ -461,13 +471,29 @@ es:{at:"Ver en",amzNote:"Como Afiliado de Amazon, Footfinder obtiene ingresos po
 fr:{at:"Voir chez",amzNote:"En tant que Partenaire Amazon, Footfinder réalise un bénéfice sur les achats remplissant les conditions requises.",amzGo:"Chercher sur Amazon",weight:"Poids",drop:"Drop",stack:"Hauteur de semelle",cushion:"Amorti",feel:"Foulée",plate:"Plaque",stab:"Maintien",surf:"Surface",dist:"Idéale pour",wide:"Version large",year:"Sortie",price:"prix catalogue",match:"correspondance",ali:"Voir sur AliExpress",amz:"Amazon · bientôt",prev:"Version précédente",
  tags:{best:"Meilleur choix",light:"La plus légère",cheap:"La moins chère",soft:"La plus amortie"},cush:{low:"Faible",medium:"Moyen",high:"Élevé",max:"Maximal"},feelV:{soft:"Moelleuse",balanced:"Équilibrée",firm:"Ferme",bouncy:"Dynamique"},none:"Aucune",
  stabV:{neutral:"Neutre",mild:"Léger maintien",stable:"Stabilité"},surfV:{road:"Route",trail:"Trail",mixed:"Route et trail"},yes:"Oui",no:"Non"},
-de:{at:"Ansehen bei",amzNote:"Als Amazon-Partner verdient Footfinder an qualifizierten Verkäufen.",amzGo:"Auf Amazon suchen",weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Übereinstimmung",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
+de:{at:"Ansehen bei",amzNote:"Als Amazon-Partner verdient Footfinder an qualifizierten Verkäufen.",amzGo:"Auf Amazon suchen",weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Match",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
  tags:{best:"Beste Wahl",light:"Leichtester",cheap:"Günstigster",soft:"Meiste Dämpfung"},cush:{low:"Gering",medium:"Mittel",high:"Hoch",max:"Maximal"},feelV:{soft:"Weich",balanced:"Ausgewogen",firm:"Fest",bouncy:"Federnd"},none:"Keine",
  stabV:{neutral:"Neutral",mild:"Leichte Stütze",stable:"Stabilität"},surfV:{road:"Straße",trail:"Trail",mixed:"Straße und Trail"},yes:"Ja",no:"Nein"},
 it:{at:"Vedi su",amzNote:"In qualità di Affiliato Amazon, Footfinder riceve un guadagno dagli acquisti idonei.",amzGo:"Cerca su Amazon",weight:"Peso",drop:"Drop",stack:"Altezza suola",cushion:"Ammortizzazione",feel:"Appoggio",plate:"Piastra",stab:"Supporto",surf:"Superficie",dist:"Ideale per",wide:"Versione larga",year:"Uscita",price:"prezzo di listino",match:"compatibilità",ali:"Vedi su AliExpress",amz:"Amazon · presto",prev:"Versione precedente",
  tags:{best:"Migliore scelta",light:"La più leggera",cheap:"La più economica",soft:"La più ammortizzata"},cush:{low:"Bassa",medium:"Media",high:"Alta",max:"Massima"},feelV:{soft:"Morbida",balanced:"Bilanciata",firm:"Rigida",bouncy:"Reattiva"},none:"Nessuna",
  stabV:{neutral:"Neutra",mild:"Supporto leggero",stable:"Stabilità"},surfV:{road:"Asfalto",trail:"Trail",mixed:"Asfalto e trail"},yes:"Sì",no:"No"}
 };
+/* Portuguese of Portugal: the Brazilian texts with Portugal wording on top */
+const deepMerge=(a,b)=>{const o={...a};for(const k in b)o[k]=b[k]&&typeof b[k]==="object"&&!Array.isArray(b[k])?deepMerge(a[k]||{},b[k]):b[k];return o};
+T.pp=deepMerge(T.pt,{resTitle:"As tuas melhores sapatilhas",resHint:"Escolhemos {n} para ti, no máximo 2 por marca.",fAll:"Todas",fBudget:"Mais baratas",similar:"Parecidas:",
+ none:"Nenhuma sapatilha passou nos teus filtros. Experimenta aumentar o orçamento ou aceitar marcas chinesas.",matchLbl:"compatibilidade",
+ note:"O Footfinder é independente. Parte das especificações é estimada. Os preços em dólares são de tabela; a loja tem a palavra final sobre o preço. Os botões \"Ver no AliExpress\" são links de afiliado: podemos ganhar uma comissão, e isso nunca muda os resultados.",
+ neverHad:"Nunca tive / não me lembro",loved:"Adorei",pickModel:"Toca no modelo",howWas:"E como correu?",
+ w:{wide:"Versão larga / forma espaçosa",soft:"Passada macia",firm:"Passada firme",heavy:"Boa para mais peso",fast:"Feita para ritmo",daily:"Ótima no dia a dia",dist:"Aguenta a tua distância",like:"Parecida com a que adoraste",trail:"Aderência em trilhos",mixed:"Estrada e terra",long:"Protege em muitos quilómetros"}});
+QT.pp=deepMerge(QT.pt,{goal:"Para que as vais usar?",volume:"Quanto corres por semana?",volume_start:"Já corres um pouco?",surface:"Onde corres mais?",surface_v0:"Onde pensas correr?",
+ distance:"Qual é a maior distância que queres correr?",distance_beg:"Qual é a tua primeira meta?",distance_fast:"Que prova queres fazer?",weight:"Qual é o teu peso?",weight_h:"Muda o amortecimento de que precisas.",
+ feel:"Como queres sentir a passada?",width:"As sapatilhas costumam apertar dos lados?",wear:"Onde é que as tuas sapatilhas velhas gastam mais?",wear_v0:"Onde é que as tuas sapatilhas do dia a dia gastam mais?",
+ wear_h:"Olha para a sola do pé direito e compara.",wear_h_v0:"Vê o par que usas mais. Compara a sola do pé direito.",budget:"Até quanto queres gastar?",budget_h:"Preço de tabela em dólares. Em promoção costuma ficar mais barato.",
+ cn:"Aceitas marcas chinesas?",loved:"Há alguma sapatilha que adoraste ou detestaste?",
+ o:{goal:{start:"Começar a correr|Caminhadas e corrida leve",trail:"Trail|Terra, pedra e monte"},surface:{road:"Estrada",treadmill:"Passadeira",trail:"Terra e trilhos"},
+  feel:{any:"Não sei|Escolhe por mim"},wear:{in:"Lado de dentro|Perto do dedo grande"}}});
+RT.pp=deepMerge(RT.pt,{amzGo:"Pesquisar na Amazon",stack:"Altura da sola",feel:"Passada",match:"compatível",tags:{cheap:"Mais barata",soft:"Mais amortecida"},
+ feelV:{soft:"Macia",firm:"Firme"},surfV:{road:"Estrada",trail:"Trilho",mixed:"Estrada e trilho"}});
 const rt=()=>RT[L]||RT.en;
 const qs=k=>(QT[L]&&QT[L][k])||QT.en[k]||"";
 const qo=k=>((QT[L]&&QT[L].o[k])||QT.en.o[k]||"").split("|");
@@ -554,7 +580,10 @@ function sanitize(){
 }
 
 /* ---------- scoring ---------- */
-let L="en";try{const sv=localStorage.getItem("fdf-lang");if(LANGS.some(x=>x[0]===sv))L=sv}catch(e){}
+const PAGE_LANG=window.PAGE_LANG||null,LANG_URL={en:"/",pt:"/pt/",pp:"/pt-pt/",es:"/es/",fr:"/fr/",de:"/de/",it:"/it/"};
+let L=PAGE_LANG||"en";if(!PAGE_LANG){try{const sv=localStorage.getItem("fdf-lang");if(LANGS.some(x=>x[0]===sv))L=sv}catch(e){}}
+/* on the English home page, a visitor who chose another language before goes to that language's page */
+if(PAGE_LANG==="en"&&location.pathname==="/"){try{const sv=localStorage.getItem("fdf-lang");if(sv&&sv!=="en"&&LANG_URL[sv])location.replace(LANG_URL[sv])}catch(e){}}
 const A={};let step=0,view="quiz",lovedStage=0,lovedBrand=null,filt="all",hi=null;
 const t=k=>T[L][k];
 const FX={firm:0,balanced:1,soft:2,bouncy:3},FO={EVA:0,sEVA:.25,TPU:.35,blend:.35,TPEE:.5,PEBA:.65};
@@ -793,7 +822,7 @@ function filtered(){
 let rpage=0,rsel=0;
 /* Amazon search link with the affiliate tag: no API needed */
 /* Awin store offers, the visitor's own region first (from the chosen language), at most two */
-const REGION={pt:["BR","PT"],en:["US","GB","IE","CA","AU"],es:["ES"],fr:["FR","BE","CH"],de:["DE","AT","CH"],it:["IT"]};
+const REGION={pt:["BR"],pp:["PT"],en:["US","GB","IE","CA","AU"],es:["ES"],fr:["FR","BE","CH"],de:["DE","AT","CH"],it:["IT"]};
 const storeOffers=s=>{const pref=REGION[L]||[];return [...s.offers].sort((a,b)=>{const ia=pref.indexOf(a[1]),ib=pref.indexOf(b[1]);return (ia<0?99:ia)-(ib<0?99:ib)}).slice(0,2)};
 const money=(v,c)=>{const n=parseFloat(v);if(!isFinite(n))return "";try{return new Intl.NumberFormat(document.documentElement.lang||"en",{style:"currency",currency:c||"USD",maximumFractionDigits:0}).format(n)}catch(e){return n.toFixed(0)+" "+(c||"")}};
 const amzLink=s=>AMZ&&AMZ.tag?`https://www.${AMZ.store}/s?${new URLSearchParams({k:`${s.brand} ${s.model} running shoes`,tag:AMZ.tag})}`:null;
@@ -887,7 +916,7 @@ function applyLang(){
 const lb=document.getElementById("langBtn"),lm=document.getElementById("langMenu");
 const closeMenu=()=>{lm.hidden=true;lb.setAttribute("aria-expanded","false")};
 lb.onclick=e=>{e.stopPropagation();lm.hidden=!lm.hidden;lb.setAttribute("aria-expanded",String(!lm.hidden));if(!lm.hidden){const s=lm.querySelector('[aria-selected="true"]');s&&s.focus()}};
-const pick=el=>{L=el.dataset.l;try{localStorage.setItem("fdf-lang",L)}catch(e){}closeMenu();applyLang();lb.focus()};
+const pick=el=>{L=el.dataset.l;try{localStorage.setItem("fdf-lang",L)}catch(e){}if(PAGE_LANG&&LANG_URL[L]&&L!==PAGE_LANG){location.href=LANG_URL[L];return}closeMenu();applyLang();lb.focus()};
 lm.onclick=e=>{const li=e.target.closest("li");if(li)pick(li)};
 lm.onkeydown=e=>{const li=e.target.closest("li");if(!li)return;
   if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(li)}

@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/">
+<meta name="description" content="Kostenloses Quiz für chinesische Laufschuhe. Tippe ein paar Antworten an und erhalte bis zu 12 Vorschläge von Li-Ning, Xtep, ANTA und mehr. Unabhängig, ohne Tippen.">
+<link rel="canonical" href="https://footfinder.cc/de/">
+<link rel="alternate" hreflang="en" href="https://footfinder.cc/">
+<link rel="alternate" hreflang="pt-BR" href="https://footfinder.cc/pt/">
+<link rel="alternate" hreflang="pt-PT" href="https://footfinder.cc/pt-pt/">
+<link rel="alternate" hreflang="es" href="https://footfinder.cc/es/">
+<link rel="alternate" hreflang="fr" href="https://footfinder.cc/fr/">
+<link rel="alternate" hreflang="de" href="https://footfinder.cc/de/">
+<link rel="alternate" hreflang="it" href="https://footfinder.cc/it/">
+<link rel="alternate" hreflang="x-default" href="https://footfinder.cc/">
+<script>window.PAGE_LANG="de"</script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Footfinder">
+<meta property="og:url" content="https://footfinder.cc/de/">
+<meta property="og:title" content="Footfinder · Finde deinen chinesischen Laufschuh">
+<meta property="og:description" content="Kostenloses Quiz für chinesische Laufschuhe. Tippe ein paar Antworten an und erhalte bis zu 12 Vorschläge von Li-Ning, Xtep, ANTA und mehr. Unabhängig, ohne Tippen.">
+<meta property="og:image" content="https://footfinder.cc/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Footfinder · Finde deinen chinesischen Laufschuh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<style>
+/* Layout: one screen, no scrolling. Header, then a slider of shoes that fills whatever height is left (the best match in the middle, the rest fading with distance on both sides), then the quiz card. */
+:root{
+  --bg:#F5F5F4; --card:#FFFFFF; --tile:#F5F5F4; --tile-hover:#EDEDEB;
+  --ink:#292524; --muted:#6B635D; --faint:#A8A29E; --line:#E7E5E4; --sel:#292524;
+  --shadow:0 1px 2px rgb(28 25 23 / .04),0 4px 12px rgb(28 25 23 / .05),0 16px 40px rgb(28 25 23 / .06);
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(0.2,0,0,1);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1C1917; --card:#292524; --tile:#33302D; --tile-hover:#3D3936;
+  --ink:#F5F5F4; --muted:#A8A29E; --faint:#78716C; --line:#3D3936; --sel:#F5F5F4;
+  --shadow:0 1px 2px rgb(0 0 0 / .3),0 16px 40px rgb(0 0 0 / .35); color-scheme:dark}
+}
+:root[data-theme="dark"]{
+  --bg:#1C1917; --card:#292524; --tile:#33302D; --tile-hover:#3D3936;
+  --ink:#F5F5F4; --muted:#A8A29E; --faint:#78716C; --line:#3D3936; --sel:#F5F5F4;
+  --shadow:0 1px 2px rgb(0 0 0 / .3),0 16px 40px rgb(0 0 0 / .35); color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{overflow:hidden;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--font);font-feature-settings:"cv11","ss01";
+  -webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 14px}
+button{font:inherit;color:inherit}
+.top{flex:none;width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;max-width:1200px;margin:0 auto;position:relative;z-index:200}  /* above the slider shoes (z up to 100) */
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+.logo svg{flex:none}
+.lang{position:relative;justify-self:center}
+.lbtn{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;padding:5px 9px;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--ink);transition-property:background-color,scale;transition-duration:.15s}
+.lbtn:hover{background:var(--line)}
+.lbtn:active{scale:.96}
+.lmenu{position:absolute;top:calc(100% + 6px);left:50%;translate:-50% 0;margin:0;padding:4px;list-style:none;min-width:160px;background:var(--card);border-radius:12px;box-shadow:var(--shadow);z-index:10}
+.lmenu li{all:unset;display:flex;justify-content:space-between;align-items:center;gap:10px;box-sizing:border-box;width:100%;cursor:pointer;padding:7px 10px;border-radius:8px;font-size:13px}
+.lmenu li:hover,.lmenu li:focus-visible{background:var(--tile);outline:none}
+.lmenu li[aria-selected="true"]{font-weight:600}
+.lmenu li[aria-selected="true"]::after{content:"✓";font-size:12px}
+.lmenu li small{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.cfoot>:first-child{justify-self:start}.cfoot>:last-child{justify-self:end}
+.about{all:unset;cursor:pointer;text-decoration:none;justify-self:end;font-size:12.5px;color:var(--ink)}
+.about:hover{text-decoration:underline;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* slider: the shoe in the middle is large and solid; the further a shoe is from the middle, the smaller and fainter it gets */
+.cloud{position:relative;flex:1 1 auto;min-height:0;width:100%;max-width:1200px;margin:6px auto 0;overflow:hidden;touch-action:pan-y;user-select:none;cursor:grab;outline-offset:-2px}
+.cloud.dragging{cursor:grabbing}
+.cloud[hidden]{display:none}
+.shoe{position:absolute;top:var(--cy,45%);left:50%;width:var(--sw,240px);translate:-50% -50%;
+  transition:left .5s var(--ease),opacity .5s var(--ease),scale .5s var(--ease),filter .5s var(--ease)}
+.cloud.dragging .shoe{transition:none}
+.shoe svg,.shoe .photo{width:100%;height:auto;display:block;pointer-events:none}
+.shoe .photo{filter:drop-shadow(0 14px 14px rgb(0 0 0 / .12))}
+.shoe.gone{opacity:0!important;scale:.6!important}
+.photo{object-fit:contain;background:transparent;filter:drop-shadow(0 6px 8px rgb(0 0 0 / .08))}
+.store.live{color:var(--ink);background:var(--card);text-decoration:none;font-weight:600;box-shadow:inset 0 0 0 1px var(--line);transition-property:background-color,scale;transition-duration:.15s}
+.store.live:hover{background:var(--tile-hover)}
+.store.live:active{scale:.96}
+.sinfo{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:14px;pointer-events:none}
+.sinfo .txt{text-align:center;min-width:0;flex:none;width:min(300px,calc(100vw - 140px))}  /* fixed width so the arrows never move */
+.sinfo b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sinfo span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sarrow{all:unset;pointer-events:auto;cursor:pointer;width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--card);box-shadow:var(--shadow);transition-property:scale,opacity;transition-duration:.15s}
+.sarrow:active{scale:.96}
+.sarrow[disabled]{opacity:.3;pointer-events:none}
+@media (max-width:520px){.sinfo b{font-size:13.5px}.sinfo span{font-size:11px}.sarrow{width:30px;height:30px}}
+.go{white-space:nowrap}
+
+/* card */
+.card{position:relative;z-index:2;flex:none;width:100%;max-width:560px;margin:6px auto 0;background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:12px}
+.card.wide{max-width:920px}
+.card:not(.res){display:flex;flex-direction:column}
+.cbody{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+.nav{all:unset;cursor:pointer;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--tile);color:var(--ink);transition-property:scale,opacity,background-color;transition-duration:.15s}
+.nav:hover{background:var(--tile-hover)}
+.nav:active{scale:.96}
+.nav[disabled]{opacity:.3;pointer-events:none}
+.chead{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;padding:6px 4px 12px}
+.icons{display:flex;gap:2px}
+#pgPrev,#pgNext{width:44px;height:44px;font-size:24px;color:var(--ink)}#pgPrev:disabled,#pgNext:disabled{color:var(--faint);cursor:default}
+.ibtn{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center;border-radius:8px;color:var(--muted);transition-property:background-color,color,scale;transition-duration:.15s}
+.ibtn:hover{background:var(--tile);color:var(--ink)}
+.ibtn:active{scale:.96}
+.ibtn[disabled]{opacity:.3;pointer-events:none}
+h1{margin:0;text-align:center;font-size:21px;font-weight:700;letter-spacing:-.022em;line-height:1.2;text-wrap:balance}
+.hint{margin:-4px 0 12px;text-align:center;color:var(--muted);font-size:13px;text-wrap:pretty;padding-inline:12px}
+.opts{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:6px}
+@media (max-width:520px){.opts{--cols:2!important}.opts.many{--cols:3!important}}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;background:var(--tile);border-radius:10px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;min-height:64px;
+  transition-property:background-color,box-shadow,scale;transition-duration:.15s}
+.opt:hover{background:var(--tile-hover)}
+.opt:active{scale:.96}
+.opt.sel{box-shadow:inset 0 0 0 1.5px var(--sel)}
+.opt b{font-weight:600;font-size:13.5px;letter-spacing:-.005em;line-height:1.25}
+.opt span{font-size:12px;color:var(--muted);line-height:1.3}
+.opt .art{width:100%;max-width:120px;height:58px;display:grid;place-items:center;margin-bottom:6px}
+.opt .art svg,.opt .art .photo{max-height:58px;width:auto;max-width:100%}
+.opt .num{font-size:22px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.1;margin-bottom:2px}
+.opt .num small{font-size:13px;font-weight:600;margin-left:2px}
+.cfoot{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 6px 2px;gap:10px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.dots{display:flex;gap:4px}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--ink)}
+.go{all:unset;cursor:pointer;background:var(--ink);color:var(--bg);font-weight:600;font-size:13px;padding:8px 14px;border-radius:9px;transition-property:scale,opacity;transition-duration:.15s}
+.go:active{scale:.96}
+
+/* results */
+.filters{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:-2px 0 12px}
+.chip{all:unset;cursor:pointer;font-size:12.5px;font-weight:500;padding:5px 11px;border-radius:999px;color:var(--muted);transition-property:background-color,color;transition-duration:.15s}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--tile);color:var(--ink)}
+.list{display:flex;flex-direction:column;gap:6px}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--tile);border-radius:10px;padding:12px 16px 12px 10px}
+@media (max-width:600px){.row{grid-template-columns:96px minmax(0,1fr);}.row .pct{grid-column:2;justify-self:start;text-align:left}}
+.row .pic svg,.row .pic .photo{width:100%;height:auto;display:block}
+
+.rbody{min-width:0;display:flex;flex-direction:column;gap:5px}
+.rname{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.rname b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.rname .br{font-size:12px;color:var(--muted)}
+.tag{font-size:11px;font-weight:500;padding:1px 7px;border-radius:999px;background:var(--card);color:var(--muted)}
+.specs{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.specs em{font-style:normal;color:var(--ink);font-weight:500}
+.why{font-size:12.5px;color:var(--ink);margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:4px}
+.why li{background:var(--card);border-radius:6px;padding:2px 7px}
+.buy{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px}
+.price{font-weight:600;font-variant-numeric:tabular-nums;margin-right:4px}
+.store{font-size:12px;padding:4px 9px;border-radius:7px;background:var(--card);color:var(--faint)}
+.sim{font-size:12px;color:var(--muted)}
+.sim button{all:unset;cursor:pointer;color:var(--ink);text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:2px}
+.pct{text-align:right;font-variant-numeric:tabular-nums}
+.pct strong{display:block;font-size:22px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.pct span{font-size:11px;color:var(--muted)}
+.row.hi{box-shadow:inset 0 0 0 1.5px var(--sel)}
+.note{position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 48px);right:max(16px,env(safe-area-inset-right,0px));width:min(320px,calc(100% - 32px));margin:0;padding:14px 16px;background:var(--card);border-radius:14px;box-shadow:var(--shadow);font-size:12.5px;line-height:1.5;color:var(--muted);text-wrap:pretty}
+.empty{text-align:center;color:var(--muted);padding:20px}
+.opts.compact .opt{min-height:40px;padding:9px 8px}
+@media (max-width:520px){.opts.compact{--cols:3!important}}
+@media (max-height:780px){
+  h1{font-size:19px}.chead{padding:4px 4px 8px}.hint{margin-bottom:8px}
+  .opt{padding:10px 8px 9px;min-height:50px}.opt .art{height:44px;margin-bottom:4px}.opt .art svg,.opt .art .photo{max-height:44px}
+  .opt .num{font-size:19px}.cfoot{padding-top:8px}
+}
+@media (max-height:640px){.opt .art{display:none}.opt span{display:none}}
+
+/* results: a product page for the selected shoe, with the shortlist beside it (one screen, no scrolling) */
+.card.res{flex:1 1 auto;min-height:0;max-width:1240px;background:transparent;box-shadow:none;padding:0;margin-top:10px}
+.rwrap{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px}
+.rmain{min-height:0;background:var(--card);border-radius:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden}
+.rphoto{position:relative;background:var(--tile);display:grid;place-items:center;padding:28px;min-height:0}
+.rphoto svg,.rphoto .photo{width:min(100%,460px);height:auto;max-height:100%;display:block}
+.rphoto .photo{filter:drop-shadow(0 22px 22px rgb(0 0 0 / .16))}
+.rbadge{position:absolute;top:18px;left:18px;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--card);font-variant-numeric:tabular-nums;box-shadow:0 1px 2px rgb(0 0 0 / .06)}
+.rdet{min-height:0;display:flex;flex-direction:column;gap:14px;padding:30px 34px}
+.rdet .rb{font-size:13px;color:var(--muted);font-weight:500}
+.rdet h2{margin:0;font-size:28px;font-weight:700;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+.rprice{font-size:24px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:8px}
+.rprice small{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{background:var(--tile);border-radius:12px;padding:10px 14px}
+.tile span{display:block;font-size:12px;color:var(--muted)}
+.tile b{font-size:18px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.spec{margin:0;display:grid;grid-template-columns:auto 1fr;font-size:13.5px}
+.spec dt,.spec dd{margin:0;padding:6px 0;border-top:1px solid var(--line)}
+.spec dt{color:var(--muted);padding-right:16px}
+.spec dd{text-align:right;font-variant-numeric:tabular-nums}
+.spec dt:first-of-type,.spec dd:first-of-type{border-top:0}
+.rwhy{display:flex;flex-wrap:wrap;gap:4px}
+.rwhy span{font-size:12px;background:var(--tile);border-radius:6px;padding:2px 8px}
+.rbtns{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.rbtn{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border-radius:12px;font-weight:600;font-size:14.5px;text-decoration:none;cursor:pointer;transition-property:scale,opacity,background-color;transition-duration:.15s}
+.rbtn:active{scale:.96}
+.rbtn.light{background:var(--tile);color:var(--ink)}
+.rbtn.dark{background:var(--ink);color:var(--bg)}
+.rbtn.ali{position:relative}.alilogo{position:absolute;left:18px;top:50%;translate:0 -50%;width:24px;height:24px;border-radius:6px}
+.smodal{position:fixed;inset:0;z-index:10000;background:rgb(0 0 0 / .32);display:grid;place-items:center;padding:16px;animation:fadein .18s}
+.smodal .rmain{position:relative;width:min(920px,100%);height:min(640px,100%)}
+.sclose{position:absolute;top:12px;right:12px;z-index:2;background:var(--tile)}
+@keyframes fadein{from{opacity:0}}
+.shoe{cursor:pointer}
+.rbtn.off{opacity:.45;cursor:default;pointer-events:none}
+.rnote{margin:0;font-size:11px;color:var(--muted);text-align:center;text-wrap:pretty}
+.rlist{min-height:0;background:var(--card);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.rlhead{display:flex;align-items:center;gap:6px;padding:12px 12px 8px}
+.rlhead b{flex:1;font-size:14px;font-weight:600;letter-spacing:-.01em;text-align:right;padding-right:6px}
+.ritem{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 14px;height:64px;transition:background-color .15s}
+.ritem:hover{background:var(--tile)}
+.ritem[aria-current="true"]{background:var(--tile)}
+.ritem .th{height:44px;display:grid;place-items:center}
+.ritem .th svg,.ritem .th .photo{max-height:44px;width:auto;max-width:58px}
+.ritem .tx{min-width:0}
+.ritem .tx b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;font-size:13.5px;font-weight:600;line-height:1.25;overflow:hidden;overflow-wrap:anywhere}
+.ritem .tx span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rtag{font-size:11.5px;font-weight:500;padding:3px 8px;border-radius:7px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap}
+.rpager{display:none}
+@media (max-height:820px){.rdet{padding:22px 26px;gap:10px}.rdet h2{font-size:24px}.rprice{font-size:20px}.tile b{font-size:16px}.spec dt,.spec dd{padding:4px 0}.rbtn{height:42px}}
+@media (max-height:700px){.spec .x{display:none}.rwhy{display:none}}
+@media (max-width:900px){
+  .rwrap{grid-template-columns:minmax(0,1fr)}
+  .rlist{display:none}
+  .rmain{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .rphoto{padding:12px 16px;height:clamp(110px,24vh,210px)}
+  .rphoto svg,.rphoto .photo{width:auto;max-width:78%;max-height:100%}
+  .rdet{padding:14px 18px 14px;gap:8px}
+  .rdet h2{font-size:21px}.rprice{font-size:18px}
+  .tile{padding:8px 12px}.tile b{font-size:15px}
+  .spec{font-size:13px}.spec dt,.spec dd{padding:3px 0}
+  .rwhy{display:none}
+  .rbtn{height:42px}
+  .rpager{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:4px}
+  .rpager span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+}
+@media (max-width:900px) and (max-height:760px){.spec .x{display:none}}
+@media (max-width:900px) and (max-height:620px){.spec .y{display:none}.rphoto{height:96px}}
+/* results: a page of cards at a time instead of a long list */
+.rgrid{display:grid;grid-template-columns:repeat(var(--per,3),minmax(0,1fr));gap:8px}
+.rcard{position:relative;background:var(--tile);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rcard .pic{height:84px;display:grid;place-items:center}
+.rcard .pic svg,.rcard .pic .photo{max-height:84px;width:auto;max-width:100%;display:block}
+.rcard .badge{position:absolute;top:10px;right:10px;font-size:13px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--ink);color:var(--bg);font-variant-numeric:tabular-nums}
+.rcard .rname{padding-right:52px}
+.pager{display:flex;align-items:center;gap:4px;font-variant-numeric:tabular-nums}
+@media (max-height:700px){.rcard .pic{height:60px}.rcard .pic svg,.rcard .pic .photo{max-height:60px}.rcard .why{display:none}}
+@media (prefers-reduced-motion:reduce){.shoe,.card,.opt,.ibtn{transition-duration:0s!important}}
+</style>
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+<div class="top">
+  <div class="logo"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 15.5c3.5 0 4.8-7 9-7 3.6 0 3.8 3 8.5 3v3.3c0 1.3-.8 2.2-2.2 2.2H3.6C2.6 17 2 16.4 2 15.5z" fill="currentColor"/></svg>Footfinder</div>
+  <div class="lang"><button class="lbtn" id="langBtn" aria-haspopup="listbox" aria-expanded="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M1.75 8h12.5M8 1.75c1.8 1.9 2.6 4 2.6 6.25S9.8 12.35 8 14.25C6.2 12.35 5.4 10.25 5.4 8S6.2 3.65 8 1.75z"/></svg><span id="langCur"></span><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m2.5 4 2.5 2.5L7.5 4"/></svg></button><ul class="lmenu" id="langMenu" role="listbox" hidden></ul></div>
+  <a class="about" id="aboutBtn" href="about.html"></a>
+</div>
+<div class="cloud" id="cloud" tabindex="0" role="region" aria-roledescription="carousel"><div class="sinfo" id="sinfo"></div></div>
+<section class="card" id="card" aria-live="polite"></section>
+
+<script>
+const RAW=[["Li-Ning","Red Hare 9 Ultra",1,2026,["daily","long"],"road",130,246,47.0,42.0,"BOOM","PEBA","none","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[58,56,53],1,"c","img/li-ning-red-hare-9-ultra.webp","https://s.click.aliexpress.com/e/_c3bi68Hx",null,[]],["Li-Ning","Red Hare 9 Pro",1,2026,["tempo"],"road",100,220,38.0,32.0,"BOOM","PEBA","nylon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[34],1,"l","img/li-ning-red-hare-9-pro.webp","https://s.click.aliexpress.com/e/_c4NM3FOv",null,[]],["Li-Ning","Red Hare 8 Pro",0,2025,["tempo"],"road",95,215,36.0,30.0,"BOOM","PEBA","nylon","bouncy","neutral",0,["5k","10k","21k"],0,1,[34],1,"l","img/li-ning-red-hare-8-pro.webp","https://s.click.aliexpress.com/e/_c3USxZ37",null,[]],["Li-Ning","Red Hare 8",0,2025,["daily","tempo","budget"],"road",60,230,33.0,26.0,"Light Foam Plus","sEVA","none","balanced","neutral",0,["5k","10k","21k"],0,0,[],1,"l","img/li-ning-red-hare-8.webp","https://s.click.aliexpress.com/e/_c2u3Enjx",null,[]],["Li-Ning","Red Hare 7 Pro",0,2024,["tempo"],"road",85,210,35.0,29.0,"BOOM","PEBA","nylon","bouncy","neutral",0,["5k","10k","21k"],0,0,[34],1,"l","img/li-ning-red-hare-7-pro.webp","https://s.click.aliexpress.com/e/_c3naQ3gH",null,[]],["Li-Ning","Red Hare 7",0,2024,["daily","tempo","budget"],"road",55,230,32.0,25.0,"Light Foam Plus","sEVA","none","balanced","neutral",0,["5k","10k","21k"],0,0,[],1,"l","img/li-ning-red-hare-7.webp","https://s.click.aliexpress.com/e/_c3w8anbF",null,[]],["Li-Ning","Feidian 5 Elite",1,2025,["race"],"road",180,175,39.0,33.0,"BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[38,15,65],1,"l","img/li-ning-feidian-5-elite.webp","https://s.click.aliexpress.com/e/_c42lzUTR",null,[]],["Li-Ning","Feidian 4 Elite",0,2024,["race"],"road",170,180,39.0,33.0,"BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,1,[15,38,65],1,"l","img/li-ning-feidian-4-elite.webp","https://s.click.aliexpress.com/e/_c3m9L761",null,[]],["Li-Ning","Feidian 3 Elite",0,2023,["race"],"road",160,190,39.0,32.0,"BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[74,65],1,"l","img/li-ning-feidian-3-elite.webp","https://s.click.aliexpress.com/e/_c3fN8YCp",null,[]],["Li-Ning","Feidian 4 Challenger",1,2024,["tempo","race"],"road",110,200,38.0,32.0,"BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[27,78,23],1,"l","img/li-ning-feidian-4-challenger.webp","https://s.click.aliexpress.com/e/_c2IJvAbr",null,[]],["Li-Ning","Jueying 4",0,2024,["daily","long"],"road",100,270,38.0,30.0,"BOOM + Light Foam","blend","none","soft","neutral",0,["5k","10k","21k","42k"],1,0,[72,11,75],1,"l","img/li-ning-jueying-4.webp","https://s.click.aliexpress.com/e/_c3dlvmY1",null,[]],["Li-Ning","Yueying 5",1,2025,["daily"],"road",80,260,38.0,30.0,"Light Foam Plus","sEVA","none","soft","neutral",0,["5k","10k","21k","42k"],1,0,[50],1,"l","img/li-ning-yueying-5.webp","https://s.click.aliexpress.com/e/_c4NCATsV",null,[]],["Li-Ning","Yueying 4",0,2024,["daily"],"road",75,260,36.0,28.0,"Light Foam Plus","sEVA","none","soft","neutral",0,["5k","10k","21k"],1,0,[50],1,"l","img/li-ning-yueying-4.webp","https://s.click.aliexpress.com/e/_c4B3mVfL",null,[]],["Li-Ning","Super Light 22",1,2025,["daily","tempo"],"road",75,200,33.0,25.0,"BOOM","PEBA","none","bouncy","neutral",0,["5k","10k","21k"],0,0,[57,59],1,"l","img/li-ning-super-light-22.webp","https://s.click.aliexpress.com/e/_c421Sk65",null,[]],["Li-Ning","Super Light 21",0,2024,["daily","tempo"],"road",70,205,32.0,24.0,"BOOM","PEBA","none","bouncy","neutral",0,["5k","10k","21k"],0,0,[57,59],1,"l","img/li-ning-super-light-21.webp","https://s.click.aliexpress.com/e/_c3tYk6PB",null,[]],["ANTA","C202 G9",1,2026,["race"],"road",180,185,40.0,34.0,"Nitrogen PEBA","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[65,6,40],1,"l","img/anta-c202-g9.webp","https://s.click.aliexpress.com/e/_c3txf2VL",null,[]],["ANTA","C202 5 GT",0,2024,["race"],"road",170,195,40.0,33.0,"Nitrogen PEBA","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[74,65],1,"l","img/anta-c202-5-gt.webp","https://s.click.aliexpress.com/e/_c3fhpomV",null,[]],["ANTA","C10 Pro",1,2025,["tempo","race"],"road",130,200,38.0,31.0,"Nitrogen Foam","sEVA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[82,80,37],1,"l","img/anta-c10-pro.webp","https://s.click.aliexpress.com/e/_c4BWhlHf",null,[]],["ANTA","Mach 5",1,2025,["daily","tempo","budget"],"road",60,230,33.0,25.0,"Nitrogen Foam","sEVA","none","bouncy","neutral",0,["5k","10k","21k"],0,0,[48,47],1,"l","img/anta-mach-5.webp","https://s.click.aliexpress.com/e/_c4eQRuTf",null,[]],["ANTA","Mach 4",0,2024,["daily","tempo","budget"],"road",55,230,32.0,24.0,"Nitrogen Foam","sEVA","none","bouncy","neutral",0,["5k","10k","21k"],0,0,[48,47],1,"l","img/anta-mach-4.webp","https://s.click.aliexpress.com/e/_c3cWDvq1",null,[]],["ANTA","PG7",0,2024,["daily","long","budget"],"road",55,260,35.0,27.0,"PG7 Foam","EVA","none","soft","neutral",0,["5k","10k","21k","42k"],1,0,[83,63,81],1,"l","img/anta-pg7.webp","https://s.click.aliexpress.com/e/_c3weovfF",null,[]],["Xtep","160X 7.0 Pro",1,2026,["race"],"road",200,195,40.0,32.0,"XTEP ACE","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[],1,"l","img/xtep-160x-7-0-pro.webp","https://s.click.aliexpress.com/e/_c3VqKHip",null,[]],["Xtep","160X 6.0 Pro",0,2025,["race"],"road",190,200,40.0,32.0,"XTEP ACE","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,1,[],1,"l","img/xtep-160x-6-0-pro.webp","https://s.click.aliexpress.com/e/_c3gpFGWH",null,[]],["Xtep","160X 6.0",1,2025,["race","tempo"],"road",130,210,40.0,32.0,"XTEP ACE","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[33,27],1,"l","img/xtep-160x-6-0.webp","https://s.click.aliexpress.com/e/_c4MG1Ikv",null,[]],["Xtep","160X 5.0 Pro",0,2024,["race"],"road",175,205,40.0,32.0,"XTEP ACE","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[],1,"l","img/xtep-160x-5-0-pro.webp","https://s.click.aliexpress.com/e/_c4kH79pX",null,[]],["Xtep","160X 3.5 Pro",0,2023,["race"],"road",160,210,39.0,32.0,"XTEP ACE","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[74],1,"l","img/xtep-160x-3-5-pro.webp","https://s.click.aliexpress.com/e/_c35rU8Iz",null,[]],["Xtep","260X 2.0",1,2025,["tempo"],"road",100,220,37.0,30.0,"Dynamic Foam","sEVA","nylon","balanced","neutral",0,["5k","10k","21k"],0,0,[],1,"l","img/xtep-260x-2-0.webp","https://s.click.aliexpress.com/e/_c3RwwANb",null,[]],["361°","Flame 5",1,2025,["race","tempo"],"road",150,200,39.0,33.0,"QU!K Flame","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[9,78,33,23],1,"l","img/361-flame-5.webp","https://s.click.aliexpress.com/e/_c3n0uuFB",null,[]],["361°","Flame 4",0,2024,["race","tempo"],"road",140,205,39.0,33.0,"QU!K Flame","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,1,[9,78,33,23],1,"l","img/361-flame-4.webp","https://s.click.aliexpress.com/e/_c37le60D",null,[]],["361°","Yushan 2",1,2024,["trail","long"],"trail",140,310,35.0,29.0,"QU!KFOAM","EVA","none","soft","neutral",0,["5k","10k","21k","42k","ultra"],1,0,[],1,"l","img/361-yushan-2.webp","https://s.click.aliexpress.com/e/_c40DVLWZ",null,[]],["PEAK","Taichi 3.0",1,2024,["daily","budget"],"road",60,260,33.0,25.0,"P-Motive","TPEE","none","bouncy","neutral",0,["5k","10k","21k"],0,0,[56,75,58],1,"l","img/peak-taichi-3-0.webp","https://s.click.aliexpress.com/e/_c3iYY8cD",null,[]],["Kailas","Fuga EX 3",1,2024,["trail","race"],"trail",200,260,34.0,28.0,"PEBA","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k","ultra"],0,0,[],1,"l","img/kailas-fuga-ex-3.webp","https://s.click.aliexpress.com/e/_c3YZOLlR",null,[]],["Li-Ning","Feidian 6 Elite",1,2026,["race"],"road",230,205,40.0,34.0,"Super BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[41,40,65,38],1,"c","img/li-ning-feidian-6-elite.webp","https://s.click.aliexpress.com/e/_c3purfWt",null,[]],["Li-Ning","Feidian 6 Challenger",1,2025,["race","tempo"],"road",115,200,38.0,31.0,"BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[27,23,78],1,"c","img/li-ning-feidian-6-challenger.webp","https://s.click.aliexpress.com/e/_c32jyNUH",null,[]],["Li-Ning","Feidian 6 Ultra",1,2026,["tempo","long"],"road",170,240,42.0,36.0,"Super BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[1],1,"l","img/li-ning-feidian-6-ultra.webp","https://s.click.aliexpress.com/e/_c4EOEZ73",null,[]],["Li-Ning","Red Hare 9",1,2026,["daily","tempo","budget"],"road",70,235,35.0,27.0,"Light Foam Plus","sEVA","none","balanced","neutral",0,["5k","10k","21k"],0,0,[],1,"l","img/li-ning-red-hare-9.webp","https://s.click.aliexpress.com/e/_c3jUnKaV",null,[]],["Li-Ning","Yueying 5 Pro",1,2025,["daily","long"],"road",95,270,40.0,32.0,"Super BOOM","PEBA","none","soft","neutral",1,["5k","10k","21k","42k"],1,0,[75],1,"l","img/li-ning-yueying-5-pro.webp","https://s.click.aliexpress.com/e/_c3zTt6I9",null,[]],["ANTA","C202 7",1,2025,["race","tempo"],"road",180,204,40.0,34.0,"Nitro Edge Pro","blend","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[17,82],1,"c","img/anta-c202-7.webp","https://s.click.aliexpress.com/e/_c4036X4N",null,[]],["ANTA","C202 G9 2",1,2026,["race"],"road",190,184,40.0,34.0,"Nitroedge 90","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[65,6,40],1,"c","img/anta-c202-g9-2.webp","https://s.click.aliexpress.com/e/_c3X9J9nT",null,[]],["Xtep","360X 2.0",0,2024,["tempo","long"],"road",120,235,40.0,33.0,"XTEP ACE","PEBA","glassfiber","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[1,34],1,"l","img/xtep-360x-2-0.webp","https://s.click.aliexpress.com/e/_c4nhCvHB",null,[]],["Qiaodan","Feiying Plaid 3.0",1,2026,["race"],"road",270,195,40.0,34.0,"Q-Kungfu Pro-HP","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[32,38,15,65],1,"l","img/qiaodan-feiying-plaid-3-0.webp","https://s.click.aliexpress.com/e/_c3UPYcFB",null,[]],["Qiaodan","Feiying Plaid 2.0",1,2025,["race"],"road",269,206,40.0,34.0,"Q-Kungfu Pro-HP","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[32,65,38],1,"c","img/qiaodan-feiying-plaid-2-0.webp","https://s.click.aliexpress.com/e/_c3w5DRip",null,[]],["Dynafish","Xiaonian",1,2025,["daily","tempo"],"road",110,204,41.0,34.0,"TPEE","TPEE","none","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[71],1,"c","img/dynafish-xiaonian.webp","https://s.click.aliexpress.com/e/_c4BnuQWH",null,[]],["Xtep","2000km Pro",1,2026,["daily","long"],"road",78,270,38.0,30.0,"Dynamic Foam","sEVA","none","balanced","mild",0,["5k","10k","21k","42k"],1,0,[],1,"l","img/xtep-2000km-pro.webp","https://s.click.aliexpress.com/e/_c3aNPxj3",null,[]],["Xtep","2000km 5.0",1,2025,["daily","long"],"road",76,265,38.0,30.0,"Dynamic Foam","sEVA","none","balanced","neutral",0,["5k","10k","21k","42k"],1,0,[],1,"l","img/xtep-2000km-5-0.webp","https://s.click.aliexpress.com/e/_c4VWYJOp",null,[]],["Xtep","2000km Plus",1,2025,["daily","budget"],"road",52,270,35.0,27.0,"Dynamic Foam","sEVA","none","balanced","neutral",0,["5k","10k","21k"],1,0,[],1,"l","img/xtep-2000km-plus.webp","https://s.click.aliexpress.com/e/_c4WhAMjB",null,[]],["Xtep","2000km 2.0",0,2024,["daily","budget"],"road",64,280,34.0,26.0,"Dynamic Foam","sEVA","none","firm","neutral",0,["5k","10k","21k"],0,0,[],1,"l","img/xtep-2000km-2-0.webp","https://s.click.aliexpress.com/e/_c4NP6yg1",null,[]],["Xtep","2000km 5.5 Pro",1,2026,["daily","tempo"],"road",79,255,38.0,30.0,"Dynamic Foam","sEVA","none","bouncy","neutral",0,["5k","10k","21k","42k"],1,0,[48,18],1,"l","img/xtep-2000km-5-5-pro.webp","https://s.click.aliexpress.com/e/_c33x6nYd",null,[]],["Xtep","Shyft 1.0",1,2025,["tempo"],"road",70,240,36.0,28.0,"Dynamic Foam","sEVA","none","bouncy","neutral",0,["5k","10k","21k"],0,0,[47,18],1,"l","img/xtep-shyft-1-0.webp","https://s.click.aliexpress.com/e/_c3RW8Eut",null,[]],["Xtep","Shyft Pro",1,2025,["tempo","long"],"road",94,250,40.0,32.0,"XTEP ACE","blend","none","bouncy","neutral",0,["5k","10k","21k","42k"],1,0,[71,47],1,"l","img/xtep-shyft-pro.webp","https://s.click.aliexpress.com/e/_c3LeizT3",null,[]],["Xtep","Qingyun Lite",1,2025,["daily"],"road",57,260,36.0,28.0,"Dynamic Foam","sEVA","none","soft","neutral",0,["5k","10k","21k"],1,0,[52,11],1,"l","img/xtep-qingyun-lite.webp","https://s.click.aliexpress.com/e/_c2yCEpQv",null,[]],["Xtep","360X",0,2023,["tempo","long"],"road",87,245,38.0,31.0,"XTEP ACE","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[1,34],1,"l","img/xtep-360x.webp","https://s.click.aliexpress.com/e/_c3VRTyrJ",null,[]],["Li-Ning","Yueying 6",1,2026,["daily","long","budget"],"road",51,265,38.0,30.0,"Light Foam Plus","sEVA","none","soft","neutral",1,["5k","10k","21k","42k"],1,0,[50],1,"l","img/li-ning-yueying-6.webp","https://s.click.aliexpress.com/e/_c3G7xkdj",null,[]],["Li-Ning","Yueying 6 Pro",1,2026,["daily","long"],"road",105,260,40.0,32.0,"Super BOOM","PEBA","none","soft","neutral",1,["5k","10k","21k","42k"],1,0,[58,75],1,"l","img/li-ning-yueying-6-pro.webp","https://s.click.aliexpress.com/e/_c2uqSbBT",null,[]],["Li-Ning","Feidian 5 Challenger",0,2025,["race","tempo"],"road",100,205,38.0,31.0,"BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[78,23,27],1,"l","img/li-ning-feidian-5-challenger.webp","https://s.click.aliexpress.com/e/_c3DavojP",null,[]],["Li-Ning","Feidian 5 Ultra",0,2025,["tempo","long"],"road",207,240,42.0,36.0,"Super BOOM","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[1],1,"l","img/li-ning-feidian-5-ultra.webp","https://s.click.aliexpress.com/e/_c3OILmMZ",null,[]],["Li-Ning","Chaoying",1,2025,["daily"],"road",68,255,36.0,28.0,"BOOM","PEBA","none","bouncy","neutral",0,["5k","10k","21k"],1,0,[58,30,36,53],1,"l","img/li-ning-chaoying.webp","https://s.click.aliexpress.com/e/_c3gw4xkN",null,[]],["Li-Ning","Chaoying Pro",1,2025,["daily","tempo"],"road",113,245,38.0,30.0,"Super BOOM","PEBA","none","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[59,13],1,"l","img/li-ning-chaoying-pro.webp","https://s.click.aliexpress.com/e/_c3xHdvRb",null,[]],["Li-Ning","Shadow 4 Essential",1,2026,["daily","long"],"road",143,265,40.0,32.0,"Super BOOM","PEBA","none","bouncy","neutral",0,["5k","10k","21k","42k"],1,0,[56,53,36],1,"l","img/li-ning-shadow-4-essential.webp","https://s.click.aliexpress.com/e/_c4B6ERDr",null,[]],["Li-Ning","Furious Rider 8 Pro",1,2025,["daily","tempo"],"road",128,250,38.0,30.0,"BOOM","PEBA","none","bouncy","neutral",0,["5k","10k","21k","42k"],1,0,[57],1,"l","img/li-ning-furious-rider-8-pro.webp","https://s.click.aliexpress.com/e/_c41p3lZJ",null,[]],["Li-Ning","Ben Xiao",1,2025,["trail"],"trail",90,310,33.0,27.0,"BOOM","PEBA","none","balanced","neutral",0,["5k","10k","21k"],0,0,[62,76,61],1,"l","img/li-ning-ben-xiao.webp","https://s.click.aliexpress.com/e/_c3Zhklpn",null,[]],["Li-Ning","Di Lu 2",0,2025,["trail","long"],"trail",135,300,36.0,30.0,"XTRM-BOOM","PEBA","none","balanced","neutral",0,["5k","10k","21k","42k","ultra"],1,0,[60,62,76],1,"l","img/li-ning-di-lu-2.webp","https://s.click.aliexpress.com/e/_c3dp2RwD",null,[]],["Li-Ning","Longju",1,2025,["trail"],"trail",148,330,34.0,28.0,"BOOM","PEBA","none","balanced","neutral",0,["5k","10k","21k"],0,0,[60,76,61],1,"l","img/li-ning-longju.webp","https://s.click.aliexpress.com/e/_c3okbQA9",null,[]],["361°","Fengye 5.0",1,2025,["daily","budget"],"road",37,260,32.0,24.0,"QU!KFOAM","EVA","none","soft","neutral",0,["5k","10k"],0,0,[83,81],1,"l","img/361-fengye-5-0.webp","https://s.click.aliexpress.com/e/_c3DY6UBP",null,[]],["361°","PopBlaze 5",0,2025,["daily","long"],"road",82,275,39.0,31.0,"QU!KFOAM","EVA","none","soft","neutral",0,["5k","10k","21k","42k"],1,0,[81,83],1,"l","img/361-popblaze-5.webp","https://s.click.aliexpress.com/e/_c4LgJGJX",null,[]],["361°","Flame 5 Future",1,2026,["race"],"road",176,190,39.0,33.0,"QU!K Flame PEBA","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[15,38,6],1,"l","img/361-flame-5-future.webp","https://s.click.aliexpress.com/e/_c4oICIdb",null,[]],["361°","Flame 4 ET",0,2025,["race","tempo"],"road",114,205,39.0,33.0,"QU!K Flame","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[9,78,33,23],1,"l","img/361-flame-4-et.webp","https://s.click.aliexpress.com/e/_c4W7Yj8l",null,[]],["361°","N40",1,2025,["daily","budget"],"road",59,260,32.0,24.0,"QU!KFOAM","EVA","none","balanced","neutral",0,["5k","10k"],0,0,[68],1,"l","img/361-n40.webp","https://s.click.aliexpress.com/e/_c3GmaV7T",null,[]],["361°","Swift Fox 2.0",1,2025,["daily","budget"],"road",39,245,31.0,23.0,"QU!KFOAM","EVA","none","balanced","neutral",0,["5k","10k"],0,0,[67],1,"l","img/361-swift-fox-2-0.webp","https://s.click.aliexpress.com/e/_c33NfZnj",null,[]],["361°","Yushan 3.0",1,2026,["trail"],"trail",78,300,32.0,26.0,"QU!KFOAM","EVA","none","balanced","neutral",0,["5k","10k","21k"],0,0,[],1,"l","img/361-yushan-3-0.webp","https://s.click.aliexpress.com/e/_c3ABHvX3",null,[]],["361°","Yushan SE",1,2025,["trail","budget"],"trail",54,305,31.0,25.0,"QU!KFOAM","EVA","none","firm","neutral",0,["5k","10k","21k"],0,0,[],1,"l","img/361-yushan-se.webp","https://s.click.aliexpress.com/e/_c4kbST49",null,[]],["Qiaodan","TG2.0 Leili",1,2026,["tempo","long"],"road",109,240,40.0,33.0,"Q-Kungfu Pro","blend","none","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[49],1,"l","img/qiaodan-tg2-0-leili.webp","https://s.click.aliexpress.com/e/_c41Jc0xJ",null,[]],["Qiaodan","TG2.0 Leili Max",1,2026,["long","recovery"],"road",138,260,44.0,36.0,"Q-Kungfu Pro","blend","none","soft","neutral",0,["5k","10k","21k","42k"],1,0,[],1,"l","img/qiaodan-tg2-0-leili-max.webp","https://s.click.aliexpress.com/e/_c3lrUzFT",null,[]],["Qiaodan","TG Plaid",1,2026,["race"],"road",111,205,39.0,32.0,"Q-Kungfu Pro-HP","TPEE","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[74],1,"l","img/qiaodan-tg-plaid.webp","https://s.click.aliexpress.com/e/_c4qy3SD3",null,[]],["Qiaodan","Feiying GT",1,2026,["race"],"road",142,200,39.0,32.0,"Q-Kungfu Pro-HP","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[65],1,"l","img/qiaodan-feiying-gt.webp","https://s.click.aliexpress.com/e/_c4dxrJoN",null,[]],["Qiaodan","Wind 3TR",1,2026,["daily","long"],"road",80,260,38.0,30.0,"Q-Kungfu","TPEE","none","soft","neutral",0,["5k","10k","21k","42k"],1,0,[36,53,30],1,"l","img/qiaodan-wind-3tr.webp","https://s.click.aliexpress.com/e/_c3dGXpyz",null,[]],["Qiaodan","Mountain God 3.0",1,2026,["trail"],"trail",90,300,33.0,27.0,"Q-Kungfu","TPEE","none","balanced","neutral",0,["5k","10k","21k"],0,0,[60,62,61],1,"l","img/qiaodan-mountain-god-3-0.webp","https://s.click.aliexpress.com/e/_c3IJ2zM5",null,[]],["ANTA","Zone 2 Heart Rate 85",1,2026,["daily","long"],"road",73,230,38.0,32.0,"Nitrogen Foam","sEVA","none","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[],1,"l","img/anta-zone-2-heart-rate-85.webp","https://s.click.aliexpress.com/e/_c31bgRjF",null,[]],["ANTA","C202 8.0",1,2026,["race","tempo"],"road",85,200,40.0,34.0,"Nitroedge","PEBA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[9,27,33,23],1,"l","img/anta-c202-8-0.webp","https://s.click.aliexpress.com/e/_c3ofsohT",null,[]],["ANTA","C202 6.0",0,2024,["race","tempo"],"road",86,205,39.0,33.0,"Nitroedge","blend","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[82,17,80],1,"l","img/anta-c202-6-0.webp","https://s.click.aliexpress.com/e/_c3yKKkbJ",null,[]],["ONEMIX","Tupo",1,2026,["race","tempo"],"road",60,220,38.0,31.0,"Supercritical foam","sEVA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[82,17,37],1,"l","img/onemix-tupo.webp","https://s.click.aliexpress.com/e/_c4bibyov",null,[]],["ONEMIX","Bumper Max",1,2025,["daily","long"],"road",71,280,40.0,32.0,"EVA","EVA","none","soft","neutral",0,["5k","10k","21k","42k"],1,0,[83],1,"l","img/onemix-bumper-max.webp","https://s.click.aliexpress.com/e/_c4PE7CPX",null,[]],["ONEMIX","Pace Beam",1,2026,["race","tempo"],"road",84,220,37.0,30.0,"Supercritical foam","sEVA","nylon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[80,17,37],1,"l","img/onemix-pace-beam.webp","https://s.click.aliexpress.com/e/_c3hPZln3",null,[]],["ONEMIX","O-Resilio",1,2025,["daily"],"road",75,260,36.0,28.0,"EVA","EVA","none","soft","neutral",0,["5k","10k","21k"],1,0,[81,63],1,"l","img/onemix-o-resilio.webp","https://s.click.aliexpress.com/e/_c37y1QXf",null,[]],["Chunta","Carbon",1,2026,["race","tempo","budget"],"road",31,240,38.0,30.0,"EVA","EVA","carbon","bouncy","neutral",0,["5k","10k","21k","42k"],0,0,[80,82,17],1,"l","img/chunta-carbon.webp","https://s.click.aliexpress.com/e/_c44nwD7b",null,[]]];
+const AMZ={"store": "amazon.com", "tag": ""}; /* {store, tag} from data/amazon.json; the Amazon button links to a search with this tag */
+const S=RAW.map((r,i)=>({i,brand:r[0],model:r[1],cur:!!r[2],yr:r[3],cats:r[4],surf:r[5],usd:r[6],g:r[7],h:r[8],f:r[9],drop:Math.round((r[8]-r[9])*10)/10,foam:r[10],ftype:r[11],plate:r[12],feel:r[13],stab:r[14],wide:!!r[15],dist:r[16],heavy:!!r[17],pop:!!r[18],sim:r[19],cn:!!r[20],conf:r[21],img:r[22]||null,ali:r[23]||null,offers:r[25]||[]}));
+const byName=n=>S.find(s=>(s.brand+" "+s.model)===n);
+
+/* ---------- shoe renders: drawn from each shoe's real stack, drop and type ---------- */
+const PAL=[["#F1F1EE","#E4572E","#FFFFFF","#2B2B2B"],["#232323","#9FE870","#F2F2EE","#111111"],["#D9F24A","#1F1F1F","#FFFFFF","#333333"],
+ ["#2F5BEA","#FFFFFF","#F3F1EC","#1E1E1E"],["#FF7A2F","#1F1F1F","#FFF6EC","#2A2A2A"],["#1E9C8E","#F7E35A","#EEF5F2","#1F2E2E"],
+ ["#F4A7C3","#3B2A60","#FFFFFF","#3B2A60"],["#D9342B","#FFFFFF","#F4F0EA","#222222"],["#A3A8AD","#FFD23F","#FFFFFF","#2B2B2B"],["#6D4BD8","#7FF0C9","#F5F3FF","#1E1A2E"]];
+const cache={};
+/* real product photo when a partner store supplied one, otherwise the drawing */
+function shoeArt(s){
+  if(!s.img)return shoeSVG(s);
+  return `<img class="photo" src="${s.img.replace(/"/g,"%22")}" alt="${(s.brand+" "+s.model).replace(/"/g,"&quot;")}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.outerHTML=shoeSVG(S[${s.i}])">`;
+}
+function shoeSVG(s){
+  if(cache[s.i])return cache[s.i];
+  const [up,ac,mid0,out]=PAL[(s.i*7+s.brand.length*3)%PAL.length];
+  const race=s.cats.includes("race"),trail=s.surf==="trail",G=110,k=1.05;
+  const hh=Math.min(s.h,52)*k,ff=Math.min(s.f,46)*k,hT=G-hh,fT=G-ff;
+  const U=race?24:trail?36:31, mid=(s.ftype==="PEBA"&&race)?ac:mid0;
+  const toeY=G-ff*.42;
+  const midsole=`M24 ${G} C15 ${G} 15 ${hT+5} 23 ${hT} L150 ${fT} C184 ${fT} 199 ${fT+ff*.3} 207 ${toeY} C210 ${G-3} 198 ${G} 182 ${G} Z`;
+  const upper=`M23 ${hT} C17 ${hT-U*.5} 22 ${hT-U} 35 ${hT-U} L60 ${hT-U+7} C67 ${hT-U+9} 71 ${hT-U-5} 83 ${hT-U-3} C118 ${hT-U+6} 140 ${fT-20} 170 ${fT-12} C192 ${fT-6} 205 ${fT-1} 207 ${toeY} C199 ${fT+ff*.3} 184 ${fT} 150 ${fT} Z`;
+  let lugs="";if(trail){for(let x=30;x<182;x+=10)lugs+=`<rect x="${x}" y="${G+3}" width="6" height="3.5" rx="1" fill="${out}"/>`}
+  let laces="";for(let j=0;j<5;j++){const x=92+j*11,y=hT-U+2+j*((fT-16)-(hT-U+2))/4.5;laces+=`<circle cx="${x}" cy="${y}" r="1.6" fill="${ac}" opacity=".9"/>`}
+  const plate=s.plate!=="none"?`<path d="M40 ${hT+hh*.55} Q120 ${fT+ff*.25} 196 ${toeY-2}" stroke="#151515" stroke-width="1.6" fill="none" opacity=".55"/>`:"";
+  const stripe=`<path d="M64 ${hT-6} C95 ${hT-U*.55} 128 ${fT-16} 150 ${fT-5}" stroke="${ac}" stroke-width="${race?4:5}" fill="none" stroke-linecap="round" opacity=".95"/>`;
+  const svg=`<svg viewBox="0 0 220 122" xmlns="http://www.w3.org/2000/svg">
+   <ellipse cx="112" cy="${G+8}" rx="92" ry="4" fill="#000" opacity=".07"/>
+   <path d="M22 ${G} L184 ${G} C196 ${G} 204 ${G-2} 207 ${toeY+2} L207 ${G+2} C200 ${G+4} 190 ${G+4} 182 ${G+4} L26 ${G+4} C20 ${G+4} 18 ${G+2} 22 ${G} Z" fill="${out}"/>${lugs}
+   <path d="${midsole}" fill="${mid}" stroke="rgb(0 0 0 / .14)" stroke-width="1"/>${plate}
+   <path d="${upper}" fill="${up}" stroke="rgb(0 0 0 / .16)" stroke-width="1"/>
+   ${stripe}${laces}
+   <path d="M24 ${hT-U+2} l-3 -7 l8 1 z" fill="${ac}"/>
+   ${trail?`<path d="M180 ${fT-10} C195 ${fT-6} 205 ${fT-1} 207 ${toeY}" stroke="${out}" stroke-width="4" fill="none" opacity=".75"/>`:""}
+  </svg>`;
+  return cache[s.i]=svg;
+}
+
+/* ---------- copy ---------- */
+const LANGS=[["en","English","en"],["pt","Português (Brasil)","pt-BR"],["pp","Português (Portugal)","pt-PT"],["es","Español","es"],["fr","Français","fr"],["de","Deutsch","de"],["it","Italiano","it"]];
+const T={
+en:{lang:"Language",about:"About",back:"Back",fwd:"Next",close:"Close",reset:"Start over",next:"See results",
+ resTitle:"Your best shoes",resHint:"We picked {n} for you, at most 2 per brand.",
+ fAll:"All",fBudget:"Cheapest",fCn:"Chinese brands",fCur:"2026 releases",
+ edit:"Change answers",prev:"Previous version · often discounted",est:"estimated specs",soon:"soon",similar:"Similar:",
+ none:"No shoe passed your filters. Try a bigger budget or allow Chinese brands.",matchLbl:"match",
+ note:"Footfinder is independent. Some specs are estimated. USD prices are list prices; the store has the final word on price. The \"See on AliExpress\" buttons are affiliate links: we may earn a commission, and it never changes the results.",
+ notHere:"Not listed",neverHad:"Never had one / can't remember",loved:"Loved it",hated:"Didn't like it",pickModel:"Tap the model",howWas:"How did it go?",
+ w:{stab:"Extra stability",wide:"Wide / roomy fit",soft:"Soft ride",bouncy:"Bouncy foam",firm:"Firm ride",heavy:"Good for heavier runners",start:"Easy for beginners",fast:"Built for pace",daily:"Great daily trainer",dist:"Handles your distance",budget:"Fits your budget",like:"Like the one you loved",trail:"Trail grip",mixed:"Road and dirt",long:"Protective for high mileage"},
+ plate:{carbon:"carbon plate",carbon_rods:"carbon rods",glassfiber:"fiberglass",nylon:"nylon plate"}},
+pt:{lang:"Idioma",about:"Sobre",back:"Voltar",fwd:"Avançar",close:"Fechar",reset:"Recomeçar",next:"Ver resultados",
+ resTitle:"Seus melhores tênis",resHint:"Selecionamos {n} para você, no máximo 2 por marca.",
+ fAll:"Todos",fBudget:"Mais baratos",fCn:"Marcas chinesas",fCur:"Lançamentos 2026",
+ edit:"Mudar respostas",prev:"Versão anterior · costuma ter desconto",est:"dados estimados",soon:"em breve",similar:"Parecidos:",
+ none:"Nenhum tênis passou nos seus filtros. Tente aumentar o orçamento ou aceitar marcas chinesas.",matchLbl:"combinação",
+ note:"O Footfinder é independente. Parte das especificações é estimada. Preços em dólar são de tabela; a loja tem a palavra final sobre o preço. Os botões \"Ver no AliExpress\" são links de afiliado: podemos ganhar uma comissão, e isso nunca muda os resultados.",
+ notHere:"Não está aqui",neverHad:"Nunca tive / não lembro",loved:"Amei esse",hated:"Não gostei",pickModel:"Toque no modelo",howWas:"E como foi com ele?",
+ w:{stab:"Mais estabilidade",wide:"Versão larga / fôrma espaçosa",soft:"Pisada macia",bouncy:"Espuma com retorno",firm:"Pisada firme",heavy:"Bom para mais peso",start:"Fácil para começar",fast:"Feito para ritmo",daily:"Ótimo no dia a dia",dist:"Aguenta sua distância",budget:"Cabe no orçamento",like:"Parecido com o que você amou",trail:"Tração para trilha",mixed:"Asfalto e terra",long:"Protege em volume alto"},
+ plate:{carbon:"placa de carbono",carbon_rods:"hastes de carbono",glassfiber:"fibra de vidro",nylon:"placa de nylon"}},
+es:{lang:"Idioma",about:"Acerca de",back:"Atrás",fwd:"Siguiente",close:"Cerrar",reset:"Empezar de nuevo",next:"Ver resultados",
+ resTitle:"Tus mejores zapatillas",resHint:"Elegimos {n} para ti, como máximo 2 por marca.",
+ fAll:"Todas",fBudget:"Más baratas",fCn:"Marcas chinas",fCur:"Novedades 2026",
+ edit:"Cambiar respuestas",prev:"Versión anterior · suele tener descuento",est:"datos estimados",soon:"pronto",similar:"Parecidas:",
+ none:"Ninguna zapatilla pasó tus filtros. Prueba con más presupuesto o acepta marcas chinas.",matchLbl:"coincidencia",
+ note:"Footfinder es independiente. Parte de las especificaciones son estimadas. Los precios en dólares son de lista; la tienda tiene la última palabra sobre el precio. Los botones \"Ver en AliExpress\" son enlaces de afiliado: podemos ganar una comisión, y nunca cambia los resultados.",
+ notHere:"No está aquí",neverHad:"Nunca tuve / no recuerdo",loved:"Me encantó",hated:"No me gustó",pickModel:"Toca el modelo",howWas:"¿Qué tal te fue?",
+ w:{stab:"Más estabilidad",wide:"Versión ancha / horma amplia",soft:"Pisada suave",bouncy:"Espuma con rebote",firm:"Pisada firme",heavy:"Buena para más peso",start:"Fácil para empezar",fast:"Hecha para el ritmo",daily:"Ideal para el día a día",dist:"Aguanta tu distancia",budget:"Entra en tu presupuesto",like:"Parecida a la que te encantó",trail:"Agarre para montaña",mixed:"Asfalto y tierra",long:"Protege en mucho volumen"},
+ plate:{carbon:"placa de carbono",carbon_rods:"varillas de carbono",glassfiber:"fibra de vidrio",nylon:"placa de nailon"}},
+fr:{lang:"Langue",about:"À propos",back:"Retour",fwd:"Suivant",close:"Fermer",reset:"Recommencer",next:"Voir les résultats",
+ resTitle:"Vos meilleures chaussures",resHint:"Nous en avons choisi {n} pour vous, 2 par marque au maximum.",
+ fAll:"Toutes",fBudget:"Les moins chères",fCn:"Marques chinoises",fCur:"Nouveautés 2026",
+ edit:"Modifier les réponses",prev:"Version précédente · souvent en promo",est:"données estimées",soon:"bientôt",similar:"Similaires :",
+ none:"Aucune chaussure ne passe vos filtres. Augmentez le budget ou acceptez les marques chinoises.",matchLbl:"correspondance",
+ note:"Footfinder est indépendant. Certaines caractéristiques sont estimées. Les prix en dollars sont des prix catalogue ; la boutique a le dernier mot sur le prix. Les boutons « Voir sur AliExpress » sont des liens affiliés : nous pouvons toucher une commission, qui ne change jamais les résultats.",
+ notHere:"Pas dans la liste",neverHad:"Jamais eu / je ne sais plus",loved:"Je l'ai adorée",hated:"Je n'ai pas aimé",pickModel:"Touchez le modèle",howWas:"Et alors, c'était comment ?",
+ w:{stab:"Plus de stabilité",wide:"Version large / chaussant ample",soft:"Foulée moelleuse",bouncy:"Mousse dynamique",firm:"Foulée ferme",heavy:"Adaptée aux coureurs plus lourds",start:"Facile pour débuter",fast:"Faite pour la vitesse",daily:"Idéale au quotidien",dist:"Tient votre distance",budget:"Dans votre budget",like:"Proche de celle que vous avez adorée",trail:"Accroche en trail",mixed:"Route et chemins",long:"Protège sur gros volume"},
+ plate:{carbon:"plaque carbone",carbon_rods:"tiges carbone",glassfiber:"fibre de verre",nylon:"plaque nylon"}},
+de:{lang:"Sprache",about:"Über",back:"Zurück",fwd:"Weiter",close:"Schließen",reset:"Neu starten",next:"Ergebnisse ansehen",
+ resTitle:"Deine besten Schuhe",resHint:"Wir haben {n} für dich ausgewählt, höchstens 2 pro Marke.",
+ fAll:"Alle",fBudget:"Günstigste",fCn:"Chinesische Marken",fCur:"Neu 2026",
+ edit:"Antworten ändern",prev:"Vorgängermodell · oft reduziert",est:"geschätzte Daten",soon:"bald",similar:"Ähnlich:",
+ none:"Kein Schuh passt zu deinen Filtern. Erhöhe das Budget oder lass chinesische Marken zu.",matchLbl:"Übereinstimmung",
+ note:"Footfinder ist unabhängig. Einige Daten sind geschätzt. Preise in US-Dollar sind Listenpreise; der Shop hat beim Preis das letzte Wort. Die Buttons „Bei AliExpress ansehen“ sind Affiliate-Links: Wir können eine Provision erhalten, die die Ergebnisse nie verändert.",
+ notHere:"Nicht dabei",neverHad:"Noch nie / weiß nicht mehr",loved:"Geliebt",hated:"Nicht gemocht",pickModel:"Tippe auf das Modell",howWas:"Wie war er?",
+ w:{stab:"Mehr Stabilität",wide:"Weite Version / großzügige Passform",soft:"Weiches Laufgefühl",bouncy:"Federnder Schaum",firm:"Festes Laufgefühl",heavy:"Gut für schwerere Läufer",start:"Leicht für Einsteiger",fast:"Gebaut fürs Tempo",daily:"Top im Alltag",dist:"Hält deine Distanz",budget:"Passt ins Budget",like:"Ähnlich wie dein Lieblingsschuh",trail:"Grip im Gelände",mixed:"Straße und Waldweg",long:"Schützt bei hohem Umfang"},
+ plate:{carbon:"Carbonplatte",carbon_rods:"Carbonstäbe",glassfiber:"Glasfaser",nylon:"Nylonplatte"}},
+it:{lang:"Lingua",about:"Info",back:"Indietro",fwd:"Avanti",close:"Chiudi",reset:"Ricomincia",next:"Vedi risultati",
+ resTitle:"Le tue scarpe migliori",resHint:"Ne abbiamo scelte {n} per te, al massimo 2 per marca.",
+ fAll:"Tutte",fBudget:"Più economiche",fCn:"Marchi cinesi",fCur:"Novità 2026",
+ edit:"Cambia risposte",prev:"Versione precedente · spesso in sconto",est:"dati stimati",soon:"presto",similar:"Simili:",
+ none:"Nessuna scarpa supera i tuoi filtri. Prova ad aumentare il budget o ad accettare marchi cinesi.",matchLbl:"compatibilità",
+ note:"Footfinder è indipendente. Alcune specifiche sono stimate. I prezzi in dollari sono di listino; il negozio ha l'ultima parola sul prezzo. I pulsanti \"Vedi su AliExpress\" sono link di affiliazione: possiamo ricevere una commissione, che non cambia mai i risultati.",
+ notHere:"Non c'è",neverHad:"Mai avute / non ricordo",loved:"Mi è piaciuta",hated:"Non mi è piaciuta",pickModel:"Tocca il modello",howWas:"Com'è andata?",
+ w:{stab:"Più stabilità",wide:"Versione larga / calzata ampia",soft:"Appoggio morbido",bouncy:"Schiuma reattiva",firm:"Appoggio rigido",heavy:"Adatta a chi pesa di più",start:"Facile per iniziare",fast:"Fatta per il ritmo",daily:"Ottima ogni giorno",dist:"Regge la tua distanza",budget:"Nel tuo budget",like:"Simile a quella che hai amato",trail:"Grip da trail",mixed:"Asfalto e sterrato",long:"Protegge con tanti km"},
+ plate:{carbon:"piastra in carbonio",carbon_rods:"aste in carbonio",glassfiber:"fibra di vetro",nylon:"piastra in nylon"}}
+};
+/* quiz copy: titles, hints and options ("label|sub") per language; missing keys fall back to English */
+const QT={
+en:{goal:"What are they for?",volume:"How much do you run a week?",volume_start:"Do you run at all yet?",surface:"Where do you run most?",surface_v0:"Where do you plan to run?",
+ distance:"Longest distance you want to run?",distance_beg:"What's your first goal?",distance_fast:"Which race are you aiming for?",weight:"Your weight range?",weight_h:"It changes how much cushioning you need.",
+ feel:"How should it feel underfoot?",width:"Do shoes feel tight on the sides?",wear:"Where do your old shoes wear out most?",wear_v0:"Where do your everyday shoes wear out most?",
+ wear_h:"Check your right sole and compare.",wear_h_v0:"Check the pair you wear most. Compare the right sole.",budget:"What's your budget?",budget_h:"List price in USD. Sales are often lower.",
+ cn:"Open to Chinese brands?",cn_h:"Li-Ning, Anta, Xtep, 361°: lots of tech for less.",loved:"A shoe you loved or hated?",
+ o:{"goal.start":"Starting out|Walks and easy jogs","goal.daily":"Daily training|A few runs a week","goal.fast":"Getting faster|Speed work and races","goal.trail":"Trail|Dirt, rocks, hills",
+  "volume.v0":"Not yet","volume.v1":"Up to 15 km","volume.v2":"15–40 km","volume.v3":"Over 40 km",
+  "surface.road":"Road","surface.treadmill":"Treadmill","surface.trail":"Dirt and trail","surface.mixed":"A bit of both",
+  "distance.none":"No goal yet|Just want to run","distance.5k":"5 km","distance.10k":"10 km","distance.21k":"Half|21 km","distance.42k":"Marathon|42 km","distance.ultra":"Ultra|42 km+",
+  "weight.w1":"Under 60 kg|< 132 lb","weight.w2":"60–80 kg|132–176 lb","weight.w3":"80–95 kg|176–209 lb","weight.w4":"Over 95 kg|> 209 lb",
+  "feel.soft":"Soft|Like a cloud","feel.bouncy":"Bouncy|Springs you forward","feel.firm":"Firm|Feel the ground","feel.any":"Not sure|You pick",
+  "width.tight":"Almost always","width.some":"Sometimes","width.no":"Never",
+  "wear.in":"Inner side|Near the big toe","wear.out":"Outer side","wear.even":"Evenly","wear.unk":"Not sure",
+  "budget.b1":"Basic","budget.b2":"Mid-range","budget.b3":"Premium","budget.b4":"No limit|Carbon plates included","budget.b4x":"No limit|The comfiest ones",
+  "cn.yes":"Yes, show me","cn.no":"Known brands only"}},
+pt:{goal:"Para que você vai usar?",volume:"Quanto você corre por semana?",volume_start:"Você já corre um pouco?",surface:"Onde você mais corre?",surface_v0:"Onde você pretende correr?",
+ distance:"Qual a maior distância que você quer correr?",distance_beg:"Qual a sua primeira meta?",distance_fast:"Qual prova você quer fazer?",weight:"Qual a sua faixa de peso?",weight_h:"Muda quanto amortecimento você precisa.",
+ feel:"Como você quer sentir a pisada?",width:"Tênis costumam apertar dos lados?",wear:"Onde seus tênis velhos gastam mais?",wear_v0:"Onde seus tênis do dia a dia gastam mais?",
+ wear_h:"Olhe a sola do pé direito e compare.",wear_h_v0:"Vale olhar o par que você mais usa. Compare a sola do pé direito.",budget:"Até quanto quer gastar?",budget_h:"Preço de tabela em dólar. Promoções costumam sair mais barato.",
+ cn:"Aceita marcas chinesas?",cn_h:"Li-Ning, Anta, Xtep, 361°: muita tecnologia por menos.",loved:"Algum tênis que você amou ou odiou?",
+ o:{"goal.start":"Começar a correr|Caminhadas e trotes","goal.daily":"Treino do dia a dia|Algumas vezes por semana","goal.fast":"Ficar mais rápido|Ritmo e provas","goal.trail":"Trilha|Terra, pedra e morro",
+  "volume.v0":"Ainda não corro","volume.v1":"Até 15 km","volume.v2":"15 a 40 km","volume.v3":"Mais de 40 km",
+  "surface.road":"Asfalto","surface.treadmill":"Esteira","surface.trail":"Terra e trilha","surface.mixed":"Um pouco de tudo",
+  "distance.none":"Sem meta|Só quero correr","distance.21k":"Meia|21 km","distance.42k":"Maratona|42 km","distance.ultra":"Ultra|42 km+",
+  "weight.w1":"Até 60 kg","weight.w2":"60 a 80 kg","weight.w3":"80 a 95 kg","weight.w4":"Mais de 95 kg",
+  "feel.soft":"Macio|Tipo nuvem","feel.bouncy":"Elástico|Devolve energia","feel.firm":"Firme|Sente o chão","feel.any":"Não sei|Escolha por mim",
+  "width.tight":"Quase sempre","width.some":"Às vezes","width.no":"Nunca",
+  "wear.in":"Lado de dentro|Perto do dedão","wear.out":"Lado de fora","wear.even":"Por igual","wear.unk":"Não sei",
+  "budget.b1":"Básico","budget.b2":"Intermediário","budget.b3":"Premium","budget.b4":"Sem limite|Inclui placa de carbono","budget.b4x":"Sem limite|Os mais confortáveis",
+  "cn.yes":"Sim, quero ver","cn.no":"Só as conhecidas"}},
+es:{goal:"¿Para qué las vas a usar?",volume:"¿Cuánto corres por semana?",volume_start:"¿Ya corres un poco?",surface:"¿Dónde corres más?",surface_v0:"¿Dónde piensas correr?",
+ distance:"¿Cuál es la distancia más larga que quieres correr?",distance_beg:"¿Cuál es tu primera meta?",distance_fast:"¿Qué carrera quieres hacer?",weight:"¿Cuál es tu rango de peso?",weight_h:"Cambia cuánta amortiguación necesitas.",
+ feel:"¿Cómo quieres sentir la pisada?",width:"¿Las zapatillas te aprietan a los lados?",wear:"¿Dónde se gastan más tus zapatillas viejas?",wear_v0:"¿Dónde se gastan más tus zapatillas de diario?",
+ wear_h:"Mira la suela del pie derecho y compara.",wear_h_v0:"Mira el par que más usas y compara la suela derecha.",budget:"¿Cuánto quieres gastar?",budget_h:"Precio de lista en dólares. Las ofertas suelen ser más baratas.",
+ cn:"¿Aceptas marcas chinas?",cn_h:"Li-Ning, Anta, Xtep, 361°: mucha tecnología por menos.",loved:"¿Alguna zapatilla que te encantó u odiaste?",
+ o:{"goal.start":"Empezar a correr|Caminatas y trotes suaves","goal.daily":"Entrenar a diario|Algunas veces por semana","goal.fast":"Ser más rápido|Ritmo y carreras","goal.trail":"Trail|Tierra, piedras y cuestas",
+  "volume.v0":"Todavía no corro","volume.v1":"Hasta 15 km","volume.v2":"15 a 40 km","volume.v3":"Más de 40 km",
+  "surface.road":"Asfalto","surface.treadmill":"Cinta","surface.trail":"Tierra y montaña","surface.mixed":"Un poco de todo",
+  "distance.none":"Sin meta|Solo quiero correr","distance.21k":"Media|21 km","distance.42k":"Maratón|42 km","distance.ultra":"Ultra|42 km+",
+  "weight.w1":"Hasta 60 kg","weight.w2":"60 a 80 kg","weight.w3":"80 a 95 kg","weight.w4":"Más de 95 kg",
+  "feel.soft":"Suave|Como una nube","feel.bouncy":"Elástica|Devuelve energía","feel.firm":"Firme|Sientes el suelo","feel.any":"No sé|Elige por mí",
+  "width.tight":"Casi siempre","width.some":"A veces","width.no":"Nunca",
+  "wear.in":"Lado interno|Cerca del dedo gordo","wear.out":"Lado externo","wear.even":"Por igual","wear.unk":"No sé",
+  "budget.b1":"Básico","budget.b2":"Intermedio","budget.b3":"Premium","budget.b4":"Sin límite|Incluye placa de carbono","budget.b4x":"Sin límite|Las más cómodas",
+  "cn.yes":"Sí, quiero verlas","cn.no":"Solo las conocidas"}},
+fr:{goal:"Pour quoi faire ?",volume:"Combien courez-vous par semaine ?",volume_start:"Vous courez déjà un peu ?",surface:"Où courez-vous le plus ?",surface_v0:"Où comptez-vous courir ?",
+ distance:"Quelle est la plus longue distance visée ?",distance_beg:"Quel est votre premier objectif ?",distance_fast:"Quelle course préparez-vous ?",weight:"Votre tranche de poids ?",weight_h:"Cela change l'amorti dont vous avez besoin.",
+ feel:"Quelle sensation sous le pied ?",width:"Les chaussures vous serrent sur les côtés ?",wear:"Où vos vieilles chaussures s'usent-elles le plus ?",wear_v0:"Où vos chaussures de tous les jours s'usent-elles le plus ?",
+ wear_h:"Regardez la semelle droite et comparez.",wear_h_v0:"Prenez la paire que vous portez le plus et comparez la semelle droite.",budget:"Quel est votre budget ?",budget_h:"Prix catalogue en dollars. Les promos sont souvent moins chères.",
+ cn:"Ouvert aux marques chinoises ?",cn_h:"Li-Ning, Anta, Xtep, 361° : beaucoup de technologie pour moins cher.",loved:"Une chaussure adorée ou détestée ?",
+ o:{"goal.start":"Débuter|Marche et footing léger","goal.daily":"Entraînement quotidien|Quelques sorties par semaine","goal.fast":"Gagner en vitesse|Allure et courses","goal.trail":"Trail|Terre, rochers, côtes",
+  "volume.v0":"Pas encore","volume.v1":"Jusqu'à 15 km","volume.v2":"15 à 40 km","volume.v3":"Plus de 40 km",
+  "surface.road":"Route","surface.treadmill":"Tapis","surface.trail":"Chemins et trail","surface.mixed":"Un peu des deux",
+  "distance.none":"Pas d'objectif|Juste courir","distance.21k":"Semi|21 km","distance.42k":"Marathon|42 km","distance.ultra":"Ultra|42 km+",
+  "weight.w1":"Moins de 60 kg","weight.w2":"60 à 80 kg","weight.w3":"80 à 95 kg","weight.w4":"Plus de 95 kg",
+  "feel.soft":"Moelleux|Comme un nuage","feel.bouncy":"Dynamique|Rend de l'énergie","feel.firm":"Ferme|On sent le sol","feel.any":"Je ne sais pas|Choisissez pour moi",
+  "width.tight":"Presque toujours","width.some":"Parfois","width.no":"Jamais",
+  "wear.in":"Côté intérieur|Près du gros orteil","wear.out":"Côté extérieur","wear.even":"Uniformément","wear.unk":"Je ne sais pas",
+  "budget.b1":"Basique","budget.b2":"Milieu de gamme","budget.b3":"Premium","budget.b4":"Sans limite|Plaques carbone incluses","budget.b4x":"Sans limite|Les plus confortables",
+  "cn.yes":"Oui, montrez-les","cn.no":"Marques connues seulement"}},
+de:{goal:"Wofür brauchst du sie?",volume:"Wie viel läufst du pro Woche?",volume_start:"Läufst du schon ein bisschen?",surface:"Wo läufst du am meisten?",surface_v0:"Wo willst du laufen?",
+ distance:"Welche Distanz willst du höchstens laufen?",distance_beg:"Was ist dein erstes Ziel?",distance_fast:"Für welches Rennen trainierst du?",weight:"Dein Gewichtsbereich?",weight_h:"Davon hängt ab, wie viel Dämpfung du brauchst.",
+ feel:"Wie soll sich der Schuh anfühlen?",width:"Drücken Schuhe bei dir an den Seiten?",wear:"Wo nutzen sich deine alten Schuhe am meisten ab?",wear_v0:"Wo nutzen sich deine Alltagsschuhe am meisten ab?",
+ wear_h:"Schau dir die rechte Sohle an und vergleiche.",wear_h_v0:"Nimm das Paar, das du am meisten trägst, und vergleiche die rechte Sohle.",budget:"Wie viel willst du ausgeben?",budget_h:"Listenpreis in US-Dollar. Angebote sind oft günstiger.",
+ cn:"Offen für chinesische Marken?",cn_h:"Li-Ning, Anta, Xtep, 361°: viel Technik für weniger Geld.",loved:"Ein Schuh, den du geliebt oder gehasst hast?",
+ o:{"goal.start":"Einsteigen|Gehen und lockeres Joggen","goal.daily":"Tägliches Training|Ein paar Läufe pro Woche","goal.fast":"Schneller werden|Tempo und Wettkämpfe","goal.trail":"Trail|Erde, Felsen, Hügel",
+  "volume.v0":"Noch gar nicht","volume.v1":"Bis 15 km","volume.v2":"15 bis 40 km","volume.v3":"Über 40 km",
+  "surface.road":"Straße","surface.treadmill":"Laufband","surface.trail":"Waldwege und Trails","surface.mixed":"Von allem etwas",
+  "distance.none":"Noch kein Ziel|Einfach laufen","distance.21k":"Halbmarathon|21 km","distance.42k":"Marathon|42 km","distance.ultra":"Ultra|42 km+",
+  "weight.w1":"Unter 60 kg","weight.w2":"60 bis 80 kg","weight.w3":"80 bis 95 kg","weight.w4":"Über 95 kg",
+  "feel.soft":"Weich|Wie auf Wolken","feel.bouncy":"Federnd|Gibt Energie zurück","feel.firm":"Fest|Gutes Bodengefühl","feel.any":"Weiß nicht|Wähl du",
+  "width.tight":"Fast immer","width.some":"Manchmal","width.no":"Nie",
+  "wear.in":"Innenseite|Beim großen Zeh","wear.out":"Außenseite","wear.even":"Gleichmäßig","wear.unk":"Weiß nicht",
+  "budget.b1":"Einfach","budget.b2":"Mittelklasse","budget.b3":"Premium","budget.b4":"Kein Limit|Mit Carbonplatte","budget.b4x":"Kein Limit|Die bequemsten",
+  "cn.yes":"Ja, zeig sie mir","cn.no":"Nur bekannte Marken"}},
+it:{goal:"Per cosa le userai?",volume:"Quanto corri a settimana?",volume_start:"Corri già un po'?",surface:"Dove corri di più?",surface_v0:"Dove pensi di correre?",
+ distance:"Qual è la distanza più lunga che vuoi correre?",distance_beg:"Qual è il tuo primo obiettivo?",distance_fast:"Per quale gara ti alleni?",weight:"La tua fascia di peso?",weight_h:"Cambia quanta ammortizzazione ti serve.",
+ feel:"Come vuoi sentire l'appoggio?",width:"Le scarpe ti stringono ai lati?",wear:"Dove si consumano di più le tue scarpe vecchie?",wear_v0:"Dove si consumano di più le tue scarpe di tutti i giorni?",
+ wear_h:"Guarda la suola destra e confronta.",wear_h_v0:"Prendi il paio che usi di più e confronta la suola destra.",budget:"Quanto vuoi spendere?",budget_h:"Prezzo di listino in dollari. Le offerte spesso costano meno.",
+ cn:"Ti vanno bene i marchi cinesi?",cn_h:"Li-Ning, Anta, Xtep, 361°: tanta tecnologia a meno.",loved:"Una scarpa che hai amato o odiato?",
+ o:{"goal.start":"Iniziare a correre|Camminate e corsette","goal.daily":"Allenamento quotidiano|Qualche uscita a settimana","goal.fast":"Diventare più veloce|Ritmo e gare","goal.trail":"Trail|Sterrato, rocce, salite",
+  "volume.v0":"Non ancora","volume.v1":"Fino a 15 km","volume.v2":"Da 15 a 40 km","volume.v3":"Oltre 40 km",
+  "surface.road":"Asfalto","surface.treadmill":"Tapis roulant","surface.trail":"Sterrato e trail","surface.mixed":"Un po' di tutto",
+  "distance.none":"Nessun obiettivo|Voglio solo correre","distance.21k":"Mezza|21 km","distance.42k":"Maratona|42 km","distance.ultra":"Ultra|42 km+",
+  "weight.w1":"Fino a 60 kg","weight.w2":"Da 60 a 80 kg","weight.w3":"Da 80 a 95 kg","weight.w4":"Oltre 95 kg",
+  "feel.soft":"Morbida|Come una nuvola","feel.bouncy":"Reattiva|Restituisce energia","feel.firm":"Rigida|Senti il terreno","feel.any":"Non so|Scegli tu",
+  "width.tight":"Quasi sempre","width.some":"A volte","width.no":"Mai",
+  "wear.in":"Lato interno|Vicino all'alluce","wear.out":"Lato esterno","wear.even":"In modo uniforme","wear.unk":"Non so",
+  "budget.b1":"Base","budget.b2":"Fascia media","budget.b3":"Premium","budget.b4":"Senza limiti|Con piastra in carbonio","budget.b4x":"Senza limiti|Le più comode",
+  "cn.yes":"Sì, fammele vedere","cn.no":"Solo marchi noti"}}
+};
+/* results copy */
+const RT={
+en:{at:"See at",amzNote:"As an Amazon Associate, Footfinder earns from qualifying purchases.",amzGo:"Search on Amazon",weight:"Weight",drop:"Drop",stack:"Stack height",cushion:"Cushioning",feel:"Ride",plate:"Plate",stab:"Support",surf:"Surface",dist:"Best for",wide:"Wide version",year:"Released",price:"list price",match:"match",ali:"See on AliExpress",amz:"Amazon · soon",prev:"Previous version",
+ tags:{best:"Best match",light:"Lightest",cheap:"Cheapest",soft:"Most cushioned"},cush:{low:"Low",medium:"Medium",high:"High",max:"Maximum"},feelV:{soft:"Soft",balanced:"Balanced",firm:"Firm",bouncy:"Bouncy"},none:"None",
+ stabV:{neutral:"Neutral",mild:"Light support",stable:"Stability"},surfV:{road:"Road",trail:"Trail",mixed:"Road and trail"},yes:"Yes",no:"No"},
+pt:{at:"Ver na",amzNote:"Como Associado da Amazon, o Footfinder ganha com compras qualificadas.",amzGo:"Buscar na Amazon",weight:"Peso",drop:"Drop",stack:"Altura do solado",cushion:"Amortecimento",feel:"Pisada",plate:"Placa",stab:"Suporte",surf:"Superfície",dist:"Ideal para",wide:"Versão larga",year:"Lançamento",price:"preço de tabela",match:"combina",ali:"Ver no AliExpress",amz:"Amazon · em breve",prev:"Versão anterior",
+ tags:{best:"Melhor combinação",light:"Mais leve",cheap:"Mais barato",soft:"Mais amortecido"},cush:{low:"Baixo",medium:"Médio",high:"Alto",max:"Máximo"},feelV:{soft:"Macia",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Nenhuma",
+ stabV:{neutral:"Neutro",mild:"Suporte leve",stable:"Estabilidade"},surfV:{road:"Asfalto",trail:"Trilha",mixed:"Asfalto e trilha"},yes:"Sim",no:"Não"},
+es:{at:"Ver en",amzNote:"Como Afiliado de Amazon, Footfinder obtiene ingresos por las compras adscritas que cumplen los requisitos aplicables.",amzGo:"Buscar en Amazon",weight:"Peso",drop:"Drop",stack:"Altura de suela",cushion:"Amortiguación",feel:"Pisada",plate:"Placa",stab:"Soporte",surf:"Superficie",dist:"Ideal para",wide:"Versión ancha",year:"Lanzamiento",price:"precio de lista",match:"coincide",ali:"Ver en AliExpress",amz:"Amazon · pronto",prev:"Versión anterior",
+ tags:{best:"Mejor opción",light:"Más ligera",cheap:"Más barata",soft:"Más amortiguada"},cush:{low:"Baja",medium:"Media",high:"Alta",max:"Máxima"},feelV:{soft:"Suave",balanced:"Equilibrada",firm:"Firme",bouncy:"Elástica"},none:"Ninguna",
+ stabV:{neutral:"Neutra",mild:"Soporte leve",stable:"Estabilidad"},surfV:{road:"Asfalto",trail:"Montaña",mixed:"Asfalto y montaña"},yes:"Sí",no:"No"},
+fr:{at:"Voir chez",amzNote:"En tant que Partenaire Amazon, Footfinder réalise un bénéfice sur les achats remplissant les conditions requises.",amzGo:"Chercher sur Amazon",weight:"Poids",drop:"Drop",stack:"Hauteur de semelle",cushion:"Amorti",feel:"Foulée",plate:"Plaque",stab:"Maintien",surf:"Surface",dist:"Idéale pour",wide:"Version large",year:"Sortie",price:"prix catalogue",match:"correspondance",ali:"Voir sur AliExpress",amz:"Amazon · bientôt",prev:"Version précédente",
+ tags:{best:"Meilleur choix",light:"La plus légère",cheap:"La moins chère",soft:"La plus amortie"},cush:{low:"Faible",medium:"Moyen",high:"Élevé",max:"Maximal"},feelV:{soft:"Moelleuse",balanced:"Équilibrée",firm:"Ferme",bouncy:"Dynamique"},none:"Aucune",
+ stabV:{neutral:"Neutre",mild:"Léger maintien",stable:"Stabilité"},surfV:{road:"Route",trail:"Trail",mixed:"Route et trail"},yes:"Oui",no:"Non"},
+de:{at:"Ansehen bei",amzNote:"Als Amazon-Partner verdient Footfinder an qualifizierten Verkäufen.",amzGo:"Auf Amazon suchen",weight:"Gewicht",drop:"Sprengung",stack:"Sohlenhöhe",cushion:"Dämpfung",feel:"Laufgefühl",plate:"Platte",stab:"Stütze",surf:"Untergrund",dist:"Ideal für",wide:"Weite Version",year:"Erschienen",price:"Listenpreis",match:"Match",ali:"Auf AliExpress ansehen",amz:"Amazon · bald",prev:"Vorgängermodell",
+ tags:{best:"Beste Wahl",light:"Leichtester",cheap:"Günstigster",soft:"Meiste Dämpfung"},cush:{low:"Gering",medium:"Mittel",high:"Hoch",max:"Maximal"},feelV:{soft:"Weich",balanced:"Ausgewogen",firm:"Fest",bouncy:"Federnd"},none:"Keine",
+ stabV:{neutral:"Neutral",mild:"Leichte Stütze",stable:"Stabilität"},surfV:{road:"Straße",trail:"Trail",mixed:"Straße und Trail"},yes:"Ja",no:"Nein"},
+it:{at:"Vedi su",amzNote:"In qualità di Affiliato Amazon, Footfinder riceve un guadagno dagli acquisti idonei.",amzGo:"Cerca su Amazon",weight:"Peso",drop:"Drop",stack:"Altezza suola",cushion:"Ammortizzazione",feel:"Appoggio",plate:"Piastra",stab:"Supporto",surf:"Superficie",dist:"Ideale per",wide:"Versione larga",year:"Uscita",price:"prezzo di listino",match:"compatibilità",ali:"Vedi su AliExpress",amz:"Amazon · presto",prev:"Versione precedente",
+ tags:{best:"Migliore scelta",light:"La più leggera",cheap:"La più economica",soft:"La più ammortizzata"},cush:{low:"Bassa",medium:"Media",high:"Alta",max:"Massima"},feelV:{soft:"Morbida",balanced:"Bilanciata",firm:"Rigida",bouncy:"Reattiva"},none:"Nessuna",
+ stabV:{neutral:"Neutra",mild:"Supporto leggero",stable:"Stabilità"},surfV:{road:"Asfalto",trail:"Trail",mixed:"Asfalto e trail"},yes:"Sì",no:"No"}
+};
+/* Portuguese of Portugal: the Brazilian texts with Portugal wording on top */
+const deepMerge=(a,b)=>{const o={...a};for(const k in b)o[k]=b[k]&&typeof b[k]==="object"&&!Array.isArray(b[k])?deepMerge(a[k]||{},b[k]):b[k];return o};
+T.pp=deepMerge(T.pt,{resTitle:"As tuas melhores sapatilhas",resHint:"Escolhemos {n} para ti, no máximo 2 por marca.",fAll:"Todas",fBudget:"Mais baratas",similar:"Parecidas:",
+ none:"Nenhuma sapatilha passou nos teus filtros. Experimenta aumentar o orçamento ou aceitar marcas chinesas.",matchLbl:"compatibilidade",
+ note:"O Footfinder é independente. Parte das especificações é estimada. Os preços em dólares são de tabela; a loja tem a palavra final sobre o preço. Os botões \"Ver no AliExpress\" são links de afiliado: podemos ganhar uma comissão, e isso nunca muda os resultados.",
+ neverHad:"Nunca tive / não me lembro",loved:"Adorei",pickModel:"Toca no modelo",howWas:"E como correu?",
+ w:{wide:"Versão larga / forma espaçosa",soft:"Passada macia",firm:"Passada firme",heavy:"Boa para mais peso",fast:"Feita para ritmo",daily:"Ótima no dia a dia",dist:"Aguenta a tua distância",like:"Parecida com a que adoraste",trail:"Aderência em trilhos",mixed:"Estrada e terra",long:"Protege em muitos quilómetros"}});
+QT.pp=deepMerge(QT.pt,{goal:"Para que as vais usar?",volume:"Quanto corres por semana?",volume_start:"Já corres um pouco?",surface:"Onde corres mais?",surface_v0:"Onde pensas correr?",
+ distance:"Qual é a maior distância que queres correr?",distance_beg:"Qual é a tua primeira meta?",distance_fast:"Que prova queres fazer?",weight:"Qual é o teu peso?",weight_h:"Muda o amortecimento de que precisas.",
+ feel:"Como queres sentir a passada?",width:"As sapatilhas costumam apertar dos lados?",wear:"Onde é que as tuas sapatilhas velhas gastam mais?",wear_v0:"Onde é que as tuas sapatilhas do dia a dia gastam mais?",
+ wear_h:"Olha para a sola do pé direito e compara.",wear_h_v0:"Vê o par que usas mais. Compara a sola do pé direito.",budget:"Até quanto queres gastar?",budget_h:"Preço de tabela em dólares. Em promoção costuma ficar mais barato.",
+ cn:"Aceitas marcas chinesas?",loved:"Há alguma sapatilha que adoraste ou detestaste?",
+ o:{goal:{start:"Começar a correr|Caminhadas e corrida leve",trail:"Trail|Terra, pedra e monte"},surface:{road:"Estrada",treadmill:"Passadeira",trail:"Terra e trilhos"},
+  feel:{any:"Não sei|Escolhe por mim"},wear:{in:"Lado de dentro|Perto do dedo grande"}}});
+RT.pp=deepMerge(RT.pt,{amzGo:"Pesquisar na Amazon",stack:"Altura da sola",feel:"Passada",match:"compatível",tags:{cheap:"Mais barata",soft:"Mais amortecida"},
+ feelV:{soft:"Macia",firm:"Firme"},surfV:{road:"Estrada",trail:"Trilho",mixed:"Estrada e trilho"}});
+const rt=()=>RT[L]||RT.en;
+const qs=k=>(QT[L]&&QT[L][k])||QT.en[k]||"";
+const qo=k=>((QT[L]&&QT[L].o[k])||QT.en.o[k]||"").split("|");
+
+/* small line icons, 1.5 stroke */
+/* answer icons, same look as the foot and sole drawings: thicker outline, grey fill inside */
+const SV=(b,h=48)=>`<svg width="64" height="${h}" viewBox="0 0 64 ${h}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${b}</svg>`;
+const G=' fill="currentColor" fill-opacity=".18"';
+const ico={
+ road:SV(`<path d="M24 44 29 4h6l5 40z"${G}/><path d="M32 9v5M32 20v6M32 32v7"/>`),
+ treadmill:SV(`<path d="M6 34h44a5 5 0 0 1 0 10H6a5 5 0 0 1 0-10z"${G}/><path d="M48 34 54 8h4"/>`),
+ trail:SV(`<path d="M3 42 20 15l9 13 8-10 23 24z"${G}/><path d="M16 42c8-6 14-3 20-9" stroke-dasharray="2 4"/>`),
+ mixed:SV(`<path d="M3 42 17 21l8 10 6-6 9 17z"${G}/><path d="M42 44 47 6M58 44 53 6"/>`),
+ any:SV(`<circle cx="32" cy="24" r="17"${G}/><path d="M27 19a5 5 0 1 1 7 4.6c-1.3.6-2 1.6-2 3V28M32 33v.5"/>`)
+};
+const foot=(w)=>{const sw={tight:12,some:15,no:18}[w];return `<svg width="64" height="58" viewBox="0 0 64 58" fill="none" stroke-width="1.5"><path d="M32 4c${sw} 0 ${sw} 14 ${sw-2} 26s-2 24-${sw-2} 24-${sw-2}-12-${sw-2}-24S${32-sw} 4 32 4z" stroke="currentColor" opacity=".35"/><path d="M32 7c8 0 11 6 11 16s-3 12-3 18-3 11-8 11-8-5-8-11-3-8-3-18S24 7 32 7z" fill="currentColor" opacity=".18" stroke="currentColor"/></svg>`};
+const sole=(z)=>`<svg width="34" height="56" viewBox="0 0 34 58" aria-hidden="true"><path d="M17 2c9 0 13 7 13 16 0 7-3 11-3 18 0 10-3 20-10 20S7 46 7 36c0-7-3-11-3-18C4 9 8 2 17 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>${z==="in"?'<path d="M17 4c-6 1-9 7-9 14 0 7 3 11 3 18s2 16 6 18z" fill="currentColor" opacity=".4"/>':z==="out"?'<path d="M17 4c6 1 9 7 9 14 0 7-3 11-3 18s-2 16-6 18z" fill="currentColor" opacity=".4"/>':z==="even"?'<path d="M17 4c8 0 11 7 11 14 0 7-3 11-3 18 0 9-3 18-8 18s-8-9-8-18c0-7-3-11-3-18C6 11 9 4 17 4z" fill="currentColor" opacity=".22"/>':'<text x="17" y="35" text-anchor="middle" font-size="15" fill="currentColor" font-family="Inter,sans-serif">?</text>'}</svg>`;
+
+const foot1=(x,y,r)=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M0 0c3.8 0 5.4 3.6 5.4 7.8S3.8 15.6 2.6 17.6 0 19.8-1.8 17.6-3.8 11.8-4.4 7.8-3.8 0 0 0z"${G}/><circle cx="-3.8" cy="-4" r="1.3" fill="currentColor"/><circle cx="-.6" cy="-5.2" r="1.3" fill="currentColor"/><circle cx="2.6" cy="-4.2" r="1.3" fill="currentColor"/></g>`;
+/* AliExpress app icon (thesvg.org, MIT), shown at the left edge of the store button */
+const aliLogo=`<svg class="alilogo" viewBox="0 0 64 64" aria-hidden="true"><path d="M5 0a5 5 0 0 0-5 5v54a5 5 0 0 0 5 5h54a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5z" fill="#e62e04"/><path d="M17.6 21.452c.245 1 .107 2.08.348 3.097.84-.615 1.4-1.63 1.285-2.687-.017-1.892-2.145-3.375-3.926-2.738-1.12.32-1.948 1.325-2.136 2.46-.224 1.3.557 2.63 1.718 3.224-.115-1.12-.384-2.3-.083-3.396.46-1.194 2.37-1.17 2.795.04zm33.138 1.356c.408-1.468-.48-3.17-1.936-3.64-1.4-.55-3.133.15-3.75 1.514-.688 1.263-.272 3.06.986 3.8.248-1.014.065-2.1.36-3.085.47-1.177 2.355-1.143 2.784.05.273 1.066.026 2.186-.077 3.262.854-.264 1.387-1.08 1.632-1.898z" fill="#b32100"/><path d="M46.4 21.396c-.296.995-.113 2.072-.36 3.085-.732 4.4-3.678 8.332-7.667 10.303a14.2 14.2 0 0 1-12.798-.016c-3.952-1.966-6.875-5.865-7.626-10.218-.24-1.018-.104-2.087-.348-3.097-.424-1.2-2.334-1.235-2.794-.04-.3 1.106-.03 2.277.083 3.396.84 5.44 4.48 10.325 9.412 12.75a17.34 17.34 0 0 0 14.635.346c5.333-2.303 9.32-7.446 10.173-13.2.103-1.076.35-2.197.076-3.262-.43-1.193-2.314-1.226-2.785-.05z" fill="#fff"/><path d="M5 0a5 5 0 0 0-5 5v9.5a5 5 0 0 1 5-5h54a5 5 0 0 1 5 5V5a5 5 0 0 0-5-5z" fill="#f90"/></svg>`;
+const icoGoal={
+ start:SV(`<path d="M32 44V24"/><path d="M32 30c-2-9-9-13-18-12 0 9 7 14 18 12z"${G}/><path d="M32 25c1-8 8-13 17-12 0 9-7 13-17 12z"${G}/><path d="M18 44h28"/>`),
+ daily:SV(`<rect x="12" y="9" width="40" height="33" rx="5"${G}/><path d="M12 18h40M22 5v7M42 5v7"/><path d="m19 26 2.5 2.5L26 24M31 26l2.5 2.5L38 24M19 35l2.5 2.5L26 33"/>`),
+ fast:SV(`<circle cx="38" cy="27" r="15"${G}/><path d="M38 12V7M34 6h8M38 27l6-6"/><path d="M4 22h10M8 29h8M4 36h12"/>`),
+ trail:ico.trail
+};
+const icoFeel={
+ soft:SV(`<path d="M18 38h28a9 9 0 0 0 1.4-17.9A12 12 0 0 0 24.4 17 10.5 10.5 0 0 0 18 38z"${G}/>`),
+ bouncy:SV(`<circle cx="46" cy="12" r="7"${G}/><path d="M8 42c4-20 12-20 16 0M24 42c4-14 10-20 14-24" stroke-dasharray="2 4"/><path d="M3 44h58"/>`),
+ firm:SV(`<rect x="8" y="28" width="48" height="12" rx="2"${G}/><path d="M32 4v15M26 13l6 6 6-6"/>`)
+};
+/* bathroom scale, the needle moves right as the range goes up */
+const icoScale=n=>{const a=(-60+n*40)*Math.PI/180,x=(32+11*Math.sin(a)).toFixed(1),y=(27-11*Math.cos(a)).toFixed(1);
+ return SV(`<rect x="12" y="6" width="40" height="38" rx="8"${G}/><path d="M20 27a12 12 0 0 1 24 0"/><path d="M32 27 ${x} ${y}"/><circle cx="32" cy="27" r="2" fill="currentColor"/>`)};
+/* weekly volume: bars, one more darkened per level */
+const icoBars=n=>SV([0,1,2].map(i=>`<rect x="${14+i*14}" y="${30-i*10}" width="9" height="${12+i*10}" rx="2.5" fill="currentColor" fill-opacity="${i<n?.55:.12}"/>`).join(""));
+/* distance: a route whose solid part (and flag) gets longer */
+const icoRoute=f=>{const x=8+48*f;return SV(`<path d="M8 40h48" stroke-dasharray="2 5" opacity=".45"/>${f?`<path d="M8 40H${x}"/><path d="M${x} 40V10l11 5-11 5z"${G}/>`:'<circle cx="8" cy="40" r="3"'+G+'/>'}`)};
+const rep=n=>{const s=byName(n);return s?shoeArt(s):""};
+/* picture for an answer: the first shoe in the catalog that fits it, preferring ones with a real photo */
+const repBy=pred=>{const s=S.find(pred);return s?shoeSVG(s):""};  // answer options always show the drawing, never a photo
+const hasC=(s,c)=>s.cats.includes(c);
+
+/* option: [value, pt, ptSub, en, enSub, art] */
+/* adaptive quiz: each question can be skipped, retitled or trimmed based on earlier answers */
+const beginner=()=>A.goal==="start"||A.volume==="v0";
+const carbonOk=()=>!(A.goal==="start"||A.volume==="v0"||A.volume==="v1");
+const traily=()=>A.goal==="trail"||A.surface==="trail";
+const Q=[
+ {id:"goal",o:[["start",()=>icoGoal.start],["daily",()=>icoGoal.daily],["fast",()=>icoGoal.fast],["trail",()=>icoGoal.trail]]},
+ {id:"volume",tk:()=>A.goal==="start"?"volume_start":"volume",
+  show:v=>A.goal==="start"?(v==="v0"||v==="v1"):A.goal==="fast"?v!=="v0":true,
+  o:[["v0",()=>icoBars(0)],["v1",()=>icoBars(1)],["v2",()=>icoBars(2)],["v3",()=>icoBars(3)]]},
+ {id:"surface",skip:()=>A.goal==="trail",tk:()=>A.volume==="v0"?"surface_v0":"surface",
+  o:[["road",()=>ico.road],["treadmill",()=>ico.treadmill],["trail",()=>ico.trail],["mixed",()=>ico.mixed]]},
+ {id:"distance",tk:()=>beginner()?"distance_beg":A.goal==="fast"?"distance_fast":"distance",
+  show:v=>{if(v==="none")return beginner();if(beginner())return v==="5k"||v==="10k";
+    if(v==="ultra")return traily()&&(A.volume==="v2"||A.volume==="v3");if(v==="42k")return A.volume!=="v1";return true},
+  o:[["none",()=>icoRoute(0)],["5k",()=>icoRoute(.2)],["10k",()=>icoRoute(.35)],["21k",()=>icoRoute(.55)],["42k",()=>icoRoute(.8)],["ultra",()=>icoRoute(1)]]},
+ {id:"weight",hk:()=>"weight_h",o:[["w1",()=>icoScale(0)],["w2",()=>icoScale(1)],["w3",()=>icoScale(2)],["w4",()=>icoScale(3)]]},
+ {id:"feel",o:[["soft",()=>icoFeel.soft],["bouncy",()=>icoFeel.bouncy],["firm",()=>icoFeel.firm],["any",()=>ico.any]]},
+ {id:"width",o:[["tight",()=>foot("tight")],["some",()=>foot("some")],["no",()=>foot("no")]]},
+ {id:"wear",tk:()=>A.volume==="v0"?"wear_v0":"wear",hk:()=>A.volume==="v0"?"wear_h_v0":"wear_h",
+  o:[["in",()=>sole("in")],["out",()=>sole("out")],["even",()=>sole("even")],["unk",()=>sole("unk")]]},
+ {id:"budget",hk:()=>"budget_h",
+  show:v=>v==="b4"?carbonOk()&&(A.goal==="fast"||A.goal==="trail"):v==="b4x"?!(carbonOk()&&(A.goal==="fast"||A.goal==="trail")):true,
+  o:[["b1",null,"$100"],["b2",null,"$160"],["b3",null,"$220"],["b4",null,"$∞"],["b4x",null,"$∞"]]},
+ {id:"cn",hk:()=>"cn_h",skip:()=>S.every(s=>s.cn),o:[["yes",()=>repBy(s=>s.cn)],["no",()=>repBy(s=>!s.cn)]]},
+ {id:"loved",special:1,skip:()=>A.volume==="v0"}
+];
+const vis=q=>q.o.filter(o=>!q.show||q.show(o[0]));
+const active=i=>!Q[i].skip||!Q[i].skip();
+const nextIdx=i=>{for(let j=i+1;j<Q.length;j++)if(active(j))return j;return -1};
+const prevIdx=i=>{for(let j=i-1;j>=0;j--)if(active(j))return j;return -1};
+const qTitle=q=>qs(q.tk?q.tk():q.id);
+const qHint=q=>q.hk?qs(q.hk()):"";
+let autoSurf=false;
+function sanitize(){
+  if(A.goal==="trail"){A.surface="trail";autoSurf=true}else if(autoSurf){delete A.surface;autoSurf=false}
+  Q.forEach((q,i)=>{if(q.special){if(!active(i))delete A.loved;return}
+    if(!active(i)){if(!(q.id==="surface"&&A.goal==="trail"))delete A[q.id];return}
+    if(A[q.id]&&!vis(q).some(o=>o[0]===A[q.id]))delete A[q.id]});
+}
+
+/* ---------- scoring ---------- */
+const PAGE_LANG=window.PAGE_LANG||null,LANG_URL={en:"/",pt:"/pt/",pp:"/pt-pt/",es:"/es/",fr:"/fr/",de:"/de/",it:"/it/"};
+let L=PAGE_LANG||"en";if(!PAGE_LANG){try{const sv=localStorage.getItem("fdf-lang");if(LANGS.some(x=>x[0]===sv))L=sv}catch(e){}}
+/* on the English home page, a visitor who chose another language before goes to that language's page */
+if(PAGE_LANG==="en"&&location.pathname==="/"){try{const sv=localStorage.getItem("fdf-lang");if(sv&&sv!=="en"&&LANG_URL[sv])location.replace(LANG_URL[sv])}catch(e){}}
+const A={};let step=0,view="quiz",lovedStage=0,lovedBrand=null,filt="all",hi=null;
+const t=k=>T[L][k];
+const FX={firm:0,balanced:1,soft:2,bouncy:3},FO={EVA:0,sEVA:.25,TPU:.35,blend:.35,TPEE:.5,PEBA:.65};
+const feelX=s=>FX[s.feel]+FO[s.ftype];
+function scoreShoe(s,strict){
+  if(strict&&!hardOk(s))return null;
+  let sc=50,w=[];const add=(n,k)=>{sc+=n;if(k&&n>=8)w.push([n,k])};
+  const surf=A.surface==="trail"||A.goal==="trail"?"trail":A.surface;
+  if(surf==="trail"){if(s.surf==="road")return null;add(s.surf==="trail"?10:4,"trail")}
+  else if(surf==="road"||surf==="treadmill"){if(s.surf==="trail")return null;if(s.surf==="mixed")add(-6)}
+  else if(surf==="mixed"){if(s.surf==="mixed")add(10,"mixed");else if(s.surf==="trail")add(2)}
+  const c=s.cats,has=x=>c.includes(x);
+  if(A.goal==="start"){if(has("race"))add(-30);if(s.plate!=="none")add(-12);if(has("daily")||has("budget")||has("stab"))add(9,"start")}
+  if(A.goal==="daily"){if(has("daily"))add(12,"daily");if(has("race")&&c.length<=2)add(-15)}
+  if(A.goal==="fast"){if(has("tempo"))add(12,"fast");if(has("race"))add(A.distance==="21k"||A.distance==="42k"?14:8,"fast");if(has("recovery")&&!has("tempo"))add(-8)}
+  if(A.volume==="v3"){if(s.h>=35)add(6);if(has("budget"))add(-6);if(has("long"))add(8,"long")}
+  if(A.volume==="v0"&&has("budget"))add(4);
+  if(A.distance){const dd=A.distance==="none"?"5k":A.distance,longD=dd==="42k"||dd==="ultra";if(s.dist.includes(dd))add(longD?8:5,longD?"dist":null);else add(-10)}
+  if(A.weight==="w3"||A.weight==="w4"){if(s.heavy)add(A.weight==="w4"?12:9,"heavy");else add(-8);if(s.g<200)add(-10);if(s.h<32)add(-6)}
+  if(A.weight==="w1"&&s.g<260)add(4);
+  if(A.feel==="soft"){if(s.feel==="soft")add(12,"soft");else if(s.feel==="bouncy")add(5);else if(s.feel==="firm")add(-10)}
+  if(A.feel==="bouncy"){if(s.feel==="bouncy")add(12,"bouncy");else if(s.feel==="soft")add(4);else if(s.feel==="firm")add(-8)}
+  if(A.feel==="firm"){if(s.feel==="firm")add(12,"firm");else if(s.feel==="balanced")add(6);else if(s.feel==="soft")add(-8)}
+  if(A.width==="tight"){if(roomy(s))add(s.brand==="Altra"||s.brand==="Topo Athletic"?14:12,"wide");else add(-6)}
+  if(A.width==="some"&&roomy(s))add(5);
+  if(A.wear==="in"){if(s.stab==="stable")add(16,"stab");else add(-4)}
+  if(A.wear==="out"||A.wear==="even"){if(s.stab==="stable")add(-4);else add(3)}
+  if(A.budget){const lim={b1:100,b2:160,b3:220,b4:1e9,b4x:1e9}[A.budget];if(s.usd>lim*1.1)return null;if(lim<1e9&&s.usd<=lim)add(A.budget==="b1"?8:4,A.budget==="b1"?"budget":null);if(!s.cur&&lim<1e9)add(3)}
+  if(A.cn==="no"&&s.cn)return null;
+  if(A.loved&&A.loved.i!=null&&A.loved.like!=null){const L0=S[A.loved.i];
+    if(s.i===A.loved.i){if(A.loved.like)add(-4);else return null}
+    else{const d=Math.abs(s.h-L0.h)/6+Math.abs(s.drop-L0.drop)/4+Math.abs(s.g-L0.g)/40+Math.abs(feelX(s)-feelX(L0))+(s.plate!==L0.plate?1:0);
+      const near=L0.sim.includes(s.i);
+      if(A.loved.like)add(near?18:Math.max(0,10-d*3),near||d<1.2?"like":null);else add(near?-16:Math.min(0,-8+d*3))}}
+  if(!s.cur)add(-3);
+  if(!Object.keys(A).length&&s.pop)sc+=5;
+  return{sc,w:w.sort((a,b)=>b[0]-a[0]).map(x=>x[1]).filter((v,i,a)=>a.indexOf(v)===i).slice(0,3)};
+}
+/* hard rules: an answer rules shoes out instead of only nudging the score */
+const roomy=s=>s.wide||s.brand==="Altra"||s.brand==="Topo Athletic";
+function hardOk(s){
+  const c=s.cats,has=x=>c.includes(x);
+  if(A.goal==="start"&&(has("race")||s.plate==="carbon"||s.plate==="carbon_rods"))return false;
+  if(A.goal==="daily"&&!(has("daily")||has("long")||has("stab")))return false;
+  if(A.goal==="fast"&&!(has("tempo")||has("race")))return false;
+  if(A.volume==="v0"&&has("race"))return false;
+  if(A.volume==="v3"&&has("budget")&&!has("tempo"))return false;
+  const dist=A.distance==="none"?"5k":A.distance;
+  if(dist&&!s.dist.includes(dist))return false;
+  if(!carbonOk()&&(s.plate==="carbon"||s.plate==="carbon_rods"||has("race")))return false;
+  if((A.weight==="w3"||A.weight==="w4")&&(s.g<215||s.h<32))return false;
+  if(A.weight==="w4"&&!s.heavy&&!has("long"))return false;
+  if(A.feel==="soft"&&s.feel==="firm")return false;
+  if(A.feel==="firm"&&(s.feel==="soft"||s.feel==="bouncy"))return false;
+  if(A.feel==="bouncy"&&s.feel==="firm")return false;
+  if(A.width==="tight"&&!roomy(s))return false;
+  if(A.wear==="in"&&s.stab==="neutral")return false;
+  if((A.wear==="out"||A.wear==="even")&&s.stab==="stable")return false;
+  return true;
+}
+/* one entry per model line (Ghost 16/17/18 → best one), max 2 per brand, only shoes close to the top score */
+const line=s=>s.brand+"|"+s.model.replace(/v\d+$/i,"").split(" ").filter(w=>!/^v?\d+(\.\d+)?$/i.test(w)).join(" ");
+function finalize(list,cut=true,max){
+  const n=answered(),seen=new Set(),per={},out=[];
+  max=max||(n>=Q.length-2||view==="results"?12:34);
+  const top=list.length?scores[list[0].i].sc:0;
+  for(const s of list){
+    if(out.length>=max)break;
+    if(cut&&n>=4&&scores[s.i].sc<top-22)break;
+    const ln=line(s);if(seen.has(ln))continue;
+    if((per[s.brand]||0)>=2)continue;
+    seen.add(ln);per[s.brand]=(per[s.brand]||0)+1;out.push(s);
+  }
+  return out;
+}
+let ranked=[],pool=[],scores=[];
+function recompute(){
+  const run=strict=>{scores=S.map(s=>scoreShoe(s,strict));pool=S.filter(s=>scores[s.i]).sort((a,b)=>scores[b.i].sc-scores[a.i].sc||b.cur-a.cur||b.pop-a.pop||b.yr-a.yr)};
+  run(true);ranked=finalize(pool);
+  if(answered()>=3&&ranked.length<4){run(false);ranked=finalize(pool)}
+  // small catalog: never end empty-handed; as a last resort ignore the budget
+  if(answered()>=3&&!ranked.length&&A.budget){const b=A.budget;delete A.budget;run(false);ranked=finalize(pool);A.budget=b}
+}
+const answered=()=>Object.keys(A).filter(k=>k!=="loved"||A.loved.like!=null).length;
+
+/* ---------- slider ---------- */
+/* The best match sits in the middle and the next ones alternate right and left of it,
+   so the slider always opens with shoes on both sides. */
+const cloud=document.getElementById("cloud"),sinfo=document.getElementById("sinfo"),els=new Map();
+let sOrder=[],sC=0,sDrag=0,sX0=null;
+const svgL=`<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg>`;
+const svgR=`<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>`;
+function sliderPct(){
+  const top=ranked.length?scores[ranked[0].i].sc:0;
+  return s=>Math.max(55,Math.min(98,Math.round(98-(top-scores[s.i].sc)*0.9)));
+}
+function sGeom(){
+  const W=cloud.clientWidth,H=cloud.clientHeight,mob=W<620,cap=H>=150;
+  const sw=Math.max(80,Math.min(mob?W*.52:W*.3,(H-(cap?64:8))*1.75,320));
+  return{W,H,sw,gap:mob?Math.max(sw*.92,W*.44):sw*1.02,cap};
+}
+function sLayout(){
+  const {W,H,sw,gap,cap}=sGeom();
+  // centre the shoe and its caption together as one group
+  const sh=sw*.56,grp=sh+(cap?62:0),top0=Math.max(0,(H-grp)/2);
+  cloud.style.setProperty("--sw",sw+"px");cloud.style.setProperty("--cy",(top0+sh/2)+"px");
+  sinfo.style.top=(top0+sh+10)+"px";
+  sOrder.forEach((i,k)=>{const el=els.get(i);if(!el)return;
+    const d=k-sC+sDrag/gap,ad=Math.abs(d);
+    el.style.left=(W/2+d*gap)+"px";
+    el.style.opacity=String(Math.max(0,1-ad*.3));
+    el.style.scale=String(Math.max(.45,1-ad*.17));
+    el.style.filter=ad<.5?"none":`grayscale(${Math.min(1,ad*.55).toFixed(2)})`;
+    el.style.zIndex=String(100-Math.round(ad*10));
+  });
+  const s=S[sOrder[sC]],on=answered()>0,pct=sliderPct(),rank=s?ranked.indexOf(s)+1:0;
+  sinfo.hidden=!cap||!s;
+  if(s)sinfo.innerHTML=`<button class="sarrow" id="sPrev" aria-label="${t("back")}" ${sC>0?"":"disabled"}>${svgL}</button>
+    <div class="txt"><b>${esc(s.brand+" "+s.model)}</b><span>${on?`#${rank} · ${pct(s)}% · `:""}${s.g} g · drop ${s.drop} mm</span></div>
+    <button class="sarrow" id="sNext" aria-label="${t("next")}" ${sC<sOrder.length-1?"":"disabled"}>${svgR}</button>`;
+  const p=document.getElementById("sPrev"),n=document.getElementById("sNext");
+  if(p)p.onclick=()=>{if(sC>0){sC--;sLayout()}};
+  if(n)n.onclick=()=>{if(sC<sOrder.length-1){sC++;sLayout()}};
+  if(s)cloud.setAttribute("aria-label",s.brand+" "+s.model);
+}
+function drawCloud(){
+  cloud.hidden=view==="results";if(view==="results")return;
+  const list=ranked.slice(0,innerWidth<620?9:13);
+  // centre-out: best in the middle, then right, left, right, left...
+  const order=[];list.forEach((s,k)=>{if(k%2)order.push(s.i);else order.unshift(s.i)});
+  const keep=new Set(order);
+  els.forEach((el,i)=>{if(!keep.has(i)){el.classList.add("gone");els.delete(i);setTimeout(()=>el.remove(),500)}});
+  const {W}=sGeom();
+  order.forEach((i,k)=>{if(els.has(i))return;
+    const el=document.createElement("div");el.className="shoe gone";el.innerHTML=shoeArt(S[i]);
+    el.style.left=(W/2+(k-order.indexOf(list[0]?list[0].i:i))*sGeom().gap)+"px";
+    el.dataset.i=i;
+    cloud.insertBefore(el,sinfo);els.set(i,el);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("gone")));
+  });
+  sOrder=order;sC=list.length?order.indexOf(list[0].i):0;
+  sLayout();
+}
+cloud.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"&&sC>0){sC--;sLayout();e.preventDefault()}if(e.key==="ArrowRight"&&sC<sOrder.length-1){sC++;sLayout();e.preventDefault()}});
+cloud.addEventListener("pointerdown",e=>{if(e.target.closest(".sarrow"))return;sX0=e.clientX;sDrag=0;cloud.setPointerCapture(e.pointerId)});
+cloud.addEventListener("pointermove",e=>{if(sX0==null)return;sDrag=e.clientX-sX0;if(Math.abs(sDrag)>4)cloud.classList.add("dragging");sLayout()});
+/* a tap (no drag) on a shoe: the centred one opens its details, any other one slides to the centre */
+const sTap=e=>{const el=document.elementsFromPoint(e.clientX,e.clientY).map(x=>x.closest&&x.closest(".shoe")).find(Boolean);
+  if(!el||el.classList.contains("gone"))return;const i=+el.dataset.i,k=sOrder.indexOf(i);if(k<0)return;
+  if(k===sC)openShoe(i);else{sC=k;sLayout()}};
+const sEnd=e=>{if(sX0==null)return;if(e&&e.type==="pointerup"&&Math.abs(sDrag)<4)sTap(e);const {gap}=sGeom();sC=Math.max(0,Math.min(sOrder.length-1,sC-Math.round(sDrag/gap)));sX0=null;cloud.classList.remove("dragging");setTimeout(()=>{sDrag=0;sLayout()},0)};
+cloud.addEventListener("pointerup",sEnd);cloud.addEventListener("pointercancel",sEnd);
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(view==="results")renderResults();else sLayout()},120)});
+
+/* ---------- card ---------- */
+const card=document.getElementById("card");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const svgBack=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg>`;
+const svgReset=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8a5.5 5.5 0 1 0 1.6-3.9M2.5 2.5v3h3"/></svg>`;
+function head(title){return `<div class="chead"><div class="icons"><button class="ibtn" id="reset" aria-label="${t("reset")}" title="${t("reset")}" ${answered()?"":"disabled"}>${svgReset}</button></div><h1>${esc(title)}</h1><div></div></div>`}
+/* footer: back on the left, progress dots in the middle, forward on the right, always in the same places */
+function foot2(backOk,fwdOk,fwdId="fwd",fwdLabel=t("fwd")){
+  return `<div class="cfoot"><button class="nav" id="back" aria-label="${t("back")}" ${backOk?"":"disabled"}>${svgL}</button><div class="dots">${Q.map((q,i)=>active(i)?`<i class="${i<=step||view==="results"?"on":""}"></i>`:"").join("")}</div><button class="nav" id="${fwdId}" aria-label="${esc(fwdLabel)}" ${fwdOk?"":"disabled"}>${svgR}</button></div>`}
+function renderQuiz(){
+  card.classList.remove("wide","res");
+  const q=Q[step];let h="";
+  if(q.special){h=head(qTitle(q))+`<div class="cbody">${renderLoved()}</div>`+foot2(true,true,"finish",t("next"))}
+  else{
+    const opts=vis(q);
+    h=head(qTitle(q))+`<div class="cbody">`;
+    if(qHint(q))h+=`<p class="hint">${esc(qHint(q))}</p>`;
+    h+=`<div class="opts${opts.length>4?" many":""}" style="--cols:${Math.min(opts.length,opts.length===6?3:5)}">`+opts.map(o=>{const [lab,sub]=qo(q.id+"."+o[0]);
+      const art=o[1]?`<div class="art">${o[1]()}</div>`:o[2]?`<div class="num">${esc(o[2])}${/^[\d<]/.test(o[2])&&q.id!=="budget"?`<small>${q.id==="weight"?"kg":"km"}</small>`:""}</div>`:"";
+      return `<button class="opt ${A[q.id]===o[0]?"sel":""}" data-v="${o[0]}">${art}<b>${esc(lab)}</b>${sub?`<span>${esc(sub)}</span>`:""}</button>`}).join("")+`</div>`;
+    h+=`</div>`+foot2(prevIdx(step)>=0,!!A[q.id]);
+  }
+  card.innerHTML=h;wire(q);fitCard();
+  requestAnimationFrame(drawCloud); // the card height changed, so the space for the cloud did too
+}
+/* the card keeps the height of its tallest question, so nothing below or above it moves between questions */
+let cardH=0,cardHKey="";
+function fitCard(){
+  const key=L+"|"+innerWidth+"x"+innerHeight;
+  if(key!==cardHKey){
+    cardHKey=key;const probe=card.cloneNode(false);probe.removeAttribute("id");
+    probe.style.cssText="position:absolute;visibility:hidden;left:0;top:0;min-height:0;height:auto;width:"+card.getBoundingClientRect().width+"px";
+    document.body.appendChild(probe);let mx=0;
+    const keep={step,lovedStage,lovedBrand};
+    Q.forEach((q,i)=>{
+      if(q.special){const cnt={};S.forEach(s=>cnt[s.brand]=(cnt[s.brand]||0)+1);const top=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];
+        [0,1].forEach(st=>{lovedStage=st;lovedBrand=top;
+        probe.innerHTML=head(qTitle(q))+`<div class="cbody">${renderLoved()}</div>`+foot2(true,true);mx=Math.max(mx,probe.offsetHeight)});return}
+      // only options that can show up together: "no goal yet" never sits next to all the race distances, and the two "no limit" budgets swap
+      step=i;const opts=q.o.filter(o=>!(q.id==="distance"&&o[0]==="none")&&!(q.id==="budget"&&o[0]==="b4x"));
+      probe.innerHTML=head(qTitle(q))+`<div class="cbody">${qHint(q)?`<p class="hint">${esc(qHint(q))}</p>`:""}<div class="opts${opts.length>4?" many":""}" style="--cols:${Math.min(opts.length,opts.length===6?3:5)}">${opts.map(o=>{const [lab,sub]=qo(q.id+"."+o[0]);return `<button class="opt">${o[1]?`<div class="art">${o[1]()}</div>`:""}<b>${esc(lab)}</b>${sub?`<span>${esc(sub)}</span>`:""}</button>`}).join("")}</div></div>`+foot2(true,true);
+      mx=Math.max(mx,probe.offsetHeight)});
+    ({step,lovedStage,lovedBrand}=keep);probe.remove();cardH=mx;
+  }
+  card.style.minHeight=cardH+"px";
+}
+function wire(q){
+  card.querySelectorAll(".opt[data-v]").forEach(b=>b.onclick=()=>{A[q.id]=b.dataset.v;
+    sanitize();recompute();drawCloud();const nx=nextIdx(step);if(nx<0){finish();return}step=nx;lovedStage=0;renderQuiz()});
+  card.querySelectorAll("[data-brand]").forEach(b=>b.onclick=()=>{lovedBrand=b.dataset.brand;lovedStage=1;renderQuiz()});
+  card.querySelectorAll("[data-shoe]").forEach(b=>b.onclick=()=>{A.loved={i:+b.dataset.shoe,like:null};lovedStage=2;renderQuiz()});
+  card.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>{A.loved.like=b.dataset.like==="1";finish()});
+  card.querySelectorAll("[data-none]").forEach(b=>b.onclick=()=>{delete A.loved;finish()});
+  const bk=document.getElementById("back");if(bk)bk.onclick=()=>{
+    if(view==="results"){view="quiz";step=active(Q.length-1)?Q.length-1:prevIdx(Q.length-1);lovedStage=0;recompute();renderQuiz();drawCloud();return}
+    if(q&&q.special&&lovedStage){lovedStage--;renderQuiz();return}
+    const pv=prevIdx(step);if(pv>=0)step=pv;renderQuiz()};
+  const rs=document.getElementById("reset");if(rs)rs.onclick=()=>{for(const k in A)delete A[k];autoSurf=false;view="quiz";step=0;lovedStage=0;filt="all";recompute();drawCloud();renderQuiz()};
+  const fw=document.getElementById("fwd");if(fw)fw.onclick=()=>{const nx=nextIdx(step);if(nx<0){finish();return}step=nx;renderQuiz()};
+  const fn=document.getElementById("finish");if(fn)fn.onclick=()=>{if(A.loved&&A.loved.like==null)delete A.loved;finish()};
+}
+function finish(){view="results";recompute();filt="all";rsel=0;renderResults();drawCloud()}
+function renderLoved(){
+  if(lovedStage===0){
+    const cnt={};S.forEach(s=>cnt[s.brand]=(cnt[s.brand]||0)+1);
+    const brands=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).slice(0,9);
+    return `<div class="opts compact" style="--cols:5">${brands.map(b=>`<button class="opt" data-brand="${esc(b)}"><b>${esc(b)}</b></button>`).join("")}<button class="opt" data-none="1"><b>${t("neverHad")}</b></button></div>`;
+  }
+  if(lovedStage===1){
+    const list=S.filter(s=>s.brand===lovedBrand).sort((a,b)=>(b.pop-a.pop)||(b.yr-a.yr)).slice(0,9);
+    return `<p class="hint">${t("pickModel")} · ${esc(lovedBrand)}</p><div class="opts compact" style="--cols:5">${list.map(s=>`<button class="opt" data-shoe="${s.i}"><b>${esc(s.model)}</b></button>`).join("")}<button class="opt" data-none="1"><b>${t("notHere")}</b></button></div>`;
+  }
+  const s=S[A.loved.i];
+  return `<p class="hint">${t("howWas")} · ${esc(s.brand+" "+s.model)}</p><div class="opts" style="--cols:2"><button class="opt" data-like="1"><div class="art">${shoeArt(s)}</div><b>${t("loved")}</b></button><button class="opt" data-like="0"><div class="art" style="filter:grayscale(1);opacity:.6">${shoeArt(s)}</div><b>${t("hated")}</b></button></div>`;
+}
+
+/* ---------- results ---------- */
+function filtered(){
+  if(filt==="all")return ranked;
+  if(filt==="budget")return finalize(pool,false,30).sort((a,b)=>a.usd-b.usd).slice(0,12);
+  return finalize(pool.filter(s=>filt==="cn"?s.cn:(s.cur&&s.yr>=2026)),false,12)}
+let rpage=0,rsel=0;
+/* Amazon search link with the affiliate tag: no API needed */
+/* Awin store offers, the visitor's own region first (from the chosen language), at most two */
+const REGION={pt:["BR"],pp:["PT"],en:["US","GB","IE","CA","AU"],es:["ES"],fr:["FR","BE","CH"],de:["DE","AT","CH"],it:["IT"]};
+const storeOffers=s=>{const pref=REGION[L]||[];return [...s.offers].sort((a,b)=>{const ia=pref.indexOf(a[1]),ib=pref.indexOf(b[1]);return (ia<0?99:ia)-(ib<0?99:ib)}).slice(0,2)};
+const money=(v,c)=>{const n=parseFloat(v);if(!isFinite(n))return "";try{return new Intl.NumberFormat(document.documentElement.lang||"en",{style:"currency",currency:c||"USD",maximumFractionDigits:0}).format(n)}catch(e){return n.toFixed(0)+" "+(c||"")}};
+const amzLink=s=>AMZ&&AMZ.tag?`https://www.${AMZ.store}/s?${new URLSearchParams({k:`${s.brand} ${s.model} running shoes`,tag:AMZ.tag})}`:null;
+const cushOf=h=>h<30?"low":h<36?"medium":h<42?"high":"max";
+const distTxt=d=>{const m={"5k":"5","10k":"10","21k":"21","42k":"42","ultra":"Ultra"};const a=m[d[0]],b=m[d[d.length-1]];return a===b?a+(a==="Ultra"?"":" km"):`${a}–${b}${b==="Ultra"?"":" km"}`};
+/* product details for one shoe: photo on the left, specs and store buttons on the right.
+   Returns the photo panel and an open .rdet column, so callers can add their own footer before closing it. */
+function shoeDetail(s,badge,why){
+  const R=rt(),plate=s.plate==="none"?R.none:(T[L].plate[s.plate]||s.plate);
+  return `      <div class="rphoto"><span class="rbadge">${esc(badge)}</span>${shoeArt(s)}</div>
+      <div class="rdet">
+        <div><div class="rb">${esc(s.brand)}${!s.cur?` · ${esc(R.prev)}`:""}</div><h2>${esc(s.model)}</h2></div>
+        <div class="rprice">$${s.usd}<small>${esc(R.price)}</small></div>
+        <div class="tiles"><div class="tile"><span>${R.weight}</span><b>${s.g} g</b></div><div class="tile"><span>${R.drop}</span><b>${s.drop} mm</b></div></div>
+        <dl class="spec">
+          <dt>${R.stack}</dt><dd>${s.h} / ${s.f} mm</dd>
+          <dt>${R.cushion}</dt><dd>${R.cush[cushOf(s.h)]}</dd>
+          <dt>${R.feel}</dt><dd>${R.feelV[s.feel]}</dd>
+          <dt>${R.stab}</dt><dd>${R.stabV[s.stab]}</dd>
+          <dt class="y">${R.plate}</dt><dd class="y">${esc(plate)}</dd>
+          <dt class="y">${R.surf}</dt><dd class="y">${R.surfV[s.surf]}</dd>
+          <dt class="x">${R.dist}</dt><dd class="x">${distTxt(s.dist)}</dd>
+          <dt class="x">${R.wide}</dt><dd class="x">${s.wide||s.brand==="Altra"||s.brand==="Topo Athletic"?R.yes:R.no}</dd>
+          <dt class="x">${R.year}</dt><dd class="x">${s.yr}</dd>
+        </dl>
+        ${why.length?`<div class="rwhy">${why.map(k=>`<span>${esc(T[L].w[k])}</span>`).join("")}</div>`:""}
+        <div class="rbtns">
+          ${storeOffers(s).map(o=>`<a class="rbtn light" href="${esc(o[2])}" target="_blank" rel="sponsored noopener">${esc(R.at)} ${esc(o[0])}${o[3]?` · ${esc(money(o[3],o[4]))}`:""}</a>`).join("")}
+          ${s.ali?`<a class="rbtn dark ali" href="${esc(s.ali)}" target="_blank" rel="sponsored noopener">${aliLogo}${esc(R.ali)}</a>`:""}
+          ${amzLink(s)?`<a class="rbtn dark" href="${esc(amzLink(s))}" target="_blank" rel="sponsored noopener">${esc(R.amzGo)}</a>`:""}
+          ${amzLink(s)?`<p class="rnote">${esc(R.amzNote)}</p>`:""}
+        </div>
+`;
+}
+/* tap a shoe in the slider: show its details over the page */
+function openShoe(i){
+  const s=S[i],sc=scores[i],top=ranked.length?scores[ranked[0].i].sc:0;
+  const pc=Math.max(55,Math.min(98,Math.round(98-(top-sc.sc)*0.9)));
+  const m=document.createElement("div");m.className="smodal";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");
+  m.innerHTML=`<section class="rmain">${shoeDetail(s,answered()?`${pc}% ${rt().match}`:s.brand,answered()?sc.w:[])}</div><button class="ibtn sclose" aria-label="${esc(t("close"))}">✕</button></section>`;
+  const close=()=>{m.remove();removeEventListener("keydown",onKey)};
+  const onKey=e=>{if(e.key==="Escape")close()};
+  m.onclick=e=>{if(e.target===m||e.target.closest(".sclose"))close()};
+  addEventListener("keydown",onKey);document.body.appendChild(m);m.querySelector(".sclose").focus();
+}
+function renderResults(){
+  card.classList.remove("wide");card.classList.add("res");card.style.minHeight="";
+  const list=ranked.slice(0,12),R=rt();
+  // match %: the best shoe gets 98%, each point of score behind it costs about 1%
+  const top=list.length?scores[list[0].i].sc:0;
+  const pct=s=>Math.max(55,Math.min(98,Math.round(98-(top-scores[s.i].sc)*0.9)));
+  if(!list.length){card.innerHTML=`<div class="rmain" style="display:block;padding:24px">${head(t("resTitle"),true)}<p class="empty">${t("none")}</p></div>`;wire(null);return}
+  rsel=Math.min(rsel,list.length-1);
+  // one tag per shoe: best match, lightest, cheapest, most cushioned
+  const tags={};const tagOnce=(k,i)=>{if(i!=null&&!(i in tags))tags[i]=R.tags[k]};
+  tagOnce("best",list[0].i);
+  tagOnce("light",[...list].sort((a,b)=>a.g-b.g)[0].i);
+  tagOnce("cheap",[...list].sort((a,b)=>a.usd-b.usd)[0].i);
+  tagOnce("soft",[...list].sort((a,b)=>b.h-a.h)[0].i);
+  const s=list[rsel],why=scores[s.i].w;
+  const icons=`<button class="ibtn" data-act="back" aria-label="${t("back")}">${svgBack}</button><button class="ibtn" data-act="reset" aria-label="${t("reset")}">${svgReset}</button>`;
+  card.innerHTML=`<div class="rwrap">
+    <section class="rmain" aria-live="polite">
+${shoeDetail(s,`${pct(s)}% ${R.match}`,why)}
+        <div class="rpager">${icons}<span>${rsel+1} / ${list.length}${tags[s.i]?" · "+esc(tags[s.i]):""}</span><span style="display:flex;gap:2px"><button class="ibtn" id="pgPrev" aria-label="‹" ${rsel?"":"disabled"}>‹</button><button class="ibtn" id="pgNext" aria-label="›" ${rsel<list.length-1?"":"disabled"}>›</button></span></div>
+      </div>
+    </section>
+    <aside class="rlist"><div class="rlhead">${icons}<b>${t("resTitle")}</b></div><div class="ritems"></div></aside>
+  </div>`;
+  // fill the shortlist with as many shoes as fit, no scrolling
+  const box=card.querySelector(".ritems"),aside=card.querySelector(".rlist");
+  const fit=aside.offsetParent?Math.max(3,Math.floor((aside.clientHeight-card.querySelector(".rlhead").offsetHeight-8)/64)):list.length;
+  const shown=list.slice(0,fit);if(rsel>=shown.length&&aside.offsetParent)rsel=0;
+  box.innerHTML=shown.map((x,k)=>`<button class="ritem" data-k="${k}" aria-current="${k===rsel}"><div class="th">${shoeArt(x)}</div><div class="tx"><b>${esc(x.brand+" "+x.model)}</b><span>$${x.usd} · ${pct(x)}%</span></div>${tags[x.i]?`<span class="rtag">${esc(tags[x.i])}</span>`:""}</button>`).join("");
+  card.querySelectorAll(".ritem").forEach(b=>b.onclick=()=>{rsel=+b.dataset.k;renderResults()});
+  const pp=document.getElementById("pgPrev"),pn=document.getElementById("pgNext");
+  if(pp)pp.onclick=()=>{rsel--;renderResults()};if(pn)pn.onclick=()=>{rsel++;renderResults()};
+  card.querySelectorAll('[data-act="back"]').forEach(b=>b.onclick=()=>{view="quiz";step=active(Q.length-1)?Q.length-1:prevIdx(Q.length-1);lovedStage=0;recompute();renderQuiz();drawCloud()});
+  card.querySelectorAll('[data-act="reset"]').forEach(b=>b.onclick=()=>{for(const k in A)delete A[k];autoSurf=false;view="quiz";step=0;lovedStage=0;filt="all";rsel=0;recompute();drawCloud();renderQuiz()});
+}
+
+/* ---------- language & boot ---------- */
+function applyLang(){
+  const cur=LANGS.find(x=>x[0]===L);document.documentElement.lang=cur[2];
+  document.getElementById("langCur").textContent=cur[1];
+  document.getElementById("langBtn").setAttribute("aria-label",t("lang")+": "+cur[1]);
+  document.getElementById("langMenu").innerHTML=LANGS.map(x=>`<li role="option" tabindex="0" data-l="${x[0]}" aria-selected="${x[0]===L}" lang="${x[2]}">${x[1]}</li>`).join("");
+  document.getElementById("aboutBtn").textContent=t("about");
+  view==="quiz"?renderQuiz():renderResults();
+}
+const lb=document.getElementById("langBtn"),lm=document.getElementById("langMenu");
+const closeMenu=()=>{lm.hidden=true;lb.setAttribute("aria-expanded","false")};
+lb.onclick=e=>{e.stopPropagation();lm.hidden=!lm.hidden;lb.setAttribute("aria-expanded",String(!lm.hidden));if(!lm.hidden){const s=lm.querySelector('[aria-selected="true"]');s&&s.focus()}};
+const pick=el=>{L=el.dataset.l;try{localStorage.setItem("fdf-lang",L)}catch(e){}if(PAGE_LANG&&LANG_URL[L]&&L!==PAGE_LANG){location.href=LANG_URL[L];return}closeMenu();applyLang();lb.focus()};
+lm.onclick=e=>{const li=e.target.closest("li");if(li)pick(li)};
+lm.onkeydown=e=>{const li=e.target.closest("li");if(!li)return;
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(li)}
+  if(e.key==="ArrowDown"){e.preventDefault();(li.nextElementSibling||lm.firstElementChild).focus()}
+  if(e.key==="ArrowUp"){e.preventDefault();(li.previousElementSibling||lm.lastElementChild).focus()}};
+document.addEventListener("click",e=>{if(!lm.hidden&&!e.target.closest(".lang"))closeMenu()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!lm.hidden){closeMenu();lb.focus()}});
+recompute();drawCloud();applyLang();
+</script>
+
+</body>
+</html>

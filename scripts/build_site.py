@@ -49,17 +49,19 @@ def compact(shoes, ali, awin):
 
 
 SHELL = """<!doctype html>
-<html lang="en">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Free quiz to find Chinese running shoes. Tap a few answers, get up to 12 picks from Li-Ning, Xtep, ANTA and more. Independent, no typing.">
-<link rel="canonical" href="https://footfinder.cc/">
+<base href="/">
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{url}">
+{alternates}<script>window.PAGE_LANG="{code}"</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Footfinder">
-<meta property="og:url" content="https://footfinder.cc/">
-<meta property="og:title" content="Footfinder · Find your Chinese running shoe">
-<meta property="og:description" content="Free quiz: tap a few answers and get up to 12 Chinese running shoes that fit how you run.">
+<meta property="og:url" content="{url}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
 <meta property="og:image" content="https://footfinder.cc/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -71,6 +73,26 @@ SHELL = """<!doctype html>
 </body>
 </html>
 """
+
+
+# one page per language, so search engines can find each one (code, folder, html lang, title, description)
+PAGES = [
+    ("en", "", "en", "Footfinder · Find your Chinese running shoe",
+     "Free quiz to find Chinese running shoes. Tap a few answers, get up to 12 picks from Li-Ning, Xtep, ANTA and more. Independent, no typing."),
+    ("pt", "pt/", "pt-BR", "Footfinder · Encontre seu tênis de corrida chinês",
+     "Quiz grátis para achar tênis de corrida chineses. Toque em algumas respostas e receba até 12 sugestões de Li-Ning, Xtep, ANTA e outras. Independente, sem digitar."),
+    ("pp", "pt-pt/", "pt-PT", "Footfinder · Encontra as tuas sapatilhas de corrida chinesas",
+     "Quiz grátis para encontrar sapatilhas de corrida chinesas. Toca em algumas respostas e recebe até 12 sugestões de Li-Ning, Xtep, ANTA e outras. Independente, sem escrever."),
+    ("es", "es/", "es", "Footfinder · Encuentra tu zapatilla de running china",
+     "Test gratis para encontrar zapatillas de running chinas. Toca unas respuestas y recibe hasta 12 opciones de Li-Ning, Xtep, ANTA y más. Independiente, sin escribir."),
+    ("fr", "fr/", "fr", "Footfinder · Trouvez votre chaussure de running chinoise",
+     "Quiz gratuit pour trouver des chaussures de running chinoises. Touchez quelques réponses et recevez jusqu'à 12 modèles Li-Ning, Xtep, ANTA et plus. Indépendant, sans rien écrire."),
+    ("de", "de/", "de", "Footfinder · Finde deinen chinesischen Laufschuh",
+     "Kostenloses Quiz für chinesische Laufschuhe. Tippe ein paar Antworten an und erhalte bis zu 12 Vorschläge von Li-Ning, Xtep, ANTA und mehr. Unabhängig, ohne Tippen."),
+    ("it", "it/", "it", "Footfinder · Trova la tua scarpa da running cinese",
+     "Quiz gratuito per trovare scarpe da running cinesi. Tocca qualche risposta e ricevi fino a 12 proposte di Li-Ning, Xtep, ANTA e altri. Indipendente, senza scrivere."),
+]
+BASE = "https://footfinder.cc/"
 
 
 def main():
@@ -105,13 +127,21 @@ def main():
     # everything before the first page element (title, styles, fonts) belongs in <head>
     cut = site.index('<div class="top">')
     head, body = site[:cut], site[cut:]
-    head = re.sub(r"<title>.*?</title>", "<title>Footfinder · Find your Chinese running shoe</title>", head, count=1)
-    html = SHELL.replace("{page}", body).replace("</head>", head + icons + "</head>", 1)
-    open(os.path.join(dist, "index.html"), "w", encoding="utf-8").write(html)
+    # the artifact-only viewport hint does not belong on the public site
+    head = re.sub(r'<meta name="claude:[^"]*"[^>]*>\n?', "", head)
+    alternates = "".join(f'<link rel="alternate" hreflang="{hl}" href="{BASE}{folder}">\n' for _, folder, hl, _, _ in PAGES)
+    alternates += f'<link rel="alternate" hreflang="x-default" href="{BASE}">\n'
+    for code, folder, hl, title, desc in PAGES:
+        page_head = re.sub(r"<title>.*?</title>", f"<title>{title}</title>", head, count=1)
+        html = (SHELL.replace("{lang}", hl).replace("{desc}", desc).replace("{title}", title)
+                .replace("{url}", BASE + folder).replace("{alternates}", alternates).replace("{code}", code))
+        html = html.replace("{page}", body).replace("</head>", page_head + icons + "</head>", 1)
+        os.makedirs(os.path.join(dist, folder), exist_ok=True)
+        open(os.path.join(dist, folder, "index.html"), "w", encoding="utf-8").write(html)
     shutil.copyfile(os.path.join(ROOT, "src", "about.template.html"), os.path.join(dist, "about.html"))
     # help search engines find the pages
     today = datetime.date.today().isoformat()
-    urls = ["https://footfinder.cc/", "https://footfinder.cc/about.html"]
+    urls = [BASE + folder for _, folder, _, _, _ in PAGES] + [BASE + "about.html"]
     open(os.path.join(dist, "sitemap.xml"), "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
@@ -120,7 +150,7 @@ def main():
     old = os.path.join(dist, "artifact.html")
     if os.path.exists(old):
         os.remove(old)
-    print(f"Built docs/ with {len(shoes)} shoes on the site, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for v in ali.values() if v.get('search_link'))} with AliExpress links, {len(awin)} with Awin offers, Amazon tag {'set' if amz['tag'] else 'not set'}")
+    print(f"Built docs/ with {len(shoes)} shoes on the site, {len([n for n in os.listdir(os.path.join(ROOT, 'docs', 'img')) if n.endswith('.webp')]) if os.path.isdir(os.path.join(ROOT, 'docs', 'img')) else 0} with photo cut-outs, {sum(1 for s in shoes if (ali.get(s['id']) or {}).get('search_link') or (ali.get(s['id']) or {}).get('link'))} of them with an AliExpress link, {len(awin)} with Awin offers, Amazon tag {'set' if amz['tag'] else 'not set'}")
 
 
 if __name__ == "__main__":
